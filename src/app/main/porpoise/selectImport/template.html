@@ -1,0 +1,20 @@
+<div class="pui-modal modal">
+    <div class="modal-dialog graph-select-import-modal">
+        <div class="modal-header">
+            <div class="modal-title">选择导入类型</div>
+            <div class="modal-close-icon" ng-click="fn.dismiss()"></div>
+        </div>
+        <div class="modal-body" style="margin-bottom: 20px;">
+            <pui-layout align="center">
+                <div class="select-btn" ng-click="fn.sure(1)">
+                    <div class="import-type">模板导入</div>
+                    <div class="import-info">按照模板导入实体间关系</div>
+                </div>
+                <div class="select-btn" ng-click="fn.sure(2)">
+                    <div class="import-type">自定义模板导入</div>
+                    <div class="import-info">自定义导入实体或实体间关系</div>
+                </div>
+            </pui-layout>
+        </div>
+    </div>
+</div>

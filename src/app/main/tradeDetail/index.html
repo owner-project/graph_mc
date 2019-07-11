@@ -1,0 +1,30 @@
+<div class="trade-detail-main">
+    <div class="clearfix" style="margin-bottom:10px;padding: 0 20px">
+        <pui-button class="pull-right" data-on-click="td.urlBack()">返回</pui-button>
+    </div>
+    <div pui-table type="header">
+        <table>
+            <thead>
+                <tr>
+                    <th ng-repeat="item in td.thList[td.type] track by $index" ng-class="{'little': item.type === 'index'}">
+                        {{item.name}}
+                    </th>
+                </tr>
+            </thead>
+        </table>
+    </div>
+    <div pui-table class="pui-table p-t-body" type="body">
+        <table>
+            <tbody>
+                <tr ng-repeat="item in td.jsonData track by $index" ng-init="pIndex = $index">
+                    <td ng-repeat="n in td.thList[td.type] track by n.type" ng-class="{'little': n.type === 'index'}">
+                        <span ng-if="n.type === 'index'">{{pIndex + 1}}</span>
+                        <span ng-if="n.type === 'totalMoney'">{{item[n.type] | rmb_wy}}</span>
+                        <span ng-if="n.type === 'netting'">{{item[n.type] | rmb_wy}}</span>
+                        <span ng-if="n.type !== 'index' && n.type !== 'totalMoney' && n.type !== 'netting'">{{item[n.type]}}</span>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

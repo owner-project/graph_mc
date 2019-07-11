@@ -1,0 +1,176 @@
+<div id="seriesParallel">
+    <div class="wrapper">
+        <h4 class="title">
+            案件描述
+        </h4>
+        <div class="series-top">
+            <pui-textarea ng-model="spc.caseDesc" ng-keydown="spc.analyzeKeyDown($event)"  data-placeholder="请输入案件内容"></pui-textarea>
+            <pui-layout data-align='end' data-justify='end'>
+                <a class="clear-btn" ng-click="spc.clearCaseDesc()">清除</a>
+                <pui-button data-type="primary" data-on-click="spc.startAnalyze()">开始分析</pui-button>
+            </pui-layout>
+        </div>
+        <div class="series-bottom">
+            <ul class="tabs" pui-layout>
+                <li class="tab" ng-class="{'active':spc.showTab=='1'}" ng-click="spc.selectTab('1')">结果分析</li>
+                <li class="tab" ng-class="{'active':spc.showTab=='2'}" ng-click="spc.selectTab('2')">串并案件</li>
+                <li class="tab" ng-class="{'active':spc.showTab=='3'}" ng-click="spc.selectTab('3')">重点人预警</li>
+            </ul>
+            <div class="series-bottom-main">
+                <div class="tab-item" ng-show="spc.showTab=='1'">
+                    <div class="item-wrapper item-wrapper-first">
+                        <series-parallel-entity data-entity-list="spc.analyzeEntityMap" data-can-select='false'></series-parallel-entity>
+                    </div>
+                    <div class="item-wrapper graph-wrapper">
+                        <div class="graph-title">
+                            <h4 class="tab-item-title">
+                                关系研判
+                                <span class="series-porpoise-icon-wrapper" ng-click="spc.jumpRelationToPorpoise()"><i class="series-porpoise-icon"></i>图析</span>
+                            </h4>
+                        </div>
+                        <relation-map-graph mode="node-link" nodes="spc.relationChartsData.vertices" links="spc.relationChartsData.edges"></relation-map-graph>
+                    </div>
+
+                </div>
+                <div class="tab-item" ng-show="spc.showTab=='2'">
+                    <div class="item-wrapper item-wrapper-first flex-2">
+                        <series-parallel-entity data-entity-list="spc.analyzeEntityMap" data-on-combine="spc.onCombine(info)"
+                            data-can-select='true'></series-parallel-entity>
+                    </div>
+                    <div class="item-wrapper flex-3 " style="overflow-y: scroll">
+                        <div>
+                            <h4 class="tab-item-title statistics-wrapper">
+                                串并案件统计
+                            </h4>
+                        </div>
+                        <div>
+                            <pui-table type="body">
+                                <table ng-if="spc.seriesParallelList.length != 0" cellpadding="0" style="table-layout:auto;width: 100%;"
+                                    cellspacing="0" border="0">
+                                    <thead>
+                                        <tr>
+                                            <th>序号</th>
+                                            <th style="width:64px">呼入时间</th>
+                                            <th>案发地点</th>
+                                            <th style="width:80px">报警人电话</th>
+                                            <th>类型</th>
+                                            <th class="">内容</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr ng-repeat="item in spc.seriesParallelList track by $index">
+                                            <td>{{$index+1}}</td>
+                                            <td>{{item.callInTime}}</td>
+                                            <td class="text-more"><div data-content="{{item.happeningPlace}}" data-trigger="click" data-auto-close="1" data-container="body"    bs-popover data-placement="right" class="content-omit">{{item.happeningPlace}}</div></td>
+                                            <td>{{item.callPhoneNumber}}</td>
+                                            <td>{{item.type}}</td>
+                                            <td class="text-more"><div  data-trigger="click" bs-popover  data-content="{{item.content}}" data-auto-close="1"  data-container="body" data-placement="left" class="content-omit">{{item.content}}</div></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </pui-table>
+                            <!-- 无数据的展示 -->
+                            <no-data ng-if="spc.seriesParallelList.length == 0" text="'无数据'" data-absolute-center="'true'"></no-data>
+                        </div>
+                    </div>
+                </div>
+                <div class="tab-item" ng-show="spc.showTab=='3'">
+                    <div class="item-wrapper item-wrapper-first" style="height:100%;overflow-y: scroll">
+                        <div>
+                            <h4 class="tab-item-title">
+                                重点人预警
+                            </h4>
+                        </div>
+                        <div>
+                            <pui-table style="width:100%" data-type="body" ng-show="spc.emphasisPersonList.length !== 0">
+                                <table style="width:100% !important">
+                                    <thead>
+                                        <tr>
+                                            <th>姓名</th>
+                                            <th>身份证件</th>
+                                            <th>类型名称</th>
+                                            <th>民族</th>
+                                            <th>电话</th>
+                                            <th>籍贯地区</th>
+                                            <th>操作</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr ng-repeat="item in spc.emphasisPersonList track by $index" ng-click='spc.showPersonInfo(item)'>
+                                            <td>{{item.name}}</td>
+                                            <td>{{item.idCard}}</td>
+                                            <td>{{item.type}}</td>
+                                            <td>{{item.nation}}</td>
+                                            <td>{{item.phone}}</td>
+                                            <td>{{item.region}}</td>
+                                            <td class="operates">
+                                                    <!-- ng-click="spc.jumpPersonToDangAn($event,item)" -->
+                                                <a ui-sref="main.file({type:'person',key:item.key})" target="_blank" class="operate" ><i
+                                                        class="series-dangan-icon"></i>档案</a>
+                                                <a class="operate" ng-click="spc.jumpPersonToPorpoise($event,item)"><i
+                                                        class="series-porpoise-icon"></i>图析</a>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+
+                            </pui-table>
+                            <!-- 无数据的展示 -->
+                            <no-data ng-if="spc.emphasisPersonList.length == 0" text="'无数据'" data-absolute-center="'true'"></no-data>
+                        </div>
+
+                    </div>
+                    <div class="item-wrapper" style="height:100%" ng-if="false">
+                        <div>
+                            <h4 class="tab-item-title">
+                                &nbsp;
+                            </h4>
+                        </div>
+                        <div class="person-info-wrapper" ng-if="spc.emphasisPersonInfo">
+                            <img ng-src="{{spc.emphasisPersonInfo.image!=''? 'data:image/jpg;base64,'+people.jsonData.image:'assets/images/theme_star_blue/people/default-person.png'}}"
+                                class="person-avatar">
+                            <div class="person clearfix">
+                                <div class="info-item  ">
+                                    <span class="info-name">姓名</span>
+                                    <span class="info-detail">{{spc.emphasisPersonInfo.base.name}}</span>
+                                </div>
+                                <div class="info-item">
+                                    <span class="info-name">实体标识</span>
+                                    <span class="info-detail">{{spc.emphasisPersonInfo.base.idNumber}}</span>
+                                </div>
+                                <div class="info-item">
+                                    <span class="info-name">电话</span>
+                                    <span class="info-detail">{{spc.emphasisPersonInfo.base.phoneNum}}</span>
+                                </div>
+                                <div class="info-item">
+                                    <span class="info-name">籍贯地区</span>
+                                    <span class="info-detail">{{spc.emphasisPersonInfo.base.nativeArea}}</span>
+                                </div>
+                                <div class="info-item">
+                                    <span class="info-name">民族</span>
+                                    <span class="info-detail">{{spc.emphasisPersonInfo.base.nation}}</span>
+                                </div>
+                                <div class="info-item">
+                                    <span class="info-name">婚否</span>
+                                    <span class="info-detail">{{spc.emphasisPersonInfo.base.married}}</span>
+                                </div>
+                                <div class="info-item info-item-all">
+                                    <span class="info-name">户籍地址</span>
+                                    <span class="info-detail">{{spc.emphasisPersonInfo.base.address}}</span>
+                                </div>
+                            </div>
+                            <div class="tag-info clearfix">
+                                <img src="assets/images/theme_star_blue/people/label.svg">
+                                <ul class="tag-list clearfix" ng-repeat="tag in spc.emphasisPersonInfo.tags">
+                                    <li class="tag">{{tag}}</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <no-data ng-if="!spc.emphasisPersonInfo" text="'无数据'" data-absolute-center="'true'"></no-data>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

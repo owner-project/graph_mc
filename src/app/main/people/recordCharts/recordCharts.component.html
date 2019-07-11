@@ -1,0 +1,20 @@
+<div id="record-charts-component">
+    <div class="clearfix">
+        <div class="pi-chart-wrapper">
+            <h3 class="chart-title">当前各档案占比</h3>
+            <div class="pi-chart"></div>
+        </div>
+        <div class="column-chart-wrapper">
+                <h3 class="chart-title">当前各档案数量</h3>
+                <div class="column-chart"></div>
+        </div>
+    </div>
+    <div class="line-chart-wrapper">
+        <h3 class="chart-title">档案数量统计</h3>
+        <ul class="line-chart-tag-wrapper">
+            <li class="tag" ng-class="{'selected':recordCharts.selectLineType === 'year'}" ng-click="recordCharts.switchLineData('year')">全年</li>
+            <li class="tag" ng-class="{'selected':recordCharts.selectLineType === 'month'}" ng-click="recordCharts.switchLineData('month')">本月</li>
+        </ul>
+        <div class="line-chart"></div>
+    </div>
+</div>

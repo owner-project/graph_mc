@@ -1,0 +1,43 @@
+<div class="phonebook-main">
+    <div class="phonebook-title">
+        <pui-button class="phonebook-btn to-porpoise" style="display:inline-block" data-on-click="phonebook.toPorpoiseAll()">查看图析</pui-button>
+        <pui-button class="phonebook-btn" style="display:inline-block" data-on-click="phonebook.historyBack()">返回</pui-button>
+    </div>
+    <div class="phonebook-body">
+        <div pui-table type="header">
+            <table>
+                <thead>
+                <tr>
+                    <th class="table-first">
+                        <pui-checkbox class="table-checkbox" ng-change="phonebook.allChoose()" ng-model="phonebook.isAllcheck"></pui-checkbox>
+                    </th>
+                    <th>姓名</th>
+                    <th>电话号码</th>
+                    <th>关联嫌犯数量</th>
+                    <th class="table-last">操作</th>
+                </tr>
+                </thead>
+            </table>
+        </div>
+        <div pui-table type="body">
+            <table>
+                <tbody>
+                <tr ng-repeat="member in phonebook.jsonData track by $index">
+                    <td class="table-first">
+                        <pui-checkbox class="table-checkbox" ng-change="phonebook.checkAll()" ng-model="member.isChoosed"></pui-checkbox>
+                    </td>
+                    <td ng-bind="member.name"></td>
+                    <td ng-bind="member.phone"></td>
+                    <td ng-bind="member.count"></td>
+                    <td class="table-last">
+                        <pui-layout class="table-last-layout" align="center" ng-click="phonebook.toPorpoise(member)">
+                            <i class="go-graph"></i>
+                            <span class="go-graph-title">到图析</span>
+                        </pui-layout>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

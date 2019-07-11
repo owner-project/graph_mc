@@ -1,0 +1,12 @@
+<div class="personal-main jq_personal_main">
+    <div class="personal-app">
+        <div ng-click="pm.into_specific(item)" ng-repeat="item in pm.jsonData.type track by $index" class="personal-app-box" ng-init="item.fzlx = (item.lx | fzlxFilter)">
+            <img ng-src={{item.fzlx.image}}>
+            <div ng-bind="item.lxmc" class="personal-app-img-text"></div>
+            <div ng-bind="item.count" class="personal-app-img-count"></div>
+        </div>
+    </div>
+     <div class="personal-time-body">
+         <div time-axis data-list="pm.jsonData.timeAxis" data-index="pm.jsonData.timeAxisIndex" data-on-change="pm.changeTimeAxis(index)"></div>
+     </div>
+</div>

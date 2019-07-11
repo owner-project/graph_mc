@@ -1,0 +1,120 @@
+// video 背景图
+.video-bg-wrap {
+    position: fixed;
+    right:0;
+    bottom: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -9999;
+    .video-bg-img {
+        width: 100%;
+        height: 100%;
+        z-index: 1;
+        position: absolute;
+        top: 0;
+        left: 0;
+    }
+    .video-bg-block {
+        width: 100%;
+        height: 100%;
+        z-index: 2;
+        position: absolute;
+        top: 0;
+        left: 0;
+    }
+}
+.application-main {
+    height: calc(~'100% - 90px');
+    padding: 50px 40px 40px 50px;
+    overflow: hidden;
+    position: relative;
+    .app-type {
+        .app-type-title {
+            height: 20px;
+            line-height: 20px;
+            padding-bottom: 6px;
+            font-weight: bold;
+        }
+        .app-type-line {
+            height: 1px;
+            margin: 10px 0px 10px 0px;
+        }
+        .app-type-ul {
+            .clearfix;
+            .app-type-li {
+                float: left;
+                width: 110px;
+                height: 110px;
+                margin: 10px;
+                border-radius: 4px;
+                img {
+                    height: 54px;
+                    width: 54px;
+                    margin: 12px 28px 5px 28px;
+                }
+                .app-type-text {
+                    text-align: center;
+                }
+            }
+        }
+    }
+}
+.application{
+    height: 100%;
+    .application-banner{
+        width: 100%;
+        .application-banner-img{
+            width: 100%
+        }
+    }
+    .application-title{
+        padding:0 40px;
+        line-height: 48px;
+        background: #153268;
+        font-weight: bold;
+        color: #D8D8D8;
+        .icon-graph{
+            width: 16px;
+            height: 16px;
+            display:inline-block;
+            background-image: url('/assets/theme-sb/icon/graph-icon.svg');
+            background-size: 100% 100%;
+            background-repeat: no-repeat;
+            vertical-align: middle;
+        }
+    }
+    .application-wrap{
+        margin-top: 40px;
+        color:#fff;
+        text-align: center;
+        .application-item{
+            display: inline-block;
+            margin:0 12px;
+            vertical-align: top;
+            cursor: pointer;
+            width: 204px;
+            height: 176px;
+            padding: 12px;
+            box-sizing: border-box !important;
+            background: #153268;
+            box-shadow: 0 2px 8px 0 #000;
+            &:hover{
+                .application-item-inner{
+                    opacity: 1;
+                    background-color: rgba(41,121,255,.8)
+                }
+            }
+            .application-item-inner{
+                width: 100%;
+                height: 100%;
+                line-height: 20px;
+                background-color: rgba(41,121,255,.5)
+            }
+            .application-item-icon{
+                margin-top: 22%;
+                margin-bottom: 8px;
+
+            }
+        }
+    }
+}

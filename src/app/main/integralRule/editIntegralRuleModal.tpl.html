@@ -1,0 +1,24 @@
+<div class="pui-modal modal confirm">
+    <div class="modal-dialog" style="width: 360px;">
+        <div class="modal-header">
+            <div class="modal-title">编辑规则</div>
+            <div class="modal-close-icon" ng-click="fn.dismiss()"></div>
+        </div>
+        <div class="modal-body">
+            <pui-layout class="mgb15" align="center">
+                <div class="mgr20 text-left" style="width: 60px;">规则详情</div>
+                <pui-input style="width: 210px;" placeholder="请填写规则详情" ng-model="data.xq"></pui-input>
+            </pui-layout>
+            <pui-layout>
+                <div class="mgr20 text-left" style="width: 60px;">经验值</div>
+                <pui-input style="width: 210px;" placeholder="请填写经验值" ng-model="data.exp"></pui-input>
+            </pui-layout>
+        </div>
+        <div class="modal-footer">
+            <pui-button class="cancel-btn" on-click="fn.dismiss()">取消</pui-button>
+            <pui-button class="confirm-btn" type="primary" on-click="fn.sure()">确定</pui-button>
+
+        </div>
+    </div>
+</div>
+

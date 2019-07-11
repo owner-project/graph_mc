@@ -1,0 +1,36 @@
+.pui-radio {
+    box-sizing: border-box;
+    position: relative;
+    width: 14px;
+    height: 14px;
+    border-radius: 8px;
+    cursor: pointer;
+    //box-shadow: inset 0px 0px 0px 1px @pui-main-color;
+    border: 1px solid @pui-main-color;
+
+    &.disabled {
+        opacity: 0.6;
+        cursor: not-allowed;
+    }
+
+    &.checked {
+        //background-color: @pui-main-color;
+
+        &:after {
+            display: block;
+        }
+    }
+
+    &:after {
+        content: '';
+        display: none;
+        background-color: @pui-main-color;
+        width: 6px;
+        height: 6px;
+        border-radius: 4px;
+        position: absolute;
+        box-shadow: 0px 0px 0px 1px fade(@pui-main-color, 30%);
+        left: 4px;
+        top: 4px;
+    }
+}

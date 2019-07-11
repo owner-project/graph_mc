@@ -1,0 +1,272 @@
+.edge-filter-wrap {
+    color: @text-color-title;
+    box-shadow: 0 0 6px 0 @shadow-color;
+
+    .dropdown-title {
+        color: @text-color-content;
+    }
+}
+
+.pui-dropdown-wrap.home-search-select {
+
+}
+
+.icon-circle-close {
+    .icon-img(@base-url, @icon-circle-close);
+}
+
+.menu-box-top {
+    // background-color: @bg-color-light;
+    // box-shadow: 0 0 6px 0 @shadow-color;
+
+    .menu-box-ul {
+        .item {
+            &.actived {
+                background-color: @text-color-primary;
+            }
+            span {
+                color: @text-color-title;
+            }
+            .icon-seq {
+                background-color: @border-color;
+            }
+        }
+    }
+}
+
+//toast提示
+.toast-main {
+    color: #fff;
+
+    &.success{
+        background-color: #5EA56D;
+    }
+
+    &.error {
+        background-color: #D56365;
+    }
+
+    &.warn {
+        background-color: #E87C5A;
+    }
+
+    &.info {
+        background-color: #4B78D3;
+    }
+
+}
+
+.relation-map-directive-wrap {
+    .icon-img(@base-url, @icon-map-bk);
+    background-size: 397px 242px;
+    .filter-controller {
+        color: @text-color-title;
+        .tag-item {
+            background-color: @bg-color-light;
+            border-color: @text-color-primary;
+            &.selected {
+                background-color: @primary-color;
+                color: #ffffff;
+                &:after {
+                    border-color: #ffffff;
+                }
+            }
+        }
+    }
+    .expend-controller {
+        .expend-btn {
+            color: @text-color-title;
+            box-shadow: 0 0 0 1px rgba(0,0,0,0.15), inset 0 0 0 1px #A3ABB0;
+            background-color: @bg-color-light;
+            .check-icon {
+                .icon-img(@base-url, @icon-header-setting-check);
+            }
+            &.actived {
+                box-shadow: 0 0 0 2px rgba(81,130,228,0.15), inset 0 0 0 2px #5182E4;
+            }
+        }
+    }
+}
+
+.time-axis-wrap {
+    .event-box-wrap {
+        .event-box {
+            background-color: @bg-color-light;
+            border-color: @border-color;
+            .event-title {
+                color: @text-color-primary;
+            }
+            &:after {
+                background-color: @bg-color-light;
+                border-color: @border-color;
+            }
+        }
+        .event-dot {
+            background-color: @bg-color-primary;
+            box-shadow: 0px 0px 0px 4px @shadow-color-primary;
+        }
+        &.top {
+            .event-title {
+                border-color: @border-color;
+            }
+        }
+        &.bottom {
+            .event-title {
+                border-color: @border-color;
+            }
+        }
+    }
+    .line-bar {
+        background-color: fade(@bg-color-primary, 40%);
+    }
+}
+
+.inner-loading-main {
+    background-color: fade(@bg-color, 80%);
+}
+.pagination {
+    margin: 8px 0 24px;
+    height: 24px;
+    line-height: 24px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    .pagination-jump-page {
+        color: fade(@info-text-color, 70%);
+        margin-left: 12px;
+        input {
+            border: 1px solid fade(@info-block-color, 50%);
+            border-radius: 4px;
+            height: 22px;
+            width: 40px;
+            padding: 0px 4px;
+            margin: 0 2px;
+            background-color: transparent;
+            color: @info-text-color;
+            opacity: 0.5;
+            &:hover {
+                opacity: 1;
+            }
+        }
+    }
+}
+.pagination .pagination-total-item {
+    color: fade(@info-text-color, 32%);
+    margin-right: 10px;
+    label {
+        color: fade(@info-text-color, 70%);
+        margin: 0 5px;
+    }
+}
+.pagination > li > a,
+.pagination > li > span {
+    color: fade(@info-text-color, 50%);
+    background-color: @popups-bg-color;
+    margin-right: 4px;
+    padding: 0px 9px;
+    line-height: 24px;
+    height: 24px;
+    border-radius: 8px;
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.30), 0 0 8px 0 rgba(0,0,0,0.08);
+}
+.pagination > li.pagination-next a,
+.pagination > li.pagination-prev a {
+    width: 24px;
+    overflow: hidden;
+    padding: 0;
+    color: transparent;
+    opacity: 0.7;
+}
+.pagination > li.pagination-next a {
+    .icon-img(@base-url, @page-next-icon);
+    background-size: unset;
+}
+.pagination > li.pagination-prev a {
+    .icon-img(@base-url, @page-prev-icon);
+    background-size: unset;
+}
+.pagination > li.pagination-next a:hover,
+.pagination > li.pagination-prev a:hover,
+.pagination > li.pagination-next a:focus,
+.pagination > li.pagination-prev a:focus {
+    color: transparent;
+    outline: none;
+    opacity: 1;
+}
+.pagination > li.disabled > a:hover,
+.pagination > li.disabled > a:focus,
+.pagination > li.disabled > a {
+    background-color: @popups-bg-color;
+    opacity: 0.4;
+}
+
+.pagination > .active > a,
+.pagination > .active > span,
+.pagination > .active > a:hover,
+.pagination > .active > span:hover,
+.pagination > .active > a:focus,
+.pagination > .active > span:focus {
+    color: @info-text-color;
+    background-color: fade(@info-block-color, 10%);
+}
+
+.pagination > li > a:hover,
+.pagination > li > span:hover,
+.pagination > li > a:focus,
+.pagination > li > span:focus {
+    color: @text-color-title;
+    background-color: fade(@bg-color-primary, 30%);
+}
+
+.pagination > .disabled > span,
+.pagination > .disabled > span:hover,
+.pagination > .disabled > span:focus,
+.pagination > .disabled > a,
+.pagination > .disabled > a:hover,
+.pagination > .disabled > a:focus {
+    background-color: transparent;
+    color: @text-color-info;
+}
+
+.select-folder-d-wrap {
+    .folder-item {
+        &.selected {
+            color: @primary-color;
+        }
+    }
+    .tag-open {
+        border: 1px solid @primary-color;
+
+        &:before {
+            background-color: @primary-color;
+        }
+        &:after {
+            background-color: @primary-color;
+        }
+    }
+    .tag-close {
+        border: 1px solid @primary-color;
+
+        &:before {
+            background-color: @primary-color;
+        }
+    }
+}
+.focus-people-dynamic  {
+    > p {
+        color: fade(@info-text-color, 65%);
+    }
+    color: @info-text-color;
+    ul {
+        li {
+            background-color: @search-result;
+            border-bottom: 1px solid fade(@info-block-color, 25%);
+            &:hover {
+                background-color: fade(@info-block-color, 40%);
+            }
+            span.name {
+                color: @info-block-color;
+            }
+        }
+    }
+}

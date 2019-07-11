@@ -1,0 +1,192 @@
+.enterprise-o-main {
+    height: 100%;
+    position: relative;
+    .clearfix;
+    &.enterprise-animate {
+        .enterprise-o-left {
+            transform: translate(0, 0);
+        }
+        .enterprise-o-right {
+            transform: translate(0, 0);
+        }
+        .enterprise-o-content > .enterprise-o-content-title-box {
+            transform: translate(0, 0);
+        }
+        .enterprise-o-content > .enterprise-o-content-title-img-box {
+            transform: translate(0, 0);
+        }
+
+
+    }
+    .enterprise-o-left {
+        width: 24%;
+        height: calc(~'100% - 2px');
+        float: left;
+        transform: translateX(-2000px);
+        transition: tranform 1000ms;
+    }
+    .enterprise-o-right {
+        transform: translateX(2000px);
+        transition: tranform 1000ms;
+        width: 20%;
+        height: 100%;
+        overflow: hidden;
+        float: right;
+        .enterprise-o-right-title {
+            height: 32px;
+            line-height: 32px;
+            padding-left: 16px;
+            position: relative;
+        }
+        .enterprise-o-right-ul {
+            height: 100%;
+            overflow-y: auto;
+            li {
+                height: 32px;
+                line-height: 32px;
+                padding-left: 16px;
+            }
+        }
+    }
+    .enterprise-o-content {
+        width: calc(~'56% - 4px');
+        height: 100%;
+        float: left;
+        position: relative;
+        .enterprise-o-content-title-box {
+            transform: translateY(-2000px);
+            transition: transform 1000ms;
+            .enterprise-o-content-title {
+                font-size: 24px;
+                text-align: center;
+                margin-top: 28px;
+            }
+            .enterprise-o-content-title-img {
+                text-align: center;
+                height: 20px;
+                width: 188px;
+                margin: auto;
+            }
+        }
+
+        .enterprise-o-content-title-img-box {
+            height: calc(~'100% - 88px');
+            width: 100%;
+            position: relative;
+            transform: translateY(2000px);
+            transition: tranform 1000ms;
+            .enterprise-o-bg-boll {
+                height: 600px;
+                width: 600px;
+                position: absolute;
+                top: calc(~'50% - 300px - 82px');
+                left: calc(~'50% - 300px');
+                .ani-login-boll-circle;
+            }
+            .enterprise-o-bg-fill3 {
+                height: 360px;
+                width: 360px;
+                position: absolute;
+                top: calc(~'50% - 180px - 82px');
+                left: calc(~'50% - 180px');
+                .ani-login-boll-circle-left;
+            }
+            .enterprise-o-bg-fill2 {
+                height: 316px;
+                width: 316px;
+                position: absolute;
+                top: calc(~'50% - 158px - 82px');
+                left: calc(~'50% - 158px');
+                .ani-login-boll-circle;
+            }
+            .enterprise-o-bg-fill1 {
+                height: 260px;
+                width: 260px;
+                position: absolute;
+                top: calc(~'50% - 130px - 82px');
+                left: calc(~'50% - 130px');
+                .ani-login-boll-circle-left;
+            }
+            .enterprise-o-bg-house {
+                height: 214px;
+                width: 244px;
+                position: absolute;
+                top: calc(~'50% - 107px - 82px');
+                left: calc(~'50% - 122px');
+            }
+            .enterprise-o-bg-text-box {
+                height: 370px;
+                width: 770px;
+                position: absolute;
+                top: calc(~'50% - 185px - 82px');
+                left: calc(~'50% - 385px');
+                .enterprise-o-bg-text-box-item {
+                    height: 33%;
+                    width: 50%;
+                    float: left;
+                    .enterprise-o-bg-text-box-item-rect1,
+                    .enterprise-o-bg-text-box-item-rect2,
+                    .enterprise-o-bg-text-box-item-rect3,
+                    .enterprise-o-bg-text-box-item-rect4,
+                    .enterprise-o-bg-text-box-item-rect5 {
+                        height: 80px;
+                        width: 170px;
+                        float: right;
+                    }
+
+                    .enterprise-o-bg-text-box-item-left1,
+                    .enterprise-o-bg-text-box-item-right1,
+                    .enterprise-o-bg-text-box-item-right2,
+                    .enterprise-o-bg-text-box-item-left2,
+                    .enterprise-o-bg-text-box-item-right3 {
+                        height: 20px;
+                        width: 150px;
+                        float: right;
+                    }
+
+                    .enterprise-o-bg-text-box-item-rect1 {
+                        margin-top: 30px;
+                    }
+                    .enterprise-o-bg-text-box-item-left1 {
+                        margin-top: 90px;
+                    }
+
+                    .enterprise-o-bg-text-box-item-rect2 {
+                        float: left;
+                    }
+                    .enterprise-o-bg-text-box-item-right1 {
+                        margin-top: 40px;
+                        float: left;
+                    }
+                    .enterprise-o-bg-text-box-item-right2 {
+                        margin-top: 50px;
+                    }
+                    .enterprise-o-bg-text-box-item-left2 {
+                        margin-top: 40px;
+                        margin-right: 40px;
+                    }
+                    .enterprise-o-bg-text-box-item-rect5 {
+                        margin-top: 35px;
+                        float: left;
+                    }
+                    .enterprise-o-bg-text-box-item-right3 {
+                        margin-top: 80px;
+                        float: left;
+                    }
+
+                    .enterprise-o-bg-text-box-item-rect-count {
+                        font-size: 34px;
+                        text-align: right;
+                        padding-right: 20px;
+                        padding-top: 5px;
+                    }
+                    .enterprise-o-bg-text-box-item-rect-name {
+                        font-size: 15px;
+                        text-align: right;
+                        padding-right: 20px;
+                    }
+                }
+            }
+        }
+    }
+}

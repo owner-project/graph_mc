@@ -1,0 +1,260 @@
+<div class="voice-main">
+	<pui-button style="position:absolute;right:16px;top:4px" data-on-click="vm.backToVoiceList()">返回</pui-button>
+	<div class="voice-title">
+		<ul class="header-ul">
+			<li class="header-li" ng-click="vm.chooseTag($event, 'hd')" ng-class="{'active': vm.chooseType === 'hd'}">话单模式</li>
+			<!-- <li class="header-li" ng-click="vm.chooseTag($event, 'tx')" ng-class="{'active': vm.chooseType === 'tx'}">图析模式</li> -->
+			<li ng-if="false" class="header-li" ng-click="vm.chooseTag($event, 'gj')" ng-class="{'active': vm.chooseType === 'gj'}">轨迹模式</li>
+		</ul>
+	</div>
+    <div class="voice-body" ng-if="vm.chooseType === 'gj'"></div>
+	<div class="voice-body" ng-if="vm.chooseType === 'hd' || vm.chooseType === 'tx'">
+        <div class="voice-body-graph" ng-if="vm.chooseType === 'tx'">
+            <relation-map-graph mode="node-link" nodes="vm.data.graph.nodes" links="vm.data.graph.links"></relation-map-graph>
+        </div>
+		<div class="voice-body-title" ng-if="vm.chooseType === 'hd'">
+			<div class="voice-body-ul menu-box-top">
+                <pui-layout class="menu-box-ul">
+                    <pui-layout align="center" class="item" ng-click="vm.selectedTop()">
+                        <i class="voice-body-ul-zd item-icon"></i>
+                        <span>选中置顶</span>
+                        <i class="icon-seq"></i>
+                    </pui-layout>
+                    <pui-layout align="center" class="item" ng-click="vm.deleteItemClick()">
+                        <i class="voice-body-ul-sc item-icon"></i>
+                        <span>删除</span>
+                        <i class="icon-seq"></i>
+                    </pui-layout>
+                    <pui-layout align="center" class="item" ng-click="vm.deleteFalseItemClick()">
+                        <i class="voice-body-ul-fx item-icon"></i>
+                        <span>反选删除</span>
+                        <i class="icon-seq"></i>
+                    </pui-layout>
+                    <pui-layout align="center" class="item" ng-click="vm.setphone()">
+                        <i class="voice-body-ul-swbj item-icon"></i>
+                        <span>设为本机</span>
+                    </pui-layout>
+                </pui-layout>
+			</div>
+			<ul class="voice-body-right-ul">
+                <!-- <li class="pointer">
+                    <i class="voice-body-right-ul-da"></i>到轨迹
+                </li> -->
+				<li class="pointer" ng-click="vm.toPorpoise()">
+                    <i class="voice-body-right-ul-tx"></i>设为本机并跳转到图析
+                </li>
+			</ul>
+		</div>
+		<div class="voice-table-con" ng-if="vm.chooseType === 'hd'">
+			<div class="pui-table">
+                <table>
+                    <thead>
+                    <tr>
+                        <th style="width: 40px">
+                            <pui-layout justify="center">
+                                <pui-checkbox ng-model="vm.data.checkAll" indeterminate="vm.data.indeterminate" ng-change="vm.checkAll($event)"></pui-checkbox>
+                            </pui-layout>
+                        </th>
+                        <th>计费号码</th>
+                        <th>通话类型</th>
+                        <th>对方号码</th>
+                        <th style="width: 140px">开始时间</th>
+                        <th >通话时长</th>
+                        <th >小区代码</th>
+                        <th >基站代码</th>
+
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr ng-repeat="item in vm.jsonData.resultData | orderBy : 'tag' track by item.id" ng-class="{'checktr': item.ischeck}">
+                        <td>
+                            <pui-layout justify="center">
+                                <pui-checkbox ng-model="item.ischeck" ng-change="vm.checkItem(item)"></pui-checkbox>
+                            </pui-layout>
+                        </td>
+                        <td ng-bind="item.baseNumber"></td>
+                        <td ng-bind="item.callType" ng-class="item.callType==='[0]主叫'?'td-green':'td-red'"></td>
+                        <td ng-bind="item.otherNumber" ></td>
+                        <td ng-bind="item.beginTime"></td>
+                        <td ng-bind="item.callTime" ></td>
+                        <td ng-bind="item.areaCode" ></td>
+                        <td ng-bind="item.stationCode" ></td>
+                    </tr>
+
+                    </tbody>
+                </table>
+            </div>
+		</div>
+		<div class="voice-body-graph" ng-if="vm.chooseType === 'gj'"></div>
+		<div class="voice-bottom-body">
+			<div class="voice-bottom-left-body">
+				<div class="voice-bottom-left-zq">
+					<div class="voice-bottom-left-zq-text">周期</div>
+						<pui-select class="vocie-bottom-left-select" config='$root.selectConfig.vmSelect' ng-change="vm.yearChange()" options='vm.jsonData.option' ng-model="vm.time"></pui-select>
+				</div>
+				<div class="voice-bottom-left-pl">
+					<div class="voice-bottom-left-pl-text">频率</div>
+					<div class="voice-bottom-left-text1">
+						<div class="vocie-left-cricle1"></div>
+							极高
+					</div>
+					<div class="voice-bottom-left-text2">
+						<div class="vocie-left-cricle2"></div>
+							较高
+					</div>
+					<div class="voice-bottom-left-text3">
+						<div class="vocie-left-cricle3"></div>
+							中等
+					</div>
+					<div class="voice-bottom-left-text4">
+						<div class="vocie-left-cricle4"></div>
+							偏弱
+					</div>
+
+				</div>
+			</div>
+			<div class="voice-bottom-right-body" id="voice-VMap">
+
+			</div>
+		</div>
+	</div>
+	<div class="voice-right">
+		<div class="voice-right-title">
+			<pui-layout class="header-ul">
+				<li class="header-li" ng-click="vm.chooseTagRight($event, 'tj')" ng-class="{'active': vm.chooseTypeRight === 'tj'}">
+                    <div>统计</div>
+                </li>
+				<li class="header-li" ng-click="vm.chooseTagRight($event, 'fx')" ng-class="{'active': vm.chooseTypeRight === 'fx'}">
+                    <div>分析</div>
+                </li>
+			</pui-layout>
+		</div>
+
+		<div class="voice-right-body" ng-show="vm.chooseTypeRight === 'fx' && vm.data.nowSetPhones && vm.data.nowSetPhones.length > 0">
+			<div class="voice-right-body-header">
+				<div class="mgb5"><span>开始时间： {{vm.jsonData.rightData.beginTime | date:'yyyy-MM-dd HH:mm:ss'}}</span></div>
+				<div><span>结束时间： {{vm.jsonData.rightData.endTime | date:'yyyy-MM-dd HH:mm:ss'}}</span></div>
+                <pui-layout align="center">
+                    <span>案发时间：</span>
+                    <pui-datepicker id="start_at_graph"
+                                    class="mgl5"
+                                    date-mode="datetime"
+                                    ng-model="vm.data.incidentTime"
+                                    data-start-date="{{vm.data.incidentTime}}"
+                                    data-placement="bottom"
+									placeholder="请选择日期"
+                                    ng-blur="vm.getPieData()"
+                                    data-max-date="{{vm.jsonData.rightData.endTime}}"
+                                    data-min-date="{{vm.jsonData.rightData.beginTime}}">
+
+                    </pui-datepicker>
+                </pui-layout>
+			</div>
+            <div class="relative call-time-chart-wrap" ng-if="vm.data.hasCallTimeChart">
+                <pui-layout justify="space-between" class="call-time-label-block">
+                    <pui-layout>
+                        <div class="mgl35">通话号码</div>
+                        <div class="mgl10">案发前</div>
+                    </pui-layout>
+                    <div class="">案发后</div>
+                </pui-layout>
+                <div class="voice-bottom-pie-body" id="incidentStackBar"></div>
+            </div>
+		</div>
+
+		<div class="voice-right-body" ng-show="vm.chooseTypeRight === 'tj' && vm.data.nowSetPhones && vm.data.nowSetPhones.length > 0">
+			<pui-layout align="center" ng-click="vm.myNumberChange()" class="right-title-text">
+                <div class="arrow-down-icon" ng-class="{'to-right': !vm.isMyNumber}"></div>
+                本机号码
+            </pui-layout>
+			<ul ng-if="vm.isMyNumber" class="right-ul">
+				<li class="right-li right_li_number" ng-repeat="item in vm.phone_color track by $index" ng-style="{color:vm.phone_color[0]['value']}" ng-bind="item.key"></li>
+			</ul>
+			<pui-layout align="center"  class="right-title-text">
+				<div class="arrow-down-icon" ng-click="vm.propertyChange()" ng-class="{'to-right': !vm.isProperty}"></div>
+				<span >
+					属性
+				</span>
+            </pui-layout>
+			<ul ng-if="vm.isProperty" class="right-ul">
+				<li class="right-li">
+					<span class="property-text">对端号码( {{vm.jsonData.rightData.sum || 0}}频次 ) </span>
+					<pui-select class="select-length-select" ng-change="vm.setphone()"  data-options="vm.selectOptions" ng-model="vm.sizeObj.qualityEndSize"></pui-select>
+					<span class="property-text">
+							条
+					</span>
+				</li>
+				<li class="right-li" ng-repeat="item in vm.jsonData.rightData.otherNumber track by $index">
+					<div class="right-hover-div">
+						<div class="right-hover-div-first">主叫:{{item.zj || 0}}</div>
+						<div>被叫:{{item.bj || 0}}</div>
+					</div>
+					<div class="right-li-phone" ng-bind="item.num"></div>
+					<div class=bfb-wrap>
+						<div class="right-li-bfb bfb-box">
+							<div class="bfb-transparent" ng-style="{'width': (item.count/vm.jsonData.rightData.sum)*100 + '%','background-color':vm.phone_color[0]['value']}"></div>
+						</div>
+						<span class="bfb-text" ng-bind="item.count"></span>
+					</div>
+				</li>
+				<li class="right-li">
+					<span class="property-text">对端号码( {{vm.secondToDate(vm.jsonData.rightData.sumTime)}} )</span>
+					<pui-select class="select-length-select" ng-change="vm.setphone()"  data-options="vm.selectOptions" ng-model="vm.sizeObj.qualitySize"></pui-select>
+					<span class="property-text">
+						条
+					</span>
+				</li>
+				<li class="right-li" ng-repeat="item in vm.jsonData.rightData.callTime track by $index">
+					<div class="right-li-phone" ng-bind="item.num"></div>
+					<span class=bfb-wrap>
+						<div class="right-li-bfb bfb-box">
+							<div class="bfb-transparent" ng-style="{'width': (item.time/vm.jsonData.rightData.sumTime)*100 + '%','background-color':vm.phone_color[0]['value']}"></div>
+						</div>
+						<span class="bfb-text">{{item.time*1000- 8*3600000 | date:'HH:mm:ss'}} </span>
+				</li>
+			</ul>
+			<pui-layout align="center"  class="right-title-text">
+                <div class="arrow-down-icon" ng-click="vm.logicChange()" ng-class="{'to-right': !vm.isLogic}"></div>
+				<span class="property-text">
+						小区代码
+				</span>
+				<pui-select class="select-length-select" ng-change="vm.setphone()"  data-options="vm.selectOptions" ng-model="vm.sizeObj.areaSize"></pui-select>
+				<span class="property-text">
+					条
+				</span>
+            </pui-layout>
+			<ul ng-if="vm.isLogic" class="right-ul">
+				<li class="right-li" ng-repeat="item in vm.jsonData.rightData.areaCode track by $index">
+					<div class="right-li-phone" ng-bind="item.num"></div>
+					<div class=bfb-wrap>
+						<div class="right-li-bfb bfb-box">
+							<div class="bfb-blue2" ng-style="{'width': (item.count/vm.jsonData.rightData.sum)*100 + '%'}"></div>
+						</div>
+						<span class="bfb-text" ng-bind="vm.jsonData.rightData.sum"></span>
+					</div>
+				</li>
+			</ul>
+			<pui-layout align="center"  class="right-title-text">
+                <div class="arrow-down-icon" ng-click="vm.stationChange()" ng-class="{'to-right': !vm.isStation}"></div>
+				<span class="property-text">
+						基站代码
+				</span>
+				<pui-select class="select-length-select" ng-change="vm.setphone()"  data-options="vm.selectOptions" ng-model="vm.sizeObj.baseStationSize"></pui-select>
+				<span class="property-text">
+					条
+				</span>
+            </pui-layout>
+			<ul ng-if="vm.isStation" class="right-ul">
+				<li class="right-li" ng-repeat="item in vm.jsonData.rightData.stationCode track by $index">
+					<div class="right-li-phone" ng-bind="item.num"></div>
+					<div class=bfb-wrap>
+						<div class="right-li-bfb bfb-box">
+							<div class="bfb-blue2" ng-style="{'width': (item.count/vm.jsonData.rightData.sum)*100 + '%'}"></div>
+						</div>
+						<span class="bfb-text" ng-bind="vm.jsonData.rightData.sum"></span>
+					</div>
+				</li>
+			</ul>
+		</div>
+	</div>
+</div>

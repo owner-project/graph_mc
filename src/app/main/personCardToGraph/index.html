@@ -1,0 +1,418 @@
+<div class="porpoise-main pc-main">
+  <div class="porpoise-body" ng-class="{'show-right': porpoise.porData.fullScreenShowRight}" id="graph-full-screen-node">
+      <div class="body-left">
+          <div class="porpoise-svg jq_relation_d3" tabindex="-1"></div>
+          <div class="float-menu-box jq_float_menu">
+              <div class="float-menu-boder"></div>
+              <div class="float-menu-boll"></div>
+              <div class="menu-side-wrap-select" ng-show="porpoise.porData.menu.showSelect">
+                  <div class="item" ng-click="porpoise.menuSelect('subling')">
+                      <i class="p-icon"></i>
+                      <span>相邻节点</span>
+                      <i class="p-icon-h"></i>
+                  </div>
+                  <div class="item" ng-click="porpoise.menuSelect('parent')">
+                      <i class="p-icon"></i>
+                      <span>父节点</span>
+                      <i class="p-icon-h"></i>
+                  </div>
+                  <div class="item" ng-click="porpoise.menuSelect('child')">
+                      <i class="p-icon"></i>
+                      <span>子节点</span>
+                      <i class="p-icon-h"></i>
+                  </div>
+              </div>
+              <div class="menu-side-wrap-layout" ng-show="porpoise.porData.menu.showLayout">
+                  <div class="item" ng-click="porpoise.menuLayout('auto')">
+                      <i class="p-icon"></i>
+                      <span>自动</span>
+                      <i class="p-icon-h"></i>
+                  </div>
+                  <div class="item" ng-click="porpoise.menuLayout('grid')">
+                      <i class="p-icon"></i>
+                      <span>网格</span>
+                      <i class="p-icon-h"></i>
+                  </div>
+                  <div class="item" ng-click="porpoise.menuLayout('gradation')">
+                      <i class="p-icon"></i>
+                      <span>层次</span>
+                      <i class="p-icon-h"></i>
+                  </div>
+                  <div class="item" ng-click="porpoise.menuLayout('circle')">
+                      <i class="p-icon"></i>
+                      <span>环形</span>
+                      <i class="p-icon-h"></i>
+                  </div>
+              </div>
+              <div class="menu-con-main">
+                  <div class="item" ng-click="porpoise.collspanBean($event)">
+                      <i class="p-icon"></i>
+                      <span>关系扩展</span>
+                      <i class="p-icon-h"></i>
+                  </div>
+                  <div class="item" ng-click="porpoise.regain($event)">
+                      <i class="p-icon"></i>
+                      <span>关系收回</span>
+                      <i class="p-icon-h"></i>
+                  </div>
+                  <div class="item" ng-click="porpoise.goRecord($event)">
+                      <i class="p-icon"></i>
+                      <span>档案</span>
+                      <i class="p-icon-h"></i>
+                  </div>
+
+                  <!-- <div class="item" ng-click="porpoise.eventCol($event)">
+                      <i class="p-icon"></i>
+                      <span>事件扩展</span>
+                      <i class="p-icon-h"></i>
+                  </div>
+                  <div class="item" ng-click="porpoise.regainEvent($event)">
+                      <i class="p-icon"></i>
+                      <span>事件收回</span>
+                      <i class="p-icon-h"></i>
+                  </div> -->
+
+                  <div class="item" ng-click="porpoise.relationCol($event)">
+                      <i class="p-icon"></i>
+                      <span>关系推演</span>
+                      <i class="p-icon-h"></i>
+                  </div>
+                  <div class="item">
+                  <div class="item" ng-click="porpoise.porData.menu.showLayout = !porpoise.porData.menu.showLayout">
+                      <i class="p-icon"></i>
+                      <span>布局</span>
+                      <i class="p-icon-h"></i>
+                  </div>
+                  <div class="item" ng-click="porpoise.deleteItem($event)">
+                      <i class="p-icon"></i>
+                      <span>删除</span>
+                      <i class="p-icon-h"></i>
+                  </div>
+                  <div class="item" ng-click="porpoise.inverseDelete($event)">
+                      <i class="p-icon"></i>
+                      <span>反选删除</span>
+                      <i class="p-icon-h"></i>
+                  </div>
+                  <div class="item" ng-click="porpoise.porData.menu.showSelect = !porpoise.porData.menu.showSelect">
+                      <i class="p-icon"></i>
+                      <span>节点选择</span>
+                      <i class="p-icon-h"></i>
+                  </div>
+                  <div class="item" ng-click="porpoise.closePorpoise($event)">
+                      <i></i>
+                  </div>
+              </div>
+          </div>
+          <div class="right-menu-box">
+              <ul class="menu-box">
+                  <li class="menu-li" ng-click="porpoise.changeNormal($event)">
+                      <i></i>
+                      <span>自动</span>
+                  </li>
+                  <li class="menu-li" ng-click="porpoise.changeWeb($event)">
+                      <i></i>
+                      <span>网格</span>
+                  </li>
+                  <li class="menu-li" ng-click="porpoise.changeTree($event)">
+                      <i></i>
+                      <span>层次</span>
+                  </li>
+                  <li class="menu-li" ng-click="porpoise.changeFlow($event)">
+                      <i></i>
+                      <span>流向</span>
+                  </li>
+                  <li class="menu-li" ng-click="porpoise.changeCircle($event)">
+                      <i></i>
+                      <span>环形</span>
+                  </li>
+              </ul>
+          </div>
+          <pui-layout align="center" class="graph-scale-box">
+              <pui-layout align="center" class="mgr10">
+                  <pui-checkbox ng-model="porpoise.porData.zoomShowAll" ng-change="porpoise.updateNodesZoomingVisibility()"></pui-checkbox>
+                  <div class="mgl5" ng-click="porpoise.porData.zoomShowAll = !porpoise.porData.zoomShowAll; porpoise.updateNodesZoomingVisibility()">缩放全部显示</div>
+              </pui-layout>
+              <pui-layout align="center">
+                  <div class="scale-btn scale-minus" ng-click="porpoise.zoomIn()"></div>
+                  <div class="scale-track-content" id="graph_scale_track">
+                      <div class="scale-tracer"></div>
+                      <div class="scale-track-back">
+                          <div class="scale-track"></div>
+                      </div>
+                  </div>
+                  <div class="scale-btn scale-plus" ng-click="porpoise.zoomOut()"></div>
+              </pui-layout>
+          </pui-layout>
+          <pui-layout align="center" justify="center" class="graph-full-screen-btn" ng-click="porpoise.fullScreen()">
+              <i></i>
+          </pui-layout>
+          <div class="menu-box-top">
+              <pui-layout class="menu-box-ul" ng-if="">
+                  <pui-layout align="center" class="item" ng-click="porpoise.undo()">
+                      <i class="item-icon"></i>
+                      <span>上一步</span>
+                      <i class="icon-seq"></i>
+                  </pui-layout>
+                  <pui-layout align="center" class="item" ng-click="porpoise.redo()">
+                      <i class="item-icon"></i>
+                      <span>下一步</span>
+                      <i class="icon-seq"></i>
+                  </pui-layout>
+                  <pui-layout align="center" class="item" ng-click="porpoise.addNode($event)">
+                      <i class="item-icon"></i>
+                      <span>添加实体</span>
+                      <i class="icon-seq"></i>
+                  </pui-layout>
+                  <pui-layout align="center" class="item" ng-click="porpoise.addEdge($event)">
+                      <i class="item-icon"></i>
+                      <span>添加关系</span>
+                      <i class="icon-seq"></i>
+                  </pui-layout>
+                  <pui-layout align="center" class="item" ng-click="porpoise.importFile($event)">
+                      <i class="item-icon"></i>
+                      <span>导入文件</span>
+                      <i class="icon-seq"></i>
+                  </pui-layout>
+                  <pui-layout align="center" class="item" ng-click="porpoise.cooperateAnalysis($event)">
+                      <i class="item-icon"></i>
+                      <span>导入图谱</span>
+                      <i class="icon-seq"></i>
+                  </pui-layout>
+                  <pui-layout align="center" class="item" ng-click="porpoise.mergeGraph($event)" ng-show="porpoise.permission.menu.mergeGraph">
+                      <i class="item-icon"></i>
+                      <span>合并图谱</span>
+                      <i class="icon-seq"></i>
+                  </pui-layout>
+                  <pui-layout align="center" class="item" ng-click="porpoise.directional($event)">
+                      <i class="item-icon"></i>
+                      <span>定向拓展</span>
+                      <i class="icon-seq"></i>
+                  </pui-layout>
+                  <pui-layout align="center" class="item" ng-click="porpoise.sliceImg($event)">
+                      <i class="item-icon"></i>
+                      <span>保存快照</span>
+                  </pui-layout>
+                  <pui-layout align="center" class="item" ng-click="porpoise.exportPNG($event)">
+                      <i class="item-icon"></i>
+                      <span>导出图片</span>
+                  </pui-layout>
+                  <pui-layout align="center" class="item" ng-click="porpoise.exportEXCEL($event)">
+                      <i class="item-icon"></i>
+                      <span>导出EXCEL</span>
+                  </pui-layout>
+                  <pui-layout align="center" class="item" ng-click="porpoise.exportBDP($event)">
+                      <i class="item-icon"></i>
+                      <span>导出到BDP</span>
+                  </pui-layout>
+              </pui-layout>
+          </div>
+          <div class="menu-box-top search-box">
+              <pui-searchbar data-placeholder="输入实体名称" data-max-width="200" data-on-search="porpoise.searchNode()" ng-model="porpoise.porData.searchWord"></pui-searchbar>
+          </div>
+          <div class="search-list-box menu-box-top" ng-if="porpoise.porData.searchNodeList.length">
+              <div ng-repeat="item in porpoise.porData.searchNodeList" ng-bind="item.name" ng-click="porpoise.moveToNode(item)"></div>
+          </div>
+      </div>
+      <div class="body-right">
+          <div class="graph-shift-btn" ng-click="porpoise.fullScreenToggleRight()">
+              {{porpoise.porData.fullScreenShowRight ? '收回' : '展开'}}
+              <i></i>
+          </div>
+          <div class="right-tab">
+              <ul class="tab-ul">
+                  <li class="tab-li" ng-class="{'check': porpoise.porData.d3Data.reqData.showDetail === 'count'}" ng-click="porpoise.porData.d3Data.reqData.showDetail = 'count'">
+                      <div>统计</div>
+                  </li>
+                  <li class="tab-li" ng-class="{'check': porpoise.porData.d3Data.reqData.showDetail === 'detail'}" ng-click="porpoise.porData.d3Data.reqData.showDetail = 'detail'">
+                      <div>详情</div>
+                  </li>
+              </ul>
+              <i class="tab-bg" ng-class="{'is-detail': porpoise.porData.d3Data.reqData.showDetail === 'detail'}"></i>
+          </div>
+          <div ng-if="porpoise.porData.d3Data.reqData.showDetail === 'count'" class="right-con">
+              <pui-layout align="center" class="right-item" ng-if="porpoise.porData.isForbidden">
+                  <div class="item-title">图中存在无法查看的实体</div>
+              </pui-layout>
+              <pui-layout align="center" class="right-item" ng-if="!porpoise.porData.nodeStatistics">
+                  <div class="item-title">团伙总数：<span ng-bind="porpoise.porData.componentsCount"></span></div>
+              </pui-layout>
+              <div class="right-item">
+                  <pui-layout align="center" class="item-title"  ng-click="porpoise.porData.verticesTypeCountOpen = !porpoise.porData.verticesTypeCountOpen">
+                      <div class="arrow-down-icon mgr5" ng-class="{'to-right': !porpoise.porData.verticesTypeCountOpen}"></div>
+                      <span class="class-title">实体统计</span>
+                  </pui-layout>
+                  <div class="item-con" ng-if="porpoise.porData.verticesTypeCountOpen">
+                      <ul>
+                          <li ng-repeat="item in porpoise.porData.nodeTree track by $index">
+                              <pui-layout align="center" class="text-left" ng-click="item.open = !item.open">
+                                  <div class="arrow-down-icon mgr5" ng-class="{'to-right': !item.open}"></div>
+                                  <div class="item-label" ng-bind="item.label"></div>
+                                  <div class="item-count">
+                                      <i ng-style="{'width': (item.sum / porpoise.porData.verticesSum * 100) + '%'}"></i>
+                                  </div>
+                                  <span class="count-span" ng-bind="item.sum"></span>
+                                  <div class="aim-at-icon" ng-click="porpoise.chooseNodes(item, $event)"></div>
+                              </pui-layout>
+                              <div class="right-item-detail" ng-if="item.open">
+                                  <div ng-repeat="(k, v) in item.child">
+                                      <pui-layout align="center" class="text-left" ng-click="v.open = !v.open">
+                                          <div class="arrow-down-icon mgr5" ng-class="{'to-right': !v.open}"></div>
+                                          <div class="item-label" ng-bind="v.label"></div>
+                                          <div class="item-count">
+                                              <i ng-style="{'width': (v.sum / item.sum * 100) + '%'}"></i>
+                                          </div>
+                                          <span class="count-span" ng-bind="v.sum"></span>
+                                          <div class="aim-at-icon" ng-click="porpoise.chooseNodes(v, $event)"></div>
+                                      </pui-layout>
+                                      <div class="right-item-detail" ng-repeat="vertice in v.child"  ng-if="v.open">
+                                          <span ng-bind="vertice.name + ' ' + vertice.key"></span>
+                                      </div>
+                                  </div>
+                              </div>
+                          </li>
+                      </ul>
+                  </div>
+              </div>
+              <div class="right-item" ng-if="!porpoise.porData.nodeStatistics">
+                  <pui-layout align="center" class="item-title" ng-click="porpoise.porData.edgesTypeCountOpen = !porpoise.porData.edgesTypeCountOpen">
+                      <div class="arrow-down-icon mgr5" ng-class="{'to-right': !porpoise.porData.edgesTypeCountOpen}"></div>
+                      <span class="class-title">关系统计</span>
+                  </pui-layout>
+                  <div class="item-con" ng-if="porpoise.porData.edgesTypeCountOpen">
+                      <ul>
+                          <li ng-repeat="item in porpoise.porData.edgeTree track by $index">
+                              <pui-layout align="center" class="text-left" ng-click="item.open = !item.open">
+                                  <div class="arrow-down-icon pull-left mgr5" ng-class="{'to-right': !item.open}"></div>
+                                  <pui-checkbox class="mgr5" data-indeterminate="item.showIndeterminate" ng-model="item.show" ng-change="porpoise.toggleEdge(item,true)"></pui-checkbox>
+                                  <div class="item-label" ng-bind="item.label"></div>
+                                  <div class="item-count relationship">
+                                      <i ng-style="{'width': (item.sum / porpoise.porData.edgesSum * 100) + '%'}"></i>
+                                  </div>
+                                  <span class="count-span" ng-bind="item.sum"></span>
+                              </pui-layout>
+
+                              <div class="right-item-detail clearfix"  ng-if="item.open">
+                                  <div ng-repeat="(k, v) in item.child" >
+                                      <pui-layout align="center" class="text-left" ng-click="v.open = !v.open">
+                                          <div class="arrow-down-icon pull-left mgr5" ng-class="{'to-right': !v.open}"></div>
+                                          <pui-checkbox class="mgr5" ng-model="v.show" ng-change="porpoise.toggleEdge(v,true)"></pui-checkbox>
+                                          <div class="item-label" title="{{v.label}}" ng-bind="v.label"></div>
+                                          <div class="item-count relationship">
+                                              <i ng-style="{'width': (v.sum / item.sum * 100) + '%'}"></i>
+                                          </div>
+                                          <span class="count-span" ng-bind="v.sum"></span>
+                                          <div class="funnel-icon" ng-class="{'actived': porpoise.porData.defaultFilterJSON !== v.filterJSON}" ng-click="$event.stopPropagation()" data-trigger="click" bs-dropdown data-container="body" data-template-url="app/main/porpoise/edgeFilter/template.html" data-placement="bottom-right"></div>
+                                      </pui-layout>
+                                      <div class="right-item-detail" ng-if="v.open">
+                                          <pui-layout align="center" ng-repeat="edge in v.child" ng-click="porpoise.clickEgge($event, edge)">
+                                              <span class="mgr15" ng-bind="edge._source.name"></span>
+                                              <div class="two-way-arrow-icon mgr15"></div>
+                                              <span ng-bind="edge._target.name"></span>
+                                          </pui-layout>
+                                      </div>
+                                  </div>
+                              </div>
+                          </li>
+                      </ul>
+                  </div>
+              </div>
+          </div>
+          <div ng-if="porpoise.porData.d3Data.reqData.showDetail === 'detail'" class="right-con">
+              <div class="edge-detail-box" ng-if="porpoise.porData.d3Data.reqData.showDetailType === 'link' && porpoise.porData.d3Data.linkTimeList">
+                  <div class="edge-source mgb10" ng-if="porpoise.porData.d3Data.chooseEdge.tname">
+                      <span>来源：</span>
+                      <span ng-bind="porpoise.porData.d3Data.chooseEdge.tname"></span>
+                  </div>
+                  <div class="edge-title">
+                      <label class="edge-item" title="{{porpoise.porData.d3Data.chooseEdge._source.name}}" ng-bind="porpoise.porData.d3Data.chooseEdge._source.name"></label>
+                      <label class="edge-item" title="{{porpoise.porData.d3Data.chooseEdge._target.name}}" ng-bind="porpoise.porData.d3Data.chooseEdge._target.name"></label>
+                  </div>
+                  <pui-layout align="center" justify="end" class="edge-show-same-link" ng-if="porpoise.porData.d3Data.chooseEdge.type !== '08' && porpoise.porData.d3Data.chooseEdge.type !== '98' && porpoise.porData.d3Data.chooseEdge.type !== '09'">
+                      <pui-checkbox ng-model="porpoise.porData.d3Data.showSameEdgeLinkData" ng-change="porpoise.changeShowEdgeLinkData()"></pui-checkbox>
+                      <div class="mgl5" ng-click="porpoise.porData.d3Data.showSameEdgeLinkData = !porpoise.porData.d3Data.showSameEdgeLinkData;porpoise.changeShowEdgeLinkData()">仅显示相关联事件</div>
+                  </pui-layout>
+                  <div class="edge-all-box">
+                      <div class="edge-time-box">
+                          <ul class="edge-left-ul" ng-if="porpoise.porData.d3Data.chooseEdge.type !== '08' && porpoise.porData.d3Data.chooseEdge.type !== '98' && porpoise.porData.d3Data.chooseEdge.type !== '09'">
+                              <li class="edge-left-li" ng-repeat="item in porpoise.porData.d3Data.linkTimeList.list">
+                                  <div class="edge-seq">
+                                      <i></i>
+                                  </div>
+                                  <div class="left-panel">
+                                      <div class="edge-item-con left" ng-repeat="child in item[porpoise.porData.d3Data.chooseEdge._source.key]">
+                                          <div class="edge-title-dialog" ng-bind="porpoise.porData.d3Data.chooseEdge | edgeEvent"></div>
+                                          <div class="edge-li-item" title="{{k}}" ng-repeat="(k, v) in child" ng-if="k !== 'key'">
+                                              <label ng-bind="v"></label>
+                                          </div>
+                                      </div>
+                                  </div>
+                                  <div class="right-panel">
+                                      <div class="edge-item-con right" ng-repeat="child in item[porpoise.porData.d3Data.chooseEdge._target.key]">
+                                          <div class="edge-title-dialog" ng-bind="porpoise.porData.d3Data.chooseEdge | edgeEvent"></div>
+                                          <div class="edge-li-item" title="{{k}}" ng-repeat="(k, v) in child" ng-if="k !== 'key'">
+                                              <label ng-bind="v"></label>
+                                          </div>
+                                      </div>
+                                  </div>
+                              </li>
+                          </ul>
+                          <ul class="edge-case-item-list" ng-if="porpoise.porData.d3Data.chooseEdge.type === '08' || porpoise.porData.d3Data.chooseEdge.type === '98'">
+                              <li class="edge-case-item" ng-repeat="item in porpoise.porData.d3Data.linkTimeList.list">
+                                  <pui-layout class="edge-case-item-info" ng-repeat="(key, value) in item">
+                                      <div class="edge-case-item-label" ng-bind="porpoise.porData.d3Data.linkTimeList.nameMap[key]"></div>
+                                      <div class="edge-case-item-content" ng-bind="value"></div>
+                                  </pui-layout>
+                              </li>
+                          </ul>
+                          <ul class="edge-case-item-list" ng-if="porpoise.porData.d3Data.chooseEdge.type === '09'">
+                              <li class="edge-case-item" ng-repeat="item in porpoise.porData.d3Data.linkTimeList.list">
+                                  <pui-layout class="edge-case-item-info">
+                                      <div class="edge-case-item-label">车牌号</div>
+                                      <div class="edge-case-item-content" ng-bind="item.id"></div>
+                                  </pui-layout>
+                                  <pui-layout class="edge-case-item-info">
+                                      <div class="edge-case-item-label">车辆所属单位</div>
+                                      <div class="edge-case-item-content" ng-bind="item.ssdw"></div>
+                                  </pui-layout>
+                                  <pui-layout class="edge-case-item-info">
+                                      <div class="violation-item">
+                                          <!--<div class="mgb10" ng-bind="porpoise.porData.d3Data.chooseEdge._source.name"></div>-->
+                                          <div class="mgb10" ng-bind="item.data[porpoise.porData.d3Data.chooseEdge._source.key].length + '次'"></div>
+                                          <div class="mgb10" ng-repeat="d in item.data[porpoise.porData.d3Data.chooseEdge._source.key]">
+                                              <div ng-repeat="(key, value) in d">
+                                                  <div class="text-break" title="{{key}}" ng-bind="value"></div>
+                                              </div>
+                                          </div>
+                                      </div>
+                                      <div class="violation-item">
+                                          <!--<div class="mgb10" ng-bind="porpoise.porData.d3Data.chooseEdge._target.name"></div>-->
+                                          <div class="mgb10" ng-bind="item.data[porpoise.porData.d3Data.chooseEdge._target.key].length + '次'"></div>
+                                          <div class="mgb10" ng-repeat="d in item.data[porpoise.porData.d3Data.chooseEdge._target.key]">
+                                              <div ng-repeat="(key, value) in d">
+                                                  <div class="text-break" title="{{key}}" ng-bind="value"></div>
+                                              </div>
+                                          </div>
+                                      </div>
+                                  </pui-layout>
+                              </li>
+                          </ul>
+                          <pui-button on-click="porpoise.getMoreEdge($event)" ng-if="porpoise.porData.d3Data.chooseEdge.type !== '09'" class="see-more">
+                              查看更多
+                          </pui-button>
+                      </div>
+                  </div>
+              </div>
+              <ul ng-if="porpoise.porData.d3Data.reqData.showDetailType === 'node' && porpoise.porData.nodeDetail" class="detail-ul">
+                  <li ng-repeat="(key, item) in porpoise.porData.nodeDetail.data" ng-if="porpoise.porData.nodeDetail.nameMap[key]" class="detail-li">
+                      <span class="detail-title" ng-bind="porpoise.porData.nodeDetail.nameMap[key]"></span>
+                      <span class="detail-text" ng-if="key !== 'type'" ng-bind="item"></span>
+                      <span class="detail-text" ng-if="key === 'type'" ng-bind="item | entityTableNameFilter"></span>
+                  </li>
+              </ul>
+              <div ng-if="!porpoise.porData.d3Data.reqData.showDetailType" class="right-empty">
+                  请点击实体或关系线查看关系信息
+              </div>
+          </div>
+      </div>
+  </div>
+</div>

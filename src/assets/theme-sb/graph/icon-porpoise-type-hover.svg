@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="20px" height="3px" viewBox="0 0 20 3" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 53.2 (72643) - https://sketchapp.com -->
+    <title>Path</title>
+    <desc>Created with Sketch.</desc>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="选择要合并的快照" transform="translate(-185.000000, -236.000000)" fill="#2979FF">
+            <g id="Group-12" transform="translate(117.000000, 103.000000)">
+                <g id="Group-2" transform="translate(32.000000, 96.000000)">
+                    <path d="M36,39 C36,37.895 36.895,37 38,37 L54,37 C55.105,37 56,37.895 56,39 L56,40 L36,40 L36,39 Z" id="Path"></path>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

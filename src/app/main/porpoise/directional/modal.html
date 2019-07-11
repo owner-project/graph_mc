@@ -1,0 +1,24 @@
+<div class="pui-modal modal confirm" >
+    <div class="modal-dialog directional-modal">
+        <div class="modal-header">
+            <div class="modal-title">深度扩展</div>
+            <div class="modal-close-icon" ng-click="fn.dismiss()"></div>
+        </div>
+        <div class="modal-body">
+            <div class="edge-box">
+                <pui-layout align="center" class="item-pr-pr-pr">
+                    <label class="item-title">实体选取</label>
+                    <pui-select class="item-con" data-search placeholder="请选择" value-field="id" options="data.options.nodeList" placement="left" ng-model="data.putData.node"></pui-select>
+                </pui-layout>
+                <pui-layout align="center" class="item-pr-pr-pr">
+                    <label class="item-title">拓展层级</label>
+                    <pui-select class="item-con" placeholder="请选择" value-field="id" options="data.options.depthList" placement="left" ng-model="data.putData.depth"></pui-select>
+                </pui-layout>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <pui-button class="cancel-btn" on-click="fn.dismiss()">取消</pui-button>
+            <pui-button class="confirm-btn" type="primary" on-click="fn.sure()">确定</pui-button>
+        </div>
+    </div>
+</div>

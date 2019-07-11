@@ -1,0 +1,49 @@
+.phonebook-main {
+    width: calc(~'100% - 40px');
+    height: calc(~'100% - 40px');
+    position: relative;
+    padding: 20px;
+    .clearfix;
+    .phonebook-title {
+        text-align: right;
+        margin-bottom: 22px;
+        cursor: pointer;
+        .phonebook-btn {
+            padding: 2px 16px;
+            background-color: inherit;
+            &.to-porpoise {
+                margin-right: 8px;
+            }
+            span {
+                line-height: 24px;
+            }
+        }
+    }
+    .phonebook-body {
+        width: 100%;
+        margin-top: 10px;
+        height: calc(~'100% - 40px');
+        .table-first {
+            width: 80px;
+            max-width: 80px;
+            .table-checkbox {
+                margin: 0 auto;
+            }
+        }
+        .table-last {
+            width: 150px;
+            .table-last-layout {
+                cursor: pointer;
+                .go-graph {
+                    display: inline-block;
+                    width: 16px;
+                    height: 16px;
+                }
+                .go-graph-title {
+                    margin-left: 5px;
+                }
+            }
+            
+        }
+    }
+}

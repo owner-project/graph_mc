@@ -1,0 +1,179 @@
+.login-main {
+    @base-url: '../../../assets/theme-sb/';
+    .bg-img(@base-url, @bg-login);
+    .login-boll {
+        .icon-img(@base-url, @icon-login-boll);
+    }
+    .login-atlas {
+        .icon-img(@base-url, @icon-login-atlas);
+        //.icon-img(@base-url, @icon-login-atlas-zt);
+        .login-bling1 {
+            .icon-img(@base-url, @icon-login-bling1);
+        }
+        .login-bling2 {
+            .icon-img(@base-url, @icon-login-bling2);
+        }
+        .login-bling3 {
+            .icon-img(@base-url, @icon-login-bling3);
+        }
+    }
+    .login-con-right {
+        .login-logo {
+            .icon-img(@base-url, @icon-login-logo);
+        }
+        .login-form {
+            .username-box {
+                border-color: @sb-blue;
+                .user-icon {
+                    .icon-img(@base-url, @icon-login-user-icon);
+                }
+                .user-input {
+                    color: @sb-white;
+                    background-color: rgba(0, 0, 0, 0);
+                    &::-webkit-input-placeholder {
+                        color: rgba(255, 255, 255, .5);
+                    }
+                }
+                .user-check {
+                    .icon-img(@base-url, @icon-login-check);
+                }
+                .user-check-log {
+                    color: @sb-red;
+                }
+            }
+            .password-box {
+                border-color: @sb-blue;
+                .pwd-icon {
+                    .icon-img(@base-url, @icon-login-pwd-icon);
+                }
+                .pwd-input {
+                    color: @sb-white;
+                    background-color: rgba(0, 0, 0, 0);
+                    &::-webkit-input-placeholder {
+                        color: rgba(255, 255, 255, .5);
+                    }
+                }
+                .pwd-check {
+                    .icon-img(@base-url, @icon-login-check);
+                }
+                .pwd-check-log {
+                    color: @sb-red;
+                }
+            }
+        }
+    }
+    .remeber-pwd-box {
+        .re-pwd {
+            .re-pwd-span {
+                color: @sb-white2;
+            }
+        }
+    }
+    .submit-box {
+        .submit-btn {
+            background-color: @sb-blue2;
+            box-shadow: 0 0 2px 1px @sb-blue;
+            color: @sb-white;
+        }
+        .submit-active {
+            .icon-img(@base-url, @icon-result-menu-active);
+        }
+    }
+}
+
+.menu-box-top {
+    border-radius: 2px;
+    height: 32px;
+
+    .menu-box-ul {
+        height: 100%;
+
+        .item {
+            height: 100%;
+            cursor: pointer;
+            .item-icon {
+                display: block;
+                width: 16px;
+                height: 16px;
+                margin-left: 6px;
+                margin-right: 3px;
+            }
+            span {
+                margin-right: 4px;
+                line-height: 18px;
+            }
+            .icon-seq {
+                width: 2px;
+                height: 6px;
+            }
+        }
+    }
+}
+
+.arrow-down-icon {
+    @base-url: '../../../assets/theme-sb/';
+    .icon-img(@base-url, @icon-arrow-down);
+    width: 12px;
+    height: 12px;
+    transition: transform 30ms ease-in-out;
+
+    &.to-right {
+        transform: rotate(-90deg);
+    }
+
+    &.to-top {
+        transform: rotate(180deg);
+    }
+
+    &.to-bottom {
+        transform: rotate(0deg);
+    }
+}
+
+.pagination > li > a,
+.pagination > li > span {
+    display: inline-block;
+    float: none;
+    padding: 0px 14px;
+    line-height: 32px;
+    background-color: transparent;
+    border: none;
+    margin-right: 5px;
+}
+
+.pagination > .active > a,
+.pagination > .active > span,
+.pagination > .active > a:hover,
+.pagination > .active > span:hover,
+.pagination > .active > a:focus,
+.pagination > .active > span:focus {
+    z-index: 3;
+    cursor: default;
+}
+
+.pagination > .disabled > span,
+.pagination > .disabled > span:hover,
+.pagination > .disabled > span:focus,
+.pagination > .disabled > a,
+.pagination > .disabled > a:hover,
+.pagination > .disabled > a:focus {
+    background-color: transparent;
+    border-color: transparent;
+    cursor: not-allowed;
+}
+// 引入人员轨迹组件样式
+@import "../main/porpoise/personGraphComponent/personGraph.component.less";
+
+// 引入人员轨迹统计样式
+@import "../main/porpoise/graphStatistics/graphStatistics.component.less";
+// 引入档案表格组件样式
+@import "../main/people/recordCharts/recordCharts.componet.less";
+
+// 引入档案 左侧菜单组件演示
+@import "../main/people/recordLeftMenu/recordLeftMenu.component.less";
+// 引入档案相关关系组件样式
+@import "../main/people/peopleRelation/peopleRelation.componet.less";
+// 引入无数据的组件样式
+@import "../components/no-data/no-data.component.less";
+// 引入已关注人员近30天内动态组件样式
+@import "../main/home/focusPeople/focusPeople.componet.less";

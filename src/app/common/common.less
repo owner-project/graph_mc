@@ -1,0 +1,195 @@
+@import "theme/index";
+
+body {
+    font-size: 12px;
+}
+
+.html-content {
+    height: 100%;
+    width: 100%;
+    background-color: #fff;
+    overflow: auto;
+    position: relative;
+}
+
+//全局百分比长条颜色定义
+.bfb-animate {
+    width: 0px;
+    transition: 300ms width ease-in-out;
+}
+.bfb-base {
+    background-size: 4px;
+}
+.bfb-color-red {
+    .bfb-base;
+    .bfb-animate;
+}
+.bfb-color-gray {
+    .bfb-base;
+}
+.bfb-color-green {
+    .bfb-base;
+    .bfb-animate;
+}
+.bfb-color-blue {
+    .bfb-base;
+    .bfb-animate;
+}
+.bfb-color-orange {
+    .bfb-base;
+    .bfb-animate;
+}
+
+.bfb-wrap{
+    display: inline-block;
+    height: 16px;
+    border-radius: 9px;
+    background: rgba(127, 138, 255, 0.2);
+    padding: 0 4px;
+}
+
+//条形百分比容器
+.bfb-box {
+    display: inline-block;
+    width: 44px;
+    height: 4px;
+    margin: 6px;
+}
+.bfb-text{
+    line-height: 16px;
+    text-align: left;
+    vertical-align: super;
+}
+
+//条形百分比填充容器
+.bfb-transparent {
+    height: 100%;
+    border-radius: 9px;
+}
+
+//条形百分比容器填充  蓝
+.bfb-blue {
+    float: left;
+}
+//条形百分比容器填充  绿
+.bfb-green {
+    float: left;
+}
+//条形百分比容器填充  蓝2
+.bfb-blue2 {
+    float: left;
+}
+
+.df-select-width {
+    min-width: 85px;
+    margin: 0 15px 0 0 ;
+}
+
+/*!*** d3.slider.css  ***!
+.d3-slider {
+    position: relative;
+    font-family: Verdana,Arial,sans-serif;
+    font-size: 1.1em;
+    border: 1px solid;
+    z-index: 2;
+}
+
+.d3-slider-horizontal {
+    height: .8em;
+
+    .d3-slider-handle {
+        top: -.3em;
+        margin-left: -.6em;
+    }
+}
+
+.d3-slider-range {
+    left:0px;
+    right:0px;
+    height: 0.8em;
+    position: absolute;
+}
+
+.d3-slider-range-vertical {
+    left:0px;
+    right:0px;
+    position: absolute;
+    top:0;
+}
+
+.d3-slider-vertical {
+    width: .8em;
+    height: 100px;
+
+    .d3-slider-handle {
+        left: -.25em;
+        margin-left: 0;
+        margin-bottom: -.6em;
+    }
+}
+
+.d3-slider-handle {
+    position: absolute;
+    width: 1.2em;
+    height: 1.2em;
+    border: 1px solid;
+    border-radius: 4px;
+    z-index: 3;
+
+    &:hover {
+        border: 1px solid;
+    }
+}
+
+.d3-slider-axis {
+    position: relative;
+    z-index: 1;
+
+    path {
+        stroke-width: 0;
+        fill: none;
+    }
+
+    line {
+        fill: none;
+        shape-rendering: crispEdges;
+    }
+
+    text {
+        font-size: 11px;
+    }
+}
+
+.d3-slider-axis-bottom {
+    top: .8em;
+}
+
+.d3-slider-axis-right {
+    left: .8em;
+}*/
+
+
+/** 局部loading  **/
+.inner-loading-main {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    transition: 500ms;
+    z-index: 999;
+    .inner-loading-body {
+        .ani-loading-svg;
+        position: absolute;
+        .c-center;
+    }
+}
+
+.select2-container {
+    .select2-choice {
+        height: 100%;
+        line-height: inherit;
+        border: 0;
+        border-radius: 0;
+    }
+}

@@ -1,0 +1,67 @@
+<div>
+    <pui-layout align="center" class="item-title"
+        ng-click="entity.openStatus = !entity.openStatus">
+        <div class="arrow-down-icon mgr5"
+            ng-class="{'to-right': !entity.openStatus}">
+        </div>
+        <div ng-if="!entity.association">
+            <span class="class-title" ng-if="!entity.hasNodeSelected">
+                <label class="statistics-title">实体统计</label>
+                <span class="statistics-count" ng-bind="entity.verticesSum"></span>
+            </span>
+            <span class="class-title" ng-if="entity.hasNodeSelected">
+                <label class="statistics-title">已选择实体</label>
+                <span class="statistics-count" ng-bind="entity.cverticesSum"></span>
+            </span>
+        </div>
+        <div ng-if="entity.association">
+            <span class="class-title">
+                <label class="statistics-title">相关联实体</label>
+                <span class="statistics-count" ng-bind="entity.connectedverticesSum"></span>
+            </span>
+        </div>
+    </pui-layout>
+    <div class="item-con" ng-if="entity.openStatus">
+        <ul>
+            <li ng-repeat="item in entity.nodeTree track by $index">
+                <pui-layout align="center" class="text-left" ng-click="item.open = !item.open">
+                    <div class="arrow-down-icon mgr5" ng-class="{'to-right': !item.open}"></div>
+                    <div class="item-label" ng-bind="item.label"></div>
+                    <div class="item-bg">
+                        <div class="item-count">
+                            <i ng-style="{'width': (item.sum / entity.verticesSum * 100) + '%'}"></i>
+                        </div>
+                        <span class="count-span" ng-bind="item.sum"></span>
+                        <div class="item-width"></div>
+                    </div>
+                    <div class="aim-at-icon" ng-click="entity.chooseNodesFunc(item, $event)"></div>
+                </pui-layout>
+                <div class="right-item-detail" ng-if="item.open">
+                    <div ng-repeat="(k, v) in item.child">
+                        <pui-layout align="center" class="text-left" ng-click="v.open = !v.open">
+                            <div class="arrow-down-icon mgr5" ng-class="{'to-right': !v.open}"></div>
+                            <!-- <pui-checkbox class="mgr5" data-indeterminate="item.showIndeterminate" ng-model="item.show" ng-change="porpoise.toggleNode(item)"></pui-checkbox> -->
+                            <div class="item-label" ng-bind="v.label"></div>
+                            <div class="item-count">
+                                <i ng-style="{'width': (v.sum / item.sum * 100) + '%'}"></i>
+                            </div>
+                            <span class="count-span" ng-bind="v.sum"></span>
+                            <div class="aim-at-icon" ng-click="entity.chooseNodesFunc(v, $event)"></div>
+                        </pui-layout>
+                        <div class="right-item-detail" ng-repeat="vertice in v.child" ng-if="v.open">
+                            <span ng-bind="vertice.name + ' ' + (!vertice.isTreauryShow? vertice.key:vertice.des)"
+                                ng-class="{'check': entity.searchWord === (!vertice.isTreauryShow? vertice.key:vertice.des)}"
+                                data-title="{{vertice.name + ' ' + (!vertice.isTreauryShow? vertice.key:vertice.des)}}" bs-tooltip
+                                data-container="body"
+                                ng-click="entity.statisticsNameClickFunc((!vertice.isTreauryShow? vertice.key:vertice.des),$event)">
+                            </span>
+                            <div ng-if="!entity.association"
+                                ng-class="{'aim-eye-icon':entity.disabledNodes[vertice.key] != 'undefined','icon-aim-hide':entity.disabledNodes[vertice.key]}"
+                                ng-click="entity.disableNodesFunc(vertice, $event)"></div>
+                        </div>
+                    </div>
+                </div>
+            </li>
+        </ul>
+    </div>
+</div>

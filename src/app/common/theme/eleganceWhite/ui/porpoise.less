@@ -1,0 +1,214 @@
+.porpoise-main {
+    background-image: none !important;
+
+    .porpoise-body {
+        &.screen-full {
+            .body-left {
+                background-image: none;
+                background-color: #f1f3f5;
+            }
+            .body-right {
+                .graph-shift-btn {
+                    border: none;
+                }
+            }
+        }
+        .body-left {
+            background-color: fade(@bg-color-light, 65%);
+
+            .graph-scale-box {
+                .scale-track-content {
+                    .scale-track-back {
+                        background-color: #D9DBDD;
+                    }
+                }
+            }
+
+            .float-menu-box {
+                .float-menu-boll {
+                    @base-url: '../../../assets/theme-ew/';
+
+                    .icon-img(@base-url, @icon-graph-menu-bg-b);
+                }
+                .menu-side-wrap-select {
+                    @base-url: '../../../assets/theme-ew/';
+                    .icon-img(@base-url, @icon-graph-side-menu-1);
+
+                    .item {
+                        &:nth-child(1) {
+                            .p-icon {
+                                .icon-img(@base-url, @icon-graph-menu-p9-1);
+                            }
+                        }
+                        &:nth-child(2) {
+                            .p-icon {
+                                .icon-img(@base-url, @icon-graph-menu-p9-2);
+                            }
+                        }
+                        &:nth-child(3) {
+                            .p-icon {
+                                .icon-img(@base-url, @icon-graph-menu-p9-3);
+                            }
+                        }
+                    }
+                }
+                .menu-side-wrap-collspan {
+                    // @base-url: '../../../assets/theme-ew/';
+                    // .icon-img(@base-url, @icon-graph-side-menu-2);
+                    .item {
+                        &:nth-child(1) {
+                            .p-icon {
+                                .icon-img(@base-url, @icon-graph-menu-p9-41);
+                            }
+                        }
+                        &:nth-child(2) {
+                            .p-icon {
+                                .icon-img(@base-url, @icon-graph-menu-p9-42);
+                            }
+                        }
+                        &:nth-child(3) {
+                            .p-icon {
+                                .icon-img(@base-url, @icon-graph-menu-p9-43);
+                            }
+                        }
+                        &:nth-child(4) {
+                            .p-icon {
+                                .icon-img(@base-url, @icon-graph-menu-p9-44);
+                            }
+                        }
+                        &:nth-child(5) {
+                            .p-icon {
+                                .icon-img(@base-url, @icon-graph-menu-p9-45);
+                            }
+                        }
+                        // &:nth-child(6) {
+                        //     .p-icon {
+                        //         .icon-img(@base-url, @icon-graph-menu-p9-46);
+                        //     }
+                        // }
+                    }
+                }
+                .menu-side-wrap-connect {
+                    // @base-url: '../../../assets/theme-ew/';
+                    // .icon-img(@base-url, @icon-graph-side-menu-3);
+                    .item {
+                        &:nth-child(1) {
+                            .p-icon {
+                                .icon-img(@base-url, @icon-graph-menu-p9-41);
+                            }
+                        }
+                        &:nth-child(2) {
+                            .p-icon {
+                                .icon-img(@base-url, @icon-graph-menu-p9-42);
+                            }
+                        }
+                        &:nth-child(3) {
+                            .p-icon {
+                                .icon-img(@base-url, @icon-graph-menu-p9-43);
+                            }
+                        }
+                        &:nth-child(4) {
+                            .p-icon {
+                                .icon-img(@base-url, @icon-graph-menu-p9-44);
+                            }
+                        }
+                        &:nth-child(5) {
+                            .p-icon {
+                                .icon-img(@base-url, @icon-graph-menu-p9-45);
+                            }
+                        }
+                        // &:nth-child(6) {
+                        //     .p-icon {
+                        //         .icon-img(@base-url, @icon-graph-menu-p9-46);
+                        //     }
+                        // }
+                    }
+                }
+                .menu-con-main {
+                    .item {
+                        @base-url: '../../../assets/theme-ew/';
+
+                        &:nth-child(1) {
+                            .p-icon {
+                                .icon-img(@base-url, @icon-graph-menu-p1);
+                            }
+                        }
+                        &:nth-child(2) {
+                            .p-icon {
+                                .icon-img(@base-url, @icon-graph-menu-p2);
+                            }
+                        }
+                        &:nth-child(3) {
+                            .p-icon {
+                                .icon-img(@base-url, @icon-graph-menu-p10);
+                            }
+                        }
+                        &:nth-child(4) {
+                            .p-icon {
+                                .icon-img(@base-url, @icon-graph-menu-p5);
+                            }
+                        }
+                        &:nth-child(5) {
+                            .p-icon {
+                                .icon-img(@base-url, @icon-graph-menu-p6);
+                            }
+                        }
+                        &:nth-child(6) {
+                            .p-icon {
+                                .icon-img(@base-url, @icon-graph-menu-p7);
+                            }
+                        }
+                        &:nth-child(7) {
+                            .p-icon {
+                                .icon-img(@base-url, @icon-graph-menu-p8);
+                            }
+                        }
+                        &:nth-child(8) {
+                            .p-icon {
+                                .icon-img(@base-url, @icon-graph-menu-p9);
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        .body-right {
+            border-color: @border-color;
+            .right-tab {
+                box-shadow: 0px 1px 5px 0px @shadow-color;
+
+                .tab-ul {
+                    .tab-li {
+                        &.check {
+                            background-color: @bg-color;
+                            box-shadow: inset 0px -2px 0px 0px @border-color-primary;
+                        }
+                    }
+                }
+                .tab-bg {
+                    display: none;
+                }
+            }
+            .right-con {
+                .right-item {
+                    .item-con {
+                        ul {
+                            li {
+                                .item-count {
+                                    background-color: #ECECEE;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+    .porpoise-footer {
+        .foot-left {
+            .foot-title {
+                box-shadow: 0px 1px 5px 0px @shadow-color;
+            }
+        }
+    }
+}

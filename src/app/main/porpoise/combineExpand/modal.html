@@ -1,0 +1,63 @@
+<div class="pui-modal modal confirm" >
+    <div class="modal-dialog combine-expand-modal">
+      <div class="modal-header">
+        <div class="modal-title">组合扩展</div>
+        <div class="modal-close-icon" ng-click="fn.dismiss()"></div>
+      </div>
+      <div class="modal-body">
+        <div class="content">
+          <div class="date-wrap">
+            <span class="mgr15">选择日期</span>
+            <pui-datepicker
+              style="width: 100px;"
+              class="mgr15"
+              placeholder="开始时间"
+              ng-model="data.startTime">
+            </pui-datepicker>
+            <span>至</span>
+            <pui-datepicker
+              style="width: 100px;"
+              class="mgl15 mgr15" placeholder="结束时间"
+              data-max-date="{{data.currentDate}}"
+              data-min-date="{{vm.data.startTime}}"
+              ng-model="data.endTime">
+            </pui-datepicker>
+          </div>
+          <div class="option-wrap">
+              <div class="select-all">
+                <pui-checkbox
+                  data-indeterminate="data.halfSelect"
+                  ng-model="data.allSelected"
+                  ng-change="fn.selectAll()">
+                </pui-checkbox>
+                <label class="select-text">全选</label>
+              </div>
+              <div class="select-item">
+                  <div ng-repeat="item in data.selectItems">
+                      <div class="select-one">
+                          <pui-checkbox
+                            ng-model="item.isChecked"
+                            ng-change="fn.toggleNode()">
+                          </pui-checkbox>
+                          <label class="select-text" ng-bind="item.name"></label>
+                      </div>
+                      <div class="select-option-wrap">
+                        <div class="select-option">
+                            <pui-select
+                              data-options="item.operation"
+                              ng-model="item.selectId">
+                            </pui-select>
+                        </div>
+                        <pui-input class="select-value" type="text" ng-model="item.selectValue"></pui-input>
+                      </div>
+                  </div>
+              </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <pui-button class="cancel-btn" on-click="fn.dismiss()">取消</pui-button>
+        <pui-button class="confirm-btn" type="primary" on-click="fn.sure()">确定</pui-button>
+      </div>
+    </div>
+</div>

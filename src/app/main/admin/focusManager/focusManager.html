@@ -1,0 +1,94 @@
+<div class="h100 focus-manager-wrapper">
+    <!-- 分组标签 -->
+    <ul class="tag-list">
+        <li class="tag" ng-class="{'active':focus.selectedGroup == group}" ng-click="focus.selectFocusGroupHandle(group)" ng-repeat="group in focus.focusGroup">
+            {{group.name}}({{group.count || 0}})
+        </li>
+        <li class="tag" ng-click="focus.createNewGroup()">
+            <i class="odipus-icon add-icon"></i>创建新分组
+        </li>
+        <li class="tag setting-tag" bs-dropdown data-animation="am-flip-x" aria-haspopup="true" aria-expanded="false" data-placement="bottom-right">
+            <i class="odipus-icon setting-icon"></i>
+            管理
+        </li>
+        <ul class="dropdown-menu" role="menu">
+                <li class="dropdown-menu-item" ng-click='focus.editSelectGroupName()'>编辑分组名称</li>
+                <li class="dropdown-menu-item" ng-click='focus.deleteSelectGroup()'>删除分组</li>
+         </ul>
+    </ul>
+    <div class="focus-manage">
+        <div class="focus-list-top clearfix">
+            <span class="fl top-item">共{{focus.pageParam.total}}条数据</span>
+            <span class="fl top-item" ng-click="focus.changeSort()">时间排序<i class="odipus-icon " ng-class="{'icon-arrow-down':focus.pageParam.desc == 'asc','icon-arrow-up':focus.pageParam.desc == 'desc'}"></i></span>
+            <pui-searchbar class="fl" data-empty-search="true" on-search="focus.onSearch($event)" ng-model="focus.searchContent">
+            </pui-searchbar>
+            <ul class="fr top-right-operates">
+                <li class="operate" ng-click="focus.moveFocusTo()">
+                    <i class="odipus-icon focus-move-to-icon"></i>
+                    移动到
+                </li>
+                <li class="operate" ng-click="focus.unFocusHandle()">
+                    <i class="odipus-icon focus-remove-icon"></i>
+                    取消关注
+                </li>
+            </ul>
+        </div>
+        <ul class="focus-list">
+                <no-data ng-if="focus.focusList.length == 0" text="'暂无数据'"></no-data>
+            <li class="focus-item" ng-repeat="entity in focus.focusList">
+                <div class="focus-item-top clearfix">
+                    
+                    <img class="focus-item-avatar fl" width="48" height="48" ng-src="{{entity.image}}">
+                    <div class="focus-item-info">
+                        <h4 class="focus-item-title">
+                            <span class="focus-item-name">{{entity.title}}</span>
+                            <span class="focus-item-card">({{entity.key}})</span>
+                        </h4>
+                        <p class="focus-reason">{{entity.desc}}</p>
+                    </div>
+                    <span class="checkbox-box">
+                        <pui-checkbox ng-model="entity.isSelected"></pui-checkbox>
+                    </span>
+                </div>
+                <div class="focus-item-bottom clearfix">
+                    <span>{{entity.ctime |date:'yyyy-MM-dd'}}</span>
+                    <div class="fr">
+                        <i class="odipus-icon edit-icon" ng-click="focus.editFocusEntity(entity)"></i>
+                        <i class="odipus-icon more-edit-icon" data-animation="am-flip-x" bs-dropdown aria-haspopup="true" aria-expanded="false">
+                        </i>
+                        <ul class="dropdown-menu" role="menu">
+                                <li class="dropdown-menu-item" ng-click='focus.moveFocusEntityTo(entity)'>
+                                    <!-- <i class="odipus-icon focus-move-to-icon"></i> -->
+                                    移动到
+                                </li>
+                                <li class="dropdown-menu-item" ng-click='focus.unFocusEntityHandle(entity)'>
+                                    <!-- <i class="odipus-icon focus-remove-icon"></i> -->
+                                    取消关注
+                                </li>
+                                <li class="dropdown-menu-item" ng-click='focus.jumpToRelation(entity)'>图析</li>
+                                <li class="dropdown-menu-item" ng-click='focus.jumpToRecord(entity)'>档案</li>
+                         </ul>
+                    </div>
+                </div>
+            </li>
+        </ul>
+        <div ng-if="focus.focusList.length > 0">
+                <div class="clearfix">
+                        <uib-pagination
+                            class="pagination-sm pull-right"
+                            total-items="focus.pageParam.total"
+                            ng-change="focus.changePage()"
+                            ng-model="focus.pageParam.pageNo"
+                            first-text="首页"
+                            last-text="末页"
+                            previous-text="上一页"
+                            next-text="下一页"
+                            force-ellipses="true"
+                            max-size="10"
+                            items-per-page="focus.pageParam.pageSize"
+                            boundary-links="true">
+                        </uib-pagination>
+                    </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,70 @@
+.menu-main {
+    height: calc(~'100% - 46px');
+    position: relative;
+    .list-left{
+        float: left;
+        width: 64px;
+        height: 100%;
+        border-right: 1px solid;
+        .list-item{
+            position: relative;
+            cursor: pointer;
+            line-height: 32px;
+            font-weight: bold;
+            padding-left: 16px;
+            margin-bottom: 16px;
+            &.active{
+                &:before{
+                    content: '';
+                    height: 8px;
+                    width: 3px;
+                    border-radius: 0 2px 2px 0;
+                    display: inline-block;
+                    position: absolute;
+                    left: 0;
+                    top: 12px;
+                }
+            }
+        }
+    }
+    .list-right{
+        // float: left;
+        width: calc(~"100% - 65px");
+        overflow: auto;
+        height: 100%;
+        .list-item{
+            line-height: 32px;
+            padding: 0 16px;
+            height: 32px;
+            .person-info-word{
+                width: calc(~"100% - 20px");
+                overflow: hidden;
+                text-overflow: ellipsis;
+                word-break: keep-all;
+                display: inline-block;
+            }
+            cursor: pointer;
+            &:hover{
+                color: rgba(255,255,255,.9);
+                background-color:rgba(41,121,255,0.05);
+                .person-info-icon{
+                    display: inline-block
+                }
+            }
+            &.active{
+                font-weight: bold;
+                background:radial-gradient(40.19px at 65% 0%, rgba(41, 121, 255, 0.2) 0%, rgba(41, 121, 255, 0) 140%), radial-gradient(40px at 30% 110%, rgba(41, 121, 255, 0.3) 0%, rgba(41, 121, 255, 0) 140%), rgba(41, 121, 255, 0.06);
+            }
+            .person-info-icon{
+                margin-left: 2px;
+                background-image:url("../../../../assets/theme-sb/people/person-info-icon.png");
+                background-size: 100% 100%;
+                display: inline-block;
+                display: none;
+                width: 14px;
+                height: 14px;
+                vertical-align: 8px;
+            }
+        }
+    }
+}

@@ -1,0 +1,68 @@
+<div class="enterprise-o-main jq_enterprise_main">
+	<div class="enterprise-o-left" id="enterprise-o-left-map">
+	</div>
+	<div class="enterprise-o-right">
+		<div ng-click="eo.enterpriseRankingClick()" class="enterprise-o-right-title">重点公司排名</div>
+		<ul class="enterprise-o-right-ul">
+			<li ng-click="eo.corporatePortraitClick(item)" ng-repeat="item in eo.jsonData.company track by item.id" ng-bind="item.name"></li>
+		</ul>
+	</div>
+	<div class="enterprise-o-content">
+		<div class="enterprise-o-content-title-box">
+			<div class="enterprise-o-content-title">
+				高危企业检测
+			</div>
+			<div class="enterprise-o-content-title-img"></div>
+		</div>
+		
+		<div class="enterprise-o-content-title-img-box">
+			<div class="enterprise-o-bg-boll"></div>
+			<div class="enterprise-o-bg-fill3"></div>
+			<div class="enterprise-o-bg-fill2"></div>
+			<div class="enterprise-o-bg-fill1"></div>
+			<div class="enterprise-o-bg-house"></div>
+			<div class="enterprise-o-bg-text-box">
+				<div class="enterprise-o-bg-text-box-item">
+					<div class="enterprise-o-bg-text-box-item-left1"></div>
+					<div class="enterprise-o-bg-text-box-item-rect1">
+						<div ng-bind="eo.jsonData.count.highDangerCompanyCount" class="enterprise-o-bg-text-box-item-rect-count"></div>
+						<div class="enterprise-o-bg-text-box-item-rect-name">高危公司数量</div>
+					</div>
+				</div>
+				<div class="enterprise-o-bg-text-box-item">
+					<div class="enterprise-o-bg-text-box-item-right1"></div>
+					<div class="enterprise-o-bg-text-box-item-rect2">
+						<div ng-bind="eo.jsonData.count.companyCount" class="enterprise-o-bg-text-box-item-rect-count"></div>
+						<div class="enterprise-o-bg-text-box-item-rect-name">评分公司总数</div>
+					</div>
+				</div>
+				<div class="enterprise-o-bg-text-box-item">
+
+				</div>
+				<div class="enterprise-o-bg-text-box-item">
+					<div class="enterprise-o-bg-text-box-item-rect3">
+						<div ng-bind="eo.jsonData.count.proportion+'%'" class="enterprise-o-bg-text-box-item-rect-count"></div>
+						<div class="enterprise-o-bg-text-box-item-rect-name">高危公司占比</div>
+					</div>
+					<div class="enterprise-o-bg-text-box-item-right2"></div>
+				</div>
+				<div class="enterprise-o-bg-text-box-item">
+					<div class="enterprise-o-bg-text-box-item-left2"></div>
+					<div class="enterprise-o-bg-text-box-item-rect4">
+						<div ng-bind="eo.jsonData.count.crimeSampleCount" class="enterprise-o-bg-text-box-item-rect-count"></div>
+						<div class="enterprise-o-bg-text-box-item-rect-name">犯罪样本数量</div>
+					</div>
+				</div>
+				<div class="enterprise-o-bg-text-box-item">
+					<div class="enterprise-o-bg-text-box-item-right3"></div>
+					<div class="enterprise-o-bg-text-box-item-rect5">
+						<div ng-bind="eo.jsonData.count.sampleCount" class="enterprise-o-bg-text-box-item-rect-count"></div>
+						<div class="enterprise-o-bg-text-box-item-rect-name">模型样本数量</div>
+					</div>
+					
+				</div>
+			</div>
+		</div> 
+		
+	</div>
+</div>

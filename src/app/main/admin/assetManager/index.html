@@ -1,0 +1,6 @@
+<div class="h100">
+    <div class="w100 h100" ng-if="vm.type === 'p_4_2'" ng-include="'app/main/admin/assetManager/entityManager/index.html'" ng-controller="EntityManagerController as vm"></div>
+    <div class="w100 h100" ng-if="vm.type === 'p_4_3'" ng-include="'app/main/admin/assetManager/relationManager/index.html'" ng-controller="RelationManagerController as vm"></div>
+    <div class="w100 h100" ng-if="vm.type === 'p_4_1'" ng-include="'app/main/admin/assetManager/sourceAsset/index.html'" ng-controller="AssetManagerController as vm"></div>
+    <div class="w100 h100" ng-if="vm.type === 'p_4_4'" ng-include="'app/main/admin/assetManager/tagManager/index.html'" ng-controller="TagManagerController as vm"></div>
+</div>

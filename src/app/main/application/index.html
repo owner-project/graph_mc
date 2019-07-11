@@ -1,0 +1,39 @@
+<!-- <div class="application-main">
+    <div class="app-type" ng-repeat="item in app.jsonData track by $index">
+        <div ng-bind="item.title" class="app-type-title"></div>
+        <ul class="app-type-ul">
+            <li ng-click="app.appItemClick(items.clickName)" class="app-type-li" ng-repeat="items in item.apps track by items.id">
+                <img ng-src={{items.image}}>
+                <div ng-bind="items.name" class="app-type-text"></div>
+            </li>
+        </ul>
+    </div> -->
+<!-- <div class="app-type">
+        <div class="app-type-title">数据导入</div>
+        <hr class="app-type-line"></hr>
+        <ul class="app-type-ul">
+            <li ng-click="app.importExl(items.clickName)" class="app-type-li">
+                <img ng-src="assets/images/theme_star_blue/application/vm.png">
+                <div class="app-type-text">嫌疑犯信息导入</div>
+            </li>
+        </ul>
+    </div> -->
+<!-- </div> -->
+
+<div class="application">
+    <div class="application-banner">
+        <img class="application-banner-img" src="../../../assets/images/theme_star_blue/application/banner.png">
+    </div>
+    <div class="application-title">
+        <i class="icon-graph"></i>
+        数据分析应用
+    </div>
+    <div class="application-wrap">
+        <div class="application-item" ng-repeat="application in app.newApplications" ng-click="app.appItemClick(application.clickName)">
+            <div class="application-item-inner">
+                <img class="application-item-icon" ng-src="{{application.imageSrc}}">
+                <p>{{application.name}}</p>
+            </div>
+        </div>
+    </div>
+</div>

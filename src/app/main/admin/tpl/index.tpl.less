@@ -1,0 +1,188 @@
+.m-m-container {
+    width: calc(~'100% - 55px');
+    padding: 0 30px 0 25px;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+
+    .m-m-body-title {
+        .clearfix;
+        margin: 10px 0;
+        .extend-operate-wrap{
+            line-height: 40px;
+            i{
+                width: 16px;
+                height: 16px;
+                display: inline-block;
+                vertical-align: text-bottom;
+            }
+            .extend-operate{
+                cursor: pointer;
+                margin-left: 8px;
+            }
+        }
+        .m-m-body-ul {
+            float: right;
+            position: relative;
+            &.operate-wrapper{
+                line-height: 18px;
+                margin-top: 10px;
+                .operate{
+                    display: inline-block;
+                    text-align: center;
+                    margin: 0 4px;
+                    opacity: .7;
+                    cursor: pointer;
+                    &:last-child{
+                        margin-right: 0;
+                    }
+                    &:hover{
+                        opacity: 1;
+                    }
+                    &.disabled {
+                        opacity: 0.5;
+                        cursor: not-allowed;
+                    }
+                }
+                .odipus-icon {
+                    display: inline-block;
+                    height: 16px;
+                    width: 16px;
+                    vertical-align: text-bottom;
+                    margin-right: 3px;
+                }
+            }
+        }
+        .m-m-title-left {
+            float: left;
+            .m-left-box {
+                height: 24px;
+                margin: 8px 0;
+                .extend-select{
+                    width: 80px;
+                }
+            }
+        }
+    }
+
+    .m-m-table-container {
+        flex-grow: 1;
+        overflow-y: auto;
+        overflow-x: hidden;
+        margin-bottom:20px;
+        .lang-string{
+            width:120px;
+            word-wrap:normal;
+            overflow:hidden;
+            text-overflow: ellipsis;
+            word-break: keep-all;
+        }
+        th{
+            font-weight: bolder;
+        }
+        .admin-table {
+            .clearfix;
+            .one-line-show{
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+            }
+            .cb-length {
+                width: 30px;
+                min-width: 30px;
+                padding: 0 5px;
+                text-align: center;
+            }
+            .cb-length-option {
+                min-width: 180px;
+                .login-logo-size{
+                    width: 125px;
+                    height: 56px
+                }
+                .logo-size{
+                    width: 93px;
+                    height: 32px
+                }
+            }
+            .hasSort{
+                position: relative;
+                cursor: pointer;
+            }
+            .odipus-icon{
+                display: inline-block;
+                position: absolute;
+                right: 0;
+                top: 16px;
+            }
+            i {
+                height: 16px;
+                width: 16px;
+                display: block;
+            }
+        }
+    }
+}
+//addMember modal
+.am-m-modal {
+    .am-m-form-group {
+        .clearfix;
+        width: 100%;
+        margin-bottom: 14px;
+
+        .cb-item-div {
+            float: left;
+            margin: 10px 5px 5px 15px;
+            input {
+                margin:-4px 2px 0px 0px;
+            }
+        }
+        .am-m-form-item {
+            width: calc(~'50% - 13px');
+            float: left;
+
+            &:nth-child(1) {
+                padding-right: 13px;
+            }
+            &:nth-child(2) {
+                padding-left: 13px;
+            }
+
+            .am-m-form-label {
+                float: left;
+                text-align: right;
+                padding-right: 8px;
+                width: 60px;
+                height: 24px;
+                line-height: 24px;
+            }
+            .am-m-form-input-wrap {
+                margin-left: 80px;
+                height: 24px;
+                line-height: 24px;
+            }
+        }
+    }
+     // 该表tooltip 的样式
+     .tooltip-inner{
+        background-color: #154698;
+    }
+    .tooltip.bottom .tooltip-arrow{
+        border-bottom-color:#154698;
+        border-top-color: #154698;
+    }
+    .tooltip.top .tooltip-arrow{
+        border-top-color: #154698;
+    }
+    .tooltip.in{
+        opacity: 1;
+    }
+    .am-m-form-right-group {
+        position: absolute;
+        top: 5px;
+        right: 10px;
+        width: 250px;
+        font-size: 12px;
+        padding: 10px;
+    }
+}

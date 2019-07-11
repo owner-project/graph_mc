@@ -1,0 +1,59 @@
+<div class="tree-body"
+  ng-class="leftTree.currentFolder.highlightSelected ? 'active' : ''"
+  ng-click="leftTree.expandFolder($event)"
+  data-title="{{leftTree.currentFolder.name || leftTree.currentFolder.themeName}}"
+  bs-tooltip
+  data-bs-enabled = "{{leftTree.currentFolder.name.length >= 9 || leftTree.currentFolder.themeName.length >= 9 }}"
+  data-placement="top">
+  <div class="tree-title">
+    <div class="file-icon"
+      ng-class='leftTree.currentFolder.children ? (leftTree.currentFolder.expand ? "open-icon" : "close-icon") : "item-icon"'>
+    </div>
+    <p class="tree-text" ng-bind="leftTree.currentFolder.name || leftTree.currentFolder.themeName"></p>
+  </div>
+  <div class="operation-icon"
+    ng-click="leftTree.showOperationFunc($event)"
+    ng-if="leftTree.chooseType !== 3 && leftTree.chooseType !== 2">
+  </div>
+  <div class="operation-list">
+    <div ng-click="leftTree.moveTo($event, leftTree.currentFolder)" ng-show="leftTree.currentFolder.type === 'file'" ng-if="leftTree.chooseType === 1">
+      <!-- <i class="open"></i> -->
+      <span>移动到</span>
+    </div>
+    <div ng-click="leftTree.pushJudge($event)" ng-show="leftTree.currentFolder.type === 'file'" ng-if="leftTree.chooseType === 1">
+      <!-- <i class="push"></i> -->
+      <span>推送</span>
+    </div>
+    <div ng-click="leftTree.shareJudge($event, leftTree.currentFolder)" ng-show="leftTree.currentFolder.type === 'file'" ng-if="leftTree.chooseType === 1">
+      <!-- <i ng-class="leftTree.currentFolder.isShare ? 'cancel-share' : 'share'"></i> -->
+      <span>{{(leftTree.currentFolder.isShare) ? ('取消共享') : ('共享')}}</span>
+    </div>
+    <div ng-click="leftTree.edit($event, leftTree.currentFolder)" ng-if="leftTree.chooseType === 1 || leftTree.chooseType === 4">
+      <!-- <i class="edit"></i> -->
+      <span>编辑</span>
+    </div>
+    <div ng-click="leftTree.delete($event, leftTree.currentFolder)" ng-if="leftTree.chooseType === 1 || leftTree.chooseType === 4">
+      <!-- <i class="delete"></i> -->
+      <span>删除</span>
+    </div>
+  </div>
+</div>
+<ul class="tree-list" ng-show="leftTree.currentFolder.expand">
+  <li ng-repeat="subfolder in leftTree.currentFolder.children">
+    <folder-tree
+      current-folder="subfolder"
+      choose-type="leftTree.chooseType"
+      select-tree-item="leftTree.selectFolder(currentFolder)"
+      call-parent-move="leftTree.moveTo(e, file)"
+      call-parent-share="leftTree.shareJudge(e, file)"
+      call-parent-delete-file="leftTree.deleteFile(e, file)"
+      call-parent-delete-folder="leftTree.deleteFolder(e, folder)"
+      call-parent-edit-file="leftTree.edit(e, file)">
+    </folder-tree>
+  </li>
+  <span class="load-more"
+    ng-click="leftTree.loadMore()"
+    ng-show="leftTree.currentFolder.total > 10"
+    ng-bind="leftTree.currentFolder.fileCount < 10 ? '没有更多了' : '加载更多'">
+  </span>
+</ul>

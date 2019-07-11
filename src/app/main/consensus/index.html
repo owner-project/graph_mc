@@ -1,0 +1,91 @@
+<div class="consensus-main">
+    <div class="tra-left">
+        <div class="tra-b-con">
+            <div pui-table type="header">
+                <table>
+                    <thead>
+                        <tr>
+                            <th class="cb-length">序号</th>
+                            <th>舆情内容</th>
+                            <th>舆情时间</th>
+                            <th>监测机构</th>
+                        </tr>
+                    </thead>
+                </table>
+            </div>
+            <div pui-table class="pui-table p-t-body" type="body">
+                <table>
+                    <tbody>
+                        <tr ng-repeat="item in vm.data.list track by $index" ng-click="vm.chooseReport($event, item)">
+                            <td class="cb-length">
+                                {{$index + 1}}
+                            </td>
+                            <td>{{item.name}}</td>
+                            <td>{{item.time}}</td>
+                            <td>{{item.area}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div class="tra-right">
+        <pui-layout class="header-ul">
+            <li class="header-li active">
+                <div>详情</div>
+            </li>
+        </pui-layout>
+        <div class="header-con">
+            <ul class="detail-con">
+                <li>
+                    <span>监测对象:</span>
+                    <span>{{vm.chooseItem.name}}</span>
+                </li>
+                <li>
+                    <span>热词:</span>
+                    <span>{{vm.chooseItem.rc}}</span>
+                </li>
+                <li>
+                    <span>摘要:</span>
+                    <span>{{vm.chooseItem.zy}}</span>
+                </li>
+                <li>
+                    <span>监测范围:</span>
+                    <span>{{vm.chooseItem.area}}</span>
+                </li>
+                <li>
+                    <span>监测时段:</span>
+                    <span>{{vm.chooseItem.time}}</span>
+                </li>
+                <li>
+                    <span>监测机构:</span>
+                    <span>{{vm.chooseItem.jg}}</span>
+                </li>
+                <li>
+                    <span>传播范围:</span>
+                    <span>{{vm.chooseItem.cbfw}}</span>
+                </li>
+                <li>
+                    <span>处置分析:</span>
+                    <span>{{vm.chooseItem.czfx}}</span>
+                </li>
+                <li>
+                    <span>倾向性分析:</span>
+                    <span>{{vm.chooseItem.tdfx}}</span>
+                </li>
+                <li>
+                    <span>微博统计:</span>
+                    <span>{{vm.chooseItem.wbtj}}</span>
+                </li>
+                <li>
+                    <span>媒体分布:</span>
+                    <span>{{vm.chooseItem.mtfb}}</span>
+                </li>
+                <li>
+                    <span>观点分析:</span>
+                    <span>{{vm.chooseItem.gdfx}}</span>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>

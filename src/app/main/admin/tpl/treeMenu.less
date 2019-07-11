@@ -1,0 +1,135 @@
+.tree-menu-view {
+    position: relative;
+    width: 220px;
+    height: calc(~'100% - 28px');
+    padding: 14px 0px;
+
+    .menu-shadow {
+        width: 100%;
+        height: calc(~'100% - 28px');
+        position: absolute;
+        top: 14px;
+        left: 0px;
+    }
+
+    &:before {
+        content: '';
+        display: block;
+        width: 100%;
+        height: 28px;
+        z-index: 2;
+        position: absolute;
+        top: 0px;
+    }
+}
+.tree-menu-container {
+    position: relative;
+    width: calc(~'100% - 16px');
+    height: 100%;
+    font-size: 12px;
+    padding-left: 16px;
+    z-index: 3;
+    overflow: auto;
+
+    // 该表tooltip 的样式
+    .tooltip-inner{
+        background-color: #154698;
+    }
+    .tooltip.bottom .tooltip-arrow{
+        border-bottom-color:#154698;
+        border-top-color: #154698;
+    }
+    .tooltip.top .tooltip-arrow{
+        border-top-color: #154698;
+    }
+    .tooltip.in{
+        opacity: 1;
+    }
+    .actived {
+        &.menu-content {
+            > .back-shadow-group {
+                display: block;
+            }
+        }
+    }
+
+    .menu-item {
+        cursor: pointer;
+        position: relative;
+        &.first-wrap {
+            margin-bottom: 8px;
+        }
+        // 箭头的icon
+        .icon-tree-menu-arrow{
+            position: absolute;
+            right: 0;
+            top: 8px;
+            right:8px;
+        }
+        .menu-content {
+            line-height: 32px;
+            padding-right: 10px;
+            position: relative;
+
+            &:hover {
+                > .back-shadow-group {
+                    display: block
+                }
+            }
+
+
+
+        }
+
+        .back-shadow-group {
+            position: absolute;
+            display: none;
+            right: 0px;
+            top: 0px;
+            height: 100%;
+            width: 220px;
+            z-index: -1;
+
+            .layer-1 {
+                width: 100%;
+                height: 100%;
+                opacity: 0.3;
+                position: absolute;
+                left: 0px;
+                top: 0px;
+            }
+
+            .layer-2 {
+                width: 100%;
+                height: 100%;
+                position: absolute;
+                left: 0px;
+                top: 0px;
+            }
+        }
+
+
+        .menu-arrow {
+            display: inline-block;
+            width: 16px;
+            height: 16px;
+            background-size: 16px 16px;
+            transition: 150ms all ease-in-out;
+            vertical-align: text-bottom;
+            &.open {
+                transform: rotate(-90deg);
+            }
+        }
+
+        .menu-title {
+            margin-left: 3px;
+        }
+
+        .menu-child {
+            margin-left: 21px;
+            &.close {
+                height: 0px;
+            }
+        }
+    }
+}

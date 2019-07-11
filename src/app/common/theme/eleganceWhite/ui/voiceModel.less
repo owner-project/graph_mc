@@ -1,0 +1,30 @@
+//话单模式
+.voice-main {
+    .voice-title {
+        .header-ul {
+            .header-li {
+                &.active {
+                    color: @text-color-highlight;
+                }
+            }
+        }
+    }
+    .voice-body {
+        .voice-bottom-body {
+            background-color: @bg-color-highlight;
+        }
+    }
+    .voice-right {
+        background-color: @bg-color-highlight;
+
+        .voice-right-title {
+            .header-ul {
+                .header-li {
+                    &.active {
+                        box-shadow: inset 0px -2px 0px 0px @border-color-primary;
+                    }
+                }
+            }
+        }
+    }
+}

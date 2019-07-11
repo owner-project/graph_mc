@@ -1,0 +1,89 @@
+.trade-report-main {
+
+    .t-r-tab {
+
+        box-shadow: inset 0 -1px 0 0 @border-color-primary;
+        .header-ul {
+            .header-li {
+                color: @text-color-title;
+                background-color: @bg-color-light;
+
+                &.active {
+                    box-shadow: inset 0px 1px 0px 0px @border-color-primary, inset -1px 0px 0px 0px @border-color-primary, inset 1px 0px 0px 0px @border-color-primary;
+                    border-bottom-color: transparent;
+                    background-color: @bg-color;
+                    color: @text-color-highlight;
+                }
+            }
+        }
+    }
+
+    .t-r-header {
+        .t-r-h-item {
+            border: 1px solid @border-color-primary;
+
+            &:nth-child(1) {
+                .item-icon {
+                    .icon-img(@base-url, @icon-trade-je);
+                }
+            }
+            &:nth-child(2) {
+                .item-icon {
+                    .icon-img(@base-url, @icon-trade-rs);
+                }
+            }
+            &:nth-child(3) {
+                .item-icon {
+                    .icon-img(@base-url, @icon-trade-zh);
+                }
+            }
+
+            .item-con {
+                .item-con-title {
+                    color: @text-color-title;
+                }
+                .item-con-con {
+                    span {
+                        color: @text-color-title;
+                        &.light-text {
+                            color: @text-color-primary;
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    .t-r-body {
+        .t-r-t-title {
+            border-bottom: 1px solid @border-color;
+            .title-con {
+                color: @text-color-title;
+            }
+        }
+        .t-r-box {
+            .item-box {
+                border: 1px solid @border-color-primary;
+
+                .box-head {
+                    border-bottom: 1px solid @border-color;
+                    background-color: @bg-color-shadow;
+                    color: @text-color-title;
+                }
+                .box-body {
+                    .box-li {
+                        .box-left {
+                            color: @text-color-content;
+                        }
+                        .box-middle {
+                            color: @text-color-content;
+                        }
+                        .box-right {
+                            color: @text-color-content;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

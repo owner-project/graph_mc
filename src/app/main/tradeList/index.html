@@ -1,0 +1,32 @@
+<div class="vl-main">
+    <div class="vl-body">
+        <div class="vl-list-body" style="overflow-y:scroll">
+            <pui-layout class="vl-list-ul">
+                <div class="vl-list-li">
+                    <pui-layout align="center" justify="center" class="vl-list-box" ng-click="tl.importExl()">
+                        <pui-layout align="center" direction="column" justify="center" class="vl-add-box">
+                            <i class="add-i"></i>
+                            <div class="add-span">添加</div>
+                        </pui-layout>
+                    </pui-layout>
+                </div>
+                <div ng-repeat="item in tl.jsonData track by $index" class="vl-list-li" ng-click="tl.itemClick(item.graphName)" >
+                    <div class="vl-list-box list-item" >
+                        <div class="item-title" data-container="body" data-bs-enabled="{{item.title&&item.title.length >10 ? true :false}}" data-title="{{item.title || '资金交易分析'}}" bs-tooltip data-placement="top">
+                            <p>{{item.title || '资金交易分析'}}</p>
+                            <i class="vl-list-delete" ng-click="tl.itemDelete($event,item)"></i>
+                        </div>
+                        <div class="item-info">
+                            <div class="vl-list-image"></div>
+                            <div class="vll-list-text">
+                                <div class="vll-list-text-auth" data-bs-enabled="{{item.description.length>10}}"   data-title="{{item.description}}" bs-tooltip data-placement="top">描述：{{item.description}}</div>
+                                <div class="vll-list-text-time">作者：{{item.username}}</div>
+                                <div class="vll-list-text-ds">时间：{{item.date | date: 'yyyy-MM-dd hh:mm:ss'}}</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </pui-layout>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,31 @@
+<div class="pui-modal modal confirm" >
+    <div class="modal-dialog analysis-list-modal">
+        <div class="modal-header">
+            <div class="modal-title">图析历史</div>
+            <div class="modal-close-icon" ng-click="fn.dismiss()"></div>
+        </div>
+        <div class="modal-body">
+            <div class="edge-box">
+                <pui-layout class="wrap-content has-overflow" ng-if="data.analysis.length != 0">
+                    <pui-layout align="middle" class="analysis-item" ng-repeat="item in data.analysis"
+                        ng-click="fn.toPorpoise(item)">
+                        <pui-layout align="center" justify="center" class="img-wrap">
+                            <img ng-src={{item.screenshot}}>
+                        </pui-layout>
+                        <pui-layout direction="column" justify="center" class="item-info">
+                            <div class="mgb5 item-name ft14"
+                                ng-bind="item.themeName"
+                                data-title="{{item.themeName}}"
+                                bs-tooltip
+                                data-bs-enabled = "{{item.themeName.length >= 12}}">
+                            </div>
+                            <div class="mgb5" ng-bind="'作者：'+ item.author"></div>
+                            <div ng-bind="'时间：'+ item.createTime"></div>
+                        </pui-layout>
+                    </pui-layout>
+                </pui-layout>
+                <div ng-include="'app/components/header/aboutMySearch/template.html'" ng-if="data.analysis.length == 0"></div>
+            </div>
+        </div>
+    </div>
+</div>

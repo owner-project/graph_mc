@@ -1,0 +1,68 @@
+.porpoise-import-graph-modal {
+    width: 74% !important;
+    max-width: 1068px !important;
+    min-width: 716px !important;
+    .modal-body {
+        padding-bottom: 24px;
+        .edge-box {
+            height: 200px;
+            text-align: center;
+            overflow: hidden;
+            margin: 0 auto;
+            .item-con {
+                margin: 76px auto 0;
+                display: inline-block;
+                &.upload-file-wrap {
+                    span {
+                        text-decoration: underline;
+                    }
+                }
+                &.has-file {
+                    height: 32px;
+                    padding: 0 16px;
+                    box-sizing: border-box !important;
+                    max-width: 300px;
+                    display: inline-block;
+                    line-height: 31px;
+                    span {
+                        max-width: 246px;
+                        overflow: hidden;
+                        white-space: nowrap;
+                        text-overflow: ellipsis;
+                        float: left;
+                    }
+                    .delete-file-icon {
+                        width: 16px;
+                        height: 16px;
+                        margin-left: 4px;
+                        float: right;
+                        margin-top: 7px;
+                    }
+                }
+            }
+            .file-upload-tip {
+                margin-top: 8px;
+                p {
+                    display: inline-block;
+                    width: 338px; 
+                }
+            }
+            .progress-wrap {
+                // width: 338px;
+                display: inline-block;
+            }
+        }
+        .preview {
+            margin-top: 16px;
+            .title {
+                font-size: 14px;
+            }
+            .des {
+                margin: 8px 0 16px 0;
+            }
+            .file-content {
+                overflow: scroll;
+            }
+        }
+    }
+}

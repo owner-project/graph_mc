@@ -1,0 +1,27 @@
+<div class="pui-modal modal confirm" >
+    <div class="modal-dialog phone-node-modal">
+        <div class="modal-header">
+            <div class="modal-title">手机规则配置</div>
+            <div class="modal-close-icon" ng-click="fn.dismiss()"></div>
+        </div>
+        <div class="modal-body">
+            <div class="pui-layout">
+                <label class="mgr10">手机规则编码</label>
+                <pui-input ng-model="data.ruleId" ng-style="{'width':'267px'}" ></pui-input>
+            </div>
+            <div class="pui-layout">
+                <label class="mgr10">手机规则名称</label>
+                <pui-input ng-model="data.ruleName" ng-style="{'width':'267px'}" ></pui-input>
+            </div>
+            <div class="pui-layout">
+                <label class="mgr10">　　规则内容</label>
+                <pui-input ng-model="data.ruleContent" ng-style="{'width':'267px'}" ></pui-input>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <pui-button class="cancel-btn" on-click="fn.dismiss()">取消</pui-button>
+            <pui-button class="confirm-btn" type="primary" on-click="fn.sure()">确定</pui-button>
+
+        </div>
+    </div>
+</div>

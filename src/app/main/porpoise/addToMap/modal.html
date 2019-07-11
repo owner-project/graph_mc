@@ -1,0 +1,53 @@
+<div class="pui-modal modal confirm" >
+    <div class="modal-dialog add-edge-modal">
+        <div class="modal-header">
+            <div class="modal-title">请选择需要加入地图的事件类型</div>
+            <div class="modal-close-icon" ng-click="fn.dismiss()"></div>
+        </div>
+        <div class="modal-body">
+            <div>
+                <pui-checkbox
+                    ng-model="root.allSelected"
+                    ng-change="fn.selectAll()"
+                    data-indeterminate="root.showIndeterminate"
+                    >
+                </pui-checkbox>
+                <label>全部</label>
+            </div>
+            <div class="pdl10">
+                <div ng-repeat="item in data.currentType.nodeTree" class="mgt15">
+                        <pui-checkbox
+                        ng-model="item.isChecked"
+                        ng-change="fn.toggleNode(item)"
+                        data-indeterminate="item.showIndeterminate"
+                        >
+                    </pui-checkbox>
+                    <label ng-bind="item.labelName"></label>
+                    <pui-datepicker class="mgl5 custom-timepicker" placeholder="开始时间"
+                        ng-model="item.startTime" data-max-date = "{{item.endTime}}">
+                    </pui-datepicker>
+                    -
+                    <pui-datepicker class="mgl5 custom-timepicker" placeholder="结束时间"
+                        ng-model="item.endTime" data-min-date = "{{item.startTime}}">
+                    </pui-datepicker>
+                    <div class="pdl10 clearfix each-items-container">
+                            <div class="pull-left mgl10" ng-repeat="v in item.child">
+                                    <pui-checkbox
+                                    ng-model="v.isChecked"
+                                    ng-change="fn.toggleNode(v)"
+                                    >
+                                </pui-checkbox>
+                                <label ng-bind="v.labelName"></label>
+                            </div>
+                    </div>
+                </div>
+                
+                
+            </div>
+        </div>
+        <div class="modal-footer">
+            <pui-button class="cancel-btn" on-click="fn.dismiss()">取消</pui-button>
+            <pui-button class="confirm-btn" type="primary" on-click="fn.sure()">确定</pui-button>
+        </div>
+    </div>
+</div>

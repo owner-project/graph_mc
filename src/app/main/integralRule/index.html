@@ -1,0 +1,115 @@
+<div class="rule-main">
+	<pui-layout justify="space-between" class="rule-title">
+		<pui-layout align="center">
+            <div class="rule-title-text">人员类型</div>
+            <pui-select style="width: 100px" ng-change="integralRule.getPageData()" placeholder="请选择类型" options='integralRule.tableData.option' ng-model="integralRule.searchData.type"></pui-select>
+        </pui-layout>
+        <pui-searchbar ng-model="integralRule.searchData.name" data-max-width="200" data-placeholder="请输入名称" data-on-search="integralRule.getPageData()"></pui-searchbar>
+    </pui-layout>
+	<div class="rule-body">
+		<ul class="rule-ul-title">`
+			<li class="rule-li">
+				<div class="rule-li-div rule-li-title">
+					<div class="rule-li-div-name">
+						<span>名称</span>
+					</div>
+					<div class="rule-li-div-content">
+						<span>详情</span>
+					</div>
+					<div class="rule-li-div-tj">
+						<span>推荐值</span>
+					</div>
+					<div class="rule-li-div-zq">
+						<span>经验值</span>
+					</div>
+					<div class="rule-li-div-cz">
+						<span>操作</span>
+					</div>
+				</div>
+			</li>
+		</ul>
+		<ul class="rule-ul">
+			<li ng-repeat="item in integralRule.tableData.resultData track by item.id" class="rule-li">
+				<div class="rule-li-div {{item.className}}">
+					<pui-layout align="center" class="rule-li-div-name">
+                        <div class="arrow-down-icon" ng-show="item.list.length > 0" ng-class="{'to-right': !item.isCollspan}"></div>
+						<span ng-click="integralRule.changeStatus(item)" ng-bind="item.mc"></span>
+					</pui-layout>
+					<div class="rule-li-div-content">
+						<span ng-bind="item.xq"></span>
+					</div>
+					<div class="rule-li-div-tj">
+						<span ng-bind="(item.jftj || '-')"></span>
+					</div>
+					<div class="rule-li-div-zq">
+						<span ng-bind="(item.exp || '-')"></span>
+					</div>
+					<div class="rule-li-div-cz">
+						<span ng-if="!item.list || item.list.length === 0">
+                            <div class="operate-icon update-icon" ng-click="integralRule.editRule(item)"></div>
+                        </span>
+					</div>
+				</div>
+				<ul class="mg0" ng-if="item.isCollspan && item.list && item.list.length > 0">
+					<li ng-repeat="item1 in item.list">
+						<div class="rule-li-div {{item1.className}}">
+							<!--<div class="rule-li-div-checkbox">
+								<input type="checkbox" ng-model="item1.ischeck">
+							</div>-->
+							<div class="rule-li-div-name">
+								<div class="rule-li-div-name-space"></div>
+								<div class="rule-li-div-name-space" ng-show="item1.list.length == 0"></div>
+								<i class="rule-li-div-name-icon1" ng-show="item1.list.length > 0" ng-class="{'rule-li-div-name-icon2':item1.isCollspan}"></i>
+								<span ng-click="integralRule.changeStatus(item1)" ng-bind="item1.mc"></span>
+							</div>
+							<div class="rule-li-div-content">
+								<span ng-bind="item1.xq"></span>
+							</div>
+							<div class="rule-li-div-tj">
+								<span ng-bind="(item1.jftj || '-')"></span>
+							</div>
+							<div class="rule-li-div-zq">
+								<span ng-bind="(item1.exp || '-')"></span>
+							</div>
+							<div class="rule-li-div-cz">
+								<span ng-if="!item1.list || item1.list.length === 0">
+                                    <div class="operate-icon update-icon" ng-click="integralRule.editRule(item1)"></div>
+                                </span>
+							</div>
+						</div>
+						<ul class="mg0" ng-if="item1.isCollspan && item1.list && item1.list.length > 0">
+							<li ng-repeat="item2 in item1.list">
+								<div class="rule-li-div {{item2.className}}">
+									<!--<div class="rule-li-div-checkbox">
+										<input type="checkbox" ng-model="item2.ischeck">
+									</div>-->
+									<div class="rule-li-div-name">
+										<div class="rule-li-div-name-space"></div>
+										<div class="rule-li-div-name-space"></div>
+										 <div class="rule-li-div-name-space" ng-show="item2.list.length == 0"></div>
+										<i class="rule-li-div-name-icon1" ng-show="item2.list.length > 0"></i>
+										<span ng-click="integralRule.changeStatus(item2)" ng-bind="item2.mc"></span>
+									</div>
+									<div class="rule-li-div-content">
+										<span ng-bind="item2.xq"></span>
+									</div>
+									<div class="rule-li-div-tj">
+										<span ng-bind="item2.jftj"></span>
+									</div>
+									<div class="rule-li-div-zq">
+										<span ng-bind="(item1.exp || '-')"></span>
+									</div>
+									<div class="rule-li-div-cz">
+										<pui-layout align="center">
+                                            <div class="operate-icon update-icon" ng-click="integralRule.editRule(item2)"></div>
+                                        </pui-layout>
+									</div>
+								</div>
+							</li>
+						</ul>
+					</li>
+				</ul>
+			</li>
+		</ul>
+	</div>
+</div>

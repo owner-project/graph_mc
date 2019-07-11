@@ -1,0 +1,36 @@
+//积分规则
+.rule-main {
+    color: @text-color-title;
+    .rule-body {
+        background-color: @bg-color-lighter;
+        .rule-ul-title {
+            .rule-li-title {
+                background-color: @bg-color-light;
+            }
+        }
+
+        .rule-ul {
+            .rule-li {
+                .update-icon {
+                    .icon-img(@base-url, @icon-update);
+                }
+                .rule-li-color1 {
+                    background-color: @bg-color;
+                }
+                .rule-li-color2 {
+                    background-color: @bg-color-light;
+                }
+                .rule-li-div {
+                    .rule-li-div-name {
+                        .rule-li-div-name-icon1 {
+                            .icon-img(@base-url, @icon-rule-icon-2);
+                        }
+                        .rule-li-div-name-icon2 {
+                            .icon-img(@base-url, @icon-rule-icon-1);
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

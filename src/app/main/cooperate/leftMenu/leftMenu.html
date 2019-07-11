@@ -1,0 +1,16 @@
+<pui-layout align="center" class="add-folder">
+    <div class="add-icon"></div>
+    <div class="add-text">新建文件夹</div>
+</pui-layout>
+<div class="menu-main">
+    <ul class="list-left">
+        <li class="list-item" ng-class='{"active":leftMenu.search.chooseType == item.chooseType}' 
+            ng-click='leftMenu.selectLeftMenu(item)' 
+            ng-repeat="(key,item) in leftMenu.leftMenuDataList track by $index">
+            {{item.name}}
+        </li>
+    </ul>
+    <div class="list-right">
+        <folder-tree ng-repeat="folder in leftMenu.currentFolder" current-folder="folder"></folder-tree>
+    </div>
+</div>

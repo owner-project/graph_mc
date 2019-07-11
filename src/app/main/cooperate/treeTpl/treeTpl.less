@@ -1,0 +1,105 @@
+.tree-body {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: relative;
+  padding-right: 10px;
+
+  .tree-title {
+    display: flex;
+    align-items: center;
+    padding-left: 16px;
+    padding-right: 6px;
+    width: calc(~'100% - 22px');
+    opacity: 0.7;
+    .file-icon {
+      height: 16px;
+      width: 16px;
+      min-width: 16px;
+    }
+    .tree-text {
+      margin: 0 0 0;
+      margin-left: 4px;
+      text-overflow: ellipsis;
+      overflow: hidden;
+      white-space: nowrap;
+      height: 32px;
+      line-height: 32px;
+      max-width: 110px;
+    }
+  }
+  .operation-icon {
+    height: 16px;
+    width: 16px;
+    right: 8px;
+    position: absolute;
+    display: none;
+    z-index: 10;
+  }
+  .operation-list {
+    right: 0;
+    top: 32px;
+    position: absolute;
+    width: 88px;
+    z-index: 10;
+    display: none;
+    &.active {
+      display: block;
+    }
+    > div {
+      height: 32px;
+      line-height: 32px;
+      margin: 8px 0;
+      text-align: left;
+      display: flex;
+      align-items: center;
+      i {
+        display: inline-block;
+        height: 16px;
+        width: 16px;
+        margin: 0 5px 0 16px;
+        opacity: 0.7;
+      }
+      span {
+        opacity: 0.7;
+        padding-left: 16px;
+      }
+      &:hover {
+        i {
+          opacity: 1;
+        }
+        span {
+          opacity: 1;
+        }
+      }
+    }
+  }
+  &.active {
+    .tree-title {
+      opacity: 1;
+    }
+  }
+  &:hover {
+    .tree-title {
+      opacity: 1;
+    }
+    .operation-icon {
+      display: block;
+    }
+  }
+  &:active {
+    opacity: 1;
+  }
+  &:after {
+    content: '';
+    position: absolute;
+    width: 175px;
+    height: 32px;
+    top: 0;
+    right: 0;
+  }
+}
+.tree-list {
+  margin-left: 16px;
+  margin-bottom: 0;
+}

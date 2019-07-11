@@ -1,0 +1,15 @@
+<div class="search-result-footer">
+    <div class="clearfix">
+        <uib-pagination ng-show="home.homeData.pressEnter" class="pagination-sm"
+            total-items="home.resultData[home.goryType].data.total"
+            ng-change="home.searchSubmitTitle()"
+            ng-model="home.resultData[home.goryType].pageNo"
+            boundary-link-numbers="true"
+            previous-text="上一页"
+            next-text="下一页"
+            force-ellipses="true"
+            max-size="3"
+            items-per-page="home.seniorSearchParams.pageSize">
+        </uib-pagination>
+    </div>
+</div>

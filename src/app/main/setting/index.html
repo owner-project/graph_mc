@@ -1,0 +1,39 @@
+<div class="setting-page">
+    <div pui-table type="header">
+        <table cellpadding="0" cellspacing="0" border="0">
+            <colgroup>
+                <col width="60%">
+                <col width="40%">
+            </colgroup>
+            <thead>
+                <tr>
+                    <th>键</th>
+                    <th>值<span class="plus" ng-click="setting.addItem()">+</span></th>
+                </tr>
+            </thead>
+        </table>
+    </div>
+    <div pui-table type="body">
+        <table cellpadding="0" cellspacing="0">
+            <colgroup>
+                <col width="60%">
+                <col width="40%">
+            </colgroup>
+            <tbody>
+                <tr ng-repeat="item in setting.settingsData">
+                    <td>
+                        <pui-input class="item-title" ng-model="item.key"></pui-input>
+                    </td>
+                    <td>
+                        <pui-input class="item-con" ng-model="item.val"></pui-input>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <pui-button on-click="setting.saveItem()">确认更改</pui-button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

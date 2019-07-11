@@ -1,0 +1,289 @@
+<div class="tm-main">
+    <div class="tm-con">
+        <div class="tm-header">
+            <ul class="header-ul">
+                <li class="header-li" ng-click="tm.chooseTag($event, 'base')" ng-class="{'active': tm.chooseType === 'base'}">基本功能</li>
+                <li class="header-li" ng-click="tm.chooseTag($event, 'cb')" ng-class="{'active': tm.chooseType === 'cb'}">串并案</li>
+                <li class="header-li" ng-click="tm.chooseTag($event, 'relation')" ng-class="{'active': tm.chooseType === 'relation'}">关系提取</li>
+                <li class="header-li" ng-click="tm.chooseTag($event, 'tool')" ng-class="{'active': tm.chooseType === 'tool'}">分析工具</li>
+            </ul>
+        </div>
+        <div class="tm-body">
+            <div class="tm-base" ng-show="tm.chooseType === 'base'">
+                <div class="left-slider">
+                    <div class="slider-top">
+                        <div class="slider-top-title">案件输入</div>
+                        <div class="slider-top-area">
+                            <textarea ng-model="tm.searchText" ng-keydown="tm.keyDownSearchBase()" placeholder="请输入案件"></textarea>
+                        </div>
+                    </div>
+                    <div class="slider-bottom">
+                        <div class="slider-bottom-title">关键词</div>
+                        <div class="slider-bottom-con cb-key-word-wrap" ng-show="tm.resData">
+                            <ul class="key-ul">
+                                <li class="key-li" ng-repeat="item in tm.resData.gjc track by $index">
+                                    <span ng-bind="item"></span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="slider-right">
+                    <div class="right-con-title">结果分析</div>
+                    <div class="right-con">
+                        <div class="item-con">
+                            <div class="con-title">原始句子</div>
+                            <div class="con-con">
+                                <span class="con-span" ng-bind="tm.resData.ysjz[0]"></span>
+                            </div>
+                        </div>
+                        <div class="item-con">
+                            <div class="con-title">关键句</div>
+                            <div class="con-con">
+                                <span class="con-span" ng-bind="tm.resData.gjj[0]"></span>
+                            </div>
+                        </div>
+                        <div class="item-con">
+                            <div class="con-title">情感</div>
+                            <div class="con-con">
+                                <span class="con-span" ng-bind="tm.resData.qg[0] | ajFilter"></span>
+                            </div>
+                        </div>
+                        <div class="item-con">
+                            <div class="con-title">类型</div>
+                            <div class="con-con">
+                                <ul>
+                                    <li ng-if="tm.resData.first_class.length">
+                                        <span ng-bind="tm.resData.first_class"></span>
+                                    </li>
+                                    <span ng-if="tm.resData.second_class.length && tm.resData.first_class.length">&gt;</span>
+                                    <li ng-if="tm.resData.second_class.length">
+                                        <span ng-bind="tm.resData.second_class"></span>
+                                    </li>
+                                    <span ng-if="tm.resData.third_class.length && tm.resData.second_class.length">&gt;</span>
+                                    <li ng-if="tm.resData.third_class.length">
+                                        <span ng-bind="tm.resData.third_class"></span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="item-con">
+                                <div class="con-title">热词</div>
+                                <div class="con-con">
+                                    <span ng-if="!tm.resData.rc.length" class="con-span" >无</span>
+                                    <ul ng-if="tm.resData.rc.length">
+                                        <li ng-repeat="item in tm.resData.rc track by $index">
+                                            <span ng-bind="item"></span>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        <div class="item-con">
+                            <div class="con-title">分词</div>
+                            <div class="con-con">
+                                <span ng-if="!tm.resData.fc.length" class="con-span" >无</span>
+                                <ul ng-if="tm.resData.fc.length">
+                                    <li ng-repeat="item in tm.resData.fc track by $index">
+                                        <span ng-bind="item"></span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div ng-if="tm.resData.stc.length" class="item-word-class">
+                            <div class="item-word-class-title" ng-class="{'open': tm.showWord}" ng-click="tm.showWord = !tm.showWord">
+                                <i></i>
+                                <span>实体词</span>
+                            </div>
+                            <div class="item-word-class-wrap" ng-show="tm.showWord">
+                                <div class="item-con" ng-repeat="child in tm.resData.stc">
+                                    <div class="con-title" ng-bind="child.type"></div>
+                                    <div class="con-con">
+                                        <ul>
+                                            <li ng-repeat="item in child.value track by $index">
+                                                <span ng-bind="item"></span>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="tm-base" ng-show="tm.chooseType === 'cb'">
+                <div class="left-slider">
+                    <div class="slider-top">
+                        <div class="slider-top-title">案件输入</div>
+                        <div class="slider-top-area">
+                            <textarea ng-model="tm.searchText" ng-keydown="tm.keyDownSearchCB()" placeholder="请输入案件"></textarea>
+                        </div>
+                    </div>
+                    <div class="slider-bottom">
+                        <div class="slider-bottom-title">关键词</div>
+                        <div class="slider-bottom-con cb-has-bottom cb-key-word-wrap" ng-show="tm.series.keyWordArr">
+                            <ul class="key-ul">
+                                <li class="key-li" ng-repeat="item in tm.series.keyWordArr track by $index">
+                                    <span ng-bind="item"></span>
+                                    <div class="close-btn" ng-click="tm.series.keyWordArr.splice($index, 1)"></div>
+                                </li>
+                                <div class="add-key-word-input key-li" ng-if="tm.series.showAddKeyWord">
+                                    <input type="text" id="seriesKeyWordInput" ng-blur="tm.series.keyWord.trim().length === 0 && (tm.series.showAddKeyWord = false)" ng-model="tm.series.keyWord" ng-keydown="tm.addKeyWord($event)" />
+                                </div>
+                                <div class="add-key-word-btn" ng-if="!tm.series.showAddKeyWord" ng-click="tm.showKeyWordInput()">+</div>
+                            </ul>
+                        </div>
+                        <div class="series-key-word-search-bar">
+                            <pui-layout align="center" justify="end">
+                                <div class="search-label mgr10">开始日期</div>
+                                <pui-datepicker class="mgr25" ng-model="tm.series.start" data-placeholder="请选择开始日期" data-max-date="{{tm.series.end}}" data-placement="top-left"></pui-datepicker>
+                                <div class="search-label mgr10">结束日期</div>
+                                <pui-datepicker class="mgr25" ng-model="tm.series.end" data-placeholder="请选择结束日期" data-min-date="{{tm.series.start}}" data-placement="top-left"></pui-datepicker>
+                                <pui-button type="primary" on-click="tm.handleSeriesSearch()">手工串并</pui-button>
+                            </pui-layout>
+                        </div>
+                    </div>
+                </div>
+                <div class="slider-right">
+                    <div class="right-con-title">串并结果统计</div>
+                    <div class="right-tip" ng-if="!tm.resData.length && !tm.series.loading">未查询到结果</div>
+                    <div class="right-con" ng-show="tm.resData.length">
+                        <div pui-table class="cb-table">
+                            <table>
+                                <colgroup>
+                                    <col width="50px">
+                                </colgroup>
+                                <thead>
+                                <tr>
+                                    <th>编号</th>
+                                    <th>呼入时间</th>
+                                    <th>案发地点</th>
+                                    <th>报警人电话</th>
+                                    <th>案件类型</th>
+                                    <th>内容</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr ng-repeat="item in tm.resData track by $index">
+                                    <td ng-bind="($index + 1)"></td>
+                                    <td ng-bind="item.call_date * 1000 | date: 'yyyy-MM-dd HH:mm'">
+                                    </td>
+                                    <td ng-bind="item.happening_place">
+                                    </td>
+                                    <td ng-bind="item.informer_phone"></td>
+                                    <td ng-bind="item.type"></td>
+                                    <td ng-bind="item.content"></td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="tm-base" ng-if="tm.chooseType === 'relation'">
+                <div class="left-slider">
+                    <div class="slider-top">
+                        <div class="slider-top-title">案件输入</div>
+                        <div class="slider-top-area">
+                            <textarea ng-model="tm.searchText" ng-keydown="tm.keyDownSearchRelation()" placeholder="请输入案件"></textarea>
+                        </div>
+                    </div>
+                    <div class="slider-bottom">
+                        <div class="slider-bottom-title">实体词</div>
+                        <div class="slider-bottom-con cb-key-word-wrap" ng-show="tm.resData.stclb && tm.resData.stclb.length > 0">
+                            <ul class="key-ul">
+                                <li class="key-li" ng-repeat="item in tm.resData.stclb track by $index">
+                                    <span ng-bind="item"></span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="slider-right">
+                    <div class="right-con-title">实体关系图</div>
+                    <div class="right-con" ng-if="tm.relationMap">
+                        <!--<div class="right-graph jq_graph"></div>-->
+                        <relation-map-graph mode="node-link" nodes="tm.relationMap.nodes" links="tm.relationMap.links"></relation-map-graph>
+                    </div>
+                </div>
+            </div>
+            <div class="tm-base" ng-if="tm.chooseType === 'tool'">
+                <pui-layout class="tool-wrap">
+                    <div class="tool-block">
+                        <div class="block-title">褒贬义分析</div>
+                        <div class="block-body">
+                            <div>
+                                <pui-textarea data-placeholder="请输入语句" ng-model="tm.tool.pnea.text"></pui-textarea>
+                                <pui-layout justify="end" class="mgt10">
+                                    <pui-button type="primary" data-on-click="tm.submitPNEA()">分析</pui-button>
+                                </pui-layout>
+                            </div>
+                            <div class="pui-table mgt10" ng-if="tm.tool.pnea.result.length">
+                                <table>
+                                    <thead>
+                                    <tr>
+                                        <th>序号</th>
+                                        <th>实体</th>
+                                        <th>情感</th>
+                                        <th>情感值</th>
+                                        <th>所属句子</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr ng-repeat="r in tm.tool.pnea.result">
+                                        <td ng-bind="$index + 1"></td>
+                                        <td ng-bind="r[0]"></td>
+                                        <td ng-bind="r[1]"></td>
+                                        <td ng-bind="r[2]"></td>
+                                        <td ng-bind="r[3]"></td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tool-block">
+                        <div class="block-title">英文校对</div>
+                        <div class="block-body">
+                            <pui-textarea ng-model="tm.tool.englishCheck.text" ng-focus="englishTextFocus()"  data-placeholder="输入需校对的英文"></pui-textarea>
+                            <pui-layout justify="end" class="mgt10">
+                                <pui-button type="primary" data-on-click="tm.submitEnglishCheck()">分析</pui-button>
+                            </pui-layout>
+                            <div class="pui-table mgt10" ng-if="tm.tool.englishCheck.result.length">
+                                <table>
+                                    <thead>
+                                    <tr>
+                                        <th>序号</th>
+                                        <th>输入的词</th>
+                                        <th>可能正确的词</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr ng-repeat="r in tm.tool.englishCheck.result">
+                                        <td ng-bind="$index + 1"></td>
+                                        <td ng-bind="r.originWord"></td>
+                                        <td ng-bind="r.mayWord"></td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tool-block">
+                        <div class="block-title">高速串匹配</div>
+                        <div class="block-body">
+                            <pui-layout align="center" class="mgb10">
+                                <div class="item-label mgr10">匹配字符串</div>
+                                <pui-input ng-model="tm.tool.textMatch.keyword" data-placeholder="请输入要匹配的字符串"></pui-input>
+                            </pui-layout>
+                            <pui-textarea data-placeholder="请输入语句" ng-model="tm.tool.textMatch.text"></pui-textarea>
+                            <pui-layout justify="end" class="mgt10">
+                                <pui-button type="primary" data-on-click="tm.submitTextMatch()">分析</pui-button>
+                            </pui-layout>
+                            <div ng-bind-html="tm.tool.textMatch.result"></div>
+                        </div>
+                    </div>
+                </pui-layout>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,102 @@
+.pui-modal {
+    &.confirm {
+        z-index: 9999 !important;
+    }
+    &.size-md {
+        .modal-dialog {
+            width: 580px;
+        }
+    }
+    .modal-dialog {
+        width: 320px;
+        background-color: @pui-bg-color;
+        color: fade(@pui-main-text-color, 70%);
+        box-sizing: content-box;
+        box-shadow: 0 12px 24px 0 rgba(0,0,0,0.50), 0 0 8px 0 rgba(0,0,0,0.08);
+        border-radius: 8px;
+
+        .modal-header {
+            position: relative;
+            font-size: 14px;
+            margin: 8px 0;
+            padding: 0 24px;
+            .modal-title {
+                height: 32px;
+                line-height: 32px;
+            }
+            .modal-close-icon {
+                position: absolute;
+                right: 24px;
+                top: 11px;
+                opacity: 0.7;
+                width: 10px;
+                height: 10px;
+                cursor: pointer;
+
+                &:hover {
+                    opacity: 1;
+                }
+
+                &:before {
+                    position: absolute;
+                    content: '';
+                    width: 14px;
+                    height: 2px;
+                    top: 4px;
+                    left: -2px;
+                    transform: rotate(45deg);
+                    background-color: @pui-main-text-color;
+                }
+
+                &:after {
+                    position: absolute;
+                    content: '';
+                    width: 14px;
+                    height: 2px;
+                    top: 4px;
+                    left: -2px;
+                    transform: rotate(-45deg);
+                    background-color: @pui-main-text-color;
+                }
+            }
+        }
+
+        .modal-body {
+            position: relative;
+            padding: 8px 32px;
+            line-height: 20px;
+            box-sizing: border-box !important;
+            max-height: 376px;
+            overflow-y: auto;
+        }
+        .modal-footer {
+            padding: 8px;
+            .pui-button {
+                box-shadow: none;
+                color: @select-hover-color;
+                line-height: 20px;
+                border-radius: 4px;
+                min-width: 60px;
+                &:hover {
+                    box-shadow: none;
+                    color: @select-hover-color;
+                    background-color: fade(@select-hover-color, 10);
+                }
+                &:active {
+                    &:after {
+                        background-image: none;
+                    }
+                }
+                &:after {
+                    animation: normal;
+                } 
+            }
+            .confirm-btn {
+                float: right;
+            }
+            .cancel-btn {
+                float: right;
+            }
+        }
+    }
+}

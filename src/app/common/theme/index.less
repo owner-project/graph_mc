@@ -1,0 +1,18 @@
+@import "theme_color";
+
+.icon-img(@base-url, @url) {
+    background-image: url('@{base-url}@{url}');
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: 100% 100%;
+}
+.bg-img(@base-url, @url) {
+    background-image: url('@{base-url}@{url}');
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover;
+}
+
+@import "starBlue/index";
+@import "eleganceWhite/index";
+@import "../../PUIComponents/styles/index";

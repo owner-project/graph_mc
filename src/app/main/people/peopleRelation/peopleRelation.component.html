@@ -1,0 +1,75 @@
+<div id="people-info-relation" class="people-info-relation" style="position:relative">
+    <div class="relation-tab">
+        <ul>
+            <li class="relation-person" ng-click="peopleRelation.changeType('person')" ng-class="{'active': peopleRelation.relationType === 'person'}">
+                <span>相关人</span>
+            </li>
+            <li class="relation-substance" ng-click="peopleRelation.changeType('substance')" ng-class="{'active': peopleRelation.relationType === 'substance'}">
+                <span>相关物</span>
+            </li>
+            <li class="relation-location" ng-click="peopleRelation.changeType('location')" ng-class="{'active': peopleRelation.relationType === 'location'}">
+                <span>相关地</span>
+            </li>
+            <li class="relation-event" ng-click="peopleRelation.changeType('event')" ng-class="{'active': peopleRelation.relationType === 'event'}">
+                <span>相关事件</span>
+            </li>
+            <li class="relation-organization" ng-click="peopleRelation.changeType('organization')" ng-class="{'active': peopleRelation.relationType === 'organization'}">
+                <span>相关机构</span>
+            </li>
+        </ul>
+        <div class="view-btn" ng-if="peopleRelation.relation[peopleRelation.relationType].data.data.length && peopleRelation.relationType !== 'event' " ng-click="peopleRelation.batchToPorpoise()">查看{{peopleRelation.relation[peopleRelation.relationType].label}}图析</div>
+    </div>
+    <div class="content">
+        <div ng-show="peopleRelation.relation[peopleRelation.relationType].data.data.length">
+            <div pui-table type="header">
+                <table cellpadding="0" cellspacing="0" border="0" class="relation-label" style="min-width:100%" width='100%'>
+                    <thead>
+                        <tr>
+                            <th
+                                ng-repeat="item in peopleRelation.relationLabel[peopleRelation.relationType]"
+                                ng-class="{'arrow':$index == 4,'arrow-down':$index == 4 && peopleRelation.orderByDesc == 'desc'}"
+                                ng-click="peopleRelation.getRelation(item, $event)">{{item}}
+                                
+                            </th>
+                        </tr>
+                    </thead>
+                </table>
+            </div>
+            <div pui-table type="body">
+                <table cellpadding="0" cellspacing="0" border="0" style="min-width:100%" width='100%'>
+                    <tbody>
+                        <tr ng-repeat="item in peopleRelation.relation[peopleRelation.relationType].data.data">
+                            <td>{{item.key}}</td>
+                            <td>{{item.name}}</td>
+                            <td>{{item.relationType}}</td>
+                            <td ng-if="peopleRelation.relationType !== 'event'">{{item.entityBigType}}->{{item.entitySmallType}}</td>
+                            <td ng-if="peopleRelation.relationType === 'event'">{{item.eventType}}</td>
+                            <td>{{item.date}}</td>
+                            <td class="option">
+                                <span ng-click="peopleRelation.showRelationDetail(item)">关系明细</span>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="search-result-footer">
+                <div class="clearfix">
+                    <uib-pagination class="pagination-sm pull-right"
+                        total-items="peopleRelation.relation[peopleRelation.relationType].data.total"
+                        ng-change="peopleRelation.getRelation()"
+                        ng-model="peopleRelation.relation[peopleRelation.relationType].pageNo"
+                        previous-text="上一页"
+                        next-text="下一页"
+                        force-ellipses="true"
+                        max-size="3"
+                        items-per-page="peopleRelation.pageSize"
+                        boundary-link-numbers="true">
+                    </uib-pagination>
+                </div>
+            </div>
+        </div>
+        <div class="no-data" ng-include="'app/components/header/aboutMySearch/template.html'"
+            ng-if="!peopleRelation.relation[peopleRelation.relationType].data.data.length">
+        </div>
+    </div>
+</div>

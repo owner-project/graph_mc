@@ -1,0 +1,221 @@
+<div class="cooperate-main jq_cooperate_main">
+    <pui-layout>
+        <div class="left-content">
+            <div class="search-wrap">
+                <pui-layout align="center" class="search-box" ng-click="cooperate.clickSearchInput()">
+                    <pui-button type="primary" class="search-btn" data-on-click="cooperate.searchData($event)">
+                        <pui-layout align="center" justify="center" class="h100">
+                            <i></i>
+                        </pui-layout>
+                    </pui-button>
+                    <pui-layout align="center" class="search-input-box">
+                        <input class="search-input" type="text"
+                            ng-model="cooperate.search.searchContent.content"
+                            ng-keyup="cooperate.keyup($event)">
+                    </pui-layout>
+                    <i class="search-icon"
+                        ng-if="cooperate.search.searchContent.content"
+                        ng-click="cooperate.clearSearch($event)" >
+                    </i>
+                </pui-layout>
+            </div>
+            <div class="menu-main">
+                <ul class="list-left">
+                    <li class="list-item" ng-class='{"active":cooperate.search.chooseType == item.chooseType}' 
+                        ng-click='cooperate.selectLeftMenu(item)'
+                        ng-repeat="(key,item) in cooperate.leftMenuDataList track by $index">
+                        {{item.name}}
+                    </li>
+                </ul>
+                <div class="list-right pull-left">
+                    <folder-tree
+                        class="folder-tree"
+                        ng-repeat="folder in cooperate.currentFolder"
+                        current-folder="folder"
+                        choose-type="cooperate.search.chooseType"
+                        select-tree-item="cooperate.selectFolder(currentFolder)"
+                        call-parent-move="cooperate.moveTo(e, file)"
+                        call-parent-share="cooperate.shareJudge(e, file)"
+                        call-parent-delete-file="cooperate.deleteJudge(e, file)"
+                        call-parent-delete-folder="cooperate.deleteFolder(e, folder)"
+                        call-parent-edit-file="cooperate.editFile(e, file)">
+                    </folder-tree>
+                    <span class="no-result" ng-show="cooperate.currentFolder.length === 0 && cooperate.treePager.total === 0">暂无结果~</span>
+                    <span class="load-more"
+                        ng-show="cooperate.treePager.total > 10"
+                        ng-bind="cooperate.treeList.file.length < 10 ? '没有更多了' : '加载更多'"
+                        ng-click="cooperate.loadMore()">加载更多</span>
+                </div>
+            </div>
+        </div>
+        <div class="right-content">
+            <div class="search-relation-body" >
+                <div class="relation-list-body">
+                    <pui-layout justify="space-between" align="center">
+                        <pui-layout align="center" class="crumb-list">
+                            <div ng-if="cooperate.search.chooseType === 1">
+                                <span class="title">当前位置：</span>
+                                <div ng-repeat="crumb in cooperate.crumbList">
+                                    <span
+                                        ng-class="{'last-nav': $last}"
+                                        ng-bind="crumb.name"
+                                        ng-click="cooperate.crumbJump($event, crumb, $index)"
+                                        class="crumb-name">
+                                    </span>
+                                    <span class="mgl5 mgr5 arrow-right" ng-if="!$last">&gt;</span>
+                                </div>
+                            </div>
+                        </pui-layout>
+                        <pui-layout align="center" class="folder-option">
+                            <div class="option-list" ng-show="cooperate.search.chooseType === 1">
+                                <span class="add-folder"
+                                    ng-click="cooperate.addFolder()">
+                                    新建文件夹
+                                </span>
+                            </div>
+                        </pui-layout>
+                    </pui-layout>
+                    <pui-layout align="center" class="mgb10 folder-statistics statistics" ng-show="cooperate.search.chooseType === 1">
+                        <span class="title">文件夹</span>
+                        <span class="mgl5 mgr5 number" ng-bind="cooperate.list.folder.length"></span>
+                    </pui-layout>
+                    <ul class="relation-list-body-ul" ng-if="cooperate.search.chooseType === 1">
+                        <li ng-repeat="item in cooperate.list.folder"
+                            data-title="{{item.name}}"
+                            bs-tooltip
+                            data-bs-enabled = "{{item.name.length > 5}}"
+                            data-container="body"
+                            data-placement="bottom"
+                            class="relation-list-body-li"
+                            ng-click="cooperate.selectFolder(item)">
+                            <pui-layout align="center">
+                                <div class="close-icon"></div>
+                                <div class="relation-list-body-right">
+                                    <div ng-bind="item.name" class="relation-list-body-li-title"></div>
+                                </div>
+                                <span ng-if="cooperate.search.chooseType === 1" ng-click="cooperate.deleteFolder($event, item)" class="delete-folder"></span>
+                            </pui-layout>
+                        </li>
+                    </ul>
+                    <div class="cooperate-header-info">
+                        <pui-layout align="center" class="mgb10 cooperate-statistics statistics">
+                            <span class="title">图析</span>
+                            <span class="mgl5 mgr5 number" ng-bind="cooperate.pager.total"></span>
+                            <span class="select-all"
+                                ng-show="(cooperate.search.chooseType === 1 || cooperate.search.chooseType === 4) && cooperate.list.file.length > 0">
+                                <pui-checkbox ng-change="cooperate.selectAll()" ng-model="cooperate.allSelected" class="file-checkbox"></pui-checkbox>
+                                选中当前页
+                            </span>
+                        </pui-layout>
+                        <pui-layout align="center" class="folder-option" ng-show="cooperate.list.file.length > 0">
+                            <div class="option-list">
+                                <span class="move-to"
+                                    ng-click="cooperate.moveTo()"
+                                    ng-show="cooperate.search.chooseType === 1">
+                                    移动到
+                                </span>
+                                <span class="share"
+                                    ng-click="cooperate.shareJudge($event, '', 'yes')"
+                                    ng-show="cooperate.search.chooseType === 1">
+                                    共享
+                                </span>
+                                <span class="cancel-share"
+                                    ng-click="cooperate.shareJudge($event, '', 'no')"
+                                    ng-show="cooperate.search.chooseType === 1">
+                                    取消共享
+                                </span>
+                                <span class="delete"
+                                    ng-click="cooperate.deleteJudge($event)"
+                                    ng-show="cooperate.search.chooseType === 1 || cooperate.search.chooseType === 4">
+                                    删除
+                                </span>
+                            </div>
+                        </pui-layout>
+                    </div>
+                    <ul class="relation-list-body-ul-item">
+                        <li class="relation-list-body-li"
+                            ng-repeat="item in cooperate.list.file"
+                            ng-class="{'active': item.selected}">
+                            <div class="select-icon" ng-if="cooperate.search.chooseType === 1 || cooperate.search.chooseType === 4">
+                                <pui-checkbox ng-model="item.selected" class="file-checkbox"></pui-checkbox>
+                            </div>
+                            <div class="relation-list-body-img"
+                                ng-click="cooperate.openJudge($event, item, cooperate.search.chooseType == 1)">
+                                <img ng-src={{item.screenshot}}>
+                            </div>
+                            <div class="relation-list-body-right">
+                                <span class="share-tag" ng-show="item.isShare">已共享</span>
+                                <div ng-if="cooperate.search.chooseType === 3"
+                                    ng-bind="item.themeName"
+                                    data-title="{{item.themeName}}"
+                                    bs-tooltip
+                                    data-placement="bottom"
+                                    data-bs-enabled = "{{item.themeName.length > 12}}"
+                                    class="relation-list-body-li-title">
+                                </div>
+                                <div ng-bind="item.themeName"
+                                    ng-if="cooperate.search.chooseType !== 3"
+                                    class="relation-list-body-li-title">
+                                </div>
+                                <pui-layout align="center">
+                                    <pui-layout align="center" class="r-l-li-item">
+                                        <div class="user-icon"></div>
+                                        <span class="r-l-li-item-text" style="max-width: 50px;" ng-bind="item.author" title="{{item.author}}"></span>
+                                    </pui-layout>
+                                    <pui-layout align="center" class="r-l-li-item r-l-li-item-time">
+                                        <div class="time-icon"></div>
+                                        <span class="r-l-li-item-text" ng-bind="item.createTime | date: 'yyyy-MM-dd'" title="{{item.createTime | date: 'yyyy-MM-dd'}}"></span>
+                                    </pui-layout>
+                                </pui-layout>
+                            </div>
+                            <ul class="relation-list-body-menu-ul" ng-show="cooperate.search.chooseType !== 3 && cooperate.search.chooseType !== 2">
+                                <li ng-if="cooperate.search.chooseType === 1" ng-click="cooperate.moveTo($event, item)">
+                                    <i class="relation-list-body-menu-ul-move"
+                                        data-title="移动"
+                                        bs-tooltip
+                                        data-placement="top">
+                                    </i>
+                                </li>
+                                <li ng-if="cooperate.search.chooseType === 1" ng-click="cooperate.pushJudge($event, item)">
+                                    <i class="relation-list-body-menu-ul-push"
+                                        data-title="推送"
+                                        bs-tooltip
+                                        data-placement="top">
+                                    </i>
+                                </li>
+                                <li ng-if="cooperate.search.chooseType === 1" ng-click="cooperate.shareJudge($event, item)">
+                                    <i ng-class="item.isShare ? 'relation-list-body-menu-ul-cancel-share' : 'relation-list-body-menu-ul-share'"
+                                        data-title="{{(item.isShare) ? ('取消共享') : ('共享')}}"
+                                        bs-tooltip
+                                        data-placement="top">
+                                    </i>
+                                </li>
+                                <li ng-if="cooperate.search.chooseType === 1 || cooperate.search.chooseType === 4" ng-click="cooperate.deleteJudge($event, item)">
+                                    <i class="relation-list-body-menu-ul-delete"
+                                        data-title="删除"
+                                        bs-tooltip
+                                        data-placement="top">
+                                    </i>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                    <div class="no-result" ng-include="'app/main/home/searchNodata/template.html'" ng-if="cooperate.pager.total === 0"></div>
+                </div>
+                <uib-pagination
+                    ng-show="cooperate.pager.total > 10"
+                    class="pagination-sm"
+                    total-items="cooperate.pager.total"
+                    ng-change="cooperate.changePage()"
+                    ng-model="cooperate.pager.pageNo"
+                    previous-text="上一页"
+                    next-text="下一页"
+                    force-ellipses="true"
+                    max-size="3"
+                    boundary-link-numbers="true"
+                    items-per-page="cooperate.pager.pageSize">
+                </uib-pagination>
+            </div>
+        </div>
+    </pui-layout>
+</div>

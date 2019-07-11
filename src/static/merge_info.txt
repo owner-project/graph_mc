@@ -1,0 +1,40 @@
+冲突文件：
+
+  gulp/serve.js
+  app/index.less
+  app/index.module.js
+  PUICompoent/datepicker/index.js
+  app/Services/cacheService.js
+  app/Services/homeService.js
+  app/Services/loginService.js
+  app/Services/porpoiseService.js
+  app/common/angular_strap.less
+  App/common/theme/ui/home.less
+  App/common/theme/ui/index.less
+  App/common/theme/ui/porpoise.less
+  App/components/header/header.html
+  App/components/header/headerDrictive.js
+  App/configs/route.js
+  App/filters/filter.js
+  App/login/loginController.js
+  App/main/admin/memberManager/memberManagerController.js
+  App/main/admin/memberManager/modal/modal.js
+  App/main/admin/redListManager/modal/modal.html
+  App/main/admin/roleManager/roleManagerController.js
+  App/main/admin/roleManager/modal/modal.js
+  App/main/admin/tpl/index.tpl.html
+  App/main/admin/tpl/index.tpl.less
+  App/main/application/applicationController.js
+  App/main/cooperate/index.html
+  App/main/cooperatePortrait.less
+  App/main/home/homeController.js
+  App/main/home/home.less
+  App/main/home/inex.html
+  App/main/people/peopleController.js
+  App/main/porpoise/porpoise.js
+  App/main/porpoise/index.html
+  App/main/porpoise/porpoise.lrss
+  App/main/porpoise/entityRelationChoose/index.js
+  App/main/porpoise/entityRelationChoose/template.html
+  App/main/porpoise/judge/judge.html
+  

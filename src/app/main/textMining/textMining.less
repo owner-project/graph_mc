@@ -1,0 +1,314 @@
+.tm-main {
+    width: 100%;
+    height: 100%;
+    .tm-con {
+        width: 100%;
+        height: 100%;
+        .tm-header {
+            width: 100%;
+            height: 40px;
+            .header-ul {
+                width: calc(~'100% - 20px');
+                height: 100%;
+                margin-left: 20px;
+                .clearfix;
+                .header-li {
+                    width: 80px;
+                    height: 30px;
+                    line-height: 30px;
+                    margin: 8px 0 0 0;
+                    float: left;
+                    text-align: center;
+                    font-size: 12px;
+                    cursor: pointer;
+                    -webkit-transform: perspective(1em) rotateX(3deg);
+                    &.active {
+                        border: 1px solid;
+                        border-bottom-color: transparent;
+                        z-index: 1;
+                        position: relative;
+                    }
+                }
+            }
+        }
+        .tm-body {
+            width: 100%;
+            height: calc(~'100% - 40px');
+            .tm-base {
+                width: 100%;
+                height: 100%;
+                .left-slider {
+                    width: 55%;
+                    height: 100%;
+                    float: left;
+                    border-right: 1px solid;
+                    .slider-top {
+                        width: calc(~'100% - 58px');
+                        height: calc(~'100% - 245px');
+                        padding: 22px;
+                        padding-left: 36px;
+
+                        .slider-top-title {
+                            height: 22px;
+                            line-height: 22px;
+                            font-size: 16px;
+                            padding-bottom: 10px;
+                            border-bottom: 1px solid;
+                        }
+                        .slider-top-area {
+                            height: calc(~'100% - 33px');
+                            textarea, div[contenteditable] {
+                                width: 100%;
+                                height: calc(~'100% - 20px');
+                                padding-top: 20px;
+                                font-size: 14px;
+                                line-height: 30px;
+                                background-color: transparent;
+                                border: 0;
+                                resize: none;
+                            }
+                        }
+                    }
+                    .slider-bottom {
+                        width: 100%;
+                        height: 200px;
+                        .slider-bottom-title {
+                            height: 30px;
+                            line-height: 30px;
+                            padding-left: 24px;
+                        }
+                        .slider-bottom-con {
+                            width: 100%;
+                            height: calc(~'100% - 30px');
+                            overflow: auto;
+
+                            .key-ul {
+                                width: calc(~'100% - 48px');
+                                height: calc(~'100% - 32px');
+                                padding: 16px 24px;
+
+                                .clearfix;
+                                .key-li {
+                                    float: left;
+                                    padding: 0 15px;
+                                    line-height: 22px;
+                                    border-radius: 20px;
+                                    margin-right: 10px;
+                                    margin-bottom: 10px;
+                                    span {
+                                        font-size: 12px;
+                                    }
+                                }
+                            }
+
+                            &.cb-has-bottom {
+                                height: calc(~'100% - 80px');
+                            }
+
+                            &.cb-key-word-wrap {
+                                .key-ul {
+                                    .key-li {
+                                        background-color: transparent;
+                                        border-radius: 0;
+                                        position: relative;
+                                        .close-btn {
+                                            position: absolute;
+                                            right: -6px;
+                                            top: -6px;
+                                            cursor: pointer;
+                                            width: 12px;
+                                            height: 12px;
+                                            border-radius: 100%;
+                                            &:before {
+                                                position: absolute;
+                                                content: '';
+                                                display: block;
+                                                height: 2px;
+                                                width: 8px;
+                                                left: 2px;
+                                                top: 5px;
+                                                transform: rotate(45deg);
+                                            }
+                                            &:after {
+                                                position: absolute;
+                                                content: '';
+                                                display: block;
+                                                height: 2px;
+                                                width: 8px;
+                                                left: 2px;
+                                                top: 5px;
+                                                transform: rotate(-45deg);
+                                            }
+                                        }
+                                        &:after {
+                                            content: '';
+                                            position: absolute;
+                                            right: 0;
+                                            bottom: 0;
+                                            width: 8px;
+                                            height: 8px;
+                                        }
+                                    }
+                                    .add-key-word-input {
+                                        input {
+                                            display: inline-block;
+                                            width: 50px;
+                                            background-color: transparent;
+                                            border: none;
+                                            box-shadow: none;
+                                            outline: none;
+                                            height: 100%;
+                                        }
+                                    }
+                                    .add-key-word-btn {
+                                        float: left;
+                                        width: 36px;
+                                        height: 22px;
+                                        cursor: pointer;
+                                        border-radius: 2px;
+                                        line-height: 20px;
+                                        font-size: 18px;
+                                        text-align: center;
+                                        font-weight: bold;
+                                        &:hover {
+                                            filter: brightness(1.2);
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                        .series-key-word-search-bar {
+                            height: 29px;
+                            padding: 11px 24px;
+                        }
+                    }
+                }
+                .slider-right {
+                    margin-top: 1px;
+                    width: calc(~'45% - 1px');
+                    float: left;
+                    height: calc(~'100% - 1px');
+                    .right-con-title {
+                        height: 39px;
+                        line-height: 40px;
+                        font-size: 12px;
+                        padding-left: 24px;
+                    }
+                    .right-tip {
+                        text-align: center;
+                        margin-top: 40px;
+                        font-size: 12px;
+                    }
+                    .right-con {
+                        width: calc(~'100% - 20px');
+                        padding-left: 20px;
+                        height: calc(~'100% - 41px');
+                        overflow: auto;
+                        .item-word-class-title {
+                            height: 36px;
+                            line-height: 36px;
+                            font-size: 12px;
+                            padding-left: 0;
+                            i {
+                                width: 16px;
+                                height: 16px;
+                                display: inline-block;
+                                vertical-align: middle;
+                                transition: transform 150ms ease-in-out;
+                            }
+                            &.open {
+                                i {
+                                    transform: rotate(90deg);
+                                }
+                            }
+                            span {
+                                vertical-align: middle;
+                            }
+                        }
+                        .item-con {
+                            width: 100%;
+                            .clearfix;
+                            .con-con-item {
+                                width: 100%;
+                                .con-con-title {
+                                    width: 100%;
+                                    text-align: left;
+                                    text-indent: 15px;
+                                    margin-top: 15px;
+                                }
+                            }
+                            .con-title {
+                                width: 56px;
+                                text-align: right;
+                                float: left;
+                                font-size: 12px;
+                                padding: 12px 0;
+                            }
+                            .con-con {
+                                margin-left: 56px;
+                                .con-span {
+                                    display: block;
+                                    font-size: 12px;
+                                    text-align: left;
+                                    padding: 12px 15px;
+                                }
+                            }
+                            ul {
+                                width: calc(~'100% - 30px');
+                                padding: 0 15px;
+                                margin-top: 9px;
+                                .clearfix;
+
+                                > span {
+                                    float: left;
+                                    line-height: 22px;
+                                    border-radius: 20px;
+                                    margin-bottom: 9px;
+                                    margin-right: 10px;
+                                }
+                                li {
+                                    float: left;
+                                    padding: 0 15px;
+                                    line-height: 22px;
+                                    border-radius: 20px;
+                                    margin-bottom: 9px;
+                                    margin-right: 10px;
+                                    span {
+                                        font-size: 12px;
+                                    }
+                                }
+                            }
+                        }
+                        .cb-table {
+                            width: calc(~'100% - 28px');
+                            margin: 20px 14px;
+                        }
+                        .right-graph {
+                            width: 100%;
+                            height: 100%;
+                        }
+                    }
+                }
+
+                .tool-wrap {
+                    flex-wrap: wrap;
+                    padding-top: 20px;
+                }
+                .tool-block {
+                    width: calc(~'50% - 44px');
+                    margin: 0px 20px;
+                    margin-bottom: 20px;
+                    flex: 0 0 auto;
+                    .block-title {
+                        padding: 0px 20px;
+                        height: 32px;
+                        line-height: 32px;
+                    }
+                    .block-body {
+                        padding: 10px;
+                    }
+                }
+            }
+        }
+    }
+}

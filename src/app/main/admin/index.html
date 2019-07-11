@@ -1,0 +1,27 @@
+<div class="admin-main-view">
+    <div class="admin-left-panel">
+        <div class="tree-menu-view">
+            <div class="menu-shadow"></div>
+            <div class="tree-menu-container">
+                <div class="menu-item first-wrap"  ng-repeat="menu in vm.data.sideMenu" ng-click="vm.changeRoute($event, menu)">
+                    <div class="menu-content" ng-class="{'actived': menu.actived}">
+                        <div class="back-shadow-group">
+                            <div class="layer-1"></div>
+                            <div class="layer-2"></div>
+                        </div>
+                        <div class="text-ellipsis">
+                            <i class="menu-arrow" ng-class="menu.style? menu.style:'icon-tree-menu-arrow'"></i>
+                            <span class="person-info-icon menu-title" ng-bind="menu.title" data-bs-enabled="{{menu.title.length>10}}" data-title="{{menu.title}}" bs-tooltip data-placement="top"></span>
+                        </div>
+                    </div>
+                    <div class="menu-child" ng-class="{'close': !menu.open}" ng-if="menu.child.length">
+                        <div ng-show="menu.open" ng-include="'app/main/admin/tpl/treeItem.tpl.html'"></div>
+                    </div>
+                    <i class="menu-arrow icon-tree-menu-arrow" ng-if="menu.child.length" ng-click="vm.openOrCloseMenu($event,menu)" ng-class="{'open': menu.open}" ></i>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <div class="admin-right-panel" ui-view></div>
+</div>

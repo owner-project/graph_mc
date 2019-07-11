@@ -1,0 +1,93 @@
+//企业非吸画像总览
+.enterprise-o-main {
+    color: @text-color-content;
+    .bg-img(@base-url, @icon-enterprise-o-bg-icon);
+    .enterprise-o-left {
+        border-right: 1px solid @border-color;
+        background-color: @bg-color-opacity;
+    }
+    .enterprise-o-right {
+        background-color: @bg-color-opacity;
+        .enterprise-o-right-title {
+            box-shadow: 0 2px 4px 0 @shadow-color;
+            color: @text-color-primary;
+        }
+        .enterprise-o-right-ul {
+            color: @text-color-content;
+            li {
+                &:nth-child(2n+1) {
+                    background-color: @bg-color-lighter;
+                }
+                &:nth-child(2n) {
+                }
+                &:hover {
+                    box-shadow:inset 0 0 10px 0 @primary-color;
+                    background-color: @bg-color-shadow;
+                }
+            }
+        }
+    }
+    .enterprise-o-content {
+        .enterprise-o-content-title {
+            color: @text-color-primary;
+        }
+        .enterprise-o-content-title-img {
+            .icon-img(@base-url, @icon-corporate-portrait-title-icon);
+        }
+        .enterprise-o-content-title-img-box {
+            .enterprise-o-bg-boll {
+                .icon-img(@base-url, @icon-enterprise-o-boll-icon);
+            }
+            .enterprise-o-bg-fill3 {
+                .icon-img(@base-url, @icon-enterprise-o-fill3-icon);
+            }
+            .enterprise-o-bg-fill2 {
+                .icon-img(@base-url, @icon-enterprise-o-fill2-icon);
+            }
+            .enterprise-o-bg-fill1 {
+                .icon-img(@base-url, @icon-enterprise-o-fill1-icon);
+            }
+            .enterprise-o-bg-house {
+                .icon-img(@base-url, @icon-enterprise-o-house-icon);
+            }
+            .enterprise-o-bg-text-box {
+                .enterprise-o-bg-text-box-item {
+                    .enterprise-o-bg-text-box-item-rect1,
+                    .enterprise-o-bg-text-box-item-rect2,
+                    .enterprise-o-bg-text-box-item-rect3,
+                    .enterprise-o-bg-text-box-item-rect4,
+                    .enterprise-o-bg-text-box-item-rect5 {
+                        background-color: @bg-color-shadow;
+                        box-shadow: 0 0 0 1px @shadow-color-primary;
+                    }
+                    .enterprise-o-bg-text-box-item-left1 {
+                        .icon-img(@base-url, @icon-enterprise-o-left-icon);
+                    }
+
+                    .enterprise-o-bg-text-box-item-right1 {
+                        .icon-img(@base-url, @icon-enterprise-o-right-icon);
+                    }
+
+                    .enterprise-o-bg-text-box-item-right2 {
+                        .icon-img(@base-url, @icon-enterprise-o-right-icon);
+                    }
+
+                    .enterprise-o-bg-text-box-item-left2 {
+                        .icon-img(@base-url, @icon-enterprise-o-left-icon);
+                    }
+
+                    .enterprise-o-bg-text-box-item-right3 {
+                        .icon-img(@base-url, @icon-enterprise-o-right-icon);
+                    }
+
+                    .enterprise-o-bg-text-box-item-rect-count {
+                        color: @text-color-title;
+                    }
+                    .enterprise-o-bg-text-box-item-rect-name {
+                        color: #E6A953;
+                    }
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,58 @@
+.theme_elegance_white {
+    @pui-main-color: #5182E4;
+    @pui-main-error-color:#E45151;
+    @pui-dark-color: #EDEFF2;
+    @pui-deep-dark-color: #191A2C;
+    @pui-black-color: #000000;
+
+    @pui-bg-color: #F7F8FA;
+    @pui-bg-color-light: #EDEFF2;
+
+    @select-bg-color: #1B2D59;
+    @select-hover-color: #2979FF;
+    @info-block-color: #2979FF;
+    @info-text-color: #fff;
+    @select-font-color: rgba(255, 255, 255, 0.7);
+    @select-font-hover-color: rgb(255, 255, 255);
+
+    @pui-border-color: #E4E7ED;
+
+    @pui-table-th: #EDEFF2;
+    @pui-table-td-odd: #F7F8FA;
+    @pui-table-td: #FFFFFF;
+
+    @pui-main-text-color: fade(#0A1220, 64%);
+    @pui-primary-text-color: #ffffff;
+    @pui-text-color-disabled: fade(@pui-main-text-color, 42%);
+
+    @import (multiple) 'ui';
+
+
+    .pui-table {
+
+        tbody {
+            tr:hover {
+                box-shadow: none;
+                background-color: fade(@pui-main-color, 20%);
+            }
+        }
+
+        &.opacity {
+            th {
+                background-color: fade(@pui-table-th, 50%);
+
+            }
+            tr:hover{
+                background-color:rgba(41,121,255,.4)
+            }
+            tr:nth-child(2n) {
+                    background-color: fade(@pui-table-td, 60%);
+
+            }
+            tr:nth-child(2n+1) {
+                    background-color: fade(@pui-table-td-odd, 60%);
+            }
+        }
+    }
+
+}

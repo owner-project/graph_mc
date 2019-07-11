@@ -1,0 +1,32 @@
+<div class="vl-main voiceList-main">
+    <div class="vl-body" style="overflow-y:scroll">
+        <div class="vl-list-body">
+            <pui-layout class="vl-list-ul">
+                <div class="vl-list-li">
+                    <pui-layout align="center" justify="center" class="vl-list-box" ng-click="voiceList.importExl()">
+                        <pui-layout align="center" direction="column" justify="center" class="vl-add-box">
+                            <i class="add-i"></i>
+                            <div class="add-span">添加</div>
+                        </pui-layout>
+                    </pui-layout>
+                </div>
+                <div ng-repeat="item in voiceList.jsonData track by item.id" class="vl-list-li" ng-click="voiceList.itemClick(item.id,item.type)">
+                    <div class="vl-list-box list-item" >
+                        <div class="item-title">
+                            <p data-title="{{item.name}}" data-container="body" data-bs-enabled="{{item.name.length>10}}" bs-tooltip data-placement="top" ng-bind="item.name"></p>
+                            <i class="vl-list-delete" ng-click="voiceList.itemDelete($event,item.id,item.type)"></i>
+                        </div>
+                        <div class="item-info">
+                            <div class="vl-list-image"></div>
+                            <div class="vll-list-text">
+                                <div class="vll-list-text-auth">作者：{{item.author}}</div>
+                                <div class="vll-list-text-time">时间：{{item.createTime}}</div>
+                                <div class="vll-list-text-ds" data-title="{{item.description}}" data-bs-enabled="{{item.description.length>10}}" bs-tooltip data-placement="top">描述：{{item.description}}</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </pui-layout>
+        </div>
+    </div>
+</div>

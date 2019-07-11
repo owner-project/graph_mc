@@ -1,0 +1,64 @@
+<div class="pui-modal modal confirm" >
+        <div class="modal-dialog relation-list-modal">
+            <div class="modal-header">
+                <div class="modal-title">关系明细</div>
+                <div class="modal-close-icon" ng-click="fn.dismiss()"></div>
+            </div>
+            <div class="modal-body">
+                <div class="edge-box">
+                    <div class="wrap-content" ng-if="data.relations.data.length">
+                        <!-- <div pui-table type="header">
+                            <table cellpadding="0" cellspacing="0" border="0">
+                                <thead>
+                                    <tr>
+                                        <th ng-repeat="item in data.relations.title">{{item}}</th>
+                                    </tr>
+                                </thead>
+                            </table>
+                        </div> -->
+                        <div pui-table type="body" class="my-relation-body">
+                            <table cellpadding="0" class="relation-detail-table" style="table-layout:auto" cellspacing="0" border="0">
+                                    <thead>
+                                            <tr>
+                                                <th ng-repeat="item in data.relations.title">{{item.name}}</th>
+                                            </tr>
+                                        </thead>
+                                <tbody>
+                                    <tr ng-repeat="trItem in data.relations.data">
+                                        <td ng-repeat="tdItem in trItem">
+                                            <!-- <div class="has-border" ng-if="key == 'key'" > 
+                                                    {{dItem[head.key]}}
+                                            </div>
+                                            <div class="has-border"  ng-if="key == 'key'" > 
+                                                    {{dItem[head.key]}}
+                                            </div> -->
+                                            <div ng-repeat="item in tdItem" ng-class="{'has-border':item.length !== 1}">
+                                                    {{item}}
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="search-result-footer">
+                            <div class="clearfix">
+                                <uib-pagination class="pagination-sm pull-right"
+                                    total-items="data.relations.total"
+                                    ng-change="fn.showRelationDetail()"
+                                    ng-model="data.pageNo"
+                                    previous-text="上一页"
+                                    next-text="下一页"
+                                    force-ellipses="true"
+                                    max-size="5"
+                                    items-per-page="data.pageSize"
+                                    boundary-link-numbers="true">
+                                </uib-pagination>
+                            </div>
+                        </div>
+                    </div>
+                    <div ng-include="'app/components/header/aboutMySearch/template.html'" ng-if="!data.relations.data.length" class="no-data"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    

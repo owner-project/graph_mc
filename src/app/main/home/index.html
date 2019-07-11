@@ -1,0 +1,1402 @@
+<div class="home-main">
+    <div class="video-wrap">
+        <video autoplay muted loop>
+            <source>
+        </video>
+        <div class="video-bg-img"></div>
+        <div class="video-bg-block"></div>
+    </div>
+    <div class="home-body jq_home_main">
+        <div class="home-ration-total jq_home_header_total" ng-if="!home.homeData.showBasicResult && !home.isSeniorSearch">
+            <span class="t-itme entity">
+                <span class="text">实体</span>
+                <span class="num">{{home.rtData.entity | num_total}}</span>
+            </span>
+            <span class="t-itme relation">
+                <span class="text">关系</span>
+                <span class="num">{{home.rtData.relation | num_total}}</span>
+            </span>
+            <span class="t-itme event">
+                <span class="text">事件</span>
+                <span class="num">{{home.rtData.event | num_total}}</span>
+            </span>
+        </div>
+        <!-- 关注动态组件 -->
+        <focus-people ng-if="!home.homeData.showBasicResult && !home.isSeniorSearch"></focus-people>
+        <div class="search-condition-wrap" ng-class="{'senior-search':home.isSeniorSearch && home.homeData.showResult }">
+            <div class="home-header jq_home_header" ng-class="{'senior-search-result':home.isSeniorSearch && home.homeData.showResult }">
+                <div ng-if="!home.isSeniorSearch" class="basic-search-condition">
+                    <pui-layout align="center" class="home-search-box">
+                        <pui-layout align="center" class="search-input-box">
+                            <input class="search-input" ng-model="home.homeData.searchValue" type="text"
+                                ng-click="home.showIntelligentSearchFunc($event)"
+                                ng-change="home.basicSearchKeywordChangeDebounce($event)"
+                                ng-keyup="home.myKeyup($event)" placeholder="请输入人员姓名、身份证号、手机号、企业名称或企业身份代码，并使用逗号分隔">
+                            <div class="search-tag-box" ng-if="home.searchTagList.length != 0 && home.showIntelligentSearch">
+                                <div class="search-tag-wrap" ng-click="home.basicSearchTypeChange()">
+                                    <label class="search-tag-label">智能检索</label>
+                                    <span ng-repeat="tag in home.searchTagList track by $index" class="search-tag">{{tag}}</span>
+                                </div>
+                            </div>
+                            <!-- search icon 与按钮 -->
+                            <pui-button type="primary"  on-click="home.pressSearchBtn()" class="search-btn">
+                                <pui-layout align="center" justify="center" class="h100">
+                                    <i></i>
+                                    <span>搜索</span>
+                                </pui-layout>
+                            </pui-button>
+                        </pui-layout>
+                    </pui-layout>
+                    <span class="senior-search-btn" ng-click="home.searchSwitch()">高级检索</span>
+                </div>
+                <div ng-if="home.isSeniorSearch" class="senior-search-condition">
+                    <div class="home-menu-box">
+                        <div class="station-one station"></div>
+                        <ul class="menu-ul pui-layout">
+                            <li class="menu-li jq_menu_li" title="实体" ng-click="home.chooseType($event, '2')" ng-class="{'active': home.homeData.choosetype == '2'}">
+                                <div class="left"></div>
+                                <div class="content">
+                                    <i class="entity"></i>
+                                    <span>实体</span>
+                                </div>
+                                <div class="right"></div>
+                            </li>
+                            <li class="menu-li jq_menu_li" title="事件" ng-click="home.chooseType($event, '3')" ng-class="{'active': home.homeData.choosetype == '3'}">
+                                <div class="left"></div>
+                                <div class="content">
+                                    <i class="event"></i>
+                                    <span>事件</span>
+                                </div>
+                                <div class="right"></div>
+                            </li>
+                        </ul>
+                        <div class="station-two station"></div>
+                    </div>
+
+                    <!-- 实体 -->
+                    <div ng-if="home.homeData.choosetype == 2" class="typelist-container">
+                        <ul class="menu-ul pui-layout">
+                            <li ng-repeat="type in home.entityTypeData">
+                                <span ng-class="{'active':home.entityTypeData.currentId == type.id}" ng-click="home.entityTypeSelect(type.id)">
+                                    {{type.cateGoryName}}
+                                </span>
+                            </li>
+                        </ul>
+                        <!-- 人 -->
+                        <div class="entity-options-container" ng-show="home.homeData.choosetype == 2 && home.entityTypeData.currentId == 1">
+                            <pui-layout align="center" class="pull-left mgt10 addedPeople1" ng-show="home.addedPeople.includes('1')">
+                                <span class="attr-title">身份证</span>
+                                <ui-select multiple tagging tagging-label="false" ng-model="home.seniorSearchParams.term.person.idCards"
+                                    theme="bootstrap" sortable="true" style="width: 366px;" title="请输入18位居民身份证号码">
+                                    <ui-select-match placeholder="请输入18位居民身份证号码">{{$item}}</ui-select-match>
+                                    <ui-select-choices repeat="each in home.emptyDic | filter:$select.search">
+                                        {{each}}
+                                    </ui-select-choices>
+
+                                </ui-select>
+
+                                <div ng-include="'app/main/home/clearCurrent/template.html'" class="clear-btn-container"
+                                    ng-click="home.clearCurrent('person','idCards','addedPeople','1','entityAttrData','peopleAttrData')"></div>
+                            </pui-layout>
+                            <pui-layout align="center" class="pull-left mgt10 addedPeople2" ng-show="home.addedPeople.includes('2')">
+                                <span class="attr-title">姓名</span>
+                                <ui-select multiple tagging tagging-label="false" ng-model="home.seniorSearchParams.term.person.name"
+                                    theme="bootstrap" sortable="true" style="width: 366px;" title="示例：张三 ，按enter添加">
+                                    <ui-select-match placeholder="示例：张三 ，按enter添加">{{$item}}</ui-select-match>
+                                    <ui-select-choices repeat="each in home.emptyDic | filter:$select.search">
+                                        {{each}}
+                                    </ui-select-choices>
+
+                                </ui-select>
+                                <div ng-include="'app/main/home/clearCurrent/template.html'" class="clear-btn-container"
+                                    ng-click="home.clearCurrent('person','name','addedPeople','2','entityAttrData','peopleAttrData')"></div>
+                            </pui-layout>
+                            <pui-layout align="center" class="pull-left mgt10 addedPeople3" ng-show="home.addedPeople.includes('3')">
+                                <span class="attr-title">民族</span>
+                                <ui-select multiple tagging tagging-label="false" ng-model="home.seniorSearchParams.term.person.nations"
+                                    theme="bootstrap" sortable="true" style="width: 366px;" title="示例：汉族 ，按enter添加">
+                                    <ui-select-match placeholder="示例：汉族 ，按enter添加">{{$item}}</ui-select-match>
+                                    <ui-select-choices repeat="i in home.seniorSearchDics.mzName | filter:$select.search">
+                                        {{i}}
+                                    </ui-select-choices>
+
+                                </ui-select>
+                                <div ng-include="'app/main/home/clearCurrent/template.html'" class="clear-btn-container"
+                                    ng-click="home.clearCurrent('person','nations','addedPeople','3','entityAttrData','peopleAttrData')"></div>
+                            </pui-layout>
+                            <pui-layout align="center" class="pull-left mgt10 addedPeople4" ng-show="home.addedPeople.includes('4')">
+                                <span class="attr-title">婚否</span>
+                                <ui-select multiple tagging tagging-label="false" ng-model="home.seniorSearchParams.term.person.isMarrieds"
+                                    theme="bootstrap" sortable="true" style="width: 366px;" title="示例：已婚 ，按enter添加">
+                                    <ui-select-match placeholder="示例：已婚 ，按enter添加">{{$item}}</ui-select-match>
+                                    <ui-select-choices repeat="each in home.seniorSearchDics.marryName | filter:$select.search">
+                                        {{each}}
+                                    </ui-select-choices>
+
+                                </ui-select>
+                                <div ng-include="'app/main/home/clearCurrent/template.html'" class="clear-btn-container"
+                                    ng-click="home.clearCurrent('person','isMarrieds','addedPeople','4','entityAttrData','peopleAttrData')"></div>
+                            </pui-layout>
+                            <pui-layout align="center" class="pull-left mgt10 addedPeople5" ng-show="home.addedPeople.includes('5')">
+                                <span class="attr-title">籍贯</span>
+                                <ui-select multiple tagging tagging-label="false" ng-model="home.seniorSearchParams.term.person.nativePlace"
+                                    theme="bootstrap" sortable="true" style="width: 366px;" title="示例：湖北省、湖北省武汉市、武汉市，按enter添加">
+                                    <ui-select-match placeholder="示例：湖北省、湖北省武汉市、武汉市，按enter添加">{{$item}}</ui-select-match>
+                                    <ui-select-choices repeat="each in home.emptyDic | filter:$select.search">
+                                        {{each}}
+                                    </ui-select-choices>
+                                </ui-select>
+                                <div ng-include="'app/main/home/clearCurrent/template.html'" class="clear-btn-container"
+                                    ng-click="home.clearCurrent('person','nativePlace','addedPeople','5','entityAttrData','peopleAttrData')"></div>
+                            </pui-layout>
+
+                            <pui-layout align="center" class="pull-left mgt10 addedPeople6" ng-show="home.addedPeople.includes('6')">
+                                <span class="attr-title">联系电话</span>
+                                <ui-select multiple tagging tagging-label="false" ng-model="home.seniorSearchParams.term.person.phone"
+                                    theme="bootstrap" sortable="true" style="width: 366px;" title="示例：请输入11位手机号码或固话号码，按enter添加">
+                                    <ui-select-match placeholder="示例：请输入11位手机号码或固话号码，按enter添加">{{$item}}</ui-select-match>
+                                    <ui-select-choices repeat="each in home.emptyDic | filter:$select.search">
+                                        {{each}}
+                                    </ui-select-choices>
+
+                                </ui-select>
+                                <div ng-include="'app/main/home/clearCurrent/template.html'" class="clear-btn-container"
+                                    ng-click="home.clearCurrent('person','phone','addedPeople','6','entityAttrData','peopleAttrData')"></div>
+                            </pui-layout>
+                            <pui-layout align="center" class="pull-left mgt10 addedPeople7" ng-show="home.addedPeople.includes('7')">
+                                <span class="attr-title">户籍详细地址</span>
+                                <ui-select multiple tagging tagging-label="false" ng-model="home.seniorSearchParams.term.person.residenceAddress"
+                                    theme="bootstrap" sortable="true" style="width: 366px;" title="示例：湖北省武汉市洪山区火车站31号，按enter添加">
+                                    <ui-select-match placeholder="示例：湖北省武汉市洪山区火车站31号，按enter添加">{{$item}}</ui-select-match>
+                                    <ui-select-choices repeat="each in home.emptyDic | filter:$select.search">
+                                        {{each}}
+                                    </ui-select-choices>
+
+                                </ui-select>
+                                <div ng-include="'app/main/home/clearCurrent/template.html'" class="clear-btn-container"
+                                    ng-click="home.clearCurrent('person','residenceAddress','addedPeople','7','entityAttrData','peopleAttrData')"></div>
+                            </pui-layout>
+                            <pui-layout align="center" class="pull-left mgt10 addedPeople8" ng-show="home.addedPeople.includes('8')">
+                                <span class="attr-title">文化程度</span>
+                                <ui-select multiple tagging tagging-label="false" ng-model="home.seniorSearchParams.term.person.eduDegree"
+                                    theme="bootstrap" sortable="true" style="width: 366px;" title="示例：小学毕业、初中毕业，按enter添加">
+                                    <ui-select-match placeholder="示例：小学毕业、初中毕业，按enter添加">{{$item}}</ui-select-match>
+                                    <ui-select-choices repeat="each in home.seniorSearchDics.eduName | filter:$select.search">
+                                        {{each}}
+                                    </ui-select-choices>
+                                </ui-select>
+                                <div ng-include="'app/main/home/clearCurrent/template.html'" class="clear-btn-container"
+                                    ng-click="home.clearCurrent('person','eduDegree','addedPeople','8','entityAttrData','peopleAttrData')"></div>
+                            </pui-layout>
+                            <pui-layout align="center" class="pull-left mgt10 addedPeople106" ng-show="home.addedPeople.includes('106')">
+                                <span class="attr-title">性别</span>
+                                <ui-select multiple tagging tagging-label="false" ng-model="home.seniorSearchParams.term.person.xbmc"
+                                    theme="bootstrap" sortable="true" style="width: 366px;" title="示例：男性 ，按enter添加">
+                                    <ui-select-match placeholder="示例：男性 ，按enter添加">{{$item}}</ui-select-match>
+                                    <ui-select-choices repeat="each in home.seniorSearchDics.sexName | filter:$select.search">
+                                        {{each}}
+                                    </ui-select-choices>
+
+                                </ui-select>
+                                <div ng-include="'app/main/home/clearCurrent/template.html'" class="clear-btn-container"
+                                    ng-click="home.clearCurrent('person','xbmc','addedPeople','106','entityAttrData','peopleAttrData')"></div>
+                            </pui-layout>
+
+                            <pui-layout align="center" class="pull-left mgt10">
+                                <pui-select class="df-select-width mgl10" disabled="home.addedPeople.length == home.entityAttrData.peopleAttrData.result.length"
+                                    options="home.entityAttrData.peopleAttrData.result" value-field="id" ng-change="home.attrChange('entityAttrData','peopleAttrData','addedPeople')"
+                                    ng-model="home.entityAttrData.peopleAttrData.currentValue"></pui-select>
+                                <input type="text" placeholder="点击左侧下拉框添加筛选条件" readonly class="des-input">
+                            </pui-layout>
+                            <pui-layout align="center" class="pull-left mgt10 seniorsearch-btn">
+                                <pui-button  on-click="home.searchSubmitTitle()">检索</pui-button>
+                                <div ng-click="home.clearCurrentAll('person','addedPeople','entityAttrData','peopleAttrData')" class="clear-current-params">全部清空</div>
+
+                            </pui-layout>
+                            <pui-layout align="center" class="pull-left mgt10">
+                                <div class="senior-search-guide" ng-if="$root.urlData.chooseMenu === 'search'">
+                                    当进行高级检索时,输入框中关键字处于失效状态;高级检索中同一条件内为'或'关系,不同条件间为'与'关系</div>
+                            </pui-layout>
+
+                        </div>
+                        
+                        <!-- 手机 -->
+                        <div class="entity-options-container" ng-show="home.homeData.choosetype == 2 && home.entityTypeData.currentId == 3">
+                            <pui-layout align="center" class="pull-left mgt10 addedPhone17" ng-show="home.addedPhone.includes('17')">
+                                <span class="attr-title">手机号</span>
+                                <ui-select multiple tagging tagging-label="false" ng-model="home.seniorSearchParams.term.phone.phoneNum"
+                                    theme="bootstrap" sortable="true" style="width: 366px;" title="示例：18200001111，按enter添加">
+                                    <ui-select-match placeholder="示例：18200001111，按enter添加">{{$item}}</ui-select-match>
+                                    <ui-select-choices repeat="each in home.emptyDic | filter:$select.search">
+                                        {{each}}
+                                    </ui-select-choices>
+                                </ui-select>
+                                <div ng-include="'app/main/home/clearCurrent/template.html'" class="clear-btn-container"
+                                    ng-click="home.clearCurrent('phone','phoneNum','addedPhone','17','entityAttrData','phoneAttrData')"></div>
+                            </pui-layout>
+                            <pui-layout align="center" class="pull-left mgt10 addedPhone18" ng-show="home.addedPhone.includes('18')">
+                                <span class="attr-title">机主姓名</span>
+                                <ui-select multiple tagging tagging-label="false" ng-model="home.seniorSearchParams.term.phone.ownerName"
+                                    theme="bootstrap" sortable="true" style="width: 366px;" title="示例：张三，按enter添加">
+                                    <ui-select-match placeholder="示例：张三，按enter添加">{{$item}}</ui-select-match>
+                                    <ui-select-choices repeat="each in home.emptyDic | filter:$select.search">
+                                        {{each}}
+                                    </ui-select-choices>
+                                </ui-select>
+                                <div ng-include="'app/main/home/clearCurrent/template.html'" class="clear-btn-container"
+                                    ng-click="home.clearCurrent('phone','ownerName','addedPhone','18','entityAttrData','phoneAttrData')"></div>
+                            </pui-layout>
+                            <pui-layout align="center" class="pull-left mgt10 addedPhone19" ng-show="home.addedPhone.includes('19')">
+                                <span class="attr-title">机主身份证</span>
+                                <ui-select multiple tagging tagging-label="false" ng-model="home.seniorSearchParams.term.phone.ownerIdCard"
+                                    theme="bootstrap" sortable="true" style="width: 366px;" title="请输入18位居民身份证号码，按enter添加">
+                                    <ui-select-match placeholder="请输入18位居民身份证号码，按enter添加">{{$item}}</ui-select-match>
+                                    <ui-select-choices repeat="each in home.emptyDic | filter:$select.search">
+                                        {{each}}
+                                    </ui-select-choices>
+                                </ui-select>
+                                <div ng-include="'app/main/home/clearCurrent/template.html'" class="clear-btn-container"
+                                    ng-click="home.clearCurrent('phone','ownerIdCard','addedPhone','19','entityAttrData','phoneAttrData')"></div>
+                            </pui-layout>
+                            <pui-layout align="center" class="pull-left mgt10 addedPhone20" ng-show="home.addedPhone.includes('20')">
+                                <span class="attr-title">机主手机卡类型</span>
+                                <ui-select multiple tagging tagging-label="false" ng-model="home.seniorSearchParams.term.phone.type"
+                                    theme="bootstrap" sortable="true" style="width: 366px;" title="示例：联通，按enter添加">
+                                    <ui-select-match placeholder="示例：联通，按enter添加">{{$item}}</ui-select-match>
+                                    <ui-select-choices repeat="each in home.seniorSearchDics.phoneTypeName | filter:$select.search">
+                                        {{each}}
+                                    </ui-select-choices>
+                                </ui-select>
+                                <div ng-include="'app/main/home/clearCurrent/template.html'" class="clear-btn-container"
+                                    ng-click="home.clearCurrent('phone','type','addedPhone','20','entityAttrData','phoneAttrData')"></div>
+                            </pui-layout>
+                            <pui-layout align="center" class="pull-left mgt10 addedPhone21" ng-show="home.addedPhone.includes('21')">
+                                <span class="attr-title">手机卡卡号</span>
+                                <ui-select multiple tagging tagging-label="false" ng-model="home.seniorSearchParams.term.phone.cardNum"
+                                    theme="bootstrap" sortable="true" style="width: 366px;" title="请输入手机卡SIM卡号，按enter添加">
+                                    <ui-select-match placeholder="请输入手机卡SIM卡号，按enter添加">{{$item}}</ui-select-match>
+                                    <ui-select-choices repeat="each in home.emptyDic | filter:$select.search">
+                                        {{each}}
+                                    </ui-select-choices>
+                                </ui-select>
+                                <div ng-include="'app/main/home/clearCurrent/template.html'" class="clear-btn-container"
+                                    ng-click="home.clearCurrent('phone','cardNum','addedPhone','21','entityAttrData','phoneAttrData')"></div>
+                            </pui-layout>
+                            <pui-layout align="center" class="pull-left mgt10">
+                                <pui-select class="df-select-width mgl10" disabled="home.addedPhone.length == home.entityAttrData.phoneAttrData.result.length"
+                                    options="home.entityAttrData.phoneAttrData.result" value-field="id" ng-change="home.attrChange('entityAttrData','phoneAttrData','addedPhone')"
+                                    ng-model="home.entityAttrData.phoneAttrData.currentValue"></pui-select>
+                                <input type="text" placeholder="点击左侧下拉框添加筛选条件" readonly class="des-input">
+                            </pui-layout>
+                            <pui-layout align="center" class="pull-left mgt10 seniorsearch-btn">
+                                <pui-button  on-click="home.searchSubmitTitle()">检索</pui-button>
+                                <div ng-click="home.clearCurrentAll('phone','addedPhone','entityAttrData','phoneAttrData')" class="clear-current-params">全部清空</div>
+
+                            </pui-layout>
+                            <pui-layout align="center" class="pull-left mgt10">
+                                <div class="senior-search-guide" ng-if="$root.urlData.chooseMenu === 'search'">
+                                    当进行高级检索时,输入框中关键字处于失效状态;高级检索中同一条件内为'或'关系,不同条件间为'与'关系</div>
+                            </pui-layout>
+
+                        </div>
+
+                        <!-- 企业 -->
+                        <div class="entity-options-container" ng-show="home.homeData.choosetype == 2 && home.entityTypeData.currentId == 2">
+
+                            <pui-layout align="center" class="pull-left mgt10 addedBusiness9" ng-show="home.addedBusiness.includes('9')">
+                                <span class="attr-title">身份代码</span>
+                                <ui-select multiple tagging tagging-label="false" ng-model="home.seniorSearchParams.term.business.identityCode"
+                                    theme="bootstrap" sortable="true" style="width: 366px;" title="请输入10位企业身份代码，按enter添加">
+                                    <ui-select-match placeholder="请输入10位企业身份代码，按enter添加">{{$item}}</ui-select-match>
+                                    <ui-select-choices repeat="each in home.emptyDic | filter:$select.search">
+                                        {{each}}
+                                    </ui-select-choices>
+                                </ui-select>
+                                <div ng-include="'app/main/home/clearCurrent/template.html'" class="clear-btn-container"
+                                    ng-click="home.clearCurrent('business','identityCode','addedBusiness','9','entityAttrData','businessAttrData')"></div>
+                            </pui-layout>
+
+                            <pui-layout align="center" class="pull-left mgt10 addedBusiness10" ng-show="home.addedBusiness.includes('10')">
+                                <span class="attr-title">企业名称</span>
+                                <ui-select multiple tagging tagging-label="false" ng-model="home.seniorSearchParams.term.business.firmName"
+                                    theme="bootstrap" sortable="true" style="width: 366px;" title="示例：武汉市青山区老北京布鞋店，按enter添加">
+                                    <ui-select-match placeholder="示例：武汉市青山区老北京布鞋店，按enter添加">{{$item}}</ui-select-match>
+                                    <ui-select-choices repeat="each in home.emptyDic | filter:$select.search">
+                                        {{each}}
+                                    </ui-select-choices>
+                                </ui-select>
+                                <div ng-include="'app/main/home/clearCurrent/template.html'" class="clear-btn-container"
+                                    ng-click="home.clearCurrent('business','firmName','addedBusiness','10','entityAttrData','businessAttrData')"></div>
+                            </pui-layout>
+                            <pui-layout align="center" class="pull-left mgt10 addedBusiness11" ng-show="home.addedBusiness.includes('11')">
+                                <span class="attr-title">注册号</span>
+                                <ui-select multiple tagging tagging-label="false" ng-model="home.seniorSearchParams.term.business.regMark"
+                                    theme="bootstrap" sortable="true" style="width: 366px;" title="请输入15位企业注册号，按enter添加">
+                                    <ui-select-match placeholder="请输入15位企业注册号，按enter添加">{{$item}}</ui-select-match>
+                                    <ui-select-choices repeat="each in home.emptyDic | filter:$select.search">
+                                        {{each}}
+                                    </ui-select-choices>
+                                </ui-select>
+                                <div ng-include="'app/main/home/clearCurrent/template.html'" class="clear-btn-container"
+                                    ng-click="home.clearCurrent('business','regMark','addedBusiness','11','entityAttrData','businessAttrData')"></div>
+                            </pui-layout>
+                            <pui-layout align="center" class="pull-left mgt10 addedBusiness12" ng-show="home.addedBusiness.includes('12')">
+                                <span class="attr-title">市场主体类型</span>
+                                <ui-select multiple tagging tagging-label="false" ng-model="home.seniorSearchParams.term.business.type"
+                                    theme="bootstrap" sortable="true" style="width: 366px;" title="示例：个体工商户，按enter添加">
+                                    <ui-select-match placeholder="示例：个体工商户，按enter添加">{{$item}}</ui-select-match>
+                                    <ui-select-choices repeat="each in home.seniorSearchDics.businessTypeName | filter:$select.search">
+                                        {{each}}
+                                    </ui-select-choices>
+                                </ui-select>
+                                <div ng-include="'app/main/home/clearCurrent/template.html'" class="clear-btn-container"
+                                    ng-click="home.clearCurrent('business','type','addedBusiness','12','entityAttrData','businessAttrData')"></div>
+                            </pui-layout>
+                            <pui-layout align="center" class="pull-left mgt10 addedBusiness13" ng-show="home.addedBusiness.includes('13')">
+                                <span class="attr-title">登记机关</span>
+                                <ui-select multiple tagging tagging-label="false" ng-model="home.seniorSearchParams.term.business.registrationAuthority"
+                                    theme="bootstrap" sortable="true" style="width: 366px;" title="示例：武汉市工商局，按enter添加">
+                                    <ui-select-match placeholder="示例：武汉市工商局，按enter添加">{{$item}}</ui-select-match>
+                                    <ui-select-choices repeat="each in home.emptyDic | filter:$select.search">
+                                        {{each}}
+                                    </ui-select-choices>
+                                </ui-select>
+                                <div ng-include="'app/main/home/clearCurrent/template.html'" class="clear-btn-container"
+                                    ng-click="home.clearCurrent('business','registrationAuthority','addedBusiness','13','entityAttrData','businessAttrData')"></div>
+                            </pui-layout>
+                            <pui-layout align="center" class="pull-left mgt10 addedBusiness14" ng-show="home.addedBusiness.includes('14')">
+                                <span class="attr-title">登记状态</span>
+                                <ui-select multiple tagging tagging-label="false" ng-model="home.seniorSearchParams.term.business.registrationStatus"
+                                    theme="bootstrap" sortable="true" style="width: 366px;" title="示例：注销，按enter添加">
+                                    <ui-select-match placeholder="示例：注销，按enter添加">{{$item}}</ui-select-match>
+                                    <ui-select-choices repeat="each in home.seniorSearchDics.businessRankTypeName | filter:$select.search">
+                                        {{each}}
+                                    </ui-select-choices>
+                                </ui-select>
+                                <div ng-include="'app/main/home/clearCurrent/template.html'" class="clear-btn-container"
+                                    ng-click="home.clearCurrent('business','registrationStatus','addedBusiness','14','entityAttrData','businessAttrData')"></div>
+                            </pui-layout>
+                            <pui-layout align="center" class="pull-left mgt10 addedBusiness15" ng-show="home.addedBusiness.includes('15')">
+                                <span class="attr-title">住所</span>
+                                <ui-select multiple tagging tagging-label="false" ng-model="home.seniorSearchParams.term.business.dwellingPlace"
+                                    theme="bootstrap" sortable="true" style="width: 366px;" title="示例：武汉市长安区建设路1号，按enter添加">
+                                    <ui-select-match placeholder="示例：武汉市长安区建设路1号，按enter添加">{{$item}}</ui-select-match>
+                                    <ui-select-choices repeat="each in home.emptyDic | filter:$select.search">
+                                        {{each}}
+                                    </ui-select-choices>
+                                </ui-select>
+                                <div ng-include="'app/main/home/clearCurrent/template.html'" class="clear-btn-container"
+                                    ng-click="home.clearCurrent('business','dwellingPlace','addedBusiness','15','entityAttrData','businessAttrData')"></div>
+                            </pui-layout>
+                            <pui-layout align="center" class="pull-left mgt10 addedBusiness16" ng-show="home.addedBusiness.includes('16')">
+                                <span class="attr-title">联系电话</span>
+                                <ui-select multiple tagging tagging-label="false" ng-model="home.seniorSearchParams.term.business.phone"
+                                    theme="bootstrap" sortable="true" style="width: 366px;" title="请输入企业联系电话，按enter添加">
+                                    <ui-select-match placeholder="请输入企业联系电话，按enter添加">{{$item}}</ui-select-match>
+                                    <ui-select-choices repeat="each in home.emptyDic | filter:$select.search">
+                                        {{each}}
+                                    </ui-select-choices>
+                                </ui-select>
+                                <div ng-include="'app/main/home/clearCurrent/template.html'" class="clear-btn-container"
+                                    ng-click="home.clearCurrent('business','phone','addedBusiness','16','entityAttrData','businessAttrData')"></div>
+                            </pui-layout>
+
+                            <pui-layout align="center" class="pull-left mgt10">
+                                <pui-select class="df-select-width mgl10" disabled="home.addedaddedBusiness.length == home.entityAttrData.businessAttrData.result.length"
+                                    options="home.entityAttrData.businessAttrData.result" value-field="id" ng-change="home.attrChange('entityAttrData','businessAttrData','addedBusiness')"
+                                    ng-model="home.entityAttrData.businessAttrData.currentValue"></pui-select>
+                                <input type="text" placeholder="点击左侧下拉框添加筛选条件" readonly class="des-input">
+                            </pui-layout>
+                            <pui-layout align="center" class="pull-left mgt10 seniorsearch-btn">
+                                <pui-button  on-click="home.searchSubmitTitle()">检索</pui-button>
+                                <div ng-click="home.clearCurrentAll('business','addedBusiness','entityAttrData','businessAttrData')" class="clear-current-params">全部清空</div>
+
+                            </pui-layout>
+                            <pui-layout align="center" class="pull-left mgt10">
+                                <div class="senior-search-guide" ng-if="$root.urlData.chooseMenu === 'search'">
+                                    当进行高级检索时,输入框中关键字处于失效状态;高级检索中同一条件内为'或'关系,不同条件间为'与'关系</div>
+                            </pui-layout>
+                        </div>
+
+                        <!-- 案件 -->
+                        <div class="entity-options-container" ng-show="home.homeData.choosetype == 2 && home.entityTypeData.currentId == 9">
+                            <pui-layout align="center" class="pull-left mgt10 addedCase67" ng-show="home.addedCase.includes('67')">
+                                <span class="attr-title">案件状态编号</span>
+                                <ui-select multiple tagging tagging-label="false" ng-model="home.seniorSearchParams.term.legalCase.number"
+                                    theme="bootstrap" sortable="true" style="width: 366px;" title="请输入关键词,按enter添加">
+                                    <ui-select-match placeholder="请输入关键词,按enter添加">{{$item}}</ui-select-match>
+                                    <ui-select-choices repeat="each in home.emptyDic | filter:$select.search">
+                                        {{each}}
+                                    </ui-select-choices>
+                                </ui-select>
+                                <div ng-include="'app/main/home/clearCurrent/template.html'" class="clear-btn-container"
+                                    ng-click="home.clearCurrent('legalCase','number','addedCase','67','entityAttrData','caseAttrData')"></div>
+                            </pui-layout>
+                            <pui-layout align="center" class="pull-left mgt10 addedCase68" ng-show="home.addedCase.includes('68')">
+                                <span class="attr-title">案件名称</span>
+                                <ui-select multiple tagging tagging-label="false" ng-model="home.seniorSearchParams.term.legalCase.name"
+                                    theme="bootstrap" sortable="true" style="width: 366px;" title="请输入关键词,按enter添加">
+                                    <ui-select-match placeholder="请输入关键词,按enter添加">{{$item}}</ui-select-match>
+                                    <ui-select-choices repeat="each in home.emptyDic | filter:$select.search">
+                                        {{each}}
+                                    </ui-select-choices>
+                                </ui-select>
+                                <div ng-include="'app/main/home/clearCurrent/template.html'" class="clear-btn-container"
+                                    ng-click="home.clearCurrent('legalCase','name','addedCase','68','entityAttrData','caseAttrData')"></div>
+                            </pui-layout>
+                            <pui-layout align="center" class="pull-left mgt10 addedCase69" ng-show="home.addedCase.includes('69')">
+                                <span class="attr-title">报案日期</span>
+                                <pui-layout align="center" class="pull-left">
+                                    <pui-datepicker class="wid-100px" ng-model="home.seniorSearchParams.term.legalCase.reportTime[0]"
+                                        data-placement="bottom-center" placeholder="开始日期" class="mgr20" data-max-date="{{home.seniorSearchParams.term.legalCase.reportTime[1]}}">
+                                    </pui-datepicker>
+                                    <span class="font-color-wihte mgl10 mgr10">-</span>
+                                    <pui-datepicker class="wid-100px" ng-model="home.seniorSearchParams.term.legalCase.reportTime[1]"
+                                        data-placement="bottom-center" placeholder="结束日期" class="mgl20" data-min-date="{{home.seniorSearchParams.term.legalCase.reportTime[0]}}">
+                                    </pui-datepicker>
+                                </pui-layout>
+                                <div ng-include="'app/main/home/clearCurrent/template.html'" class="clear-btn-container"
+                                    ng-click="home.clearCurrent('legalCase','reportTime','addedCase','69','entityAttrData','caseAttrData')"></div>
+                            </pui-layout>
+                            <pui-layout align="center" class="pull-left mgt10 addedCase70" ng-show="home.addedCase.includes('70')">
+                                <span class="attr-title">案件状态</span>
+                                <ui-select multiple tagging tagging-label="false" ng-model="home.seniorSearchParams.term.legalCase.type"
+                                    theme="bootstrap" sortable="true" style="width: 366px;" title="请输入关键词,按enter添加">
+                                    <ui-select-match placeholder="请输入关键词,按enter添加">{{$item}}</ui-select-match>
+                                    <ui-select-choices repeat="each in home.seniorSearchDics.ctStatusName | filter:$select.search">
+                                        {{each}}
+                                    </ui-select-choices>
+                                </ui-select>
+                                <div ng-include="'app/main/home/clearCurrent/template.html'" class="clear-btn-container"
+                                    ng-click="home.clearCurrent('legalCase','type','addedCase','70','entityAttrData','caseAttrData')"></div>
+                            </pui-layout>
+                            <pui-layout align="center" class="pull-left mgt10 addedCase72" ng-show="home.addedCase.includes('72')">
+                                <span class="attr-title">案件区划内详细地址</span>
+                                <ui-select multiple tagging tagging-label="false" ng-model="home.seniorSearchParams.term.legalCase.address"
+                                    theme="bootstrap" sortable="true" style="width: 366px;" title="请输入关键词,按enter添加">
+                                    <ui-select-match placeholder="请输入关键词,按enter添加">{{$item}}</ui-select-match>
+                                    <ui-select-choices repeat="each in home.emptyDic | filter:$select.search">
+                                        {{each}}
+                                    </ui-select-choices>
+                                </ui-select>
+                                <div ng-include="'app/main/home/clearCurrent/template.html'" class="clear-btn-container"
+                                    ng-click="home.clearCurrent('legalCase','address','addedCase','72','entityAttrData','caseAttrData')"></div>
+                            </pui-layout>
+                            <pui-layout align="center" class="pull-left mgt10 addedCase89" ng-show="home.addedCase.includes('89')">
+                                <span class="attr-title">案件日期时间</span>
+
+                                <pui-datepicker class="wid-100px" ng-model="home.seniorSearchParams.term.legalCase.date[0]"
+                                    data-placement="bottom-center" placeholder="开始日期" class="mgr20" data-max-date="{{home.seniorSearchParams.term.legalCase.date[1]}}">
+                                </pui-datepicker>
+                                <span class="font-color-wihte mgl10 mgr10">-</span>
+                                <pui-datepicker class="wid-100px" ng-model="home.seniorSearchParams.term.legalCase.date[1]"
+                                    data-placement="bottom-center" placeholder="结束日期" class="mgl20" data-min-date="{{home.seniorSearchParams.term.legalCase.date[0]}}">
+                                </pui-datepicker>
+                                <div ng-include="'app/main/home/clearCurrent/template.html'" class="clear-btn-container"
+                                    ng-click="home.clearCurrent('legalCase','date','addedCase','89','entityAttrData','caseAttrData')"></div>
+                            </pui-layout>
+                            <pui-layout align="center" class="pull-left mgt10 addedCase88" ng-show="home.addedCase.includes('88')">
+                                <span class="attr-title">案件描述</span>
+                                <ui-select multiple tagging tagging-label="false" ng-model="home.seniorSearchParams.term.legalCase.des"
+                                    theme="bootstrap" sortable="true" style="width: 366px;" title="请输入关键词,按enter添加">
+                                    <ui-select-match placeholder="请输入关键词,按enter添加">{{$item}}</ui-select-match>
+                                    <ui-select-choices repeat="each in home.emptyDic | filter:$select.search">
+                                        {{each}}
+                                    </ui-select-choices>
+                                </ui-select>
+                                <div ng-include="'app/main/home/clearCurrent/template.html'" class="clear-btn-container"
+                                    ng-click="home.clearCurrent('legalCase','des','addedCase','88','entityAttrData','caseAttrData')"></div>
+                            </pui-layout>
+                            <pui-layout align="center" class="pull-left mgt10">
+                                <pui-select class="df-select-width mgl10" disabled="home.addedCase.length == home.entityAttrData.caseAttrData.result.length"
+                                    options="home.entityAttrData.caseAttrData.result" value-field="id" ng-change="home.attrChange('entityAttrData','caseAttrData','addedCase')"
+                                    ng-model="home.entityAttrData.caseAttrData.currentValue"></pui-select>
+                                <input type="text" placeholder="点击左侧下拉框添加筛选条件" readonly class="des-input">
+                            </pui-layout>
+                            <pui-layout align="center" class="pull-left mgt10 seniorsearch-btn">
+                                <pui-button on-click="home.searchSubmitTitle()">检索</pui-button>
+                                <div ng-click="home.clearCurrentAll('legalCase','addedCase','entityAttrData','caseAttrData')" class="clear-current-params">全部清空</div>
+                            </pui-layout>
+                            <pui-layout align="center" class="pull-left mgt10 seniorsearch-btn">
+                            </pui-layout>
+                            <pui-layout align="center" class="pull-left mgt10">
+                                <div class="senior-search-guide" ng-if="$root.urlData.chooseMenu === 'search'">
+                                    当进行高级检索时,输入框中关键字处于失效状态;高级检索中同一条件内为'或'关系,不同条件间为'与'关系</div>
+                            </pui-layout>
+                        </div>
+
+                        <!-- 网吧 -->
+                        <div class="entity-options-container" ng-show="home.homeData.choosetype == 2 && home.entityTypeData.currentId == 21">
+                            <pui-layout align="center" class="pull-left mgt10 addedInternet90" ng-show="home.addedInternet.includes('90')">
+                                <span class="attr-title">网吧编号</span>
+                                <ui-select multiple tagging tagging-label="false" ng-model="home.seniorSearchParams.term.internetBarEntity.wbbh"
+                                    theme="bootstrap" sortable="true" style="width: 366px;" title="示例：34411111111，按enter添加">
+                                    <ui-select-match placeholder="示例：34411111111，按enter添加">{{$item}}</ui-select-match>
+                                    <ui-select-choices repeat="each in home.emptyDic | filter:$select.search">
+                                        {{each}}
+                                    </ui-select-choices>
+                                </ui-select>
+                                <div ng-include="'app/main/home/clearCurrent/template.html'" class="clear-btn-container"
+                                    ng-click="home.clearCurrent('internetBarEntity','wbbh','addedInternet','90','entityAttrData','internetAttrData')"></div>
+                            </pui-layout>
+                            <pui-layout align="center" class="pull-left mgt10 addedInternet91" ng-show="home.addedInternet.includes('91')">
+                                <span class="attr-title">网吧名称</span>
+                                <ui-select multiple tagging tagging-label="false" ng-model="home.seniorSearchParams.term.internetBarEntity.wbmc"
+                                    theme="bootstrap" sortable="true" style="width: 366px;" title="示例：张三网吧，按enter添加">
+                                    <ui-select-match placeholder="示例：张三网吧，按enter添加">{{$item}}</ui-select-match>
+                                    <ui-select-choices repeat="each in home.emptyDic | filter:$select.search">
+                                        {{each}}
+                                    </ui-select-choices>
+                                </ui-select>
+                                <div ng-include="'app/main/home/clearCurrent/template.html'" class="clear-btn-container"
+                                    ng-click="home.clearCurrent('internetBarEntity','wbmc','addedInternet','91','entityAttrData','internetAttrData')"></div>
+                            </pui-layout>
+                            <pui-layout align="center" class="pull-left mgt10 addedInternet92" ng-show="home.addedInternet.includes('92')">
+                                <span class="attr-title">经营许可编号</span>
+                                <ui-select multiple tagging tagging-label="false" ng-model="home.seniorSearchParams.term.internetBarEntity.jyxkzbh"
+                                    theme="bootstrap" sortable="true" style="width: 366px;" title="示例：13124，按enter添加">
+                                    <ui-select-match placeholder="示例：13124，按enter添加">{{$item}}</ui-select-match>
+                                    <ui-select-choices repeat="each in home.emptyDic | filter:$select.search">
+                                        {{each}}
+                                    </ui-select-choices>
+                                </ui-select>
+                                <div ng-include="'app/main/home/clearCurrent/template.html'" class="clear-btn-container"
+                                    ng-click="home.clearCurrent('internetBarEntity','jyxkzbh','addedInternet','92','entityAttrData','internetAttrData')"></div>
+                            </pui-layout>
+                            <pui-layout align="center" class="pull-left mgt10 addedInternet93" ng-show="home.addedInternet.includes('93')">
+                                <span class="attr-title">网吧负责人</span>
+                                <ui-select multiple tagging tagging-label="false" ng-model="home.seniorSearchParams.term.internetBarEntity.wbfzr"
+                                    theme="bootstrap" sortable="true" style="width: 366px;" title="示例：张三，按enter添加">
+                                    <ui-select-match placeholder="示例：张三，按enter添加">{{$item}}</ui-select-match>
+                                    <ui-select-choices repeat="each in home.emptyDic | filter:$select.search">
+                                        {{each}}
+                                    </ui-select-choices>
+                                </ui-select>
+                                <div ng-include="'app/main/home/clearCurrent/template.html'" class="clear-btn-container"
+                                    ng-click="home.clearCurrent('internetBarEntity','wbfzr','addedInternet','93','entityAttrData','internetAttrData')"></div>
+                            </pui-layout>
+                            <pui-layout align="center" class="pull-left mgt10 addedInternet94" ng-show="home.addedInternet.includes('94')">
+                                <span class="attr-title">管辖单位名称</span>
+                                <ui-select multiple tagging tagging-label="false" ng-model="home.seniorSearchParams.term.internetBarEntity.gxdwmc"
+                                    theme="bootstrap" sortable="true" style="width: 366px;" title="请输入单位名称，按enter添加">
+                                    <ui-select-match placeholder="请输入单位名称，按enter添加">{{$item}}</ui-select-match>
+                                    <ui-select-choices repeat="each in home.emptyDic | filter:$select.search">
+                                        {{each}}
+                                    </ui-select-choices>
+                                </ui-select>
+                                <div ng-include="'app/main/home/clearCurrent/template.html'" class="clear-btn-container"
+                                    ng-click="home.clearCurrent('internetBarEntity','gxdwmc','addedInternet','94','entityAttrData','internetAttrData')"></div>
+                            </pui-layout>
+                            <pui-layout align="center" class="pull-left mgt10 addedInternet95" ng-show="home.addedInternet.includes('95')">
+                                <span class="attr-title">网吧地址</span>
+                                <ui-select multiple tagging tagging-label="false" ng-model="home.seniorSearchParams.term.internetBarEntity.wbdz"
+                                    theme="bootstrap" sortable="true" style="width: 366px;" title="请输入网吧地址，按enter添加">
+                                    <ui-select-match placeholder="请输入网吧地址，按enter添加">{{$item}}</ui-select-match>
+                                    <ui-select-choices repeat="each in home.emptyDic | filter:$select.search">
+                                        {{each}}
+                                    </ui-select-choices>
+                                </ui-select>
+                                <div ng-include="'app/main/home/clearCurrent/template.html'" class="clear-btn-container"
+                                    ng-click="home.clearCurrent('internetBarEntity','wbdz','addedInternet','95','entityAttrData','internetAttrData')"></div>
+                            </pui-layout>
+                            <pui-layout align="center" class="pull-left mgt10">
+                                <pui-select class="df-select-width mgl10" disabled="home.addedInternet.length == home.entityAttrData.internetAttrData.result.length"
+                                    options="home.entityAttrData.internetAttrData.result" value-field="id" ng-change="home.attrChange('entityAttrData','internetAttrData','addedInternet')"
+                                    ng-model="home.entityAttrData.internetAttrData.currentValue"></pui-select>
+                                <input type="text" placeholder="点击左侧下拉框添加筛选条件" readonly class="des-input">
+                            </pui-layout>
+                            <pui-layout align="center" class="pull-left mgt10 seniorsearch-btn">
+                                <pui-button  on-click="home.searchSubmitTitle()">检索</pui-button>
+                                <div ng-click="home.clearCurrentAll('internetBarEntity','addedInternet','entityAttrData','internetAttrData')" class="clear-current-params">全部清空</div>
+
+                            </pui-layout>
+                            <pui-layout align="center" class="pull-left mgt10">
+                                <div class="senior-search-guide" ng-if="$root.urlData.chooseMenu === 'search'">
+                                    当进行高级检索时,输入框中关键字处于失效状态;高级检索中同一条件内为'或'关系,不同条件间为'与'关系</div>
+                            </pui-layout>
+                        </div>
+
+                        <!-- 车辆 -->
+                        <div class="entity-options-container" ng-show="home.homeData.choosetype == 2 && home.entityTypeData.currentId == 22">
+                            <pui-layout align="center" class="pull-left mgt10 addedVehicleEntity96" ng-show="home.addedVehicleEntity.includes('96')">
+                                <span class="attr-title">车辆编号</span>
+                                <ui-select multiple tagging tagging-label="false" ng-model="home.seniorSearchParams.term.vehicle.clbh"
+                                    theme="bootstrap" sortable="true" style="width: 366px;" title="示例：赣A11111，按enter添加">
+                                    <ui-select-match placeholder="示例：赣A11111，按enter添加">{{$item}}</ui-select-match>
+                                    <ui-select-choices repeat="each in home.emptyDic | filter:$select.search">
+                                        {{each}}
+                                    </ui-select-choices>
+                                </ui-select>
+                                <div ng-include="'app/main/home/clearCurrent/template.html'" class="clear-btn-container"
+                                    ng-click="home.clearCurrent('vehicle','clbh','addedVehicleEntity','96','entityAttrData','vehicleAttrData')"></div>
+                            </pui-layout>
+                            <pui-layout align="center" class="pull-left mgt10 addedVehicleEntity97" ng-show="home.addedVehicleEntity.includes('97')">
+                                <span class="attr-title">车辆识别代号</span>
+                                <ui-select multiple tagging tagging-label="false" ng-model="home.seniorSearchParams.term.vehicle.clsbdh"
+                                    theme="bootstrap" sortable="true" style="width: 366px;" title="示例：0774513，按enter添加">
+                                    <ui-select-match placeholder="示例：0774513，按enter添加">{{$item}}</ui-select-match>
+                                    <ui-select-choices repeat="each in home.emptyDic | filter:$select.search">
+                                        {{each}}
+                                    </ui-select-choices>
+                                </ui-select>
+                                <div ng-include="'app/main/home/clearCurrent/template.html'" class="clear-btn-container"
+                                    ng-click="home.clearCurrent('vehicle','clsbdh','addedVehicleEntity','97','entityAttrData','vehicleAttrData')"></div>
+                            </pui-layout>
+                            <pui-layout align="center" class="pull-left mgt10 addedVehicleEntity98" ng-show="home.addedVehicleEntity.includes('98')">
+                                <span class="attr-title">车辆所有人</span>
+                                <ui-select multiple tagging tagging-label="false" ng-model="home.seniorSearchParams.term.vehicle.syr"
+                                    theme="bootstrap" sortable="true" style="width: 366px;" title="示例：张三，按enter添加">
+                                    <ui-select-match placeholder="示例：张三，按enter添加">{{$item}}</ui-select-match>
+                                    <ui-select-choices repeat="each in home.emptyDic | filter:$select.search">
+                                        {{each}}
+                                    </ui-select-choices>
+                                </ui-select>
+                                <div ng-include="'app/main/home/clearCurrent/template.html'" class="clear-btn-container"
+                                    ng-click="home.clearCurrent('vehicle','syr','addedVehicleEntity','98','entityAttrData','vehicleAttrData')"></div>
+                            </pui-layout>
+                            <pui-layout align="center" class="pull-left mgt10 addedVehicleEntity99" ng-show="home.addedVehicleEntity.includes('99')">
+                                <span class="attr-title">所有人证件号码</span>
+                                <ui-select multiple tagging tagging-label="false" ng-model="home.seniorSearchParams.term.vehicle.zjhm"
+                                    theme="bootstrap" sortable="true" style="width: 366px;" title="示例：输入所有人证件号码，按enter添加">
+                                    <ui-select-match placeholder="示例：输入所有人证件号码，按enter添加">{{$item}}</ui-select-match>
+                                    <ui-select-choices repeat="each in home.emptyDic | filter:$select.search">
+                                        {{each}}
+                                    </ui-select-choices>
+                                </ui-select>
+                                <div ng-include="'app/main/home/clearCurrent/template.html'" class="clear-btn-container"
+                                    ng-click="home.clearCurrent('vehicle','zjhm','addedVehicleEntity','99','entityAttrData','vehicleAttrData')"></div>
+                            </pui-layout>
+                            <pui-layout align="center" class="pull-left mgt10 addedVehicleEntity100" ng-show="home.addedVehicleEntity.includes('100')">
+                                <span class="attr-title">发动机号</span>
+                                <ui-select multiple tagging tagging-label="false" ng-model="home.seniorSearchParams.term.vehicle.fdjh"
+                                    theme="bootstrap" sortable="true" style="width: 366px;" title="请输入发动机号，按enter添加">
+                                    <ui-select-match placeholder="请输入发动机号，按enter添加">{{$item}}</ui-select-match>
+                                    <ui-select-choices repeat="each in home.emptyDic | filter:$select.search">
+                                        {{each}}
+                                    </ui-select-choices>
+                                </ui-select>
+                                <div ng-include="'app/main/home/clearCurrent/template.html'" class="clear-btn-container"
+                                    ng-click="home.clearCurrent('vehicle','fdjh','addedVehicleEntity','100','entityAttrData','vehicleAttrData')"></div>
+                            </pui-layout>
+                            <pui-layout align="center" class="pull-left mgt10 addedVehicleEntity101" ng-show="home.addedVehicleEntity.includes('101')">
+                                <span class="attr-title">发动机型号</span>
+                                <ui-select multiple tagging tagging-label="false" ng-model="home.seniorSearchParams.term.vehicle.fdjxh"
+                                    theme="bootstrap" sortable="true" style="width: 366px;" title="请输入发动机型号，按enter添加">
+                                    <ui-select-match placeholder="请输入发动机型号，按enter添加">{{$item}}</ui-select-match>
+                                    <ui-select-choices repeat="each in home.emptyDic | filter:$select.search">
+                                        {{each}}
+                                    </ui-select-choices>
+                                </ui-select>
+                                <div ng-include="'app/main/home/clearCurrent/template.html'" class="clear-btn-container"
+                                    ng-click="home.clearCurrent('vehicle','fdjxh','addedVehicleEntity','101','entityAttrData','vehicleAttrData')"></div>
+                            </pui-layout>
+                            <pui-layout align="center" class="pull-left mgt10 addedVehicleEntity102" ng-show="home.addedVehicleEntity.includes('102')">
+                                <span class="attr-title">车辆品牌</span>
+                                <ui-select multiple tagging tagging-label="false" ng-model="home.seniorSearchParams.term.vehicle.clpp"
+                                    theme="bootstrap" sortable="true" style="width: 366px;" title="请输入车辆品牌，按enter添加">
+                                    <ui-select-match placeholder="请输入车辆品牌，按enter添加">{{$item}}</ui-select-match>
+                                    <ui-select-choices repeat="each in home.emptyDic | filter:$select.search">
+                                        {{each}}
+                                    </ui-select-choices>
+                                </ui-select>
+                                <div ng-include="'app/main/home/clearCurrent/template.html'" class="clear-btn-container"
+                                    ng-click="home.clearCurrent('vehicle','clpp','addedVehicleEntity','102','entityAttrData','vehicleAttrData')"></div>
+                            </pui-layout>
+                            <pui-layout align="center" class="pull-left mgt10 addedVehicleEntity103" ng-show="home.addedVehicleEntity.includes('103')">
+                                <span class="attr-title">车辆类型</span>
+                                <ui-select multiple tagging tagging-label="false" ng-model="home.seniorSearchParams.term.vehicle.cllxdm"
+                                    theme="bootstrap" sortable="true" style="width: 366px;" title="请输入车辆类型，按enter添加">
+                                    <ui-select-match placeholder="请输入车辆类型，按enter添加">{{$item}}</ui-select-match>
+                                    <ui-select-choices repeat="each in home.emptyDic | filter:$select.search">
+                                        {{each}}
+                                    </ui-select-choices>
+                                </ui-select>
+                                <div ng-include="'app/main/home/clearCurrent/template.html'" class="clear-btn-container"
+                                    ng-click="home.clearCurrent('vehicle','cllxdm','addedVehicleEntity','103','entityAttrData','vehicleAttrData')"></div>
+                            </pui-layout>
+                            <pui-layout align="center" class="pull-left mgt10 addedVehicleEntity104" ng-show="home.addedVehicleEntity.includes('104')">
+                                <span class="attr-title">车辆型号</span>
+                                <ui-select multiple tagging tagging-label="false" ng-model="home.seniorSearchParams.term.vehicle.clxh"
+                                    theme="bootstrap" sortable="true" style="width: 366px;" title="请输入车辆型号，按enter添加">
+                                    <ui-select-match placeholder="请输入车辆型号，按enter添加">{{$item}}</ui-select-match>
+                                    <ui-select-choices repeat="each in home.emptyDic | filter:$select.search">
+                                        {{each}}
+                                    </ui-select-choices>
+                                </ui-select>
+                                <div ng-include="'app/main/home/clearCurrent/template.html'" class="clear-btn-container"
+                                    ng-click="home.clearCurrent('vehicle','clxh','addedVehicleEntity','104','entityAttrData','vehicleAttrData')"></div>
+                            </pui-layout>
+                            <pui-layout align="center" class="pull-left mgt10 addedVehicleEntity105" ng-show="home.addedVehicleEntity.includes('105')">
+                                <span class="attr-title">机动车号牌种类代码</span>
+                                <ui-select multiple tagging tagging-label="false" ng-model="home.seniorSearchParams.term.vehicle.clcpzldm"
+                                    theme="bootstrap" sortable="true" style="width: 366px;" title="请输入机动车号牌种类代码，按enter添加">
+                                    <ui-select-match placeholder="请输入机动车号牌种类代码，按enter添加">{{$item}}</ui-select-match>
+                                    <ui-select-choices repeat="each in home.emptyDic | filter:$select.search">
+                                        {{each}}
+                                    </ui-select-choices>
+                                </ui-select>
+                                <div ng-include="'app/main/home/clearCurrent/template.html'" class="clear-btn-container"
+                                    ng-click="home.clearCurrent('vehicle','clcpzldm','addedVehicleEntity','105','entityAttrData','vehicleAttrData')"></div>
+                            </pui-layout>
+                            <pui-layout align="center" class="pull-left mgt10">
+                                <pui-select class="df-select-width mgl10" disabled="home.addedVehicleEntity.length == home.entityAttrData.vehicleAttrData.result.length"
+                                    options="home.entityAttrData.vehicleAttrData.result" value-field="id" ng-change="home.attrChange('entityAttrData','vehicleAttrData','addedVehicleEntity')"
+                                    ng-model="home.entityAttrData.vehicleAttrData.currentValue"></pui-select>
+                                <input type="text" placeholder="点击左侧下拉框添加筛选条件" readonly class="des-input">
+                            </pui-layout>
+                            <pui-layout align="center" class="pull-left mgt10 seniorsearch-btn">
+                                <pui-button  on-click="home.searchSubmitTitle()">检索</pui-button>
+                                <div ng-click="home.clearCurrentAll('vehicle','addedVehicleEntity','entityAttrData','vehicleAttrData')" class="clear-current-params">全部清空</div>
+
+                            </pui-layout>
+                            <pui-layout align="center" class="pull-left mgt10">
+                                <div class="senior-search-guide" ng-if="$root.urlData.chooseMenu === 'search'">
+                                    当进行高级检索时,输入框中关键字处于失效状态;高级检索中同一条件内为'或'关系,不同条件间为'与'关系</div>
+                            </pui-layout>
+                        </div>
+                    </div>
+
+                    <!-- 事件 -->
+                    <div ng-if="home.homeData.choosetype == 3" class="typelist-container">
+                        <ul class="menu-ul pui-layout">
+                            <li ng-repeat="type in home.eventTypeData">
+                                <span ng-class="{'active':home.eventTypeData.currentId == type.id}" ng-click="home.caseTypeSelect(type.id)">
+                                    {{type.cateGoryName}}
+                                </span>
+                            </li>
+                        </ul>
+                        <!-- 住宿 -->
+                        <div class="entity-options-container" ng-show="home.homeData.choosetype == 3 && home.eventTypeData.currentId == 8">
+                            <pui-layout align="center" class="pull-left mgt10 addedHotel59" ng-show="home.addedHotel.includes('59')">
+                                <span class="attr-title">旅馆编号</span>
+                                <ui-select multiple tagging tagging-label="false" ng-model="home.seniorSearchParams.term.hotel.hotelNum"
+                                    theme="bootstrap" sortable="true" style="width: 366px;" title="请输入关键词,按enter添加">
+                                    <ui-select-match placeholder="请输入关键词,按enter添加">{{$item}}</ui-select-match>
+                                    <ui-select-choices repeat="i in home.emptyDic | filter:$select.search">
+                                        {{i}}
+                                    </ui-select-choices>
+                                </ui-select>
+                                <div ng-include="'app/main/home/clearCurrent/template.html'" class="clear-btn-container"
+                                    ng-click="home.clearCurrent('hotel','hotelNum','addedHotel','59','eventAttrData','hotelAttrData')"></div>
+                            </pui-layout>
+                            <pui-layout align="center" class="pull-left mgt10 addedHotel60" ng-show="home.addedHotel.includes('60')">
+                                <span class="attr-title">旅馆名称</span>
+                                <ui-select multiple tagging tagging-label="false" ng-model="home.seniorSearchParams.term.hotel.hotelName"
+                                    theme="bootstrap" sortable="true" style="width: 366px;" title="请输入关键词,按enter添加">
+                                    <ui-select-match placeholder="请输入关键词,按enter添加">{{$item}}</ui-select-match>
+                                    <ui-select-choices repeat="i in home.emptyDic | filter:$select.search">
+                                        {{i}}
+                                    </ui-select-choices>
+
+                                </ui-select>
+                                <div ng-include="'app/main/home/clearCurrent/template.html'" class="clear-btn-container"
+                                    ng-click="home.clearCurrent('hotel','idCard','addedHotel','60','eventAttrData','hotelAttrData')"></div>
+                            </pui-layout>
+                            <pui-layout align="center" class="pull-left mgt10 addedHotel61" ng-show="home.addedHotel.includes('61')">
+                                <span class="attr-title">身份证号</span>
+                                <ui-select multiple tagging tagging-label="false" ng-model="home.seniorSearchParams.term.hotel.idCard"
+                                    theme="bootstrap" sortable="true" style="width: 366px;" title="请输入关键词,按enter添加">
+                                    <ui-select-match placeholder="请输入关键词,按enter添加">{{$item}}</ui-select-match>
+                                    <ui-select-choices repeat="i in home.emptyDic | filter:$select.search">
+                                        {{i}}
+                                    </ui-select-choices>
+
+                                </ui-select>
+                                <div ng-include="'app/main/home/clearCurrent/template.html'" class="clear-btn-container"
+                                    ng-click="home.clearCurrent('hotel','idCard','addedHotel','61','eventAttrData','hotelAttrData')"></div>
+                            </pui-layout>
+                            <pui-layout align="center" class="pull-left mgt10 addedHotel62" ng-show="home.addedHotel.includes('62')">
+                                <span class="attr-title">入住编号</span>
+                                <ui-select multiple tagging tagging-label="false" ng-model="home.seniorSearchParams.term.hotel.occupancyNumber"
+                                    theme="bootstrap" sortable="true" style="width: 366px;" title="请输入关键词,按enter添加">
+                                    <ui-select-match placeholder="请输入关键词,按enter添加">{{$item}}</ui-select-match>
+                                    <ui-select-choices repeat="i in home.emptyDic | filter:$select.search">
+                                        {{i}}
+                                    </ui-select-choices>
+
+                                </ui-select>
+                                <div ng-include="'app/main/home/clearCurrent/template.html'" class="clear-btn-container"
+                                    ng-click="home.clearCurrent('hotel','idCard','addedHotel','62','eventAttrData','hotelAttrData')"></div>
+                            </pui-layout>
+                            <pui-layout align="center" class="pull-left mgt10 addedHotel63" ng-show="home.addedHotel.includes('63')">
+                                <span class="attr-title">入住姓名</span>
+                                <ui-select multiple tagging tagging-label="false" ng-model="home.seniorSearchParams.term.hotel.checkIn"
+                                    theme="bootstrap" sortable="true" style="width: 366px;" title="请输入关键词,按enter添加">
+                                    <ui-select-match placeholder="请输入关键词,按enter添加">{{$item}}</ui-select-match>
+                                    <ui-select-choices repeat="i in home.emptyDic | filter:$select.search">
+                                        {{i}}
+                                    </ui-select-choices>
+
+                                </ui-select>
+                                <div ng-include="'app/main/home/clearCurrent/template.html'" class="clear-btn-container"
+                                    ng-click="home.clearCurrent('hotel','checkIn','addedHotel','63','eventAttrData','hotelAttrData')"></div>
+                            </pui-layout>
+                            <pui-layout align="center" class="pull-left mgt10 addedHotel64" ng-show="home.addedHotel.includes('64')">
+                                <span class="attr-title">房间号</span>
+                                <ui-select multiple tagging tagging-label="false" ng-model="home.seniorSearchParams.term.hotel.roomNumber"
+                                    theme="bootstrap" sortable="true" style="width: 366px;" title="请输入关键词,按enter添加">
+                                    <ui-select-match placeholder="请输入关键词,按enter添加">{{$item}}</ui-select-match>
+                                    <ui-select-choices repeat="i in home.emptyDic | filter:$select.search">
+                                        {{i}}
+                                    </ui-select-choices>
+
+                                </ui-select>
+                                <div ng-include="'app/main/home/clearCurrent/template.html'" class="clear-btn-container"
+                                    ng-click="home.clearCurrent('hotel','roomNumber','addedHotel','64','eventAttrData','hotelAttrData')"></div>
+                            </pui-layout>
+                            <pui-layout align="center" class="pull-left mgt10 addedHotel65" ng-show="home.addedHotel.includes('65')">
+                                <span class="attr-title">入住时间</span>
+                                <pui-datepicker class="wid-100px" ng-model="home.seniorSearchParams.term.hotel.startTime[0]"
+                                    data-placement="bottom-center" placeholder="开始日期" class="mgr20" data-max-date="{{home.seniorSearchParams.term.hotel.startTime[1]}}">
+                                </pui-datepicker>
+                                <span class="font-color-wihte mgl10 mgr10">-</span>
+                                <pui-datepicker class="wid-100px" ng-model="home.seniorSearchParams.term.hotel.startTime[1]"
+                                    data-placement="bottom-center" placeholder="结束日期" class="mgl20" data-min-date="{{home.seniorSearchParams.term.hotel.startTime[0]}}">
+                                </pui-datepicker>
+                                <div ng-include="'app/main/home/clearCurrent/template.html'" class="clear-btn-container"
+                                    ng-click="home.clearCurrent('hotel','startTime','addedHotel','65','eventAttrData','hotelAttrData')"></div>
+                            </pui-layout>
+                            <pui-layout align="center" class="pull-left mgt10 addedHotel66" ng-show="home.addedHotel.includes('66')">
+                                <span class="attr-title">离开时间</span>
+                                <pui-datepicker class="wid-100px" ng-model="home.seniorSearchParams.term.hotel.endTime[0]"
+                                    data-placement="bottom-center" placeholder="开始日期" class="mgr20" data-max-date="{{home.seniorSearchParams.term.hotel.endTime[1]}}">
+                                </pui-datepicker>
+                                <span class="font-color-wihte mgl10 mgr10">-</span>
+                                <pui-datepicker class="wid-100px" ng-model="home.seniorSearchParams.term.hotel.endTime[1]"
+                                    data-placement="bottom-center" placeholder="结束日期" class="mgl20" data-min-date="{{home.seniorSearchParams.term.hotel.endTime[0]}}">
+                                </pui-datepicker>
+                                <div ng-include="'app/main/home/clearCurrent/template.html'" class="clear-btn-container"
+                                    ng-click="home.clearCurrent('hotel','endTime','addedHotel','66','eventAttrData','hotelAttrData')"></div>
+                            </pui-layout>
+
+
+                            <pui-layout align="center" class="pull-left mgt10">
+                                <pui-select class="df-select-width mgl10" options="home.eventAttrData.hotelAttrData.result"
+                                    value-field="id" ng-change="home.attrChange('eventAttrData','hotelAttrData','addedHotel')"
+                                    ng-model="home.eventAttrData.hotelAttrData.currentValue"></pui-select>
+                                <input type="text" placeholder="点击左侧下拉框添加筛选条件" readonly class="des-input">
+                            </pui-layout>
+                            <pui-layout align="center" class="pull-left mgt10 seniorsearch-btn">
+                                <pui-button  on-click="home.searchSubmitTitle()">检索</pui-button>
+                                <div ng-click="home.clearCurrentAll('hotel','addedHotel','eventAttrData','hotelAttrData')" class="clear-current-params">全部清空</div>
+
+                            </pui-layout>
+                            <pui-layout align="center" class="pull-left mgt10">
+                                <div class="senior-search-guide" ng-if="$root.urlData.chooseMenu === 'search'">
+                                    当进行高级检索时,输入框中关键字处于失效状态;高级检索中同一条件内为'或'关系,不同条件间为'与'关系</div>
+                            </pui-layout>
+                        </div>
+                        <!-- 航班离港 -->
+                        <div class="entity-options-container" ng-show="home.homeData.choosetype == 3 && home.eventTypeData.currentId == 7">
+                            <pui-layout align="center" class="pull-left mgt10 addedFlight50" ng-show="home.addedFlight.includes('50')">
+                                <span class="attr-title">证件号码</span>
+                                <ui-select multiple tagging tagging-label="false" ng-model="home.seniorSearchParams.term.flightDeparture.idNum"
+                                    theme="bootstrap" sortable="true" style="width: 366px;" title="请输入关键词,按enter添加">
+                                    <ui-select-match placeholder="请输入关键词,按enter添加">{{$item}}</ui-select-match>
+                                    <ui-select-choices repeat="i in home.emptyDic | filter:$select.search">
+                                        {{i}}
+                                    </ui-select-choices>
+
+                                </ui-select>
+                                <div ng-include="'app/main/home/clearCurrent/template.html'" class="clear-btn-container"
+                                    ng-click="home.clearCurrent('flightDeparture','idNum','addedFlight','50','eventAttrData','flightAttrData')"></div>
+                            </pui-layout>
+                            <pui-layout align="center" class="pull-left mgt10 addedFlight51" ng-show="home.addedFlight.includes('51')">
+                                <span class="attr-title">航班号</span>
+                                <ui-select multiple tagging tagging-label="false" ng-model="home.seniorSearchParams.term.flightDeparture.flightNUm"
+                                    theme="bootstrap" sortable="true" style="width: 366px;" title="请输入关键词,按enter添加">
+                                    <ui-select-match placeholder="请输入关键词,按enter添加">{{$item}}</ui-select-match>
+                                    <ui-select-choices repeat="i in home.emptyDic | filter:$select.search">
+                                        {{i}}
+                                    </ui-select-choices>
+
+                                </ui-select>
+                                <div ng-include="'app/main/home/clearCurrent/template.html'" class="clear-btn-container"
+                                    ng-click="home.clearCurrent('flightDeparture','flightNUm','addedFlight','51','eventAttrData','flightAttrData')"></div>
+                            </pui-layout>
+                            <pui-layout align="center" class="pull-left mgt10 addedFlight52" ng-show="home.addedFlight.includes('52')">
+                                <span class="attr-title">登机机场</span>
+                                <ui-select multiple tagging tagging-label="false" ng-model="home.seniorSearchParams.term.flightDeparture.boardAirport"
+                                    theme="bootstrap" sortable="true" style="width: 366px;" title="请输入关键词,按enter添加">
+                                    <ui-select-match placeholder="请输入关键词,按enter添加">{{$item}}</ui-select-match>
+                                    <ui-select-choices repeat="i in home.seniorSearchDics.flightName | filter:$select.search">
+                                        {{i}}
+                                    </ui-select-choices>
+
+                                </ui-select>
+                                <div ng-include="'app/main/home/clearCurrent/template.html'" class="clear-btn-container"
+                                    ng-click="home.clearCurrent('flightDeparture','boardAirport','addedFlight','52','eventAttrData','flightAttrData')"></div>
+                            </pui-layout>
+                            <pui-layout align="center" class="pull-left mgt10 addedFlight53" ng-show="home.addedFlight.includes('53')">
+                                <span class="attr-title">到达机场</span>
+                                <ui-select multiple tagging tagging-label="false" ng-model="home.seniorSearchParams.term.flightDeparture.arrivalAirport"
+                                    theme="bootstrap" sortable="true" style="width: 366px;" title="请输入关键词,按enter添加">
+                                    <ui-select-match placeholder="请输入关键词,按enter添加">{{$item}}</ui-select-match>
+                                    <ui-select-choices repeat="i in home.seniorSearchDics.flightName | filter:$select.search">
+                                        {{i}}
+                                    </ui-select-choices>
+
+                                </ui-select>
+                                <div ng-include="'app/main/home/clearCurrent/template.html'" class="clear-btn-container"
+                                    ng-click="home.clearCurrent('flightDeparture','arrivalAirport','addedFlight','53','eventAttrData','flightAttrData')"></div>
+                            </pui-layout>
+                            <pui-layout align="center" class="pull-left mgt10 addedFlight54" ng-show="home.addedFlight.includes('54')">
+                                <span class="attr-title">承运航空公司</span>
+                                <ui-select multiple tagging tagging-label="false" ng-model="home.seniorSearchParams.term.flightDeparture.airLine"
+                                    theme="bootstrap" sortable="true" style="width: 366px;" title="请输入关键词,按enter添加">
+                                    <ui-select-match placeholder="请输入关键词,按enter添加">{{$item}}</ui-select-match>
+                                    <ui-select-choices repeat="i in home.emptyDic | filter:$select.search">
+                                        {{i}}
+                                    </ui-select-choices>
+
+                                </ui-select>
+                                <div ng-include="'app/main/home/clearCurrent/template.html'" class="clear-btn-container"
+                                    ng-click="home.clearCurrent('flightDeparture','airLine','addedFlight','54','eventAttrData','flightAttrData')"></div>
+                            </pui-layout>
+                            <pui-layout align="center" class="pull-left mgt10 addedFlight55" ng-show="home.addedFlight.includes('55')">
+                                <span class="attr-title">航班日期</span>
+                                <pui-datepicker class="wid-100px" ng-model="home.seniorSearchParams.term.flightDeparture.flightDate[0]"
+                                    data-placement="bottom-center" placeholder="开始日期" class="mgr20" data-max-date="{{home.seniorSearchParams.term.flightDeparture.flightDate[1]}}">
+                                </pui-datepicker>
+                                <span class="font-color-wihte mgl10 mgr10">-</span>
+                                <pui-datepicker class="wid-100px" ng-model="home.seniorSearchParams.term.flightDeparture.flightDate[1]"
+                                    data-placement="bottom-center" placeholder="结束日期" class="mgl20" data-min-date="{{home.seniorSearchParams.term.flightDeparture.flightDate[0]}}">
+                                </pui-datepicker>
+                                <div ng-include="'app/main/home/clearCurrent/template.html'" class="clear-btn-container"
+                                    ng-click="home.clearCurrent('flightDeparture','flightDate','addedFlight','55','eventAttrData','flightAttrData')"></div>
+                            </pui-layout>
+                            <pui-layout align="center" class="pull-left mgt10 addedFlight56" ng-show="home.addedFlight.includes('56')">
+                                <span class="attr-title">进港时间</span>
+                                <pui-datepicker class="wid-100px" ng-model="home.seniorSearchParams.term.flightDeparture.startTime[0]"
+                                    data-placement="bottom-center" placeholder="开始日期" class="mgr20" data-max-date="{{home.seniorSearchParams.term.flightDeparture.startTime[1]}}">
+                                </pui-datepicker>
+                                <span class="font-color-wihte mgl10 mgr10">-</span>
+                                <pui-datepicker class="wid-100px" ng-model="home.seniorSearchParams.term.flightDeparture.startTime[1]"
+                                    data-placement="bottom-center" placeholder="结束日期" class="mgl20" data-min-date="{{home.seniorSearchParams.term.flightDeparture.startTime[0]}}">
+                                </pui-datepicker>
+                                <div ng-include="'app/main/home/clearCurrent/template.html'" class="clear-btn-container"
+                                    ng-click="home.clearCurrent('flightDeparture','startTime','addedFlight','56','eventAttrData','flightAttrData')"></div>
+                            </pui-layout>
+                            <pui-layout align="center" class="pull-left mgt10 addedFlight57" ng-show="home.addedFlight.includes('57')">
+                                <span class="attr-title">离港时间</span>
+                                <pui-datepicker class="wid-100px" ng-model="home.seniorSearchParams.term.flightDeparture.endTime[0]"
+                                    data-placement="bottom-center" placeholder="开始日期" class="mgr20" data-max-date="{{home.seniorSearchParams.term.flightDeparture.endTime[1]}}">
+                                </pui-datepicker>
+                                <span class="font-color-wihte mgl10 mgr10">-</span>
+                                <pui-datepicker class="wid-100px" ng-model="home.seniorSearchParams.term.flightDeparture.endTime[1]"
+                                    data-placement="bottom-center" placeholder="结束日期" class="mgl20" data-min-date="{{home.seniorSearchParams.term.flightDeparture.endTime[0]}}">
+                                </pui-datepicker>
+                                <div ng-include="'app/main/home/clearCurrent/template.html'" class="clear-btn-container"
+                                    ng-click="home.clearCurrent('flightDeparture','endTime','addedFlight','57','eventAttrData','flightAttrData')"></div>
+                            </pui-layout>
+                            <pui-layout align="center" class="pull-left mgt10 addedFlight58" ng-show="home.addedFlight.includes('58')">
+                                <span class="attr-title">电话号码</span>
+                                <ui-select multiple tagging tagging-label="false" ng-model="home.seniorSearchParams.term.flightDeparture.phone"
+                                    theme="bootstrap" sortable="true" style="width: 366px;" title="请输入关键词,按enter添加">
+                                    <ui-select-match placeholder="请输入关键词,按enter添加">{{$item}}</ui-select-match>
+                                    <ui-select-choices repeat="i in home.emptyDic | filter:$select.search">
+                                        {{i}}
+                                    </ui-select-choices>
+
+                                </ui-select>
+                                <div ng-include="'app/main/home/clearCurrent/template.html'" class="clear-btn-container"
+                                    ng-click="home.clearCurrent('flightDeparture','phone','addedFlight','58','eventAttrData','flightAttrData')"></div>
+                            </pui-layout>
+                            <pui-layout align="center" class="pull-left mgt10">
+                                <pui-select class="df-select-width mgl10" options="home.eventAttrData.flightAttrData.result"
+                                    value-field="id" ng-change="home.attrChange('eventAttrData','flightAttrData','addedFlight')"
+                                    ng-model="home.eventAttrData.flightAttrData.currentValue"></pui-select>
+                                <input type="text" placeholder="点击左侧下拉框添加筛选条件" readonly class="des-input">
+                            </pui-layout>
+                            <pui-layout align="center" class="pull-left mgt10 seniorsearch-btn">
+                                <pui-button  on-click="home.searchSubmitTitle()">检索</pui-button>
+                                <div ng-click="home.clearCurrentAll('flightDeparture','addedFlight','eventAttrData','flightAttrData')" class="clear-current-params">全部清空</div>
+
+                            </pui-layout>
+                            <pui-layout align="center" class="pull-left mgt10">
+                                <div class="senior-search-guide" ng-if="$root.urlData.chooseMenu === 'search'">
+                                    当进行高级检索时,输入框中关键字处于失效状态;高级检索中同一条件内为'或'关系,不同条件间为'与'关系</div>
+                            </pui-layout>
+                        </div>
+                        <!-- 违法车辆 -->
+                        <div class="entity-options-container" ng-show="home.homeData.choosetype == 3 && home.eventTypeData.currentId == 6">
+                            <pui-layout align="center" class="pull-left mgt10 addedVehicle44" ng-show="home.addedVehicle.includes('44')">
+                                <span class="attr-title">驾驶证编号</span>
+                                <ui-select multiple tagging tagging-label="false" ng-model="home.seniorSearchParams.term.illegalVehicle.driverNum"
+                                    theme="bootstrap" sortable="true" style="width: 366px;" title="请输入关键词,按enter添加">
+                                    <ui-select-match placeholder="请输入关键词,按enter添加">{{$item}}</ui-select-match>
+                                    <ui-select-choices repeat="i in home.emptyDic | filter:$select.search">
+                                        {{i}}
+                                    </ui-select-choices>
+
+                                </ui-select>
+                                <div ng-include="'app/main/home/clearCurrent/template.html'" class="clear-btn-container"
+                                    ng-click="home.clearCurrent('illegalVehicle','driverNum','addedVehicle','44','eventAttrData','vehicleAttrData')"></div>
+                            </pui-layout>
+                            <pui-layout align="center" class="pull-left mgt10 addedVehicle45" ng-show="home.addedVehicle.includes('45')">
+                                <span class="attr-title">违法车辆类型</span>
+                                <ui-select multiple tagging tagging-label="false" ng-model="home.seniorSearchParams.term.illegalVehicle.carType"
+                                    theme="bootstrap" sortable="true" style="width: 366px;" title="请输入关键词,按enter添加">
+                                    <ui-select-match placeholder="请输入关键词,按enter添加">{{$item}}</ui-select-match>
+                                    <ui-select-choices repeat="i in home.seniorSearchDics.illegalCarTypeName | filter:$select.search">
+                                        {{i}}
+                                    </ui-select-choices>
+                                </ui-select>
+                                <div ng-include="'app/main/home/clearCurrent/template.html'" class="clear-btn-container"
+                                    ng-click="home.clearCurrent('illegalVehicle','carType','addedVehicle','45','eventAttrData','vehicleAttrData')"></div>
+                            </pui-layout>
+                            <pui-layout align="center" class="pull-left mgt10 addedVehicle46" ng-show="home.addedVehicle.includes('46')">
+                                <span class="attr-title">违法机动车号牌类型</span>
+                                <ui-select multiple tagging tagging-label="false" ng-model="home.seniorSearchParams.term.illegalVehicle.carFlapperType"
+                                    theme="bootstrap" sortable="true" style="width: 366px;" title="请输入关键词,按enter添加">
+                                    <ui-select-match placeholder="请输入关键词,按enter添加">{{$item}}</ui-select-match>
+                                    <ui-select-choices repeat="i in home.seniorSearchDics.illegalCarName | filter:$select.search">
+                                        {{i}}
+                                    </ui-select-choices>
+
+                                </ui-select>
+                                <div ng-include="'app/main/home/clearCurrent/template.html'" class="clear-btn-container"
+                                    ng-click="home.clearCurrent('illegalVehicle','carFlapperType','addedVehicle','46','eventAttrData','vehicleAttrData')"></div>
+                            </pui-layout>
+                            <pui-layout align="center" class="pull-left mgt10 addedVehicle47" ng-show="home.addedVehicle.includes('47')">
+                                <span class="attr-title">号码编号</span>
+                                <ui-select multiple tagging tagging-label="false" ng-model="home.seniorSearchParams.term.illegalVehicle.flapperNum"
+                                    theme="bootstrap" sortable="true" style="width: 366px;" title="请输入关键词,按enter添加">
+                                    <ui-select-match placeholder="请输入关键词,按enter添加">{{$item}}</ui-select-match>
+                                    <ui-select-choices repeat="i in home.emptyDic | filter:$select.search">
+                                        {{i}}
+                                    </ui-select-choices>
+
+                                </ui-select>
+                                <div ng-include="'app/main/home/clearCurrent/template.html'" class="clear-btn-container"
+                                    ng-click="home.clearCurrent('illegalVehicle','flapperNum','addedVehicle','47','eventAttrData','vehicleAttrData')"></div>
+                            </pui-layout>
+                            <pui-layout align="center" class="pull-left mgt10 addedVehicle48" ng-show="home.addedVehicle.includes('48')">
+                                <span class="attr-title">违法时间</span>
+                                <pui-datepicker class="wid-100px" ng-model="home.seniorSearchParams.term.illegalVehicle.time[0]"
+                                    data-placement="bottom-center" placeholder="开始日期" class="mgr20" data-max-date="{{home.seniorSearchParams.term.illegalVehicle.time[1]}}">
+                                </pui-datepicker>
+                                <span class="font-color-wihte mgl10 mgr10">-</span>
+                                <pui-datepicker class="wid-100px" ng-model="home.seniorSearchParams.term.illegalVehicle.time[1]"
+                                    data-placement="bottom-center" placeholder="结束日期" class="mgl20" data-min-date="{{home.seniorSearchParams.term.illegalVehicle.time[0]}}">
+                                </pui-datepicker>
+                                <div ng-include="'app/main/home/clearCurrent/template.html'" class="clear-btn-container"
+                                    ng-click="home.clearCurrent('illegalVehicle','time','addedVehicle','48','eventAttrData','vehicleAttrData')"></div>
+                            </pui-layout>
+
+                            <pui-layout align="center" class="pull-left mgt10">
+                                <pui-select class="df-select-width mgl10" options="home.eventAttrData.vehicleAttrData.result"
+                                    value-field="id" ng-change="home.attrChange('eventAttrData','vehicleAttrData','addedVehicle')"
+                                    ng-model="home.eventAttrData.vehicleAttrData.currentValue"></pui-select>
+                                <input type="text" placeholder="点击左侧下拉框添加筛选条件" readonly class="des-input">
+                            </pui-layout>
+                            <pui-layout align="center" class="pull-left mgt10 seniorsearch-btn">
+                                <pui-button  on-click="home.searchSubmitTitle()">检索</pui-button>
+                                <div ng-click="home.clearCurrentAll('illegalVehicle','addedVehicle','eventAttrData','vehicleAttrData')" class="clear-current-params">全部清空</div>
+
+                            </pui-layout>
+                            <pui-layout align="center" class="pull-left mgt10">
+                                <div class="senior-search-guide" ng-if="$root.urlData.chooseMenu === 'search'">
+                                    当进行高级检索时,输入框中关键字处于失效状态;高级检索中同一条件内为'或'关系,不同条件间为'与'关系</div>
+                            </pui-layout>
+                        </div>
+                        <!-- 网络购票 -->
+                        <div class="entity-options-container" ng-show="home.homeData.choosetype == 3 && home.eventTypeData.currentId == 5">
+                            <pui-layout align="center" class="pull-left mgt10 addedTicket39" ng-show="home.addedTicket.includes('39')">
+                                <span class="attr-title">证件号码</span>
+                                <ui-select multiple tagging tagging-label="false" ng-model="home.seniorSearchParams.term.onlionTicket.idCard"
+                                    theme="bootstrap" sortable="true" style="width: 366px;" title="请输入关键词,按enter添加">
+                                    <ui-select-match placeholder="请输入关键词,按enter添加">{{$item}}</ui-select-match>
+                                    <ui-select-choices repeat="i in home.emptyDic | filter:$select.search">
+                                        {{i}}
+                                    </ui-select-choices>
+
+                                </ui-select>
+                                <div ng-include="'app/main/home/clearCurrent/template.html'" class="clear-btn-container"
+                                    ng-click="home.clearCurrent('onlionTicket','idCard','addedTicket','39','eventAttrData','ticketAttrData')"></div>
+                            </pui-layout>
+                            <pui-layout align="center" class="pull-left mgt10 addedTicket40" ng-show="home.addedTicket.includes('40')">
+                                <span class="attr-title">联系方式</span>
+                                <ui-select multiple tagging tagging-label="false" ng-model="home.seniorSearchParams.term.onlionTicket.contactWay"
+                                    theme="bootstrap" sortable="true" style="width: 366px;" title="请输入关键词,按enter添加">
+                                    <ui-select-match placeholder="请输入关键词,按enter添加">{{$item}}</ui-select-match>
+                                    <ui-select-choices repeat="i in home.emptyDic | filter:$select.search">
+                                        {{i}}
+                                    </ui-select-choices>
+
+                                </ui-select>
+                                <div ng-include="'app/main/home/clearCurrent/template.html'" class="clear-btn-container"
+                                    ng-click="home.clearCurrent('onlionTicket','contactWay','addedTicket','40','eventAttrData','ticketAttrData')"></div>
+                            </pui-layout>
+                            <pui-layout align="center" class="pull-left mgt10 addedTicket41" ng-show="home.addedTicket.includes('41')">
+                                <span class="attr-title">购票数量</span>
+                                <ui-select multiple tagging tagging-label="false" ng-model="home.seniorSearchParams.term.onlionTicket.ticketNum"
+                                    theme="bootstrap" sortable="true" style="width: 366px;" title="请输入关键词,按enter添加">
+                                    <ui-select-match placeholder="请输入关键词,按enter添加">{{$item}}</ui-select-match>
+                                    <ui-select-choices repeat="i in home.emptyDic | filter:$select.search">
+                                        {{i}}
+                                    </ui-select-choices>
+
+                                </ui-select>
+                                <div ng-include="'app/main/home/clearCurrent/template.html'" class="clear-btn-container"
+                                    ng-click="home.clearCurrent('onlionTicket','ticketNum','addedTicket','41','eventAttrData','ticketAttrData')"></div>
+                            </pui-layout>
+                            <pui-layout align="center" class="pull-left mgt10 addedTicket42" ng-show="home.addedTicket.includes('42')">
+                                <span class="attr-title">购票时间</span>
+                                <pui-datepicker class="wid-100px" ng-model="home.seniorSearchParams.term.onlionTicket.time[0]"
+                                    data-placement="bottom-center" placeholder="开始日期" class="mgr20" data-max-date="{{home.seniorSearchParams.term.onlionTicket.time[1]}}">
+                                </pui-datepicker>
+                                <span class="font-color-wihte mgl10 mgr10">-</span>
+                                <pui-datepicker class="wid-100px" ng-model="home.seniorSearchParams.term.onlionTicket.time[1]"
+                                    data-placement="bottom-center" placeholder="结束日期" class="mgl20" data-min-date="{{home.seniorSearchParams.term.onlionTicket.time[0]}}">
+                                </pui-datepicker>
+                                <div ng-include="'app/main/home/clearCurrent/template.html'" class="clear-btn-container"
+                                    ng-click="home.clearCurrent('onlionTicket','time','addedTicket','42','eventAttrData','ticketAttrData')"></div>
+                            </pui-layout>
+                            <pui-layout align="center" class="pull-left mgt10">
+                                <pui-select class="df-select-width mgl10" options="home.eventAttrData.ticketAttrData.result"
+                                    value-field="id" ng-change="home.attrChange('eventAttrData','ticketAttrData','addedTicket')"
+                                    ng-model="home.eventAttrData.ticketAttrData.currentValue"></pui-select>
+                                <input type="text" placeholder="点击左侧下拉框添加筛选条件" readonly class="des-input">
+                            </pui-layout>
+                            <pui-layout align="center" class="pull-left mgt10 seniorsearch-btn">
+                                <pui-button  on-click="home.searchSubmitTitle()">检索</pui-button>
+                                <div ng-click="home.clearCurrentAll('onlionTicket','addedTicket','eventAttrData','ticketAttrData')" class="clear-current-params">全部清空</div>
+
+                            </pui-layout>
+                            <pui-layout align="center" class="pull-left mgt10">
+                                <div class="senior-search-guide" ng-if="$root.urlData.chooseMenu === 'search'">
+                                    当进行高级检索时,输入框中关键字处于失效状态;高级检索中同一条件内为'或'关系,不同条件间为'与'关系</div>
+                            </pui-layout>
+                        </div>
+                        <!-- 火车出行 -->
+                        <div class="entity-options-container" ng-show="home.homeData.choosetype == 3 && home.eventTypeData.currentId == 4">
+                            <pui-layout align="center" class="pull-left mgt10 addedTrain22" ng-show="home.addedTrain.includes('22')">
+                                <span class="attr-title">证件号码</span>
+                                <ui-select multiple tagging tagging-label="false" ng-model="home.seniorSearchParams.term.trainTrip.idNum"
+                                    theme="bootstrap" sortable="true" style="width: 366px;" title="请输入关键词,按enter添加">
+                                    <ui-select-match placeholder="请输入关键词,按enter添加">{{$item}}</ui-select-match>
+                                    <ui-select-choices repeat="i in home.emptyDic | filter:$select.search">
+                                        {{i}}
+                                    </ui-select-choices>
+
+                                </ui-select>
+                                <div ng-include="'app/main/home/clearCurrent/template.html'" class="clear-btn-container"
+                                    ng-click="home.clearCurrent('trainTrip','idNum','addedTrain','22','eventAttrData','trainAttrData')"></div>
+                            </pui-layout>
+                            <pui-layout align="center" class="pull-left mgt10 addedTrain23" ng-show="home.addedTrain.includes('23')">
+                                <span class="attr-title">火车班次</span>
+                                <ui-select multiple tagging tagging-label="false" ng-model="home.seniorSearchParams.term.trainTrip.classes"
+                                    theme="bootstrap" sortable="true" style="width: 366px;" title="请输入关键词,按enter添加">
+                                    <ui-select-match placeholder="请输入关键词,按enter添加">{{$item}}</ui-select-match>
+                                    <ui-select-choices repeat="i in home.emptyDic | filter:$select.search">
+                                        {{i}}
+                                    </ui-select-choices>
+
+                                </ui-select>
+                                <div ng-include="'app/main/home/clearCurrent/template.html'" class="clear-btn-container"
+                                    ng-click="home.clearCurrent('trainTrip','classes','addedTrain','23','eventAttrData','trainAttrData')"></div>
+                            </pui-layout>
+                            <pui-layout align="center" class="pull-left mgt10 addedTrain24" ng-show="home.addedTrain.includes('24')">
+                                <span class="attr-title">出发车站</span>
+                                <ui-select multiple tagging tagging-label="false"
+                                    ng-model="home.seniorSearchParams.term.trainTrip.departStation"
+                                    ng-change="home.trainNameChange()"
+                                    class="start-train"
+                                    theme="bootstrap" sortable="true" style="width: 366px;" title="请输入关键词,按enter添加">
+                                    <ui-select-match placeholder="请输入关键词,按enter添加">{{$item}}</ui-select-match>
+                                    <ui-select-choices repeat="i in home.seniorSearchDics.trainNameSelect | filter:$select.search">
+                                        {{i}}
+                                    </ui-select-choices>
+                                </ui-select>
+                                <div ng-include="'app/main/home/clearCurrent/template.html'" class="clear-btn-container"
+                                    ng-click="home.clearCurrent('trainTrip','departStation','addedTrain','24','eventAttrData','trainAttrData')"></div>
+                            </pui-layout>
+                            <pui-layout align="center" class="pull-left mgt10 addedTrain35" ng-show="home.addedTrain.includes('35')">
+                                <span class="attr-title">到达车站</span>
+                                <ui-select multiple tagging tagging-label="false"
+                                    ng-model="home.seniorSearchParams.term.trainTrip.arrivalStation"
+                                    ng-change="home.trainNameChange()"
+                                    class="end-train"
+                                    theme="bootstrap" sortable="true" style="width: 366px;" title="请输入关键词,按enter添加">
+                                    <ui-select-match placeholder="请输入关键词,按enter添加">{{$item}}</ui-select-match>
+                                    <ui-select-choices repeat="i in home.seniorSearchDics.trainNameSelect | filter:$select.search">
+                                        {{i}}
+                                    </ui-select-choices>
+
+                                </ui-select>
+                                <div ng-include="'app/main/home/clearCurrent/template.html'" class="clear-btn-container"
+                                    ng-click="home.clearCurrent('trainTrip','arrivalStation','addedTrain','35','eventAttrData','trainAttrData')"></div>
+                            </pui-layout>
+                            <pui-layout align="center" class="pull-left mgt10 addedTrain36" ng-show="home.addedTrain.includes('36')">
+                                <span class="attr-title">车次日期</span>
+                                <pui-datepicker class="wid-100px" ng-model="home.seniorSearchParams.term.trainTrip.trafficDate[0]"
+                                    data-placement="bottom-center" placeholder="开始日期" class="mgr20" data-max-date="{{home.seniorSearchParams.term.trainTrip.trafficDate[1]}}">
+                                </pui-datepicker>
+                                <span class="font-color-wihte mgl10 mgr10">-</span>
+                                <pui-datepicker class="wid-100px" ng-model="home.seniorSearchParams.term.trainTrip.trafficDate[1]"
+                                    data-placement="bottom-center" placeholder="结束日期" class="mgl20" data-min-date="{{home.seniorSearchParams.term.trainTrip.trafficDate[0]}}">
+                                </pui-datepicker>
+                                <div ng-include="'app/main/home/clearCurrent/template.html'" class="clear-btn-container"
+                                    ng-click="home.clearCurrent('trainTrip','trafficDate','addedTrain','36','eventAttrData','trainAttrData')"></div>
+                            </pui-layout>
+                            <pui-layout align="center" class="pull-left mgt10 addedTrain37" ng-show="home.addedTrain.includes('37')">
+                                <span class="attr-title">出发时间</span>
+                                <pui-datepicker class="wid-100px" ng-model="home.seniorSearchParams.term.trainTrip.departDate[0]"
+                                    data-placement="bottom-center" placeholder="开始日期" class="mgr20" data-max-date="{{home.seniorSearchParams.term.trainTrip.departDate[1]}}">
+                                </pui-datepicker>
+                                <span class="font-color-wihte mgl10 mgr10">-</span>
+                                <pui-datepicker class="wid-100px" ng-model="home.seniorSearchParams.term.trainTrip.departDate[1]"
+                                    data-placement="bottom-center" placeholder="结束日期" class="mgl20" data-min-date="{{home.seniorSearchParams.term.trainTrip.departDate[0]}}">
+                                </pui-datepicker>
+                                <div ng-include="'app/main/home/clearCurrent/template.html'" class="clear-btn-container"
+                                    ng-click="home.clearCurrent('trainTrip','departDate','addedTrain','37','eventAttrData','trainAttrData')"></div>
+                            </pui-layout>
+                            <pui-layout align="center" class="pull-left mgt10 addedTrain38" ng-show="home.addedTrain.includes('38')">
+                                <span class="attr-title">到达时间</span>
+                                <pui-datepicker class="wid-100px" ng-model="home.seniorSearchParams.term.trainTrip.arrivalDate[0]"
+                                    data-placement="bottom-center" placeholder="开始日期" class="mgr20" data-max-date="{{home.seniorSearchParams.term.trainTrip.arrivalDate[1]}}">
+                                </pui-datepicker>
+                                <span class="font-color-wihte mgl10 mgr10">-</span>
+                                <pui-datepicker class="wid-100px" ng-model="home.seniorSearchParams.term.trainTrip.arrivalDate[1]"
+                                    data-placement="bottom-center" placeholder="结束日期" class="mgl20" data-min-date="{{home.seniorSearchParams.term.trainTrip.arrivalDate[0]}}">
+                                </pui-datepicker>
+                                <div ng-include="'app/main/home/clearCurrent/template.html'" class="clear-btn-container"
+                                    ng-click="home.clearCurrent('trainTrip','arrivalDate','addedTrain','38','eventAttrData','trainAttrData')"></div>
+                            </pui-layout>
+                            <pui-layout align="center" class="pull-left mgt10">
+                                <pui-select class="df-select-width mgl10" options="home.eventAttrData.trainAttrData.result"
+                                    value-field="id" ng-change="home.attrChange('eventAttrData','trainAttrData','addedTrain')"
+                                    ng-model="home.eventAttrData.trainAttrData.currentValue"></pui-select>
+                                <input type="text" placeholder="点击左侧下拉框添加筛选条件" readonly class="des-input">
+                            </pui-layout>
+                            <pui-layout align="center" class="pull-left mgt10 seniorsearch-btn">
+                                <pui-button  on-click="home.searchSubmitTitle()">检索</pui-button>
+                                <div ng-click="home.clearCurrentAll('trainTrip','addedTrain','eventAttrData','trainAttrData')" class="clear-current-params">全部清空</div>
+
+                            </pui-layout>
+                            <pui-layout align="center" class="pull-left mgt10">
+                                <div class="senior-search-guide" ng-if="$root.urlData.chooseMenu === 'search'">
+                                    当进行高级检索时,输入框中关键字处于失效状态;高级检索中同一条件内为'或'关系,不同条件间为'与'关系</div>
+                            </pui-layout>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 简单搜索支持4种类型: 人 车 手机 企业 网吧 案件-->
+        <div class="jq_home_result search-result-body" ng-if="home.homeData.showBasicResult && !home.isSeniorSearch">
+            <div class="search-result-filter">
+                <ul ng-show="home.homeData.pressEnter">
+                    <li 
+                    ng-repeat="item in home.basicFilterItem"
+                    ng-click="home.chooseEntityType($event, item)"
+                    ng-class="home.goryType == item.code ? 'active' : ''"
+                    >
+                        {{item.name}}
+                    </li>
+                </ul>
+            </div>
+            <div class="search-result-body-content">
+                <div class="batch-to basic-batch-to">
+                    <!-- <div class="to-record" ng-show="true" ng-click="home.batchToPorpoise(null,true)" ng-if="!(home.goryType == 0)">
+                        <img src="/assets/theme-sb/result/result-gis.svg">
+                        <span>gis</span>
+                    </div> -->
+                    <div class="to-porpoise operate-box" ng-show="true" ng-click="home.batchToPorpoise()">
+                        <img src="assets/images/theme_star_blue/home/home-porpoise.svg">
+                        <span>图析</span>
+                    </div>
+                    
+                    <div class="to-record operate-box" ng-show="true" ng-click="home.into_archives()">
+                        <img src="/assets/theme-sb/result/result-da.svg">
+                        <span>档案</span>
+                    </div>
+                    <!-- <div class="add-focus operate-box" ng-if="false" ng-show="true" ng-click="home.addFocusEntities()">
+                        <img src="/assets/theme-sb/admin/blue-star.svg">
+                        <span>关注</span>
+                    </div> -->
+                </div>
+                <div class="senior-search-input basic-search-input">
+                    <pui-layout align="center" class="home-search-box" ng-click="home.clickBasicSearchInput()">
+                        <pui-button type="primary" on-click="home.pressBasicSearchBtn($event)" class="search-btn">
+                            <pui-layout align="center" justify="center" class="h100">
+                                <i></i>
+                            </pui-layout>
+                        </pui-button>
+                        <pui-layout align="center" class="search-input-box">
+                            <input class="search-input" ng-model="home.homeData.basicSearchValue" type="text"
+                                ng-keyup="home.myBasicKeyup($event)">
+                        </pui-layout>
+                        <i ng-if="false" ng-click="home.basicBackHome($event)" class="search-icon"></i>
+                    </pui-layout>
+                </div>
+                <div ng-include="'app/main/home/searchResult/header.html'"></div>
+                <div class="result-list-body">
+                    <ul ng-show="home.homeData.pressEnter" class="result-list-body-ul">
+                        <li class="result-list-body-li jq_result_li ng-animate-disable" ng-repeat="item in home.resultData[home.goryType].data.data">
+                            <div ng-include="'app/main/home/searchResult/body.html'"></div>
+                        </li>
+                    </ul>
+                    <div ng-include="'app/main/home/searchNodata/template.html'" ng-if="home.resultData[home.goryType].data.data.length == 0"></div>
+                </div>
+            </div>
+            <div ng-include="'app/main/home/searchResult/pagination.html'" ng-if="home.resultData[home.goryType].data.data.length !== 0"></div>
+        </div>
+        <div class="jq-home-result-wrap" ng-if="home.homeData.showResult && home.isSeniorSearch">
+            <div class="senior-search-input">
+                <pui-layout align="center" class="home-search-box" ng-click="home.clickSeniorSearchInput()">
+                    <pui-button type="primary" on-click="home.pressSeniorSearchBtn($event)" class="search-btn">
+                        <pui-layout align="center" justify="center" class="h100">
+                            <i></i>
+                        </pui-layout>
+                    </pui-button>
+                    <pui-layout align="center" class="search-input-box">
+                        <input class="search-input" ng-model="home.homeData.seniorSearchValue" type="text"
+                            ng-keyup="home.mySeniorKeyup($event)">
+                    </pui-layout>
+                    <i ng-if="false" ng-click="home.seniorBackHome($event)" class="search-icon"></i>
+                </pui-layout>
+            </div>
+            <div class="batch-to">
+                <!-- <div class="to-record"  ng-show="true" ng-click="home.batchToPorpoise(null,true)">
+                    <img src="/assets/theme-sb/result/result-gis.svg">
+                    <span>gis</span>
+                </div> -->
+                <div class="to-porpoise operate-box"  ng-show="true" ng-click="home.batchToPorpoise()">
+                    <img src="assets/images/theme_star_blue/home/home-porpoise.svg">
+                    <span>图析</span>
+                </div>
+                <div class="to-record operate-box" ng-show="true" ng-click="home.into_archives()">
+                    <img src="/assets/theme-sb/result/result-da.svg">
+                    <span>档案</span>
+                </div>
+                
+                <!-- <div class="add-focus operate-box" ng-show="true" ng-if="false" ng-click="home.addFocusEntities()">
+                    <img src="/assets/theme-sb/admin/blue-star.svg">
+                    <span>关注</span>
+                </div> -->
+            </div>
+            <div class="jq_home_result search-result-body senior-search"
+                ng-show="home.homeData.showResult && home.isSeniorSearch"
+            >
+                <div class="search-result-body-content">
+                    <div ng-include="'app/main/home/searchResult/header.html'"></div>
+                    <div class="result-list-body">
+                        <ul ng-show="home.homeData.pressEnter" class="result-list-body-ul">
+                            <li class="result-list-body-li jq_result_li ng-animate-disable" ng-repeat="item in home.resultData[home.goryType].data.data"
+                                >
+                                <div ng-include="'app/main/home/searchResult/body.html'"></div>
+                            </li>
+                        </ul>
+                        <div ng-include="'app/main/home/searchNodata/template.html'" ng-if="home.resultData[home.goryType].data.data.length == 0">
+                            {{home.resultData[home.goryType].data.data.length}}
+                        </div>
+                    </div>
+                </div>
+                <div ng-include="'app/main/home/searchResult/pagination.html'" ng-if="home.resultData[home.goryType].data.data.length !== 0"></div>
+            </div>
+        </div>
+    </div>
+</div>

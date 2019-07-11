@@ -1,0 +1,44 @@
+.pui-progress-wrap {
+    display: flex;
+    align-items: center;
+
+    .pui-progress-bar {
+        width: 100%;
+        position: relative;
+        background-color: fade(@pui-main-text-color, 20%);
+
+        &.has-info {
+            width: calc(~'100% - 40px');
+        }
+
+        .progress-percent-bar {
+            position: absolute;
+            height: 100%;
+            left: 0px;
+            top: 0px;
+            border-radius: inherit;
+            background-color: @info-block-color;
+            transition: width 300ms ease-in-out;
+            &.complete {
+                &:after {
+                    content: '';
+                    display: block;
+                    position: absolute;
+                    right: -20px;
+                    top: -5px;
+                    width: 16px;
+                    height: 16px;
+                    background: url(../../../assets/theme-sb/common/progress-complete.svg) no-repeat center;
+                }
+            }
+        }
+    }
+
+    .percentage-text {
+        text-align: right;
+        color: @info-block-color;
+        font-size: 12px;
+        margin-left: 24px;
+        white-space: nowrap;
+    }
+}

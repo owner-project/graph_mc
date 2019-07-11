@@ -1,0 +1,24 @@
+<div class="modal pui-modal size-md">
+    <div class="modal-dialog am-m-modal" style="width: 400px">
+        <div class="modal-header">
+            <div class="modal-title">临时文件保存设置</div>
+            <div class="modal-close" ng-click="fn.dismiss()"></div>
+        </div>
+        <div class="modal-body">
+            <div class="am-m-form-group">
+                <div class="am-m-form-item">
+                    <div class="am-m-form-label" style="text-align: left; width: 30px;">分钟</div>
+                    <div class="am-m-form-input-wrap" style="margin-left: 38px;">
+                        <pui-input type="text" ng-model="data.timeVal"></pui-input>
+                    </div>
+                </div>
+            </div>
+            <p>默认单位分钟，从正整数开始设置，小数会自动转为整数，最小为0，如果为0将不保存临时文件</p>
+        </div>
+        <div class="modal-footer">
+            <pui-button class="pull-right" on-click="fn.dismiss()">取消</pui-button>
+            <pui-button type="primary" class="pull-right mgr10" on-click="fn.sure()">确定</pui-button>
+
+        </div>
+    </div>
+</div>

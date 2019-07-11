@@ -1,0 +1,90 @@
+.home-main {
+    .home-body {
+        .home-search-box {
+            border: 1px solid @border-color-primary;
+        }
+        .home-header {
+            .home-menu-box {
+                .hover-icon {
+                    display: none;
+                }
+            }
+        }
+        .home-menu-box {
+            .menu-ul {
+                .menu-li {
+                    @base-url: '../../../assets/theme-ew/';
+
+                    &:nth-child(1) {
+                        i {
+                            .icon-img(@base-url, @icon-result-all-white);
+                        }
+                    }
+                    &:nth-child(2) {
+                        i {
+                            .icon-img(@base-url, @icon-result-shiti-white);
+                        }
+                    }
+                    &:nth-child(3) {
+                        i {
+                            .icon-img(@base-url, @icon-result-shijian-white);
+                        }
+                    }
+                    &:nth-child(4) {
+                        i {
+                            .icon-img(@base-url, @icon-result-wenben-white);
+                        }
+                    }
+                    &:nth-child(5) {
+                        i {
+                            .icon-img(@base-url, @icon-result-net-white);
+                        }
+                    }
+                }
+            }
+
+        }
+        .home-content {
+            .app-item {
+
+                &:hover {
+                    box-shadow: none;
+                }
+            }
+            .home-analysis-wrap {
+                .wrap-content {
+                    background-color: fade(@bg-color, 100%);
+                }
+
+                .analysis-item {
+                    background-color: @bg-color-highlight;
+                    border: 1px solid @border-color;
+
+                    &:hover {
+                        border: 1px solid @border-color-primary;
+                        background-color: @bg-color-highlight;
+                    }
+                }
+            }
+        }
+        .search-result-body {
+            .search-result-body-content {
+                border: 1px solid @border-color-light;
+            }
+
+            .result-list-body {
+                .result-list-body-ul {
+                    .result-list-body-li {
+                        .result-list-body-li-menu-ul {
+                            color: @text-color-primary;
+                        }
+                        &:hover {
+                            box-shadow: none;
+                            background-color: fade(@bg-color-primary, 40%);
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

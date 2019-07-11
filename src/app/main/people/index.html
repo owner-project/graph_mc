@@ -1,0 +1,185 @@
+<div class="people-info-main" style="overflow-y:scroll">
+    <div class="people-info-left">
+            <record-left-menu data-is-jump='"false"' data-show-search='people.showSearch'  data-show-generalize='people.showGeneralize' data-select-generalize='people.selectGeneralize' data-on-select-record="people.onSelectRecord(record,type)"></record-left-menu>
+    </div>
+    <div class="people-info-right" ng-if='!people.selectGeneralize' style="position:relative">
+        <div class="info-title">
+            <span>{{people.getFileName(people.$state.params.type)}}资料</span>
+            <div class="people-info-operate">
+                <!-- <div class="to-porpoise operate-item" ng-if="people.$state.params.type == 'person'" ng-click="people.into_porpoise(true)">
+                    <img src="assets/theme-sb/result/result-gis.svg">
+                    <span>gis</span>
+                </div> -->
+                <div class="to-porpoise operate-item" ng-click="people.into_porpoise()">
+                    <img src="assets/images/theme_star_blue/home/home-porpoise.svg">
+                    <span>图析</span>
+                </div>
+            </div>
+        </div>
+        <div class="info-content jq_info_main">
+            <!-- 资料信息 -->
+            <div class="info-top">
+
+                <div class="info-base" ng-if='people.jsonData'>
+                    <!-- 下拉显示的按钮 -->
+                    <div class="person-info-operate-box">
+                            <div class="export-file operate-item">
+                                    <div class="export-file-btn" ng-click="people.showExportTypeFunc($event)">
+                                        <img src="assets/images/theme_star_blue/people/export-file-icon.svg" class="export-file-icon">
+                                        <span>导出档案</span>
+                                        <img src="assets/images/theme_star_blue/people/triangle.svg">
+                                        <div class="export-file-type" ng-show="people.showExportType">
+                                            <div class="item"
+                                                ng-repeat="item in people.loadTypeList"
+                                                ng-click = "people.getLoadInfo(item.value)"
+                                            >
+                                                {{item.name}}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                        <div class="show-assistant operate-item active" ng-click="people.showAssistantFunc()" ng-class="{'active': !people.showAssistant}">
+                            <img src="assets/images/theme_star_blue/people/triangle-down.svg">
+                        </div>
+                    </div>
+
+                    <div class="info-b-img-box">
+                        <img ng-if="people.jsonData.base" ng-src="{{people.jsonData.image!=''? 'data:image/jpg;base64,'+people.jsonData.image:people.getDefaultImg(people.$state.params.type)}}" >
+                        <span ng-bind="people.jsonData.base.number" class="title-code"></span>
+                        <div class="focus-people operate-item" ng-click="people.focusOrUnFocus()">
+                                <i class="odipus-icon icon-people-unFocus"></i>
+                                关注
+                            </div>
+                    </div>
+                    <div class="info-b-con">
+                        <div class="con-con">
+                            <ul class="con-con-items clearfix">
+                                <li class="con-con-item">
+                                    <div class="item-left" ng-class="{'item-all':$last}" ng-repeat="item in people.jsonData.base"
+                                    data-title="{{item.value}}"
+                                    data-container=".people-info-main"
+                                    data-placement="bottom"
+                                    bs-tooltip
+                                    data-delay = "150"
+                                    data-trigger="hover"
+                                    data-bs-enabled = "{{item.value.length > 6}}"
+                                    >
+                                        <span class="item-title">{{item.key}}:</span>
+
+                                        <span class="item-con">{{item.value}}</span>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                        <!-- 标签 -->
+                        <div class="con-title">
+                            <img src="assets/images/theme_star_blue/people/label.svg">
+                            <ul class="title-tags mgr50" >
+                                <li ng-repeat="group in people.jsonData.groupInfo">{{group.name}}</li>
+                            </ul>
+                        </div>
+                        <!-- 第二层数据 -->
+                        <div class="info-assistant con-con" ng-show="people.showAssistant">
+                                <ul class="con-ul con-con-items clearfix">
+                                        <li class="con-li con-con-item" >
+                                            <div class="item-left" ng-repeat="item in people.jsonData.subsidiary">
+                                                <span class="item-title">{{item.key}}:</span>
+                                                <span  class="con-con">{{item.value}}</span>
+                                            </div>
+                                        </li>
+                                </ul>
+                            <div class="con-title">
+                                <img src="assets/images/theme_star_blue/people/label.svg">
+                                <ul class="title-tags mgr50" >
+                                    <li ng-repeat="item in people.jsonData.label track by $index" ng-bind="item"></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- 无数据的展示 -->
+                <div class="no-data" ng-include="'app/components/header/aboutMySearch/template.html'"
+                ng-if="!people.jsonData">
+                </div>
+            </div>
+            <div class="info-relation-wrap">
+                <people-relation key='people.entityKey' data-key-list="people.personGraphSelectKeyList"></people-relation>
+            </div>
+            <div class="info-bottom">
+                <div class="info-assistant-tab">
+                    <ul>
+                        <li ng-class="{'active': people.assistantType === 'trajectory'}" ng-click="people.changeAssistantType('trajectory')">{{people.relationText}}轨迹信息</li>
+                        <li ng-class="{'active': people.assistantType === 'judg'}" ng-click="people.changeAssistantType('judg')">动态列表</li>
+                        <li ng-class="{'active': people.assistantType === 'attention'}" ng-click="people.changeAssistantType('attention')">同关注列表</li>
+                    </ul>
+                </div>
+                <div class="info-assistant info-assi-footer" ng-show="people.assistantType === 'trajectory'">
+                    <person-graph graph-data="people.personGraphData" start-time="people.graphDefaultStartTime"  default-Search='true' data-on-selected-dang-an="people.personGraphSelected(keyList)" data-on-back="people.personGraphBack()" on-search="people.personGraphSearch(dateParam)"></person-graph>
+                </div>
+                <div class="info-judg-graph info-assistant" ng-if="people.assistantType === 'judg'" style="position:relative">
+                    <!-- <div class="assistant-body" ng-show="people.judgImages.length !== 0">
+                        <div ng-repeat="item in people.judgImages track by item.id" class="assistant-box" ng-click="people.toImagePorpoise(item)">
+                            <pui-layout align="center" justify="center" class="assistant-image-box">
+                                <img ng-src={{item.image}} >
+                            </pui-layout>
+                            <div title="{{item.title}}" ng-bind="item.title" class="assistant-title"></div>
+                            <div title="{{item.author}}" ng-bind="item.author" class="assistant-time assistant-author"></div>
+                            <div title="{{item.time}}" ng-bind="item.time" class="assistant-time assistant-judg-time"></div>
+                        </div>
+                    </div> -->
+                    <!-- <div class="no-data" ng-include="'app/components/header/aboutMySearch/template.html'"
+                        ng-if="people.judgImages.length === 0">
+                    </div> -->
+                    <focus-people people-key="people.focusId" show-no-data="'true'"></focus-people>
+                </div>
+                <div class="info-wrap info-assistant" ng-show="people.assistantType === 'attention'">
+                    <div class="wrap-body">
+                        <div class="no-data" ng-include="'app/components/header/aboutMySearch/template.html'"
+                            ng-if="!(people.sameFocusList.data.data && people.sameFocusList.data.data.length)">
+                        </div>
+                        <div class="pui-table" ng-if="people.sameFocusList.data.data && people.sameFocusList.data.data.length">
+                            <table cellpadding="0" cellspacing="0" border="0">
+                                <thead>
+                                <tr>
+                                    <th>警号</th>
+                                    <th>警员姓名</th>
+                                    <th>所属组织</th>
+                                    <th>关注日期</th>
+                                    <th colspan="2">关注理由</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr ng-repeat="item in people.sameFocusList.data.data">
+                                    <td ng-bind="item.policeId"></td>
+                                    <td ng-bind="item.name"></td>
+                                    <td ng-bind="item.name"></td>
+                                    <td ng-bind="item.name"></td>
+                                    <td ng-bind="item.name" colspan="2"></td>
+                                </tr>
+                                </tbody>
+                            </table>
+                            <div class="search-result-footer">
+                                <div class="clearfix">
+                                    <uib-pagination class="pagination-sm pull-right"
+                                        total-items="people.sameFocusList.data.count"
+                                        ng-change="people.getSameFocusList()"
+                                        ng-model="people.sameFocusList.pageNo"
+                                        previous-text="上一页"
+                                        next-text="下一页"
+                                        force-ellipses="true"
+                                        max-size="3"
+                                        items-per-page="people.sameFocusList.pageSize"
+                                        boundary-link-numbers="true">
+                                    </uib-pagination>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="people-info-right" ng-if='people.selectGeneralize'>
+        <record-charts></record-charts>
+    </div>
+</div>

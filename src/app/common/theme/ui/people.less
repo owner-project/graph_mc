@@ -1,0 +1,157 @@
+.people-info-main {
+    // background-color: @bg-color-people;
+    color: fade(@info-text-color, 70%);
+    .people-info-right {
+        .export-file-type {
+            background: @popups-bg-color;
+            color: fade(@info-text-color, 70%);
+            box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.2);
+            .item:hover {
+                background-color: fade(@info-block-color, 10%);
+                color: @info-text-color;
+            }
+        }
+        .info-content {
+            .focus-people{
+                background-color: #2979FF;
+            }
+            .icon-people-focus{
+                .icon-img(@base-url,@people-focus-icon)
+            }
+            .icon-people-unFocus{
+                .icon-img(@base-url,@people-un-focus-icon)
+            }
+            .info-top {
+                background-color: fade(@info-block-color, 15%);
+                .info-base {
+                    .show-assistant {
+                        background-color: fade(@info-block-color, 20%);
+                    }
+                    .info-b-img-box {
+                        .title-code {
+                            color: @text-color-primary;
+                        }
+                    }
+                    .info-b-con {
+                        .con-con {
+                            &.info-assistant {
+                                border-top: 1px solid fade(@info-block-color, 15%);
+                            }
+                            .item-title {
+                                color: fade(@info-text-color, 32%);
+                            }
+                        }
+                        .con-title {
+                            .title-tags {
+                                li {
+                                    color: @info-text-color;
+                                    background-color: fade(@info-block-color, 30%);
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            .info-relation-wrap {
+                background: fade(@info-block-color, 15%);
+                #people-info-relation {
+                    .relation-tab {
+                        border-bottom: 1px solid fade(@info-block-color, 20%);
+                        .view-btn {
+                            color: @info-block-color;
+                            border-bottom: 1px solid ;
+                        }
+                        ul {
+                            li {
+                                color: fade(@info-text-color, 50%);
+                                &.active {
+                                     color: @info-text-color;
+                                }
+                                &.relation-person {
+                                    i {
+                                        .icon-img(@base-url, @relation-person-icon);
+                                    }
+                                }
+                                &.relation-substance {
+                                    i {
+                                        .icon-img(@base-url, @relation-substance-icon);
+                                    }
+                                }
+                                &.relation-location {
+                                    i {
+                                        .icon-img(@base-url, @relation-location-icon);
+                                    }
+                                }
+                                &.relation-event {
+                                    i {
+                                        .icon-img(@base-url, @relation-event-icon);
+                                    }
+                                }
+                                &.relation-organization {
+                                    i {
+                                        .icon-img(@base-url, @relation-organization-icon);
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    .arrow{
+                        &:after {
+                            .icon-img(@base-url, @relation-order-icon);
+                        }
+                    }
+                    .content {
+                        .option span {
+                            color: @info-block-color;
+                            border-bottom: 2px solid fade(@info-block-color, 20%);
+                        }
+                    }
+                }
+            }
+            .info-bottom {
+                background-color: fade(@info-block-color, 15%);
+                .info-assistant-tab {
+                    border-bottom: 1px solid fade(@info-block-color, 20%);
+                    ul {
+                        li {
+                            &.active {
+                                &:after {
+                                    background-color: @info-block-color;
+                                }
+                            } 
+                        }
+                    }
+                }
+                .info-judg-graph {
+                    .assistant-body {
+                        .assistant-box {
+                            background-color: fade(@info-block-color, 15%);
+                            border: 1px solid rgba(41, 121, 255, 15%);
+                            .assistant-title {
+                                color: fade(@info-text-color, 70%);
+                            }
+                            .assistant-time {
+                                color: fade(@info-text-color, 50%);
+                                &.assistant-author {
+                                    &:before {
+                                        .icon-img(@base-url, @assistant-author-icon);
+                                    }
+                                }
+                                &.assistant-judg-time {
+                                    &:before {
+                                        .icon-img(@base-url, @assistant-judg-time);
+                                    }
+                                }
+                            }
+                            &:hover {
+                                background-color: fade(@info-block-color, 30%);
+                                border-radius: 8px;
+                                border: 1px solid fade(@info-block-color, 30%);
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

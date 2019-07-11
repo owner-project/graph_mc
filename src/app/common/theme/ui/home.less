@@ -1,0 +1,306 @@
+::-webkit-scrollbar-thumb
+{
+    background-color: fade(@info-block-color, 25%);
+}
+.home-main {
+    //.bg-img(@base-url, @bg-home);
+    .video-bg-img {
+        .bg-img(@base-url, @video-bg-img);
+    }
+    .video-bg-block {
+        background-color: @video-bg-color;
+    }
+    .home-body {
+        .typelist-container {
+            .menu-ul {
+                li {
+                    span {
+                        color: @info-text-color;
+                        &.active {
+                            background: fade(@info-block-color, 30%)
+                        }
+                    }
+                }
+            }
+        }
+        .search-condition-wrap {
+            border-right: 1px solid fade(@info-block-color, 20%);
+            .basic-search-condition {
+                .senior-search-btn {
+                    color: @info-block-color;
+                }
+            }
+            .senior-search-condition {
+                .home-menu-box {
+                    .station {
+                        border-bottom: 2px solid fade(@info-block-color, 50%);
+                    }
+                    .menu-ul {
+                        .menu-li {
+                            border-bottom: 2px solid fade(@info-block-color, 50%);
+                            &.active {
+                                div {
+                                    &.content {
+                                        border-top: 2px solid fade(@info-block-color, 50%);
+                                    }
+                                    &.left {
+                                        background-color: fade(@info-block-color, 50%);
+                                    }
+                                    &.right {
+                                        background-color: fade(@info-block-color, 50%);
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        .home-ration-total {
+            color: @text-color-title;
+            .t-itme {
+                &.entity:before {
+                    .icon-img(@base-url, @icon-ration-entity);
+                }
+                &.relation:before {
+                    .icon-img(@base-url, @icon-ration-relation);
+                }
+                &.event:before {
+                    .icon-img(@base-url, @icon-ration-event);
+                }
+            }
+        }
+        .batch-to {
+            color: fade(@info-text-color, 70%);
+        }
+        .baidu-info-box {
+            color: @text-color-title;
+        }
+        .home-search-box {
+
+            .search-btn {
+                i {
+                    .icon-img(@base-url, @icon-menu-serch-ico);
+                }
+            }
+            .search-icon {
+                .icon-img(@base-url, @icon-search-input-del);
+            }
+            .search-select {
+                border-right: 1px solid fade(@border-color-primary, 32%);
+            }
+            .search-input-box {
+                background-color: fade(@info-block-color, 6%);
+                border: 1px solid fade(@info-block-color, 70%);
+                color: @text-color-title;
+                .home-search-input-select{
+                    .selectize-input {
+                        background-color: fade(@info-block-color, 40%);
+                    }
+                    .item {
+                        color: @info-text-color;
+                    }
+                }
+            }
+            .search-tag-box {
+                background-color: @popups-bg-color;
+                box-shadow: 0 12px 24px 0 rgba(0,0,0,0.50), 0 0 8px 0 rgba(0,0,0,0.50);
+                color: fade(@info-text-color, 70%);
+                .search-tag-wrap {
+                    background-color: fade(@info-block-color, 20%);
+                    .search-tag{
+                        border-color: fade(@info-block-color, 50%)
+                    }
+                }
+            }
+        }
+        .home-menu-box {
+            .menu-ul {
+                .menu-li {
+                    i.entity {
+                        .icon-img(@base-url, @icon-result-shiti-white);
+                    }
+                    i.event {
+                        .icon-img(@base-url, @icon-result-shijian-white);
+                    }
+                    i.text {
+                        .icon-img(@base-url, @icon-result-wenben-white);
+                    }
+
+                    span {
+                        color: @text-color-title;
+                    }
+                }
+            }
+            .hover-icon {
+                .icon-img(@base-url, @icon-result-menu-active);
+            }
+        }
+        .home-content {
+            .wrap-title {
+                color: @text-color-title;
+            }
+            .app-item {
+                .app-name {
+                    color: @text-color-title;
+                    margin-top: 5px;
+                }
+
+                &:hover {
+                    background-color: fade(@bg-color-primary, 10%);
+                    box-shadow: inset 0px 0px 0px 1px @shadow-color-primary;
+                }
+            }
+
+            .home-analysis-wrap {
+                .wrap-content {
+                    background-color: fade(@bg-color, 40%);
+                }
+
+                .analysis-item {
+                    border: 1px solid fade(@border-color, 30%);
+                    .item-info {
+                        color: @text-color-title;
+                    }
+
+                    &:hover {
+                        background-color: fade(@bg-color-primary, 10%);
+                    }
+                }
+            }
+        }
+        .clear-current-params{
+            color: @text-color-title;
+            text-decoration: @text-color-title;
+            cursor: pointer;
+        }
+        .senior-search-guide{
+            color: @text-color-content;
+            text-decoration: @text-color-content;
+            margin-top: 10px;
+        }
+        .pui-button{
+            color: @info-text-color;
+        }
+
+        .search-result-body {
+            .search-result-filter {
+                color: @info-text-color;
+                ul {
+                    li {
+                        &.active {
+                            background: fade(@info-block-color, 30%);
+                        }
+                    }
+                }
+            }
+            .to-porpoise {
+                color: fade(@info-text-color, 70%);
+            }
+            .result-list-header {
+                .result-list-header-ul {
+                    li {
+                        color: @text-color-content;
+                    }
+                }
+            }
+            .result-list-body {
+                .focus-status{
+                    color: fade(@info-text-color, 70%);
+                    border-radius: 10px;
+                    background-color: #2263CB;
+                }
+                .un-search-result {
+                    color: @text-color-content;
+                }
+                .result-list-body-ul {
+                    .result-list-body-li {
+                        background-color: @search-result;
+                        .search-highlight {
+                            color: #dd4b39;
+                        }
+                        .result-list-body-li-title {
+                            color: fade(@info-text-color, 70%);
+
+                            em {
+                                color: @text-color-primary;
+                            }
+                        }
+                        .result-list-body-li-ul {
+                            li {
+                                color: fade(@info-text-color, 70%);
+                                .title {
+                                    color: fade(@info-text-color, 32%);
+                                }
+                            }
+                        }
+                        .result-baidu-info {
+                            color: @text-color-content;
+                            em {
+                                color: @text-color-primary;
+                            }
+                        }
+                        .result-list-body-li-menu-ul {
+                            color: @text-color-title;
+                            div {
+                                color: fade(@info-text-color, 70%);
+                                &:hover {
+                                    color: @info-text-color;
+                                }
+                            }
+                            .result-list-body-li-menu-ul-dangan {
+                                i {
+                                    .icon-img(@base-url, @icon-result-dn-icon);
+                                }
+                            }
+                            .result-list-body-li-menu-ul-gis {
+                                i {
+                                    .icon-img(@base-url, @icon-result-gis-icon);
+                                }
+                            }
+                            .result-list-body-li-menu-ul-tuxi {
+                                i {
+                                    .icon-img(@base-url, @icon-result-tx-icon);
+                                }
+                            }
+                            .result-list-body-li-menu-ul-focus {
+                                i {
+                                    .icon-img(@base-url, @icon-blue-star);   
+                                }
+                            }
+                            .result-list-body-li-menu-unfollow {
+                                i {
+                                    .icon-img(@base-url, @icon-list-unfollow-ico);
+                                }
+                            }
+                        }
+                        &:hover {
+                            background-color: fade(@info-block-color, 40%);
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+.ui-select-choices-row {
+    &:hover {
+        background-color: fade(@info-block-color, 10%);
+    }
+    span {
+        color: @info-text-color;
+    }
+    &.active>span {
+        background-color: fade(@info-block-color, 10%);
+    }
+}
+.ui-select-bootstrap > .ui-select-choices,
+.ui-select-bootstrap > .ui-select-no-choice {
+    background-color: @popups-bg-color;
+    color: fade(@info-text-color, 70%);
+}
+.ui-select-bootstrap .ui-select-choices-row>span:hover, 
+.ui-select-bootstrap .ui-select-choices-row>span:focus {
+    background-color: fade(@info-block-color, 10%);
+    color: @info-text-color;
+}

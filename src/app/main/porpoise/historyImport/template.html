@@ -1,0 +1,81 @@
+<div class="pui-modal modal">
+    <div class="modal-dialog history-import-modal">
+        <div class="modal-header">
+            <div class="modal-title">历史导入</div>
+            <div class="modal-close-icon" ng-click="fn.dismiss()"></div>
+        </div>
+        <div class="modal-body" style="overflow: hidden;">
+            <div class="mgb10" ng-click="fn.goBack();" ng-if="data.type === '02'" style="width: 50px;">返回</div>
+            <div class="pui-table import-all" ng-if="data.type === '01' && data.recordList.length > 0">
+                <table>
+                    <colgroup>
+                        <col width="60%">
+                        <col width="40%">
+                    </colgroup>
+                    <thead>
+                    <tr>
+                        <th>导入时间</th>
+                        <th>操作</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr ng-repeat="item in data.recordList">
+                        <td ng-bind="item.timeFormat"></td>
+                        <td>
+                            <pui-layout align="center" justify="center">
+                                <div class="mgr10" ng-click="fn.viewRecord(item)">查看</div>
+                                <div ng-click="fn.deleteRecord(item)">删除</div>
+                            </pui-layout>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            <pui-layout style="height: 150px;" align="center" justify="center"
+                        ng-if="data.type === '01' && data.recordList.length == 0">
+                暂无历史记录
+            </pui-layout>
+            <div class="pui-table mgb32" ng-if="data.type === '02'">
+                <table>
+                    <colgroup>
+                        <col width="30%">
+                        <col width="40%">
+                        <col width="30%">
+                    </colgroup>
+                    <thead>
+                    <tr>
+                        <th>团伙名称</th>
+                        <th>实体数量</th>
+                        <th>操作</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr ng-repeat="item in data.recordList">
+                        <td ng-if="data.pager.pageNo === 1 && $index === 0">全部团伙</td>
+                        <td ng-if="data.pager.pageNo !== 1 || $index !== 0" ng-bind="'团伙' + ($index + (data.pager.pageSize * (data.pager.pageNo - 1)))"></td>
+                        <td ng-bind="item.size"></td>
+                        <td>
+                            <div ng-click="fn.viewComponent(item)">导入</div>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            <pui-layout justify="end">
+                <uib-pagination
+                    class="pagination-sm"
+                    ng-if="data.pager.total > data.pager.pageSize"
+                    total-items="data.pager.total"
+                    ng-change="fn.changePage()"
+                    ng-model="data.pager.pageNo"
+                    previous-text="上一页"
+                    next-text="下一页"
+                    force-ellipses="true"
+                    max-size="3"
+                    boundary-link-numbers="true"
+                    items-per-page="data.pager.pageSize">
+                </uib-pagination>
+            </pui-layout>
+        </div>
+    </div>
+</div>

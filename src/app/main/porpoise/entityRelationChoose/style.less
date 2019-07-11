@@ -1,0 +1,126 @@
+.entity-relation-choose-modal {
+    width: 1068px !important;
+    max-width: 1068px !important;
+    min-width: 800px !important;
+    top: 50% !important;
+    // height: 488px;
+    .operate-block {
+        width: 380px;
+        box-sizing: border-box !important;
+        .entity-relation-tab {
+            height: 48px;
+            line-height: 48px;
+            display: flex;
+            padding-left: 24px;
+            font-weight: bold;
+        }
+        &-title {
+            width: 80px;
+            text-align: center;
+            &.current {
+                position: relative;
+                &:after {
+                    content: '';
+                    position: absolute;
+                    width: 20px;
+                    height: 3px;
+                    bottom: 0;
+                    left: 50%;
+                    transform: translateX(-50%);
+                }
+            }
+        }
+        .add-content {
+            padding: 16px 16px 0 16px;
+            &.add-relation-content {
+                .node-info-label {
+                    width: 48px;
+                }
+            }
+        }
+        .add-content-btn {
+            margin-top: 24px;
+            .pui-button {
+                border-radius: 4px;
+                padding: 2px 32px;
+                border: 1px solid #2979FF;
+                line-height: 24px;
+            }
+        }
+        .node-info {
+            margin-bottom: 8px;
+            &-label {
+                width: 36px;
+                text-align: right;
+                margin-right: 16px;
+            }
+            &-content {
+                flex: 1 1 auto;
+            }
+            .selectize-control {
+                .item {
+                    width: 248px !important;
+                }
+            }
+        }
+    }
+    .entity-relation-content {
+        height: 358px;
+        position: relative;
+        .tip {
+            color: rgba(255, 255, 255, 0.3);
+            position: absolute;
+            top: 16px;
+            left: 16px;
+        }
+    }
+    .entity-relation-map {
+        background: transparent !important;
+        height: 100%;
+        width: calc(~'100% - 380px');
+    }
+    .content-title {
+        margin-bottom: 8px;
+    }
+
+    .content-list {
+        border-radius: 2px;
+        padding: 10px;
+        max-height: 300px;
+        overflow: auto;
+
+        .list-item {
+            .item-name {
+                width: 40px;
+            }
+            margin-bottom: 10px;
+
+            .delete-btn {
+                width: 20px;
+                height: 20px;
+                position: relative;
+                margin-left: 20px;
+                cursor: pointer;
+
+                &:after {
+                    position: absolute;
+                    content: '';
+                    width: 15px;
+                    height: 1px;
+                    transform: rotate(45deg);
+                    left: 3px;
+                    top: 10px;
+                }
+                &:before {
+                    position: absolute;
+                    content: '';
+                    width: 15px;
+                    height: 1px;
+                    transform: rotate(135deg);
+                    left: 3px;
+                    top: 10px;
+                }
+            }
+        }
+    }
+}

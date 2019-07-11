@@ -1,0 +1,73 @@
+<div class="tt-main">
+    <div class="vt-body">
+        <div class="vt-lits-box">
+            <div class="vt-list-header">
+                <div class="vt-list-header-title">话单列表</div>
+                <div class="vt-list-header-item">
+                    <div class="vt-list-item">
+                        <span>计费号码</span>
+                        <pui-select class="df-select-width fl" value-field="key" options='ticketTable.jsonData.option1'
+                                    ng-model="option.value1"></pui-select>
+                    </div>
+                    <div class="vt-list-item">
+                        <span>通话类型</span>
+                        <pui-select class="df-select-width fl" value-field="key" options='ticketTable.jsonData.option1'
+                                    ng-model="option.value2"></pui-select>
+                    </div>
+                    <div class="vt-list-item">
+                        <span>对方号码</span>
+                        <pui-select class="df-select-width fl" value-field="key" options='ticketTable.jsonData.option1'
+                                    ng-model="option.value3"></pui-select>
+                    </div>
+                    <div class="vt-list-item">
+                        <span>开始时间</span>
+                        <pui-select class="df-select-width fl" value-field="key" options='ticketTable.jsonData.option1'
+                                    ng-model="option.value4"></pui-select>
+                    </div>
+                    <div class="vt-list-item">
+                        <span>通话时长</span>
+                        <pui-select class="df-select-width fl" value-field="key" options='ticketTable.jsonData.option1'
+                                    ng-model="option.value5"></pui-select>
+                    </div>
+                    <div class="vt-list-item">
+                        <span>小区代码</span>
+                        <pui-select class="df-select-width fl" value-field="key" options='ticketTable.jsonData.option1'
+                                    ng-model="option.value6"></pui-select>
+                    </div>
+                    <div class="vt-list-item">
+                        <span>基站代码</span>
+                        <pui-select class="df-select-width fl" value-field="key" options='ticketTable.jsonData.option1'
+                                    ng-model="option.value7"></pui-select>
+                    </div>
+                </div>
+            </div>
+            <div class="vt-list">
+                <div class="voice-table-con">
+                    <div class="pui-table content-table">
+                        <table>
+                            <thead>
+                            <tr>
+                                <th style="width: 50px;">序号</th>
+                                <th style="width: 120px;" ng-repeat="item in ticketTable.jsonData.option1 track by item.key">
+                                    {{item.name}}
+                                </th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr ng-repeat="item in ticketTable.jsonData.resultData track by $index">
+                                <td>{{$index+1}}</td>
+                                <td ng-repeat="child in ticketTable.jsonData.option1 track by child.key">
+                                    {{item[child.key]}}
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <pui-layout justify="center" class="vt-footer">
+        <pui-button type="primary" on-click="ticketTable.ticketTableSubmit()" class="vt-submit">确定</pui-button>
+    </pui-layout>
+</div>

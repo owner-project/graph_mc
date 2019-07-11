@@ -1,0 +1,243 @@
+<div class="trade-report-app-main">    
+    <pui-button style="position:absolute;right:16px;" data-on-click="tra.historyBack()">返回</pui-button>
+    <div class="tra-header">
+        <ul class="header-ul">
+            <li class="header-li" ng-click="tra.chooseTag($event, 'jl')" ng-class="{'active': tra.chooseType === 'jl'}">记录模式</li>
+            <li class="header-li" ng-click="tra.chooseTag($event, 'tx')" ng-class="{'active': tra.chooseType === 'tx'}">图析模式</li>
+        </ul>
+    </div>
+    <div class="tra-body" ng-if="tra.chooseType === 'jl'">
+       
+        <div class="tra-left">
+            
+            <div class="tra-b-title">
+                <pui-layout class="table-last-layout" align="right" ng-click="tra.toPorpoise(null,'batch')" style="float: right;margin-top:6px">
+                    <i class="go-graph"></i>
+                    <span class="go-graph-title">已选择人员批量到图析</span>
+                </pui-layout>
+            </div>
+            <div class="tra-b-con">
+                <div pui-table type="header">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th class="cb-length">
+                                    <pui-layout justify="center">
+                                        <pui-checkbox ng-model="tra.checkAll" indeterminate="tra.indeterminate" ng-change="tra.selectAll()">
+                                        </pui-checkbox>
+                                    </pui-layout>
+                                </th>
+                                <th>涉案人员</th>
+                                <th>身份证</th>
+                                <th>转入金额</th>
+                                <th>转出金额</th>
+                                <th>轧差金额</th>
+                                <th>操作</th>
+                            </tr>
+                        </thead>
+                    </table>
+                </div>
+                
+                <div pui-table class="pui-table p-t-body" type="body">
+                    <table>
+                        <tbody>
+                            <tr ng-repeat="item in tra.reportList track by $index" ng-click="tra.chooseReport($event, item)">
+                                <td class="cb-length">
+                                    <pui-layout justify="center">
+                                        <pui-checkbox ng-model="item.selected" ng-change="tra.isSelectAll(item)">
+                                        </pui-checkbox>
+                                    </pui-layout>
+                                </td>
+                                <td>{{item.involvedName}}</td>
+                                <td>{{item.idCard}}</td>
+                                <td>{{item.fromMoney | rmb_wy}}</td>
+                                <td>{{item.toMoney | rmb_wy}}</td>
+                                <td>{{item.netting | rmb_wy}}</td>
+                                <td>
+                                    <pui-layout class="table-last-layout" align="center" ng-click="tra.toPorpoise(item,'single')">
+                                        <i class="go-graph"></i>
+                                        <span class="go-graph-title">到图析</span>
+                                    </pui-layout>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="tra-right">
+            <pui-layout class="header-ul">
+                <li class="header-li active">
+                    <div>详情</div>
+                </li>
+            </pui-layout>
+            <div class="header-con" >
+                <ul class="detail-con"  ng-if="tra.chooseItemDetail">
+                    <li>
+                        <span>姓名:</span>
+                        <span>{{tra.chooseReportItem.involvedName}}</span>
+                    </li>
+                    <li>
+                        <span>转入金额:</span>
+                        <span>{{tra.chooseReportItem.fromMoney | rmb_wy}}</span>
+                    </li>
+                    <li>
+                        <span>转出金额:</span>
+                        <span>{{tra.chooseReportItem.toMoney | rmb_wy}}</span>
+                    </li>
+                    <li>
+                        <span>轧差:</span>
+                        <span>{{tra.chooseReportItem.netting | rmb_wy}}</span>
+                    </li>
+                    <li>
+                        <span>
+                            交易记录
+                        </span>
+                        <span>{{tra.chooseDetailList.length}}条</span>
+                    </li>
+                    <li class="detial-list-con">
+                        <div class="trade-li-item" ng-repeat="item in tra.chooseDetailList track by $index">
+                            <div class="trade-li-item-title" ng-click="item.open = !item.open;">
+                                <i class="d-inline-block arrow-down-icon" ng-class="{'to-right': !item.open}"></i>
+                                {{ item.transactionTime | date:'yyyy年MM月dd日' }}{{item.type}}{{item.coinCount | rmb_wy}}
+                            </div>
+                            <div class="trade-li-item-con" ng-class="{'fewer': !item.open}">
+                                <div class="item-tpl">
+                                    <span>收款方姓名</span>
+                                    <span>{{item.toName}}</span>
+                                </div>
+                                <div class="item-tpl">
+                                    <span>收款方账户</span>
+                                    <span>{{item.toAccount}}</span>
+                                </div>
+                                <div class="item-tpl">
+                                    <span>收款方身份证</span>
+                                    <span>{{item.toCard}}</span>
+                                </div>
+                                <div class="item-tpl">
+                                    <span>付款方姓名</span>
+                                    <span>{{item.fromName}}</span>
+                                </div>
+                                <div class="item-tpl">
+                                    <span>付款方账户</span>
+                                    <span>{{item.fromAccount}}</span>
+                                </div>
+                                <div class="item-tpl">
+                                    <span>付款方身份证</span>
+                                    <span>{{item.fromCard}}</span>
+                                </div>
+                                <div class="item-tpl">
+                                    <span>交易金额</span>
+                                    <span>{{item.coinCount | rmb_wy}}{{item.moneyName}}</span>
+                                </div>
+                                <div class="item-tpl">
+                                    <span>交易时间</span>
+                                    <span>{{item.transactionTime | date:'yyyy年MM月dd日' | date: 'yyy年MM月dd日 hh:mm:ss'}}</span>
+                                </div>
+                                <div class="item-tpl">
+                                    <span>用途</span>
+                                    <span>{{item.purpose}}</span>
+                                </div>
+                                <div class="item-tpl">
+                                    <span>交易地区</span>
+                                    <span>{{item.tradingPlace}}</span>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="tra-body" ng-if="tra.chooseType === 'tx'">
+        <div class="tra-left">
+            <div class="tra-body-graph">
+                <!-- <relation-map-graph mode="node-link" on-click-link="tra.chooseGraphLink(data)" on-click-node="tra.chooseGrpahItem(data)" nodes="tra.graphData.vertices" links="tra.graphData.edges"></relation-map-graph> -->
+                <relation-map-graph mode="node-link" on-click-node="tra.chooseGrpahItem(data)" nodes="tra.graphData.vertices" links="tra.graphData.edges"></relation-map-graph>
+            </div>
+        </div>
+        <div class="tra-right">
+            <pui-layout class="header-ul">
+                <li class="header-li active">
+                    <div>详情</div>
+                </li>
+            </pui-layout>
+            <div class="header-con">
+                <ul class="detail-con" ng-if="tra.chooseItemDetail">
+                    <li ng-show="tra.chooseReportItem">
+                        <span>姓名:</span>
+                        <span>{{tra.chooseReportItem.involvedName}}</span>
+                    </li>
+                    <li ng-show="tra.chooseReportItem">
+                        <span>转入金额:</span>
+                        <span>{{tra.chooseReportItem.fromMoney | rmb_wy}}</span>
+                    </li>
+                    <li ng-show="tra.chooseReportItem">
+                        <span>转出金额:</span>
+                        <span>{{tra.chooseReportItem.toMoney | rmb_wy}}</span>
+                    </li>
+                    <li ng-show="tra.chooseReportItem">
+                        <span>轧差:</span>
+                        <span>{{tra.chooseReportItem.netting | rmb_wy}}</span>
+                    </li>
+                    <li>
+                        <span>
+                            交易记录
+                        </span>
+                        <span>{{tra.chooseDetailList.length}}条</span>
+                    </li>
+                    <li class="detial-list-con">
+                        <div class="trade-li-item" ng-repeat="item in tra.chooseDetailList track by $index">
+                            <div class="trade-li-item-title" ng-click="item.open = !item.open;">
+                                <i class="d-inline-block arrow-down-icon" ng-class="{'to-right': !item.open}"></i>
+                                {{ item.transactionTime | date:'yyyy年MM月dd日' }}{{item.type}}{{item.coinCount | rmb_wy}}
+                            </div>
+                            <div class="trade-li-item-con" ng-class="{'fewer': !item.open}">
+                                <div class="item-tpl">
+                                    <span>收款方姓名</span>
+                                    <span>{{item.toName}}</span>
+                                </div>
+                                <div class="item-tpl">
+                                    <span>收款方账户</span>
+                                    <span>{{item.toAccount}}</span>
+                                </div>
+                                <div class="item-tpl">
+                                    <span>收款方身份证</span>
+                                    <span>{{item.toCard}}</span>
+                                </div>
+                                <div class="item-tpl">
+                                    <span>付款方姓名</span>
+                                    <span>{{item.fromName}}</span>
+                                </div>
+                                <div class="item-tpl">
+                                    <span>付款方账户</span>
+                                    <span>{{item.fromAccount}}</span>
+                                </div>
+                                <div class="item-tpl">
+                                    <span>付款方身份证</span>
+                                    <span>{{item.fromCard}}</span>
+                                </div>
+                                <div class="item-tpl">
+                                    <span>交易金额</span>
+                                    <span>{{item.coinCount | rmb_wy}}{{item.moneyName}}</span>
+                                </div>
+                                <div class="item-tpl">
+                                    <span>交易时间</span>
+                                    <span>{{item.transactionTime | date:'yyyy年MM月dd日' | date: 'yyy年MM月dd日 hh:mm:ss'}}</span>
+                                </div>
+                                <div class="item-tpl">
+                                    <span>用途</span>
+                                    <span>{{item.purpose}}</span>
+                                </div>
+                                <div class="item-tpl">
+                                    <span>交易地区</span>
+                                    <span>{{item.tradingPlace}}</span>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>

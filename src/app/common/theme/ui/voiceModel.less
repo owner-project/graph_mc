@@ -1,0 +1,164 @@
+//话单模式
+.voice-main {
+    color: @text-color-title;
+
+    .voice-title {
+        //background: linear-gradient(180deg, @sb-black10 0%, @sb-blue29 100%);
+        box-shadow: inset 0 -1px 0 0 @border-color-primary;
+        .header-ul {
+            .header-li {
+                color: @text-color-title;
+                background-color: @bg-color-light;
+
+                &.active {
+                    box-shadow: inset 0px 1px 0px 0px @border-color-primary, inset -1px 0px 0px 0px @border-color-primary, inset 1px 0px 0px 0px @border-color-primary;
+                    border-bottom-color: transparent;
+                    background-color: @bg-color;
+                    color: @text-color-highlight;
+                }
+            }
+        }
+    }
+    .voice-body {
+        .voice-body-title {
+            .voice-body-ul {
+                .item {
+                    .voice-body-ul-up {
+                        .icon-img(@base-url, @icon-voice-model-up-icon);
+                    }
+                    .voice-body-ul-down {
+                        .icon-img(@base-url, @icon-voice-model-down-icon);
+                    }
+                    .voice-body-ul-xz {
+                        .icon-img(@base-url, @icon-voice-model-xz-icon);
+                    }
+                    .voice-body-ul-zd {
+                        .icon-img(@base-url, @icon-voice-model-zd-icon);
+                    }
+                    .voice-body-ul-sc {
+                        .icon-img(@base-url, @icon-voice-model-sc-icon);
+                    }
+                    .voice-body-ul-fx {
+                        .icon-img(@base-url, @icon-voice-model-fx-icon);
+                    }
+                    .voice-body-ul-swbj {
+                        .icon-img(@base-url, @icon-voice-model-swbj-icon);
+                    }
+                    .voice-body-ul-line {
+                        .icon-img(@base-url, @icon-voice-model-line-icon);
+                    }
+                }
+            }
+            .voice-body-right-ul {
+                li {
+                    .voice-body-right-ul-da {
+                        .icon-img(@base-url, @icon-voice-model-dangan-icon);
+                    }
+                    .voice-body-right-ul-tx {
+                        .icon-img(@base-url, @icon-voice-model-tuxi-icon);
+                    }
+
+                }
+            }
+        }
+        .voice-table-con {
+            //background-color: @sb-blue3;
+        }
+        .voice-bottom-body {
+            border: 1px solid @border-color;
+            background-color: @bg-color-lighter;
+            .voice-bottom-left-body {
+                border-right: 1px solid @border-color;
+                //background-color: @sb-blue26;
+                .voice-bottom-left-pl {
+                    .voice-bottom-left-text1 {
+                        color: fade(@primary-color, 100%);
+                        .vocie-left-cricle1 {
+                            background-color: fade(@primary-color, 100%);
+                        }
+                    }
+                    .voice-bottom-left-text2 {
+                        color: fade(@primary-color, 80%);
+                        .vocie-left-cricle2 {
+                            background-color: fade(@primary-color, 80%);
+                        }
+                    }
+                    .voice-bottom-left-text3 {
+                        color: fade(@primary-color, 60%);
+                        .vocie-left-cricle3 {
+                            background-color: fade(@primary-color, 60%);
+                        }
+                    }
+                    .voice-bottom-left-text4 {
+                        color: fade(@primary-color, 40%);
+                        .vocie-left-cricle4 {
+                            background-color: fade(@primary-color, 40%);
+                        }
+                    }
+                }
+            }
+        }
+    }
+    .voice-right {
+        border: 1px solid @border-color;
+        background-color: @bg-color-lighter;
+        .voice-right-title {
+            .header-ul {
+                background-color: @bg-color-light;
+                .header-li {
+                    color: @text-color-title;
+                    div {
+                       border-right: 1px solid @border-color;
+                    }
+                    &.active {
+                        color: @text-color-primary;
+                        font-weight: bold;
+                    }
+                }
+            }
+        }
+        .voice-right-body {
+            .voice-right-body-header {
+                color: @text-color-title;
+            }
+            .call-time-label-block {
+                color: @text-color-info;
+            }
+            .right-ul {
+                .right-li {
+                    &:hover {
+                        .right-hover-div {
+                            border-color: @border-color;
+                            background-color: @bg-color-light;
+                        }
+                    }
+                }
+            }
+            .right-title-text {
+                .right-title-text-icon1 {
+                    .icon-img(@base-url, @icon-rule-icon-1);
+                }
+                .right-title-text-icon2 {
+                    .icon-img(@base-url, @icon-rule-icon-2);
+                }
+            }
+            .right-ul{
+                .right_li_number {
+                    color: @text-color-primary;
+                }
+            }
+        }
+    }
+}
+
+//TODO sb里面写了2遍和上面。合并一下
+.voice-main {
+    .voice-body {
+
+    }
+    .voice-right {
+        .voice-right-body {
+
+        }
+    }
+}

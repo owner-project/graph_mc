@@ -1,0 +1,18 @@
+<pui-layout align="center" class="folder-item {{data.selectFolder.id === child.id ? 'selected' : ''}}">
+    <div ng-class="{'tag-close': child.open || !child.status, 'tag-open': !child.open && child.status}"
+        ng-click="fn.openFolder(child, $event)">
+    </div>
+    <div ng-bind="child.name"
+        ng-click="fn.selectFolder(child, $event)"
+        class="folder-name"
+        data-title="{{child.name}}"
+        bs-tooltip
+        data-container="body"
+        data-bs-enabled = "{{child.name.length > 30}}">
+    </div>
+</pui-layout>
+<div ng-if="child.open" class="select-folder-children">
+    <div ng-repeat="child in child.children">
+        <div ng-include="'app/components/selectFolder/folder.html'"></div>
+    </div>
+</div>

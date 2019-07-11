@@ -1,0 +1,23 @@
+//个人建模
+.personal-main {
+    color: @text-color-title;
+    .personal-app {
+        .personal-app-box {
+            background-color: @bg-color-lighter;
+            border: 1px solid @border-color;
+            .personal-app-img-count {
+                color: @text-color-primary;
+            }
+        }
+    }
+    .personal-time-body {
+        .time-axis-wrap {
+            .prev {
+                .icon-img(@base-url, @icon-personal-prev-icon);
+            }
+            .next{
+                .icon-img(@base-url, @icon-personal-next-icon);
+            }
+        }
+    }
+}

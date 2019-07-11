@@ -1,0 +1,47 @@
+<div class="modal pui-modal import-voice-modal">
+    <div class="modal-dialog" style="width: 540px;">
+        <div class="modal-header">
+            <div class="modal-title">资金流水导入</div>
+            <div class="modal-close-icon" ng-click="fn.dismiss()"></div>
+        </div>
+        <div class="modal-body">
+            <pui-layout align="center" class="mgb20">
+                <div class="mgr10 p-text-title">导入模式：</div>
+                <pui-layout align="center" justify="space-between" >
+                    <div class="file-item-wrap">
+                        <div ng-if="data.upload" class="file-item-block">
+                            <span ng-bind="data.upload.name"></span>
+                            <div class="close-btn" ng-click="fn.deleteFile($event, 'upload')"></div>
+                        </div>
+                    </div>
+                    <input type="file" id="voice-upload-input" class="file-upload-input ng-hide" file-upload ng-model="data.upload">
+                    <pui-button ng-if="!data.upload" on-click="fn.chooseFile($event)">上传流水列表</pui-button>
+                </pui-layout>
+            </pui-layout>
+            <pui-layout align="center" class="mgb20">
+                    <div class="mgr10 p-text-title">名称：</div>
+                    <pui-layout align="center" justify="space-between" class="mgr20">
+                        <pui-input type="text" class="p-text" ng-model="data.title"></pui-input>
+                    </pui-layout>
+                </pui-layout>
+            <pui-layout align="center" class="mgb20">
+                <div class="mgr10 p-text-title">描述：</div>
+                <pui-layout align="center" justify="space-between" class="mgr20">
+                    <pui-input type="text" class="p-text" ng-model="data.description"></pui-input>
+                </pui-layout>
+            </pui-layout>
+            <div>
+                <div class="download-link" ng-click="fn.downloadFile($event)">
+                    <span>下载模板</span>
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <pui-button class="cancel-btn" on-click="fn.dismiss()">取消</pui-button>
+            <pui-button class="confirm-btn" type="primary" ng-disabled="data.uploading" on-click="fn.import()">
+                <span ng-if="data.uploading">上传中</span>
+                <span ng-if="!data.uploading" ng-bind="data.status ? '导入成功，点击查看' : '确定导入'"></span>
+            </pui-button>
+        </div>
+    </div>
+</div>

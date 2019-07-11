@@ -1,0 +1,11 @@
+<div class="pui-progress-wrap">
+    <div class="pui-progress-bar" ng-class="{'has-info': !hideInfo}" ng-style="{'height': (strokeWidth || '6') + 'px', 'borderRadius': (strokeWidth || '6') / 2 + 'px'}">
+        <div class="progress-percent-bar"
+            ng-style="{'width': (percent || 0) + '%'}"
+            ng-class="percent == 100 ? 'complete' : ''">
+        </div>
+    </div>
+    <div class="percentage-text" ng-if="!hideInfo">
+        {{percent == 100 ? '完成' : (percent || 0) + '%'}}
+    </div>
+</div>

@@ -1,0 +1,10 @@
+<div class="pui-textarea-wrap">
+    <textarea class="pui-textarea"
+              ng-class="{'disabled': !!ngDisabled}"
+              ng-disabled="!!ngDisabled"
+              ng-attr-placeholder="{{placeholder}}"
+              ng-focus="$onFocus($event)"
+              ng-blur="$onBlur($event)"
+              ng-keydown="$onKeyDown($event)"
+              ng-model="value"></textarea>
+</div>

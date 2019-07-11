@@ -1,0 +1,9 @@
+<div class="result-list-header">
+  <ul ng-show="home.homeData.pressEnter" class="result-list-header-ul">
+      <li ng-bind="'搜索结果： '+ home.resultData[home.goryType].data.total+ '条'"></li>
+      <!--<li ng-bind="'实体： '+ home.resultData[home.goryType].data.entity+ '条'"></li>
+      <li ng-bind="'事件： '+ home.resultData[home.goryType].data.event+ '条'"></li>
+      <li ng-bind="'文本：'+ home.resultData[home.goryType].data.text+ '条'"></li>-->
+      <li ng-bind="'无权限查看： '+ home.resultData[home.goryType].data.forbiddenCount+ '条'"></li>
+  </ul>
+</div>

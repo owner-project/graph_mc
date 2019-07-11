@@ -1,0 +1,34 @@
+<div class="select-folder-d-wrap">
+    <div class="select-folder-d-content" ng-class="from === 'porpoise' ? 'porpoise' : ''">
+        <div ng-repeat="folder in data.folder">
+            <pui-layout align="center" class="folder-item {{data.selectFolder.id === folder.id ? 'selected' : ''}}">
+                <div ng-class="{'tag-close': folder.open, 'tag-open': !folder.open}" ng-click="fn.openFolder(folder, $event)"></div>
+                <div ng-bind="folder.name" ng-click="fn.selectFolder(folder, $event)"></div>
+            </pui-layout>
+            <div ng-if="folder.open" class="select-folder-children">
+                <div ng-repeat="child in folder.children">
+                    <div ng-include="'app/components/selectFolder/folder.html'"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <pui-layout align="center" class="mgb10" ng-click="fn.stopPropa($event)">
+        <pui-button ng-if="!data.openAddFolder" class="add-folder-btn" size="small" data-on-click="fn.showAddFolder($event)">新建</pui-button>
+        <pui-input 
+            class="add-folder-input"
+            ng-if="data.openAddFolder"
+            ng-model="data.addFolder.name">
+        </pui-input>
+        <pui-button type="primary" class="add-folder-btn" ng-if="data.openAddFolder" data-on-click="fn.addFolder($event)">确定</pui-button>
+        <pui-button type="primary" class="add-folder-btn cancel-add-folder-btn" ng-if="data.openAddFolder" data-on-click="fn.cancelAddFolder($event)">取消</pui-button>
+    </pui-layout>
+    <pui-layout align="center" ng-if="from !== 'porpoise'">
+        <div class="selected-title">已选择：</div>
+        <div ng-bind="data.selectFolder.path"
+            class="select-path-name"
+            data-title="{{data.selectFolder.path}}"
+            bs-tooltip
+            data-container="body">
+        </div>
+    </pui-layout>
+</div>

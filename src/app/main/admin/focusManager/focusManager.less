@@ -1,0 +1,130 @@
+
+.focus-manager-wrapper{
+    padding:16px 24px;
+    overflow-y: scroll;
+    .odipus-icon{
+        display: inline-block;
+        width: 16px;
+        height: 16px;
+        vertical-align: sub;
+        margin-right: 4px;
+    }
+    .tag-list{
+        position: relative;
+        padding-right: 76px;
+        .tag{
+            display: inline-block;
+            border-width: 1px;
+            border-style: solid;
+            border-radius: 4px;
+            padding: 4px 8px;
+            line-height: 20px;
+            margin-right: 8px;
+            cursor: pointer;
+            margin-bottom: 8px;
+        }
+        .setting-tag{
+            position: absolute;
+            right: 0;
+            top: 0;
+        }
+    }
+    // 列表的头部
+    .focus-list-top{
+        .top-item{
+            line-height: 24px;
+            margin-right: 4px;
+        }
+        .top-right-operates{
+            .operate{
+                line-height: 24px;
+                display: inline-block;
+                cursor: pointer;
+                opacity: .7;
+                &:hover{
+                    opacity: 1;
+                }
+            }
+        }
+
+    }
+    .focus-list{
+        min-height:45em;
+    }
+    // dropdown menu样式
+    .dropdown-menu{
+        line-height: 2em;
+    }
+    .focus-manage{
+        position: relative;
+    }
+    // 关注项
+    .focus-item{
+        display: inline-block;
+        border-width: 1px;
+        border-style: solid;
+        margin-right: 16px;
+        margin-bottom: 16px;
+        width: 376px;
+        position: relative;
+        .focus-item-top{
+            padding: 2px 16px;
+            border-bottom-style: 1px;
+            border-bottom-width: 1px;
+            border-bottom: 1px solid;
+            .checkbox-box{
+                position: absolute;
+                top: 8px;
+                right: 16px;
+            }
+        }
+        // 用户图标
+        .focus-item-avatar{
+            margin-top: 16px;
+            border-radius: 50%;
+        }
+        .focus-item-title{
+            font-weight: bold;
+            font-size: 12px;
+            .focus-item-card{
+                font-size: 10px;
+            }
+        }
+        .focus-item-info{
+            margin-left: 54px;
+        }
+        .focus-item-bottom {
+            line-height: 36px;
+            height: 36px;
+            padding: 0 16px;
+            .odipus-icon{
+                cursor: pointer;
+                transition: .25s;
+                opacity: 0.7;
+                &:hover{
+                    opacity:1;
+                }
+            }
+        }
+    }
+}
+
+
+// 订阅管理modal层通用样式
+.focus-manager-modal{
+    .tag{
+        display: inline-block;
+        border-width: 1px;
+        border-style: solid;
+        border-radius: 4px;
+        padding: 4px 8px;
+        line-height: 20px;
+        margin-right: 8px;
+        cursor: pointer;
+        margin-bottom: 8px;
+    }
+    .odipus-icon{
+        .odipus-icon(16px);
+        transition: .5s
+    }
+}

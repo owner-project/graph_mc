@@ -1,0 +1,84 @@
+<div>
+    <pui-layout
+        align="center" 
+        class="item-title"
+        ng-click="relation.openStatus = !relation.openStatus">
+        <div class="arrow-down-icon mgr5" ng-class="{'to-right': !relation.openStatus}"></div>
+        <span class="class-title">
+            <label class="statistics-title" ng-if="relation.type === 1">关系统计</label>
+            <label class="statistics-title" ng-if="relation.type === 2">相关联关系</label>
+            <label class="statistics-title" ng-if="relation.type === 3">已选择关系</label>
+            <span class="statistics-count" ng-bind="relation.edgesSum"></span>
+        </span>
+    </pui-layout>
+
+    <div class="item-con" ng-if="relation.openStatus">
+        <ul>
+            <li ng-repeat="item in relation.edgeTree track by $index">
+                <pui-layout align="center" class="text-left" ng-click="item.open = !item.open">
+                    <div class="arrow-down-icon pull-left mgr5" ng-class="{'to-right': !item.open}">
+                    </div>
+                    <pui-checkbox 
+                        class="mgr5"
+                        ng-if="relation.type === 1"
+                        data-indeterminate="item.showIndeterminate"
+                        ng-model="item.show"
+                        ng-change="relation.toggleEdgeFunc(item,false)">
+                    </pui-checkbox>
+                    <div class="item-label" ng-bind="item.label"></div>
+                    <!-- <span class="count-span" ng-bind="item.sum"></span> -->
+                    <div class="item-bg relationship">
+                        <div class="item-count">
+                            <i
+                                ng-style="{'width': (item.sum / relation.allEdgesSum * 100) + '%'}"></i>
+                        </div>
+                        <span class="count-span" ng-bind="item.sum"></span>
+                        <div class="item-width"></div>
+                    </div>
+                </pui-layout>
+
+                <div class="right-item-detail clearfix" ng-if="item.open">
+                    <div ng-repeat="(k, v) in item.child">
+                        <pui-layout align="center" class="text-left relation-line" ng-click="v.open = !v.open">
+                            <div class="arrow-down-icon pull-left mgr5"
+                                ng-class="{'to-right': !v.open}"></div>
+                            <pui-checkbox class="mgr5"
+                                ng-model="v.show"
+                                ng-change="relation.toggleEdgeFunc(v,false)"
+                                ng-if="relation.type === 1">
+                            </pui-checkbox>
+                            <div class="item-label" title="{{v.label}}" ng-bind="v.label"></div>
+                            <div class="item-bg">
+                                <div class="item-count">
+                                    <i ng-style="{'width': (v.sum / item.sum * 100) + '%'}"></i>
+                                </div>
+                                <span class="count-span" ng-bind="v.sum"></span>
+                                <div class="item-width"></div>
+                            </div>
+                            <div class="funnel-icon"
+                                ng-if="relation.type === 1"
+                                ng-class="{'actived':  relation.defaultFilterJson!== v.filterJSON}"
+                                ng-click="relation.showFilter($event, v)">
+                                <div ng-include="'app/main/porpoise/edgeFilter/template.html'"
+                                    ng-show="v.filterShow">
+                                </div>
+                            </div>
+                        </pui-layout>
+                        <div class="right-item-detail" ng-if="v.open">
+                            <pui-layout align="center" ng-repeat="edge in v.child"
+                                ng-click="relation.porpoiseLineClickFunc($event, edge)">
+                                <span class="mgr10 text-ellipsis" title="{{edge._source.name}}"
+                                    ng-bind="edge._source.name"
+                                    ng-class="{'check': relation.selectedEdge === edge.key}"></span>
+                                <div class="two-way-arrow-icon mgr10"></div>
+                                <span class="text-ellipsis" ng-bind="edge._target.name"
+                                    title="{{edge._target.name}}"
+                                    ng-class="{'check': relation.selectedEdge === edge.key}"></span>
+                            </pui-layout>
+                        </div>
+                    </div>
+                </div>
+            </li>
+        </ul>
+    </div>
+</div>

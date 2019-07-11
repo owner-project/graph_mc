@@ -1,0 +1,166 @@
+<div class="trade-report-main">
+    <pui-button style="position:absolute;right:16px" data-on-click="tr.historyBack()">返回</pui-button>
+    <div class="t-r-tab">
+        <ul class="header-ul">
+            <li class="header-li" ng-click="tr.chooseTag($event, 'rmb')" ng-class="{'active': tr.chooseType === 'rmb'}">人民币</li>
+            <li class="header-li" ng-click="tr.chooseTag($event, 'wb')" ng-class="{'active': tr.chooseType === 'wb'}">外币</li>
+        </ul>
+    </div>
+    <div class="t-r-main">
+        <div class="t-r-header">
+            <div class="t-r-h-item">
+                <div class="item-icon"></div>
+                <div class="item-con">
+                    <div class="item-con-title">
+                        涉案总金额
+                    </div>
+                    <div class="item-con-con">
+                        <span class="light-text">{{tr.jsonData.totalData.totalAmount | rmb_wy}}</span>
+                    </div>
+                </div>
+            </div>
+            <div class="t-r-h-item">
+                <div class="item-icon"></div>
+                <div class="item-con">
+                    <div class="item-con-title">
+                        涉案总人数
+                    </div>
+                    <div class="item-con-con">
+                        <span class="light-text">{{tr.jsonData.totalData.totalCard}}</span>
+                        <span>人</span>
+                    </div>
+                </div>
+            </div>
+            <div class="t-r-h-item">
+                <div class="item-icon"></div>
+                <div class="item-con">
+                    <div class="item-con-title">
+                        涉案总账户
+                    </div>
+                    <div class="item-con-con">
+                        <span class="light-text">{{tr.jsonData.totalData.totalAccount}}</span>
+                        <span>个</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="t-r-body">
+            <div class="t-r-t-title">
+                <span class="title-con">涉案人员</span>
+                <pui-button class="open-detail" on-click="tr.openDetail($event)">查看详情</pui-button>
+            </div>
+            <div class="t-r-box">
+                <div class="item-box">
+                    <div class="box-head">
+                        转出金额人员 TOP 10
+                        <span ng-click="tr.goDetail($event, 'zcj')">更多</span>
+                    </div>
+                    <ul class="box-body">
+                        <li class="box-li" ng-repeat="item in tr.jsonData.zczjData track by $index">
+                            <span class="box-left">{{$index + 1}}</span>
+                            <span class="box-middle">{{item.fromName}}</span>
+                            <span class="box-right">{{item.totalMoney | rmb_wy}}</span>
+                        </li>
+                    </ul>
+                </div>
+                <div class="item-box">
+                    <div class="box-head">
+                        转入金额人员 TOP 10
+                        <span ng-click="tr.goDetail($event, 'zrj')">更多</span>
+                    </div>
+                    <ul class="box-body">
+                        <li class="box-li" ng-repeat="item in tr.jsonData.zrzjData track by $index">
+                            <span class="box-left">{{$index + 1}}</span>
+                            <span class="box-middle">{{item.toName}}</span>
+                            <span class="box-right">{{item.totalMoney | rmb_wy}}</span>
+                        </li>
+                    </ul>
+                </div>
+                <div class="item-box">
+                    <div class="box-head">
+                        轧差金额正向人员 TOP 10
+                        <span ng-click="tr.goDetail($event, 'gcjz')">更多</span>
+                    </div>
+                    <ul class="box-body">
+                        <li class="box-li" ng-repeat="item in tr.jsonData.zjzczData track by $index">
+                            <span class="box-left">{{$index + 1}}</span>
+                            <span class="box-middle">{{item.fromName}}</span>
+                            <span class="box-right">{{item.netting | rmb_wy}}</span>
+                        </li>
+                    </ul>
+                </div>
+                <div class="item-box">
+                    <div class="box-head">
+                        轧差金额负向人员 TOP 10
+                        <span ng-click="tr.goDetail($event, 'gcjf')">更多</span>
+                    </div>
+                    <ul class="box-body">
+                        <li class="box-li" ng-repeat="item in tr.jsonData.zjzcfData track by $index">
+                            <span class="box-left">{{$index + 1}}</span>
+                            <span class="box-middle">{{item.fromName}}</span>
+                            <span class="box-right">{{item.netting | rmb_wy}}</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="t-r-t-title">
+                <span class="title-con">涉案账户</span>
+            </div>
+            <div class="t-r-box">
+                <div class="item-box">
+                    <div class="box-head">
+                        转出金额账户 TOP 10
+                        <span ng-click="tr.goDetail($event, 'zcr')">更多</span>
+                    </div>
+                    <ul class="box-body">
+                        <li class="box-li" ng-repeat="item in tr.jsonData.zczhData track by $index">
+                            <span class="box-left">{{$index + 1}}</span>
+                            <span class="box-middle">{{item.fromAccount}}</span>
+                            <span class="box-right">{{item.totalMoney | rmb_wy}}</span>
+                        </li>
+                    </ul>
+                </div>
+                <div class="item-box">
+                    <div class="box-head">
+                        转入金额人账户 TOP 10
+                        <span ng-click="tr.goDetail($event, 'zrr')">更多</span>
+                    </div>
+                    <ul class="box-body">
+                        <li class="box-li" ng-repeat="item in tr.jsonData.zrzhData track by $index">
+                            <span class="box-left">{{$index + 1}}</span>
+                            <span class="box-middle">{{item.toAccount}}</span>
+                            <span class="box-right">{{item.totalMoney | rmb_wy}}</span>
+                        </li>
+                    </ul>
+                </div>
+                <div class="item-box">
+                    <div class="box-head">
+                        轧差金额正向账户 TOP 10
+                        <span ng-click="tr.goDetail($event, 'gcrz')">更多</span>
+                    </div>
+                    <ul class="box-body">
+                        <li class="box-li" ng-repeat="item in tr.jsonData.zhzczData track by $index">
+                            <span class="box-left">{{$index + 1}}</span>
+                            <span class="box-middle">{{item.fromAccount}}</span>
+                            <span class="box-right">{{item.netting | rmb_wy}}</span>
+                        </li>
+                    </ul>
+                </div>
+                <div class="item-box">
+                    <div class="box-head">
+                        轧差金额负向账户 TOP 10
+                        <span ng-click="tr.goDetail($event, 'gcrf')">更多</span>
+                    </div>
+                    <ul class="box-body">
+                        <li class="box-li" ng-repeat="item in tr.jsonData.zhzcfData track by $index">
+                            <span class="box-left">{{$index + 1}}</span>
+                            <span class="box-middle">{{item.fromAccount}}</span>
+                            <span class="box-right">{{item.netting | rmb_wy}}</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>

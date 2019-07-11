@@ -1,0 +1,54 @@
+// bootstrap 部分需要更改的样式 
+// tooltip部分样式
+
+    .tooltip-inner{
+        background-color: #154698;
+    }
+    .tooltip{
+        &.bottom{
+            border-top-color: #154698;
+            .tooltip-arrow{
+                border-bottom-color: #154698;
+            }
+        }
+        &.top{
+            .tooltip-arrow{
+                border-top-color: #154698;
+            }
+        }
+        &.left{
+            .tooltip-arrow{
+                border-left-color: #154698;
+            }
+        }
+        &.right{
+            .tooltip-arrow{
+                border-right-color: #154698;
+            }
+        }
+    }
+
+    //popover 部分样式
+    .popover{
+        color:#fff;
+        background-color: #154698;
+        border-color: transparent;
+        .popover-content{
+            max-height: 300px;
+            overflow-y: scroll;
+        }
+        &.left{
+            .arrow{
+                &:after{
+                    border-left-color: #154698
+                }
+            }
+        }
+        &.right{
+            .arrow{
+                &:after{
+                    border-right-color: #154698
+                }
+            }
+        }
+    }

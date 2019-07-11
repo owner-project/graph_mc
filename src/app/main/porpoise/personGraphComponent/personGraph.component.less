@@ -1,0 +1,151 @@
+/*组件部分样式*/
+#person-graph-main{
+    height: calc(~'100% - 32px');
+    position: relative;
+    .df-select-width{
+        text-indent: 0;
+    }
+    .selected {
+        .data-label {opacity: 0.75;}
+    }
+    .flags-selected-labels {
+        h2 {background-color: #2b6be6}
+    }
+    .flags-data-labels {
+        font: normal 12px Arial;
+        color: #fff;
+        height: 60px;
+        width: 150px;
+        overflow: hidden;
+        border: 1px solid #5384E1;
+        background-color: #313657; /*transition: left 0.1s linear, top 0.1s linear;*/
+        h2 {
+            height: 22px; line-height: 22px; background-color: #5384E1; padding: 0 0 0 4px;
+            font-size: 12px;
+            margin: 0;
+            .title-more-num{
+                color:#fff;
+                float: right;
+                margin-right: 6px;
+                width: 16px;
+                height: 16px;
+                background: #E7A538;
+                border-radius: 8px;
+                text-align: center;
+                line-height: 16px;
+                margin-top: 2px;
+            }
+
+        }
+        div {padding: 2px 6px 6px 10px; margin:0; overflow: auto; height:40px;cursor: pointer; }
+        p {
+            margin:0;
+            padding-bottom: 6px;
+        }
+    }
+    .assistant-body2-title {
+        height: 30px;
+        padding: 15px 0 5px 20px;
+        color: #fff;
+        .assistant-body2-detail {
+            height: 30px;
+            width: 56px;
+            float: left;
+            border-radius: 2px;
+            text-align: center;
+            line-height: 30px;
+        }
+        /*标签样式*/
+        .tag-list{
+            margin-left: 15px;
+            .tag{
+                padding: 2px 8px;
+                color: rgba(255,255,255,0.5);
+                cursor: pointer;
+                border-radius: 12px;
+                line-height: 20px;
+                margin-right: 16px;
+                &.selected{
+                    color: #fff;
+                    background-color: rgba(41, 121, 255, 0.3);
+                }
+                &:hover{
+                    color: #fff;
+                }
+            }
+
+        }
+        .person-search-btn{
+            color: rgba(255,255,255,0.5);
+            background-image: url("../../../../assets/theme-sb/graph/person_graph_search.png");
+            background-repeat: no-repeat;
+            background-position: center center;
+            height: 32px;
+            width: 32px;
+            min-width: 32px;
+            border-radius: 50%;
+            opacity: 0.5;
+            transition: 300ms;
+            &:hover{
+                opacity: 1;
+            }
+        }
+        .person-back-btn{
+            color: rgba(255,255,255,0.5);
+            background-image: url("../../../../assets/theme-sb/graph/person-graph-back.png");
+            background-repeat: no-repeat;
+            background-position: 14px;
+            padding-left:30px;
+        }
+    }
+
+    .assistant-body-echart {
+        margin: 0 10px;
+        min-height: 200px;
+        overflow: hidden;
+    }
+    .width80{
+        width: 80px;
+        margin: 0 5px;
+    }
+    .visibility-hidden{
+        visibility: hidden;
+    }
+    .no-data{
+        color:#fff;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%,-50%)
+    }
+    .graphTooltip{
+        background-color: #223870;
+        border-radius: 8px;
+        box-shadow: 0 12px 24px #000000;
+        padding:16px;
+        position: absolute;
+        bottom: 20%;
+        font-size: 12px;
+        line-height: 28px;
+        left: 20%;
+        z-index: 3;
+        max-height: 300px;
+        overflow-y: scroll;
+        white-space: nowrap;
+        .event-list:not(:last-child){
+            border-bottom: 1px dotted rgba(41,121,255,.5);
+        }
+        .event-detail:not(:last-child){
+            border-bottom: 1px dotted rgba(41,121,255,.5);
+        }
+        .colorWhite{
+            color: #fff;
+        }
+        .colorWhite70{
+            color: rgba(255,255,255,.7)
+        }
+        .colorWhite50{
+            color: rgba(255,255,255,.5)
+        }
+    }
+}

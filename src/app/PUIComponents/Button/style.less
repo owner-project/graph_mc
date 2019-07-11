@@ -1,0 +1,138 @@
+.button-animation(@color, @name) {
+    @keyframes @name
+    {
+        0% {
+            background-image: radial-gradient(60px at left bottom, fade(@color, 0%) 0%, fade(@color, 0%) 100%);
+        }
+        10% {
+            background-image: radial-gradient(60px at left bottom, fade(@color, 15%) 10%, fade(@color, 0%) 10%);
+        }
+        20% {
+            background-image: radial-gradient(60px at left bottom, fade(@color, 15%) 20%, fade(@color, 0%) 20%);
+        }
+        30% {
+            background-image: radial-gradient(60px at left bottom, fade(@color, 15%) 30%, fade(@color, 0%) 30%);
+        }
+        40% {
+            background-image: radial-gradient(60px at left bottom, fade(@color, 30%) 0%, fade(@color, 30%) 10%, fade(@color, 15%) 10%, fade(@color, 15%) 40%, fade(@color, 0%) 40%);
+        }
+        50% {
+            background-image: radial-gradient(60px at left bottom, fade(@color, 30%) 0%, fade(@color, 30%) 20%, fade(@color, 15%) 20%, fade(@color, 15%) 50%, fade(@color, 0%) 50%);
+        }
+        60% {
+            background-image: radial-gradient(60px at left bottom, fade(@color, 30%) 0%, fade(@color, 30%) 30%, fade(@color, 15%) 30%, fade(@color, 15%) 60%, fade(@color, 0%) 60%);
+        }
+        70% {
+            background-image: radial-gradient(60px at left bottom, fade(@color, 30%) 0%, fade(@color, 30%) 40%, fade(@color, 15%) 40%, fade(@color, 15%) 70%, fade(@color, 0%) 70%);
+        }
+        80% {
+            background-image: radial-gradient(60px at left bottom, fade(@color, 30%) 0%, fade(@color, 30%) 50%, fade(@color, 15%) 50%, fade(@color, 15%) 80%, fade(@color, 0%) 80%);
+        }
+        90% {
+            background-image: radial-gradient(60px at left bottom, fade(@color, 30%) 0%, fade(@color, 30%) 60%, fade(@color, 15%) 60%, fade(@color, 15%) 90%, fade(@color, 0%) 90%);
+        }
+        100% {
+            background-image: radial-gradient(60px at left bottom, fade(@color, 30%) 0%, fade(@color, 30%) 100%);
+        }
+    }
+}
+
+.button-animation(#3F6CC7, buttonActiveDefault);
+.button-animation(#1A58D3, buttonActivePrimary);
+
+
+.pui-button {
+    position: relative;
+    box-sizing: border-box !important;
+    min-width: 56px;
+    text-align: center;
+    font-size: 12px;
+    background-color: transparent;
+    cursor: pointer;
+    color: #2979ff;
+    padding: 6px 16px;
+    line-height: 1.4;
+    font-weight: bold;
+    border-radius: 2px;
+
+    &.no-shadow {
+        box-shadow: none !important;
+        color: @pui-main-color;
+
+        &:hover {
+            color: @pui-main-color;
+        }
+    }
+
+    &:hover {
+        background-color: fade(@pui-main-color, 12%);
+        box-shadow: inset 0 0 0 1px @pui-main-color;
+        color: @pui-main-color;
+    }
+
+    &:active {
+        &:after {
+            display: block;
+            background-image: radial-gradient(60px at left bottom, fade(#3F6CC7, 30%) 0%, fade(#3F6CC7, 30%) 100%);
+        }
+    }
+
+    &.large {
+        min-width: 60px;
+        font-size: 14px;
+    }
+
+    &.primary {
+        color: @pui-primary-text-color;
+        background-color: @pui-main-color;
+        box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.06);
+
+        &:hover {
+            background-color: saturate(@pui-main-color, 15%);
+        }
+
+        &:after {
+            animation: buttonActivePrimary 0.3s;
+        }
+    }
+
+    &.disabled {
+        opacity: 0.6;
+        cursor: not-allowed;
+
+        &:hover {
+            color: fade(@pui-main-text-color, 70%);
+            box-shadow: inset 0 0 0 1px fade(@pui-main-color, 60%);
+            background-color: transparent;
+        }
+
+        &.primary {
+            &:hover {
+                background-color: @pui-main-color;
+                color: @pui-primary-text-color;
+            }
+        }
+
+        &.no-shadow {
+            &:hover {
+                color: @pui-main-color;
+            }
+        }
+
+        &:after {
+            display: none !important;
+        }
+    }
+
+    &:after {
+        content: '';
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        border-radius: 2px;
+        display: none;
+        left: 0px;
+        top: 0px;
+        animation: buttonActiveDefault 0.2s;
+    }
+}

@@ -1,0 +1,8 @@
+<div class="pui-checkbox-wrap" ng-class="{'has-label':labelText}"  ng-click="check($event)">
+    <span class="pui-checkbox" ng-class="{'checked': value, 'disabled': !!ngDisabled, 'indeterminate': !!indeterminate}"></span>
+   <label class="pui-checkbox-label" ng-if="labelText">
+        <input type="checkbox" ng-model="value" disabled ="disabled">
+        <div class="label-text">{{labelText}}</div>
+   </label>     
+</div>
+

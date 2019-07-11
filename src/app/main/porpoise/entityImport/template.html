@@ -1,0 +1,53 @@
+<div class="pui-modal modal" >
+    <div class="modal-dialog porpoise-import-graph-modal">
+        <div class="modal-header">
+            <div class="modal-title">自定义模版导入</div>
+            <div class="modal-close-icon" ng-click="fn.dismiss()"></div>
+        </div>
+        <div class="modal-body">
+            <div class="edge-box">
+                <input class="ng-hide" type="file" ng-model="data.file" ng-if="!data.file" file-upload >
+                <div class="item-con upload-file-wrap" ng-if="!data.file" ng-click="fn.chooseFile($event)">
+                    <span>选择上传文件</span>
+                </div>
+                <div class="item-con has-file pointer" ng-if="data.file">
+                    <span ng-bind="data.file.name"></span>
+                    <div class="delete-file-icon icon-circle-close" ng-click="fn.deleteFile($event)"></div>
+                </div>
+                <div class="file-upload-tip">
+                    <p>支持Excel和CSV文件（单个Excel最大100M，CSV最大200M）</p>
+                </div>
+                <div ng-if="data.file.percentage" class="progress-wrap">
+                    <pui-progress style="width: 306px" percent="data.file.percentage"></pui-progress>
+                </div>
+            </div>
+            <div class="preview" ng-if="data.uploaded">
+                <span class="title">文件预览</span>
+                <div class="des">
+                    <p>1. 请上传有标准行列的一维数据表格。（有合并单元格的数据请处理过后再上传，否则可能出现表头识别有误）</p>
+                    <p>2. 日期字段需包含年月日（如2016/1/1），或年月日时分秒。（如2016/1/1 00:00）</p>
+                </div>
+                <div pui-table type="header" class="file-content">
+                    <table cellpadding="0" cellspacing="0" border="0" style="table-layout:auto">
+                        <thead>
+                            <tr>
+                                <th ng-repeat="item in data.result track by $index"
+                                    ng-bind="item.value">
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="item in data.uploadContent track by $index">
+                                <td ng-repeat="itemTd in item track by $index" ng-bind="itemTd"></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <pui-button ng-show="data.file" class="cancel-btn" on-click="fn.dismiss()">取消</pui-button>
+            <pui-button ng-show="data.file" class="confirm-btn" type="primary" on-click="fn.sure()" ng-disabled="data.uploading" ng-bind="data.btnStr"></pui-button>
+        </div>
+    </div>
+</div>

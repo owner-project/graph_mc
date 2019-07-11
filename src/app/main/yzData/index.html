@@ -1,0 +1,32 @@
+<div class="yz-main">
+    <div class="select-bar">
+        <pui-layout align="center" class="select-layout">
+            <pui-select class="select-item" placeholder="请选择" ng-change="yd.chooseData()" value-field="id" options="yd.yzList" placement="center" ng-model="yd.chooseYz"></pui-select>
+        </pui-layout>
+    </div>
+    <div class="yz-body">
+        <div class="yz-body-header" pui-table type="header">
+            <table>
+                <thead>
+                    <tr>
+                        <th style="width: 50px">序号</th>
+                        <th ng-repeat="item in yd.yzThList[yd.chooseYz] track by $index">{{item.name}}</th>                        
+                    </tr>
+                </thead>
+            </table>
+        </div>
+        <div class="yz-body-list" pui-table type="body">
+            <table>
+                <tbody ng-if="yd.yzBodyList.length > 0">
+                    <tr ng-repeat="item in yd.yzBodyList track by $index">
+                        <td style="width: 50px">{{$index + 1}}</td>
+                        <td ng-repeat="n in yd.yzThList[yd.chooseYz] track by $index">
+
+                            {{item[n.key]}}
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

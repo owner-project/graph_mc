@@ -1,0 +1,29 @@
+<div class="modal pui-modal size-md">
+    <div class="modal-dialog am-m-modal">
+        <div class="modal-header">
+            <div class="modal-title">保存</div>
+            <div class="modal-close" ng-click="fn.dismiss()"></div>
+        </div>
+        <div class="modal-body">
+            <div class="am-m-form-group">
+                <div class="am-m-form-item">
+                    <div class="am-m-form-label">名称</div>
+                    <div class="am-m-form-input-wrap">
+                        <pui-input ng-model="data.recordName"></pui-input>
+                    </div>
+                </div>
+                <div class="am-m-form-item">
+                    <div class="am-m-form-label">描述</div>
+                    <div class="am-m-form-input-wrap">
+                        <pui-input ng-model="data.description"></pui-input>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <pui-button class="pull-right" on-click="fn.dismiss()">取消</pui-button>
+            <pui-button type="primary" class="pull-right mgr10" on-click="fn.sure()">确定</pui-button>
+
+        </div>
+    </div>
+</div>

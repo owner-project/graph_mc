@@ -1,0 +1,34 @@
+//企业画像
+.corporate-main {
+    color: @text-color-title;
+    .corporate-title {
+        color: @text-color-title;
+    }
+    .corporate-title-img {
+        .icon-img(@base-url, @icon-corporate-portrait-title-icon);
+    }
+    .corporate-body {
+        .corporate-box {
+            .corporate-box-box {
+                background-color: @bg-color-lighter;
+                .box-corporate-score {
+                    color: #FF8660;
+                }
+                &.md-bg {
+                    .bg-img(@base-url, @icon-corporate-portrait-title-bg-icon);
+                }
+                &.map-md-bg {
+                    .bg-img(@base-url, @icon-corporate-portrait-title-map-bg-icon);
+                }
+                .corporate-box-title {
+                    background-color: @bg-color-light;
+                    .corporate-box-title-right {
+                        i {
+                            .bg-img(@base-url, @icon-corporate-portrait-title-more-icon);
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

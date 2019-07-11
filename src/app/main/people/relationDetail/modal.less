@@ -1,0 +1,46 @@
+.relation-list-modal {
+    width: 82% !important;
+    max-width: 1190px !important;
+    overflow: auto;
+    .modal-header {
+        border-bottom: 0 !important;
+    }
+    .no-data {
+        margin-bottom: 40px;
+    }
+    .edge-box {
+        .my-relation-body {
+            min-height: 200px;
+        }
+    }
+    .pui-table-body.pui-table-body{
+        overflow-x: auto;
+    }
+    .relation-detail-table{
+        @border-color:#2979ff;
+        border:1px solid @border-color;
+
+        tr{
+            text-align: center;
+            border: 1px solid @border-color; 
+            th{
+                border: 1px solid @border-color; 
+                text-align: center;
+            }
+            td{
+                border: 1px solid @border-color; 
+                text-align: center;
+                padding: 0;
+                .has-border{
+                    border-bottom: 1px solid @border-color;
+                    padding: 4px 0;
+                    &:last-child{
+                        border:none;
+                    }
+                }
+            }
+        }
+
+    }
+}
+

@@ -1,0 +1,37 @@
+<div class="focus-people-dynamic">
+  <div ng-if="focusPeople.dynamicList.length > 0">
+      <p>已关注人员<span ng-if="!focusPeople.showNoData">近30天内</span>动态</p>
+      <ul ng-class="!focusPeople.showNoData ? 'scroll-wrap' : ''">
+        <li ng-repeat="item in focusPeople.dynamicList">
+          <img ng-src="{{focusPeople.appIconMap[item.type] ? focusPeople.appIconMap[item.type] : focusPeople.appIconMap['default']}}">
+          <div>
+            <p>
+              <span ng-show="item.entityList.length > 1">
+                <span class="name" ng-click="focusPeople.into_porpoise(item.entityList[0].key)">{{item.entityList[0].name}}</span>与
+                <span class="name" ng-click="focusPeople.into_porpoise(item.entityList[1].key)">{{item.entityList[1].name}}</span>
+              </span>
+              <span ng-show="item.entityList.length === 1" class="name" ng-click="focusPeople.into_porpoise(item.entityList[0].key)">{{item.entityList[0].name}}</span>
+              <label>{{item.string}}</label>
+            </p>
+          </div>
+        </li>
+      </ul>
+      <uib-pagination class="pagination-sm"
+        ng-if="focusPeople.showNoData"
+        total-items="focusPeople.totalCount"
+        ng-change="focusPeople.getFocusDynamic()"
+        ng-model="focusPeople.pageNo"
+        previous-text="上一页"
+        next-text="下一页"
+        force-ellipses="true"
+        max-size="3"
+        items-per-page="focusPeople.PAGE_SIZE"
+        boundary-link-numbers="true">
+      </uib-pagination>
+  </div>
+
+  <div class="no-data"
+    ng-include="'app/components/header/aboutMySearch/template.html'"
+    ng-if="focusPeople.dynamicList.length === 0 && focusPeople.showNoData">
+  </div>
+</div>

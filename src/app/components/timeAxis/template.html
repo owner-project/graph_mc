@@ -1,0 +1,26 @@
+<div class="time-axis-wrap">
+    <div class="event-boxes-wrap">
+        <div class="event-boxes" ng-style="{'transform': 'translateX(' + (data.nowIndex * -160 + data.width / 2 + 80) + 'px)'}" ng-class="{'animate': data.hasAnimate}">
+            <div class="event-box-wrap" ng-class="{'top': (list.length - $index) % 2 === 0, 'bottom': (list.length - $index) % 2 === 1}" ng-repeat="item in list">
+                <div class="event-box">
+                    <div class="event-title" ng-if="(list.length - $index) % 2 === 0">
+                        <span ng-bind="item.sj"></span>
+                    </div>
+                    <div class="event-content-wrap">
+                        <div ng-repeat="event in item.list" ng-style="{'padding-top': $first ? '8px': '0px', 'padding-bottom': $last ? '8px' : '0px'}" class="event-content">
+                            <span ng-bind="event.xgr"></span>
+                            <span ng-bind="event.xgnr"></span>
+                        </div>
+                    </div>
+                    <div class="event-title" ng-if="(list.length - $index) % 2 === 1">
+                        <span ng-bind="item.sj"></span>
+                    </div>
+                </div>
+                <div class="event-dot"></div>
+            </div>
+        </div>
+    </div>
+    <div class="icon-personal-prev-icon-sb control-btn prev" ng-click="change(-1)"></div>
+    <div class="icon-personal-next-icon-sb control-btn next" ng-click="change(1)"></div>
+    <div class="line-bar"></div>
+</div>

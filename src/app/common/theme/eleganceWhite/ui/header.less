@@ -1,0 +1,40 @@
+.header-main {
+    .header-left {
+        background-color: @bg-color-primary;
+    }
+    .header-content {
+        .webwidget-menu-glide {
+            .webwidget-menu-glide-ul {
+                .webwidget-menu-glide-li {
+                    a {
+                        &.current {
+                            color: @text-color-highlight;
+                            //background-color: @bg-color-highlight;
+                        }
+                    }
+                }
+            }
+        }
+    }
+    .header-right {
+        .header-right-ul {
+            @base-url: '../../../assets/theme-ew/';
+            .header-application {
+                .icon-img(@base-url, @icon-header-left-application);
+                background-size: 16px;
+            }
+            .header-setting {
+                .icon-img(@base-url, @icon-header-left-setting);
+                background-size: 16px;
+            }
+            .header-help {
+                .icon-img(@base-url, @icon-header-left-help);
+                background-size: 16px;
+            }
+            .header-logout {
+                .icon-img(@base-url, @icon-header-left-logout);
+                background-size: 16px;
+            }
+        }
+    }
+}

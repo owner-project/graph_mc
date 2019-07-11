@@ -1,0 +1,125 @@
+.consensus-main {
+    width: 100%;
+    height: 100%;
+
+    .tra-left {
+        height: 100%;
+        width: 80%;
+        float: left;
+        position: relative;
+
+        .tra-body-graph {
+            width: 100%;
+            height: 100%;
+        }
+
+        .tra-b-con {
+            width: calc(~'100% - 40px');
+            height: calc(~'100% - 50px');
+            margin: 25px 20px;
+
+            .p-t-body {
+                height: calc(~'100% - 50px');
+            }
+
+            .cb-length {
+                width: 60px;
+            }
+
+            .table-last-layout {
+                
+                .go-graph {
+                    display: inline-block;
+                    width: 16px;
+                    height: 16px;
+                }
+                .go-graph-title {
+                    margin-left: 5px;
+                }
+            }
+        }
+    }
+    .tra-right {
+        height: calc(~'100% - 2px');
+        width:  calc(~'20% - 2px');
+        float: left;
+        overflow: hidden;
+        .header-ul {
+            width: 100%;
+            height: 45px;
+            .header-li {
+                height: 29px;
+                padding: 8px 0px;
+                width: 100%;
+                text-align: center;
+                div {
+                    line-height: 29px;
+                }
+            }
+        }
+        .header-con {
+            width: 100%;
+            height: calc(~'100% - 45px');
+
+            .detail-con {
+                width: 100%;
+                height: 100%;
+                overflow: auto;
+
+                li {
+                    display: flex;
+                    width: 100%;
+                    word-break: all;
+                    line-height: 30px;
+
+                    & > span {
+                        &:nth-child(1) {
+                            width: 80px;
+                            text-align: right;
+                            margin-right: 10px;
+                            flex: 0 0 auto;
+                        }
+                    }
+                }
+                .detial-list-con {
+                    display: block;
+                    height: auto;
+
+                    .trade-li-item {
+                        width: 100%;
+                        .trade-li-item-title {
+                            width: calc(~'100% - 50px');
+                            padding-left: 50px;
+                        }
+                        .trade-li-item-con {
+                            width: calc(~'100% - 60px');
+                            padding-left: 60px;
+                            margin-bottom: 10px;
+                            overflow: hidden;
+                            transition: 500ms;
+                            &.fewer {
+                                margin-bottom: 0;
+                                height: 0;
+                            }
+
+                            .item-tpl {
+                                display: flex;
+                                & > span {
+                                    &:nth-child(1) {
+                                        width: 80px;
+                                        text-align: right;
+                                        margin-right: 10px;
+                                    }
+                                    &:nth-child(2) {
+                                        word-break: break-all;
+                                    }
+                                }
+                            }
+                            
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

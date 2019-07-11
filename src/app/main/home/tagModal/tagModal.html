@@ -1,0 +1,34 @@
+<div class="pui-modal modal confirm add-tag-modal" style="top:30%">
+    <div class="modal-dialog relation-list-modal">
+        <div class="modal-header">
+            <div class="modal-title">创建标签</div>
+            <div class="modal-close-icon" ng-click="fn.dismiss()"></div>
+        </div>
+        <div class="modal-body">
+            <div class="form-horizontal">
+                <div class="form-group">
+                    <label for="inputEmail3" class="col-sm-2 control-label">标签名称</label>
+                    <div class="col-sm-9">
+                        <pui-input type=text ng-model='data.tagName'></pui-input>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="inputEmail3" class="col-sm-2 control-label">业务说明</label>
+                    <div class="col-sm-9">
+                        <pui-textarea ng-model='data.tagDescription'></pui-textarea>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="inputEmail3" class="col-sm-2 control-label">实体标识字段</label>
+                    <div class="col-sm-9">
+                        <pui-select placeholder="请选择" ng-model='data.tagField' data-options='data.tagOptionList'></pui-select>
+                    </div>
+                </div>
+                <pui-layout class="" justify="end">
+                        <pui-button class="mgr10" data-on-click="fn.addTag()">确定</pui-button>
+                        <pui-button type="primary" data-on-click="fn.dismiss()">取消</pui-button>
+                    </pui-layout>
+            </div>
+        </div>
+    </div>
+</div>

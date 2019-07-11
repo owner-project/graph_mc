@@ -1,0 +1,185 @@
+<div class="pui-modal modal">
+    <div class="modal-dialog entity-relation-choose-modal">
+        <div class="modal-header">
+            <div class="modal-title">自定义模版导入</div>
+            <div class="modal-close-icon" ng-click="fn.dismiss()"></div>
+        </div>
+        <div class="entity-relation-body modal-body" ng-if="data.state === 'choose'">
+            <pui-layout class="entity-relation-content">
+                <div class="tip">请在右侧属性编辑区域进行编辑后，系统会自动进行绘制</div>
+                <relation-map-graph class="entity-relation-map" mode="node-link" nodes="data.entityList" links="data.relationList" data-single="1" data-no-lock="1" on-unselect-all="fn.unselectAll()" on-click-link="fn.relationChoose(data)" on-click-node="fn.nodeChoose(data)"></relation-map-graph>
+                <div class="operate-block">
+                    <div class="entity-relation-tab">
+                        <div class="operate-block-title add-entity"
+                            ng-bind="data.selectType === 'none' ? '添加实体' : '修改实体'"
+                            ng-class="data.entityRelationTab === 'entity' ? 'current' : ''"
+                            ng-if="data.selectType === 'none' || data.selectType === 'node'"
+                            ng-click="fn.chooseAddType('entity')">
+                        </div>
+                        <div class="operate-block-title add-relation"
+                            ng-bind="data.selectType === 'none' ? '添加关系' : '修改关系'"
+                            ng-class="data.entityRelationTab === 'relation' ? 'current' : ''"
+                            ng-if="data.selectType === 'none' || data.selectType === 'edge'"
+                            ng-click="fn.chooseAddType('relation')">
+                        </div>
+                    </div>
+                    <div class="add-content"
+                        ng-if="(data.selectType === 'none' || data.selectType === 'node') && data.entityRelationTab === 'entity'">
+                        <pui-layout class="node-info" align="center">
+                            <div class="node-info-label">大类</div>
+                            <pui-select value-field="id" data-dropdown-parent="body" class="mgl5 node-info-content"
+                                        options="data.options.entity"
+                                        ng-change="fn.getDataEntityChildList(data.addNode)" data-placeholder="实体大类"
+                                        ng-model="data.addNode.type"></pui-select>
+                        </pui-layout>
+                        <pui-layout class="node-info" align="center">
+                            <div class="node-info-label">类型</div>
+                            <pui-select value-field="id" data-dropdown-parent="body" class="mgl5 node-info-content"
+                                        options="data.addNode.entityChildList" data-placeholder="实体类型"
+                                        ng-model="data.addNode.dataType"></pui-select>
+                        </pui-layout>
+                        <pui-layout class="node-info" align="center">
+                            <div class="node-info-label">标识列</div>
+                            <pui-select value-field="id" data-dropdown-parent="body" class="mgl5 node-info-content"
+                                        options="data.options.headerInfo" data-search="1"
+                                        data-placeholder="实体标识对应列" ng-model="data.addNode.keyLine"></pui-select>
+                        </pui-layout>
+                        <pui-layout class="node-info" align="center">
+                            <div class="node-info-label">名称列</div>
+                            <pui-select value-field="id" data-dropdown-parent="body" class="mgl5 node-info-content"
+                                        options="data.options.headerInfo" data-search="1"
+                                        data-placeholder="实体名称对应列" ng-model="data.addNode.nameLine"></pui-select>
+                        </pui-layout>
+                        <pui-layout class="add-content-btn" justify="end">
+                            <pui-button class="mgr10" ng-if="data.selectType !== 'none'" on-click="fn.deleteElement(data.entityList, data.addNode)">删除</pui-button>
+                            <pui-button type="primary" on-click="data.selectType === 'none' ? fn.pushNode() : fn.modifyNode()">{{data.selectType === 'none' ? '添加' : '修改'}}</pui-button>
+                        </pui-layout>
+                    </div>
+                    <div class="add-content add-relation-content"
+                        ng-if="(data.selectType === 'none' || data.selectType === 'edge') && data.entityRelationTab === 'relation'">
+                        <pui-layout class="node-info" align="center">
+                            <div class="node-info-label">大类</div>
+                            <pui-select value-field="id" data-dropdown-parent="body" class="mgl5 node-info-content"
+                                        options="data.options.relation"
+                                        ng-change="fn.getDataRelationChildList(data.addEdge)" data-placeholder="关系大类"
+                                        ng-model="data.addEdge.type"></pui-select>
+                        </pui-layout>
+                        <pui-layout class="node-info" align="center">
+                            <div class="node-info-label">类型</div>
+                            <pui-select ng-if="data.addEdge.type !== '00'" value-field="id" data-dropdown-parent="body" class="mgl5 node-info-content"
+                                        options="data.addEdge.relationChildList"
+                                        data-placeholder="关系类型" ng-model="data.addEdge.dataType"></pui-select>
+                            <pui-select ng-if="data.addEdge.type === '00'" value-field="id" data-dropdown-parent="body" class="mgl5 node-info-content"
+                                        options="data.options.headerInfo" data-search="1"
+                                        data-placeholder="自定义关系类型列" ng-model="data.addEdge.dataLabel"></pui-select>
+                        </pui-layout>
+                        <!-- <pui-layout class="node-info" align="center">
+                            <pui-layout align="center">
+                                <pui-checkbox ng-model="data.addEdge.isCustomDataLabel"></pui-checkbox>
+                                <div class="mgl10">手写关系内容</div>
+                            </pui-layout>
+                        </pui-layout> -->
+                        <!-- <pui-layout class="node-info" ng-if="data.addEdge.isCustomDataLabel"  align="center">
+                            <div class="node-info-label">内容列</div>
+                            <pui-select value-field="id" data-dropdown-parent="body" class="mgl5 node-info-content"
+                                        options="data.options.headerInfo" data-search="1"
+                                        data-placeholder="自定义关系内容列" ng-model="data.addEdge.customDataLabelLine"></pui-select>
+                        </pui-layout> -->
+                        <pui-layout class="node-info" align="center">
+                            <div class="node-info-label">来源实体</div>
+                            <pui-select value-field="id" data-dropdown-parent="body" class="mgl5 node-info-content"
+                                        options="data.entityList" data-placeholder="来源实体" data-search="1"
+                                        ng-model="data.addEdge.from"></pui-select>
+                        </pui-layout>
+                        <pui-layout class="node-info" align="center">
+                            <div class="node-info-label">目标实体</div>
+                            <pui-select value-field="id" data-dropdown-parent="body" class="mgl5 node-info-content"
+                                        options="data.entityList" data-placeholder="目标实体" data-search="1"
+                                        ng-model="data.addEdge.to"></pui-select>
+                        </pui-layout>
+                        <pui-layout class="add-content-btn" justify="end">
+                            <pui-button class="mgr10" ng-if="data.selectType !== 'none'" on-click="fn.deleteElement(data.relationList, data.addEdge)">删除</pui-button>
+                            <pui-button type="primary" on-click="data.selectType === 'none' ? fn.pushRelation() : fn.modifyRelation()">{{data.selectType === 'none' ? '添加' : '修改'}}</pui-button>
+                        </pui-layout>
+                    </div>
+                </div>
+            </pui-layout>
+            <!-- <pui-layout align="center">
+                <div class="mgr10">继续推演关系层数</div>
+                <pui-select value-field="id" data-dropdown-parent="body" class="mgl5" style="width: 150px"
+                            options="data.options.level" data-placeholder="选择层数" ng-model="data.depth"></pui-select>
+                <div class="mgr10 magl20">推演关系类型</div>
+                    <pui-select value-field="graphName" label-field="graphDesc" multiple max-items="10" ng-init="data.deduce_graphName = 'test_graph'"
+                    data-dropdown-parent="body" class="mgl5"
+                                    options="data.graphNameList" data-placeholder="选择关系类型" ng-model="data.deduce_graphName" ng-change="fn.aaaa()"></pui-select>
+            </pui-layout> -->
+        </div>
+       
+        <div class="modal-body" ng-if="data.state === 'components'">
+            <div class="pui-table">
+                <table>
+                    <colgroup>
+                        <col width="30%">
+                        <col width="40%">
+                        <col width="30%">
+                    </colgroup>
+                    <thead>
+                    <tr>
+                        <th>团伙名称</th>
+                        <th>实体数量</th>
+                        <th>操作</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr ng-repeat="item in data.recordList">
+                        <td ng-if="data.pager.pageNo === 1 && $index === 0">全部团伙</td>
+                        <td ng-if="data.pager.pageNo !== 1 || $index !== 0" ng-bind="'团伙' + ($index + (data.pager.pageSize * (data.pager.pageNo - 1)))"></td>
+                        <td ng-bind="item.size"></td>
+                        <td>
+                            <div ng-click="fn.viewComponent(item)">导入</div>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            <pui-layout justify="end">
+                <uib-pagination
+                    class="pagination-sm"
+                    ng-if="data.pager.total > data.pager.pageSize"
+                    total-items="data.pager.total"
+                    ng-change="fn.changePage()"
+                    ng-model="data.pager.pageNo"
+                    previous-text="上一页"
+                    next-text="下一页"
+                    force-ellipses="true"
+                    max-size="3"
+                    boundary-link-numbers="true"
+                    items-per-page="data.pager.pageSize">
+                </uib-pagination>
+            </pui-layout>
+        </div>
+        <div class="modal-footer">
+            <div ng-if="data.state === 'components'">
+                <pui-button class="confirm-btn"
+                    type="primary"
+                    on-click="fn.showChoose()">
+                    上一步
+                </pui-button>
+            </div>
+            <div ng-if="data.state === 'choose'">
+                <pui-button class="cancel-btn" on-click="fn.dismiss()">取消</pui-button>
+                <pui-button class="confirm-btn" type="primary"
+                    on-click="fn.sure()"
+                    ng-disabled="data.onLoading"
+                    ng-bind="data.btnStr">
+                </pui-button>
+                <pui-button class="confirm-btn"
+                    type="primary"
+                    on-click="fn.before()"
+                    ng-disabled="data.onLoading">
+                    上一步
+                </pui-button>
+            </div>
+        </div>
+    </div>
+</div>

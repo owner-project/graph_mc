@@ -1,0 +1,43 @@
+.main-page-setting-modal {
+    .item-label {
+        margin-right: 10px;
+    }
+    .modal-body {
+        padding-top: 34px !important;
+    }
+    .application-choose-wrap {
+        border: 1px solid;
+        height: 270px;
+
+        .panel-item {
+            width: 220px;
+            &:first-child {
+                border-right: 1px solid;
+            }
+        }
+
+        .panel-title {
+            line-height: 32px;
+            font-size: 12px;
+            padding: 0px 16px;
+        }
+        .panel-body {
+            padding: 0px 15px;
+            height: calc(~'100% - 32px');
+            overflow-x: hidden;
+            overflow-y: auto;
+
+            .app-item {
+                height: 32px;
+
+                .app-item-checkbox {
+                    margin-right: 12px;
+                }
+                .delete-btn {
+                    width: 12px;
+                    height: 12px;
+                }
+            }
+        }
+    }
+}

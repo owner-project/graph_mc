@@ -1,0 +1,124 @@
+<div class="specific-main">
+    <div class="gang-mining-left">
+        <div class="gang-mining-app-list-title">
+            <!--<div class="gang-mining-app-list-title-left-icon">
+                &lt;!&ndash; <i></i> &ndash;&gt;
+                <img ng-src={{sf.jsonData.image}}>
+            </div>
+            <div class="gang-mining-app-list-title-left-text" ng-bind="sf.jsonData.title">
+                涉毒
+            </div>-->
+            <div class="gang-mining-app-list-title-icon">
+                <pui-searchbar ng-model="sf.searchData.searchContent" data-placeholder="请输入人员名称" data-max-width="200"
+                               data-on-search="sf.getPageData()"></pui-searchbar>
+            </div>
+            <!--<div ng-click="sf.into_rule()" class="gang-mining-app-list-title-jfmx">
+                <i></i>
+                积分模型
+            </div>-->
+        </div>
+        <div class="gang-mining-table-con">
+            <div pui-table>
+                <table class="content-table">
+                    <colgroup>
+                        <col width="50px">
+                        <col width="150px">
+                    </colgroup>
+                    <thead>
+                    <tr>
+                        <th>编号</th>
+                        <th>身份证号</th>
+                        <th>姓名</th>
+                        <th>类型名称</th>
+                        <th>危险度</th>
+                        <th>亲密度</th>
+                        <th>操作</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr ng-repeat="item in sf.jsonData.resultData track by item.id"
+                        ng-click="sf.getRecessivePersonDetail(item)">
+                        <td ng-bind="$index + 1 + (sf.pager.pageSize * (sf.pager.pageNo - 1))"></td>
+                        <td ng-bind="item.sfzh"></td>
+                        <td ng-bind="item.xm"></td>
+                        <td ng-bind="item.lxmc"></td>
+                        <td class={{item.iColor}} ng-bind="item.wxd + '%'"></td>
+                        <td class={{item.wColor}} ng-bind="item.qmd + '%'"></td>
+                        <td>
+                            <pui-layout align="center">
+                                <i ng-click="sf.into_people(item)" class="gang-mining-table-td-da mgr10"></i>
+                                <i ng-click="sf.into_porpoise(item)" class="gang-mining-table-td-yp"></i>
+                            </pui-layout>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="clearfix" ng-if="sf.pager.total > sf.pager.pageSize">
+            <uib-pagination
+                class="pagination-sm pull-right"
+                total-items="sf.pager.total"
+                ng-change="sf.getPageData()"
+                ng-model="sf.pager.pageNo"
+                previous-text="上一页"
+                next-text="下一页"
+                force-ellipses="true"
+                max-size="3"
+                items-per-page="sf.pager.pageSize"
+                boundary-link-numbers="true">
+            </uib-pagination>
+        </div>
+    </div>
+    <div class="keyPerson-right">
+        <pui-layout class="keyPerson-jbxx">
+            <div class="keyPerson-jbxx-img">
+                <img  ng-src="{{sf.jsonData.personal.image && sf.jsonData.personal.image != ''? 'data:image/jpg;base64,' + sf.jsonData.personal.image : 'assets/images/theme_star_blue/people/people_info_img.png'}}" >
+            </div>
+            <div class="keyPerson-jbxx-detail">
+                <div ng-bind="sf.jsonData.personal.key" class="keyPerson-jbxx-bm"></div>
+                <div ng-bind="'姓名：'+sf.jsonData.personal.xm" class="keyPerson-jbxx-xm"></div>
+                <div ng-bind="'民族：'+sf.jsonData.personal.mzmc" class="keyPerson-jbxx-xm"></div>
+                <div ng-bind="'籍贯：'+sf.jsonData.personal.jgdq" class="keyPerson-jbxx-xm"></div>
+                <div ng-bind="'婚否：'+sf.jsonData.personal.hyzk" class="keyPerson-jbxx-xm"></div>
+                <div ng-bind="'户籍地址：'+sf.jsonData.personal.hjxz" class="keyPerson-jbxx-xm"></div>
+                <div ng-bind="'住址：'+sf.jsonData.personal.sjzzxz" class="keyPerson-jbxx-xm"></div>
+            </div>
+            <!--<div ng-repeat="item in sf.jsonData.personal.type track by $index" class="keyPerson-jbxx-tags" >
+                <div ng-bind="item.name" class="keyPerson-jbxx-tags-{{item.color}}"></div>
+            </div>-->
+        </pui-layout>
+        <div class="keyPerson-jbxx-tx">
+            <relation-map-graph mode="node-link" nodes="sf.jsonData.chart.nodes"
+                                links="sf.jsonData.chart.links"></relation-map-graph>
+        </div>
+        <!--<div class="keyPerson-right-table-con">
+            <div pui-table>
+                <table>
+                    <colgroup>
+                        <col width="140px">
+                    </colgroup>
+                    <thead>
+                    <tr>
+                        <th>时间</th>
+                        <th>类型</th>
+                        <th>描述</th>
+                        <th>命中规则</th>
+                        <th>积分</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr ng-repeat="item in sf.jsonData.hitevents track by item.id">
+                        <td ng-bind="item.sj"></td>
+                        <td ng-bind="item.lx"></td>
+                        <td ng-bind="item.ms"></td>
+                        <td ng-bind="item.gz"></td>
+                        <td class="{{item.jf > 0 ? 'gang-mining-table-td-color-red' : 'gang-mining-table-td-color-green'}} "
+                            ng-bind="item.jf"></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>-->
+    </div>
+</div>

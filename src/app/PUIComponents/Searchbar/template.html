@@ -1,0 +1,29 @@
+
+<div class="pui-search-bar" ng-style="{width:width?width+'px' :'180px'}" ng-click="$openInput($event)">
+    <div class="pui-search-wrap" >
+        <!-- search icon -->
+            <i class="pui-search-icon"></i>
+            <input class="pui-search-bar-input" ng-focus="$onFocus($event)"  type="text"
+             ng-model="value" ng-show="true" 
+             placeholder="{{placeholderText}}"
+             ng-blur="$onBlur($event)"
+             ng-keydown="$onKeyDown($event)"
+             ng-change="$onChange($event)"
+             />
+    </div>
+
+    <!-- <div class="pui-search-bar" ng-style="{width: $open ? ($maxWidth + 'px') : width?width+'px' :'64px'}" ng-mousedown="$toggle($event,true)">
+    <div class="search-bar-content" ng-class="{'open': $open}">
+        <input type="text"
+               ng-show="$open || placeholder"
+               ng-model="value"
+               placeholder="{{placeholderText
+               ng-keydown="$onKeyDown($event)"
+               ng-blur="$onBlur($event)"
+               ng-change="$onChange($event)"
+               ng-focus="$onFocus($event)">
+        <div class="pui-del-icon" ng-click="$open && $onClose($event)" ng-if="$open && value">X</div>
+        <div class="pui-search-icon" ng-click="$onSearch($event)"></div>
+    </div>
+</div> -->
+</div>

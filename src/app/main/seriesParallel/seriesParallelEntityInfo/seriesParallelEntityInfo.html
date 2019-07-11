@@ -1,0 +1,43 @@
+<!-- 样式部分写到父组件上 -->
+<div class="seriesParallelEntityComponent">
+    <h4 class="seriesParallelEntity-title">
+        实体名称<span class="tip" ng-if="spec.canSelect">(可多选实体标签,进行人工串并)</span>
+    </h4>
+    <div class="seriesParallelEntity-wrapper" ng-if="!spec.isNoData">
+        <ul class="entity-list">
+            <li class="entity-type" ng-repeat="item in spec.entityList">
+                <div class="entity-name">{{item.type}}</div>
+                <div class="entity-items">
+                    
+                    <span ng-repeat="entity in item.list track by $index" class="entity-item" ng-class="{'active':spec.canSelect && entity.selected}" ng-click="spec.selectEntity(entity)">{{entity.name}}<i> </i></span>
+                </div>
+            </li>
+            <!-- 自定义实体名称 -->
+            <li class="entity-type entity-custom-wrapper" ng-if="spec.canSelect">
+                    <div class="entity-name">手动添加</div>
+                    <div class="entity-customs">
+                        <button ng-click="spec.showCustomEntityInput = true"  class="add-entity-custom-btn"></button>
+                        <span ng-if="spec.showCustomEntityInput" class="add-entity-custom-input-wrap entity-custom-item">
+                            <input ng-model="spec.customEntityName" ng-blur="spec.addCustomEntity($event)" ng-keydown="spec.addCustomEntity($event)" class="add-entity-custom-input">
+                        </span>
+                        <span ng-repeat="entity in spec.customEntities track by $index"  class="entity-custom-item"> 
+                            {{entity}}
+                            <i class="entity-custom-close-btn" ng-click="spec.removeCustomEntity($index)"></i>
+                        </span>
+                    </div>
+            </li>
+        </ul>
+    </div>
+    <!-- 无数据的展示 -->
+    <no-data ng-if="spec.isNoData" text="'无数据'" data-absolute-center="'true'"></no-data>
+    <!-- 时间选择和人工串并按钮的位置 -->
+    <div ng-if="spec.canSelect" class="time-wrapper" pui-layout data-align="right" justify="end">
+        <span class="time-name">日期</span>
+        <pui-datepicker id="start_at_graph" class="mgl3 width80" date-mode="date" ng-model="spec.searchStartTime"
+            data-placement="top" placeholder="开始日期" data-max-date="{{spec.searchEndTime}}"></pui-datepicker>
+
+        <pui-datepicker id="end_at_graph" class="mgl3 width80" date-mode="date" ng-model="spec.searchEndTime"
+            data-placement="top" placeholder="结束日期" data-min-date="{{spec.searchStartTime}}" data-max-date="{{spec.todayTime}}"></pui-datepicker>
+        <pui-button data-on-click="spec.combine()">人工串并</pui-button>
+    </div>
+</div>

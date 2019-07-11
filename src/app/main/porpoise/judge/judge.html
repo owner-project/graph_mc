@@ -1,0 +1,45 @@
+<div class="pui-modal modal">
+    <div class="modal-dialog judge-m-modal">
+        <div class="modal-header">
+            <div class="modal-title">保存图析</div>
+            <div class="modal-close-icon" ng-click="fn.dismiss()"></div>
+        </div>
+        <div class="modal-body">
+            <pui-layout align="center" ng-init="data.chooseType = 2" ng-show="data.route_id" class="judge-user">
+                <span class="judge-title">保存方式</span>
+                <pui-layout class="judge-input" >
+                    <pui-radio class="mgr4" ng-if="data.canUpdateGraph" ng-model="data.chooseType" value="1"></pui-radio>
+                    <span class="mgr24" ng-if="data.canUpdateGraph">保存当前图析</span>
+                    <pui-radio class="mgr4" ng-model="data.chooseType" value="2"></pui-radio>
+                    <span>新建图析文件</span>
+                </pui-layout>
+            </pui-layout>
+            <div class="slice-img-box">
+                <div class="slice-img jq_slice_img">
+                    <img class="loading-img" alt="">
+                </div>
+            </div>
+            <pui-layout align="center" ng-if="data.chooseType === 2" class="judge-user theme">
+                <span class="judge-title">图析主题</span>
+                <pui-input class="judge-input" type="text" ng-model="data.putData.themeName"></pui-input>
+            </pui-layout>
+            <pui-layout align="center" ng-if="data.chooseType === 2" class="judge-user">
+                <span class="judge-title">保存文件夹</span>
+                <div class="folder-select" ng-click="fn.showFolderTreeFunc()">
+                    <span class="path">{{data.putData.path}}</span>
+                    <div class="judge-select-folder" ng-show='data.showFolderTree'>
+                        <select-folder type="graphshot" from='porpoise' on-select="fn.selectFolder(folder)"></select-folder>
+                    </div>
+                </div>
+            </pui-layout>
+            <pui-layout align="center" ng-if="data.chooseType === 2" class="judge-content">
+                <!-- <span class="judge-title">描述</span> -->
+                <pui-textarea class="judge-text" placeholder="请输入图析描述" ng-model="data.putData.description"></pui-textarea>
+            </pui-layout>
+        </div>
+        <div class="modal-footer">
+            <pui-button class="cancel-btn" on-click="fn.dismiss()">取消</pui-button>
+            <pui-button class="confirm-btn" type="primary" on-click="fn.sure()">确定</pui-button>
+        </div>
+    </div>
+</div>

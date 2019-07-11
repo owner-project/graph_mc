@@ -1,0 +1,164 @@
+#record-left-menu-component{
+    display: inline-block;
+    width: 100%;
+    color:rgba(255,255,255,0.7);
+    border-right:1px solid rgba(211, 216, 226, 0.2);
+    font-size: 12px;
+    height: 100%;
+    position: relative;
+    // 全局搜索的盒子
+    .search-from-server-wrapper{
+        position: absolute;
+        top: 34px;
+        left: 0;
+        padding:0 10px;
+        box-sizing:border-box !important;
+        width: 100%;
+    }
+    .search-from-server-box{
+        padding: 14px 6px;
+        word-break: break-all;
+        background-color: #1B2D59;
+        font-size: 12px;
+        cursor: pointer;
+        .search-key{
+            color:#2979FF;
+        }
+    }
+    // 更改搜索条的宽度
+    .record-menu-search-wrapper{
+        margin-top: 10px;
+        position: relative;
+        width: 100%;
+        padding: 0 10px;
+        box-sizing: border-box !important;
+        .pui-search-bar{
+            width: 100% !important;
+        }
+    }
+    // 该表tooltip 的样式
+    .tooltip-inner,{
+        background-color: #154698;
+    }
+    .tooltip.bottom .tooltip-arrow{
+        border-bottom-color:#154698;
+        border-top-color: #154698;
+    }
+    .tooltip.top .tooltip-arrow{
+        border-top-color: #154698;
+    }
+    .tooltip.in{
+        opacity: 1;
+    }
+
+    .active{
+        color: #fff;
+    }
+    .generalize{
+        line-height: 32px;
+        height: 32px;
+        font-weight: bold;
+        cursor: pointer;
+        margin-top: 10px;
+        .generalize-img{
+         padding: 0 10px 0 18px;
+         vertical-align: middle;
+         width:14px;
+         height: 11px;    
+        }
+        &.active{
+            background:radial-gradient(40.19px at 65% 0%, rgba(41, 121, 255, 0.2) 0%, rgba(41, 121, 255, 0) 140%), radial-gradient(40px at 30% 110%, rgba(41, 121, 255, 0.3) 0%, rgba(41, 121, 255, 0) 140%), rgba(41, 121, 255, 0.06);
+        }
+    }
+    .menu-main{
+        height: calc(~'100% - 56px');
+        position: relative;
+        .list-left{
+            float: left;
+            width: 62px;
+            text-align: center;
+            height: 100%;
+            border-right: 1px solid rgba(41,121,255,.2);
+            .list-item{
+                position: relative;
+                cursor: pointer;
+                text-align: center;
+                width: 100%;
+                line-height: 40px;
+                font-weight: bold;
+                padding-left: 0;
+                margin-bottom:0;
+                &:hover{
+                    color: rgba(255,255,255,0.9);
+                }
+                &.active{
+                    &:before{
+                        content: '';
+                        height: 8px;
+                        width: 3px;
+                        background-color: #2979FF;
+                        border-radius: 0 2px 2px 0;
+                        display: inline-block;
+                        position: absolute;
+                        left: 0;
+                        top: 16px;
+                    }
+                }
+            }
+        }
+        .list-right{
+            margin-left: 62px;
+            margin-bottom: 0;
+            max-height: 100%;
+            overflow-y: scroll;
+            .list-item{
+                line-height: 32px;
+                padding: 0 16px;
+                height: 32px;
+                overflow: hidden;
+                .person-info-word{
+                    width: calc(~"100% - 20px");
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                    word-break: keep-all;
+                    display: inline-block;
+                }
+                cursor: pointer;
+                &:hover{
+                    color: rgba(255,255,255,.9);
+                    background-color:rgba(41,121,255,0.05);
+                    .person-info-icon{
+                        display: inline-block
+                    }
+                }
+                &.active{
+                    font-weight: bold;
+                    background:radial-gradient(40.19px at 65% 0%, rgba(41, 121, 255, 0.2) 0%, rgba(41, 121, 255, 0) 140%), radial-gradient(40px at 30% 110%, rgba(41, 121, 255, 0.3) 0%, rgba(41, 121, 255, 0) 140%), rgba(41, 121, 255, 0.06);
+                }
+                .person-info-icon{
+                    margin-left: 2px;
+                    background-image:url("../../../../assets/theme-sb/people/person-info-icon.png");
+                    background-size: 100% 100%;
+                    display: inline-block;
+                    display: none;
+                    width: 14px;
+                    height: 14px;
+                    vertical-align: 8px;
+                }
+            }
+            .load-more{
+                text-align: center;
+                cursor: pointer;
+                line-height: 28px;
+                background-color: rgba(41, 121, 255, 0.15);
+                width: 142px;
+                margin: 0 auto;
+                margin-bottom: 16px;
+                &:hover{
+                    color:#fff;
+                }
+            }
+        }
+    }
+
+}

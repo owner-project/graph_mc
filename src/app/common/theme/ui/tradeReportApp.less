@@ -1,0 +1,62 @@
+.trade-report-app-main {
+    color: @text-color-title;
+
+    .tra-header {
+
+        box-shadow: inset 0 -1px 0 0 @border-color-primary;
+        .header-ul {
+            .header-li {
+                color: @text-color-title;
+                background-color: @bg-color-light;
+
+                &.active {
+                    box-shadow: inset 0px 1px 0px 0px @border-color-primary, inset -1px 0px 0px 0px @border-color-primary, inset 1px 0px 0px 0px @border-color-primary;
+                    border-bottom-color: transparent;
+                    background-color: @bg-color;
+                    color: @text-color-highlight;
+                }
+            }
+        }
+    }
+
+    .tra-body {
+        .go-graph {
+            .icon-img(@base-url, @icon-voice-model-tuxi-icon);
+        }
+        .tra-right {
+            border: 1px solid @border-color;
+            .header-ul {
+                background-color: @bg-color-lighter;
+            }
+            .header-con {
+                .detail-con {
+                    li {
+                        span {
+                            color: @text-color-title;
+                            &:nth-child(1) {
+                                color: @text-color-content;
+                            }
+                        }
+                    }
+                    .detial-list-con {
+                        .trade-li-item {
+                            .trade-li-item-title {
+                                color: @text-color-title;
+                            }
+                            .trade-li-item-con {
+                                .item-tpl {
+                                    span {
+                                        &:nth-child(1) {
+                                            color: @text-color-content;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+           
+        }
+    }
+}

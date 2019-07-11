@@ -1,0 +1,50 @@
+.combine-expand-modal {
+  overflow-y: visible !important;
+  width: 500px !important;
+  .modal-body {
+    padding: 0 !important;
+    margin: 24px 32px;
+    overflow-y: visible;
+  }
+  .content {
+    .date-wrap {
+      .pui-datepicker-wrap {
+          display: inline-block;
+      }
+    }
+    .option-wrap {
+      min-height: 180px;
+      .select-all {
+        margin: 16px 0 8px;
+        display: flex;
+        align-items: center;
+      }
+      .select-text {
+        margin-left: 8px;
+        font-weight: normal;
+      }
+      .select-item {
+        .select-one {
+          display: flex;
+          align-items: center;
+        }
+        > div {
+          + div {
+            margin-top: 16px;
+          }
+        }
+        .select-option-wrap {
+          display: flex;
+          .select-option {
+            width: 152px;
+            margin-left: 18px;
+          }
+          .select-value {
+            width: 125px;
+            margin-left: 20px;
+          }
+        }
+      }
+    }
+  }
+}

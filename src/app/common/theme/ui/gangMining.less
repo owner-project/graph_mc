@@ -1,0 +1,45 @@
+//团伙挖掘
+.gang-mining-main {
+    color: @text-color-title;
+    .gang-mining-left {
+        .gang-mining-app-box {
+            .gang-mining-app-box-item {
+                border: 1px solid @border-color;
+                .gang-mining-app-count {
+                    color: @text-color-primary;
+                }
+            }
+        }
+        .gang-mining-table-con {
+            td {
+                .gang-mining-table-td-yp {
+                    .icon-img(@base-url, @icon-result-tx-icon);
+                }
+            }
+
+        }
+    }
+    .gang-mining-right {
+        border: 1px solid @border-color;
+        background-color: @bg-color-light;
+        .gang-mining-right-thlx {
+            border-bottom: 1px solid @border-color;
+            .item-label {
+                color: @text-color-title;
+            }
+            .item-content {
+                color: @text-color-content;
+            }
+        }
+        .gang-mining-right-pie {
+            .gang-mining-right-pie-ul {
+                li {
+                    .gang-mining-right-pie-li-box {
+                        background-image: linear-gradient(90deg, transparent 0px, transparent 2px, @bg-color-lighter 2px, @bg-color-lighter 4px);
+                        background-size: 4px;
+                    }
+                }
+            }
+        }
+    }
+}

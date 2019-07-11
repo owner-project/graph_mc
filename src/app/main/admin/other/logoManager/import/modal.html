@@ -1,0 +1,37 @@
+<div class="pui-modal modal">
+    <div class="modal-dialog graph-import-modal">
+        <div class="modal-header">
+            <div class="modal-title">导入文件</div>
+            <div class="modal-close-icon" ng-click="fn.dismiss()"></div>
+        </div>
+        <div class="modal-body">
+            <div class="edge-box">
+                <pui-layout class="amm-item" align="center">
+                    <span class="amm-item-title">logo名称</span>
+                    <pui-input class="amm-item-input mgl10" ng-model="data.name"></pui-input>
+                </pui-layout>
+                <pui-layout align="center" class="form-item mgt20">
+                    <input class="ng-hide" type="file" ng-model="data.file" ng-if="!data.file" file-upload >
+                    <div class="item-title">上传logo</div>
+                    <div class="item-con" ng-if="!data.file" ng-click="fn.chooseFile($event)">
+                        <span>选择logo</span>
+                    </div>
+                    <div class="item-con has-file pointer" ng-if="data.file">
+                        <span ng-bind="data.file.name"></span>
+                        <div class="delete-file-icon icon-circle-close" ng-click="fn.deleteFile($event)"></div>
+                    </div>
+                    <div class="mgl20" ng-if="data.file.percentage">
+                        <pui-progress style="width: 150px" percent="data.file.percentage"></pui-progress>
+                    </div>
+                </pui-layout>
+                <pui-layout class="amm-item" align="center">
+                    <span class="amm-item-title">建议使用尺寸93*32的png图片</span>
+                </pui-layout>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <pui-button class="cancel-btn" on-click="fn.dismiss()">取消</pui-button>
+            <pui-button class="confirm-btn" type="primary" on-click="fn.sure()" ng-disabled="data.uploading" ng-bind="data.btnStr"></pui-button>
+        </div>
+    </div>
+</div>

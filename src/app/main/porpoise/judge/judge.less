@@ -1,0 +1,103 @@
+.judge-m-modal {
+    width: 412px !important;
+    .modal-body {
+        overflow: visible !important;
+        .slice-img-box {
+            .slice-img {
+                width: 280px;
+                height: 129px;
+                position: relative;
+                .loading-img {
+                    position: absolute;
+                    max-width: 280px;
+                    max-height: 129px;
+                    .c-center;
+                }
+            }
+        }
+        .judge-user {
+            margin: 8px auto 16px auto;
+            &.theme {
+                height: 32px;
+            }
+            .judge-title {
+                opacity: .42;
+                margin-right: 8px;
+                font-weight: bold;
+                min-width: 60px;
+                text-align: left;
+            }
+            .judge-input {
+                height: 24px;
+                align-items: center;
+                width: 280px;
+                .mgr4 {
+                    margin-right: 4px;
+                }
+                .mgr24 {
+                    margin-right: 24px;
+                }
+            }
+            .judge-text {
+                width: calc(~'100% - 60px');
+                height: 65px;
+                line-height: 20px;
+            }
+        }
+        .folder-select {
+            position: relative;
+            height: 32px;
+            .path {
+                width: 280px;
+                height: 32px;
+                display: inline-block;
+                border-bottom: 1px solid rgba(41,121,255,.5);
+                cursor: pointer;
+                text-align: left;
+                line-height: 35px;
+                position: relative;
+                box-sizing: border-box !important;
+                padding-right: 16px;
+                overflow: hidden;
+                white-space: nowrap;
+                text-overflow: ellipsis;
+                &:after {
+                    content: '';
+                    display: block;
+                    background-image: url("../../../../assets/theme-sb/graph/select-arrow.svg");
+                    background-repeat: no-repeat;
+                    background-position: center center;
+                    height: 16px;
+                    width: 16px;
+                    right: 0;
+                    bottom: 8px;
+                    position: absolute;
+                    opacity: .7;
+                }
+            }
+            .judge-select-folder {
+                position: absolute;
+                background: #1B2D59;
+                width: 280px;
+                height: 250px;
+                padding: 8px 10px 20px 16px;
+                box-sizing: border-box !important;
+                z-index: 1;
+                border-radius: 4px;
+                border: 0 !important;
+                box-shadow: 0 12px 24px 0 rgba(0,0,0,0.50), 0 0 8px 0 rgba(0,0,0,0.08);
+            }
+        }
+        .judge-content {
+            .pui-textarea {
+                width: 348px;
+                height: 88px;
+            }
+        }
+    }
+}
+@media screen and (max-height: 800px) {
+    .judge-m-modal .modal-body .folder-select .judge-select-folder {
+        height: 200px;
+    }
+}

@@ -1,0 +1,67 @@
+<div class="pui-modal add-member-modal modal" >
+    <div class="modal-dialog">
+        <div class="modal-header">
+            <div class="modal-title">人员角色配置</div>
+            <div class="modal-close-icon" ng-click="fn.dismiss()"></div>
+        </div>
+        <div class="modal-body">
+            <pui-layout class="amm-item" align="center">
+                <span class="amm-item-title">账号</span>
+                <pui-input class="amm-item-input" ng-model="data.username" ng-disabled="data.globalSetting.is_ucenter == 1"></pui-input>
+                <span class="amm-item-title mgl30">警号</span>
+                <pui-input class="amm-item-input" ng-model="data.policeId" ng-disabled="data.globalSetting.is_ucenter == 1"></pui-input>
+            </pui-layout>
+            <pui-layout class="amm-item" align="center">
+                <span class="amm-item-title more-font">手机号</span>
+                <pui-input class="amm-item-input" ng-model="data.phone" ng-disabled="data.globalSetting.is_ucenter == 1"></pui-input>
+                <span class="amm-item-title mgl30">姓名</span>
+                <pui-input class="amm-item-input" ng-model="data.name" ng-disabled="data.globalSetting.is_ucenter == 1"></pui-input>
+            </pui-layout>
+            <pui-layout class="amm-item" align="center">
+                <span class="amm-item-title">性别</span>
+                <pui-layout align="center">
+                    <pui-radio value="0" ng-model="data.sex" ng-disabled="data.globalSetting.is_ucenter == 1" class="mgr10"></pui-radio>
+                    <span ng-click="data.sex = 0">男</span>
+                </pui-layout>
+                <pui-layout class="mgl20" align="center">
+                    <pui-radio value="1" ng-model="data.sex" ng-disabled="data.globalSetting.is_ucenter == 1" class="mgr10"></pui-radio>
+                    <span ng-click="data.sex = 1">女</span>
+                </pui-layout>
+            </pui-layout>
+            <pui-layout class="amm-item" align="center">
+                <div class="body-left">
+                    <span>可选角色</span>
+                    <div class="left-box">
+                        <pui-layout align="center" class="item-div" ng-repeat="item in data.roleList track by item.roleId">
+                            <pui-checkbox class="mgr10" ng-model="item.isChecked"></pui-checkbox>
+                            <span ng-bind="item.roleName" ng-click="item.isChecked = !item.isChecked;"></span>
+                        </pui-layout>
+                    </div>
+                </div>
+                <div class="body-left mgl20">
+                    <span>级别</span>
+                    <div class="left-box">
+                        <pui-layout align="center" class="item-div" ng-repeat="item in data.levelList">
+                            <pui-checkbox class="mgr10" ng-model="item.isChecked" ng-change="fn.changeLevel(item)"></pui-checkbox>
+                            <span ng-bind="item.label" ng-click="item.isChecked = !item.isChecked;fn.changeLevel(item);"></span>
+                        </pui-layout>
+                    </div>
+                </div>
+                <!--<div class="body-right">
+                    <span>已选权限</span>
+                    <div class="right-box">
+                        <span class="amm-right-text-box" ng-repeat="item in data.roleList track by item.roleId" ng-if="item.isChecked">
+                            <span ng-bind="item.roleName"></span>
+                            <span ng-if="!$last">,</span>
+                        </span>
+                    </div>
+                </div>-->
+            </pui-layout>
+        </div>
+        <div class="modal-footer">
+            <pui-button class="cancel-btn" on-click="fn.dismiss()">取消</pui-button>
+            <pui-button class="confirm-btn" type="primary" on-click="fn.sure()">确定</pui-button>
+
+        </div>
+    </div>
+</div>

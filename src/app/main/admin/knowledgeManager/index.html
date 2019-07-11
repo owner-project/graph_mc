@@ -1,0 +1,9 @@
+<div class="knowledge-manager-main">
+    <div class="w100 h100" ng-if="vm.type === 'p_5_1'" ng-include="'app/main/admin/knowledgeManager/peopleType/index.html'" ng-controller="PeopleTypeController as vm"></div>
+    <div class="w100 h100" ng-if="vm.type === 'p_5_2'" ng-include="'app/main/admin/knowledgeManager/relationType/index.html'" ng-controller="RelationTypeController as vm"></div>
+    <div class="w100 h100" ng-if="vm.type === 'p_5_3'" ng-include="'app/main/admin/knowledgeManager/addressType/index.html'" ng-controller="AddressTypeController as vm"></div>
+    <div class="w100 h100" ng-if="vm.type === 'p_5_4'" ng-include="'app/main/admin/knowledgeManager/cardType/index.html'" ng-controller="CardTypeController as vm"></div>
+    <div class="w100 h100" ng-if="vm.type === 'p_5_5'" ng-include="'app/main/admin/knowledgeManager/communityType/index.html'" ng-controller="CommunityTypeController as vm"></div>
+    <div class="w100 h100" ng-if="vm.type === 'p_5_6'" ng-include="'app/main/admin/knowledgeManager/carCardType/index.html'" ng-controller="CarCardTypeController as vm"></div>
+    <div class="w100 h100" ng-if="vm.type === 'p_5_7'" ng-include="'app/main/admin/knowledgeManager/phoneType/index.html'" ng-controller="PhoneTypeController as vm"></div>
+</div>

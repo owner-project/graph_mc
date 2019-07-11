@@ -1,0 +1,46 @@
+<div class="enterprise-main">
+	<div class="enterprise-app-list-title">
+		<div class="enterprise-app-list-title-icon">
+			<pui-searchbar ng-model="er.searchData.name" data-placeholder="请输入公司名称" data-max-width="200" data-on-search="er.searchList()"></pui-searchbar>
+		</div>
+	</div>
+	<div class="enterprise-table-con">
+		<div pui-table>
+            <table class="content-table">
+                <colgroup>
+                    <col width="30%">
+                </colgroup>
+                <thead>
+                <tr>
+                    <th>公司名称</th>
+                    <th>评分</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr ng-click="er.corporatePortraitClick(item)" ng-repeat="item in er.jsonData.resultData track by item.id">
+                    <td ng-bind="item.name"></td>
+                    <td>
+                        <pui-layout align="center">
+                            <div ng-bind="item.score" class="bfb-text {{item.cColor}}"></div>
+                            <div class="bfb {{item.bColor}}" ng-style="{'width': item.score * 1.5}"></div>
+                        </pui-layout>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+	</div>
+    <div class="clearfix" ng-if="er.pager.total > er.pager.pageSize">
+        <uib-pagination class="pagination-sm pull-right"
+            total-items="er.pager.total"
+            ng-change="er.getEnterpriseRankList()"
+            ng-model="er.pager.pageNo"
+            previous-text="上一页"
+            next-text="下一页"
+            force-ellipses="true"
+            max-size="3"
+            items-per-page="er.pager.pageSize"
+            boundary-link-numbers="true">
+        </uib-pagination>
+    </div>
+</div>

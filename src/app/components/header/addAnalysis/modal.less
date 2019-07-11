@@ -1,0 +1,44 @@
+.analysis-list-modal {
+    width: 1155px !important;
+    max-width: 1155px !important;
+    .modal-header {
+        border-bottom: 0 !important;
+    }
+    .modal-footer {
+        border-top: 0 !important;
+    }
+    .edge-box {
+        .wrap-content {
+            flex-wrap: wrap;
+        }
+        .analysis-item {
+            width: 352px;
+            height: 120px;
+            border-radius: 8px;
+            background: rgba(41, 121, 255,0.15);
+            margin-bottom: 17px;
+            margin-right: 17px;
+            &:nth-child(3n) {
+                margin-right: 0;
+            }
+            .img-wrap {
+                width: 142px;
+                img {
+                    width: 102px;
+                    max-height: 100px;
+                }
+            }
+            .item-info {
+                width: 210px;
+                padding-right: 16px;
+                box-sizing: border-box !important;
+                text-align: left;
+            }
+            .item-name {
+                overflow: hidden;
+                white-space: nowrap;
+                text-overflow: ellipsis;
+            }
+        }
+    }
+}

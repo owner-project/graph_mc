@@ -1,0 +1,22 @@
+<div class="edge-filter-wrap" ng-click="$event.stopPropagation()">
+    <div class="mgb10">筛选</div>
+    <div class="mgb10">
+        <pui-layout align="center" class="dropdown-item">
+            <div class="item-label">次数:</div>
+            <pui-select class="mgr10"
+                style="width: 122px;"
+                ng-model="v.filter.time.compare"
+                data-options="relation.comparison">
+            </pui-select>
+            <pui-input 
+                data-placeholder="请输入数字"
+                class="item-input"
+                ng-model="v.filter.time.number">
+            </pui-input>
+        </pui-layout>
+    </div>
+    <pui-layout class="" justify="end">
+        <pui-button class="mgr10" data-on-click="relation.resetFilterFunc($event, v)">重置</pui-button>
+        <pui-button type="primary" data-on-click="relation.confirmFilterFunc($event, v)">确定</pui-button>
+    </pui-layout>
+</div>

@@ -1,0 +1,6 @@
+<div class="pui-dropdown-wrap home-search-select" ng-click="$event.stopPropagation()">
+    <pui-layout align="center" class="search-item" ng-repeat="option in home.homeData.search.option">
+        <pui-checkbox ng-model="option.chosen" ng-change="home.changeSearchSelect(option)"></pui-checkbox>
+        <div class="search-label" ng-click="option.chosen = !option.chosen; home.changeSearchSelect(option);" ng-bind="option.label"></div>
+    </pui-layout>
+</div>

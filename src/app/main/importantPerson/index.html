@@ -1,0 +1,91 @@
+<div class="gang-mining-main">
+	<div class="gang-mining-left jq_gang-mining_left">
+		<!--<div class="gang-mining-app-box">
+			<div ng-repeat="item in gm.jsonData.counts" class="gang-mining-app-box-item" ng-init="item.fzlx = (item.thlx | fzlxFilter)" ng-click="gm.searchData.type = item.thlx;gm.getPageData()">
+				<img ng-src={{item.fzlx.image}} />
+				<div ng-bind="item.fzlx.name" class="gang-mining-app-text"></div>
+				<div ng-bind="item.count" class="gang-mining-app-count"></div>
+				<div class="gang-mining-app-unit">个</div>
+			</div>
+		</div>-->
+		<div class="gang-mining-app-table-box">
+			<div pui-table class="gang-mining-table-con">
+				<table>
+                    <colgroup>
+                        <col width="50px">
+                        <col width="80px">
+                        <col width="100px">
+                        <col width="200px">
+                        <col width="80px">
+                    </colgroup>
+					<thead>
+					<tr>
+						<th>序号</th>
+						<th>姓名</th>
+						<th>身份证号</th>
+						<th class="gang-mining-table-th-date">危险度积分</th>
+                        <th>图析</th>
+                    </tr>
+					</thead>
+					<tbody>
+						<tr ng-repeat="item in gm.jsonData.resultData" ng-click="gm.getGangDetailInfo(item)">
+							<td ng-bind="$index + 1"></td>
+							<td ng-bind="item.xm"></td>
+							<td ng-bind="item.sfzh"></td>
+							<td class="gang-mining-table-td-date">
+								<pui-layout align="center">
+                                    <div ng-bind="item.wxd" class="gang-mining-table-date-text"></div>
+                                    <div class="bfb {{item.lColor}}" ng-style="{'width': item.wxd * 1.2}"></div>
+                                </pui-layout>
+							</td>
+                            <td ng-click="gm.toPorpoise(item)">
+                                <i class="gang-mining-table-td-yp"></i>
+                            </td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+            <div class="clearfix">
+                <uib-pagination
+                    ng-show="gm.pager.total > gm.pager.pageSize"
+                    class="pagination-sm pull-right"
+                    total-items="gm.pager.total"
+                    ng-change="gm.changePage()"
+                    ng-model="gm.pager.pageNo"
+                    previous-text="上一页"
+                    next-text="下一页"
+                    force-ellipses="true"
+                    max-size="3"
+                    items-per-page="gm.pager.pageSize"
+                    boundary-link-numbers="true">
+                </uib-pagination>
+            </div>
+		</div>
+	</div>
+	<div class="gang-mining-right jq_gang-mining_left">
+		<div class="gang-mining-right-thlx">
+            <pui-layout class="mgb5">
+                <div class="mgr10 item-label" style="flex: 0 0 auto;">人员姓名：</div>
+                <div class="item-content" ng-bind="gm.jsonData.gangDetailInfo.xm"></div>
+            </pui-layout>
+            <pui-layout>
+                <div class="mgr10 item-label" style="flex: 0 0 auto;">身份证号</div>
+                <div class="item-content" ng-bind="gm.jsonData.gangDetailInfo.sfzh"></div>
+            </pui-layout>
+		</div>
+		<!--<div class="gang-mining-right-thlx">
+
+		</div>-->
+		<div class="gang-mining-right-pie">
+            <ul class="gang-mining-right-pie-ul">
+                <li>危险度</li>
+                <li>
+                    <div class="gang-mining-right-pie-li-box">
+                        <div class="gang-mining-right-pie-li-box-bfb {{gm.jsonData.gangDetailInfo.lColor}}" ng-style="{'width': gm.jsonData.gangDetailInfo.wxd * 1.2}"></div>
+                    </div>
+                </li>
+                <li ng-bind="gm.jsonData.gangDetailInfo.wxd + '%'"></li>
+            </ul>
+		</div>
+	</div>
+</div>

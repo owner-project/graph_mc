@@ -1,0 +1,91 @@
+<div class="vt-main">
+    <div class="vt-body">
+        <div class="vt-lits-box">
+            <div class="vt-list-header">
+                <div class="vt-list-header-title">嫌疑犯手机号码</div>
+                <div class="vt-list-header-item">
+                    <div class="vt-list-item">
+                        <span>嫌疑犯号码</span>
+                        <pui-select class="df-select-width fl" value-field="key" config='$root.selectConfig.vtSelect' options='voiceTable.jsonData.option1' ng-model="option.value1"></pui-select>
+                    </div>
+                    <div class="vt-list-item">
+                        <span>嫌疑犯姓名</span>
+                        <pui-select class="df-select-width fl" value-field="key" config='$root.selectConfig.vtSelect' options='voiceTable.jsonData.option2' ng-model="option.value2"></pui-select>
+                    </div>
+                </div>
+            </div>
+            <div class="vt-list">
+                <div class="voice-table-con">
+                    <div class="pui-table">
+                        <table>
+                            <thead>
+                            <tr>
+                                <th style="width: 50px">序号</th>
+                                <th style="width: 130px" title="{{item.name}}" ng-repeat="item in voiceTable.jsonData.option1 track by item.key">
+                                    {{item.name}}
+                                </th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr ng-repeat="item in voiceTable.jsonData.resultData1 track by $index">
+                                <td>{{$index+1}}</td>
+                                <td ng-repeat="child in voiceTable.jsonData.option1 track by child.key">
+                                    {{item[child.key]}}
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="vt-lits-box">
+            <div class="vt-list-header">
+                <div class="vt-list-header-title">嫌疑犯通讯录</div>
+                <div class="vt-list-header-item">
+                    <div class="vt-list-item">
+                        <span>对方号码</span>
+                        <pui-select class="df-select-width fl" value-field="key" config='$root.selectConfig.vtSelect' options='voiceTable.jsonData.option3' ng-model="option.value3"></pui-select>
+                    </div>
+                    <div class="vt-list-item">
+                        <span>对方姓名</span>
+                        <pui-select class="df-select-width fl" value-field="key" config='$root.selectConfig.vtSelect' options='voiceTable.jsonData.option4' ng-model="option.value4"></pui-select>
+                    </div>
+                    <div class="vt-list-item">
+                        <span>嫌疑犯号码</span>
+                        <pui-select class="df-select-width fl" value-field="key" config='$root.selectConfig.vtSelect' options='voiceTable.jsonData.option5' ng-model="option.value5"></pui-select>
+                    </div>
+                </div>
+            </div>
+            <div class="vt-list">
+                <div class="voice-table-con">
+                    <div class="pui-table">
+                        <table>
+                            <thead>
+                            <tr>
+                                <th style="width: 50px;">序号</th>
+                                <th style="width: 130px;" title="{{item.name}}" ng-repeat="item in voiceTable.jsonData.option3 track by item.key">
+                                    {{item.name}}
+                                </th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr ng-repeat="item in voiceTable.jsonData.resultData2 track by $index">
+                                <td>{{$index+1}}</td>
+                                <td ng-repeat="child in voiceTable.jsonData.option3 track by child.key">
+                                    {{item[child.key]}}
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <pui-layout justify="center" class="vt-footer">
+        <pui-button on-click="voiceTable.voiceTableSubmit()" class="vt-submit" type="primary">确定</pui-button>
+    </pui-layout>
+</div>

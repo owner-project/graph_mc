@@ -1,0 +1,53 @@
+<!doctype html>
+<html ng-app="wuhanProject" ng-strict-di>
+  <head>
+    <meta charset="utf-8">
+    <title>公安知识图谱</title>
+    <meta name="description" content=""><meta http-equiv="Cache-Control" content="no-cache" />
+    <meta name="viewport" content="width=device-width">
+    <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+      <link rel="shortcut icon" href="./favicon.ico">
+      <link rel="Bookmark" href="./favicon.ico">
+      <!-- build:css({.tmp/serve,src}) styles/vendor.css -->
+    <!-- bower:css -->
+    <!-- run `gulp inject` to automatically populate bower styles dependencies -->
+    <!-- endbower -->
+    <!-- endbuild -->
+
+    <!-- build:css({.tmp/serve,src}) styles/app.css -->
+    <!-- inject:css -->
+    <!-- css files will be automatically insert here -->
+    <!-- endinject -->
+    <!-- endbuild -->
+    <!-- 部署用户中心版本 需要注释该script -->
+    <!-- <script type="text/javascript" src="https://api.map.baidu.com/getscript?v=2.0&ak=1XjLLEhZhQNUzd93EjU5nOGQ"></script> -->
+
+  </head>
+  <body class="theme_star_blue root-body">
+    <!--[if lt IE 10]>
+      <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+    <![endif]-->
+  <div id="root" class="root-view" ui-view water-mark></div>
+  <toaster-container toaster-options="{'close-button':false, 'time-out':2500 }"></toaster-container>
+	<div class="toast-main jq_toast">
+		<i></i>
+		<span class="jq_toast_str"></span>
+	</div>
+  <div ng-show="$root.isLoading" class="loading-main">
+    <div class="loading-con"></div>
+  </div>
+    <!-- build:js(src) scripts/vendor.js -->
+    <!-- bower:js -->
+    <!-- run `gulp inject` to automatically populate bower script dependencies -->
+    <!-- endbower -->
+    <!-- endbuild -->
+    <!-- build:js({.tmp/serve,.tmp/partials}) scripts/app.js -->
+    <!-- inject:js -->
+    <!-- js files will be automatically insert here -->
+    <!-- endinject -->
+    <!-- inject:partials -->
+    <!-- angular templates will be automatically converted in js and inserted here -->
+    <!-- endinject -->
+    <!-- endbuild -->
+  </body>
+</html>

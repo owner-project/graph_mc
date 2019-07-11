@@ -1,0 +1,199 @@
+<pui-layout align="center" justify="space-between" class="header-main">
+	<pui-layout align="center">
+        <pui-layout align="center" justify="center" class="header-left">
+            <div class="header-logo" ng-click="header.stateChoose($event, 'home')"></div>
+            <!--致图logo-->
+            <!--<div class="header-logo-zt"></div>-->
+        </pui-layout>
+        <div class="header-content">
+            <div class="webwidget-menu-glide">
+                <pui-layout align="middle" class="webwidget-menu-glide-ul">
+                    <div class="webwidget-menu-glide-li" ng-if="header.config[1].code == 1">
+                        <a  ng-class="{'current': $root.urlData.chooseMenu === 'home'}" ng-click="header.stateChoose($event, 'home')">{{::header.config[2].code}}</a>
+					</div>
+                    <!-- <div class="webwidget-menu-glide-li relation-menu" ng-if="header.config[5].code == 1" ng-mouseenter="header.showRelation = true" ng-mouseleave="header.showRelation = false">
+                        <a ng-class="{'current': $root.urlData.chooseMenu === 'relation'}">{{::header.config[6].code}}
+                            <svg width="8" height="6" viewBox="0 0 8 6" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M1 1.5L4 4.5L7 1.5" stroke="white" stroke-width="1.5"/>
+                            </svg>
+                        </a>
+                    </div> -->
+                    <div class="webwidget-menu-glide-li relation-menu" ng-if="header.config[5].code == 1" >
+                        <a ng-class="{'current': $root.urlData.chooseMenu === 'relation'}" ng-click="header.stateChoose($event,'relation')">{{::header.config[6].code}}
+                        </a>
+                    </div>
+                    <div class="webwidget-menu-glide-li" ng-if="header.config[7].code == 1">
+                        <a ng-class="{'current': $root.urlData.chooseMenu === 'file'}" ng-click="header.stateChoose($event,'file')">{{::header.config[8].code}}</a>
+                    </div>
+                    <div class="webwidget-menu-glide-li" ng-if="header.config[9].code == 1">
+                        <a ng-class="{'current': $root.urlData.chooseMenu === 'cooperate'}" ng-click="header.stateChoose($event, 'cooperate')">{{::header.config[10].code}}</a>
+                    </div>
+                    <div class="webwidget-menu-glide-li" ng-if="header.headerAuth.nav.application">
+                        <a ng-class="{'current': $root.urlData.chooseMenu === 'application' || $root.urlData.chooseMenu === 'voiceList' ||  $root.urlData.chooseMenu === 'textmining' ||  $root.urlData.chooseMenu === 'tradeList'}" ng-click="header.stateChoose($event, 'application')">应用</a>
+                    </div>
+                    <div class="webwidget-menu-glide-li" ng-if="header.headerAuth.nav.admin">
+                        <a ng-class="{'current': $root.urlData.chooseMenu === 'admin'}" ng-click="header.stateChoose($event, 'admin')">管理</a>
+                    </div>
+                </pui-layout>
+            </div>
+        </div>
+    </pui-layout>
+	<div class="header-right">
+		<pui-layout align="center" class="header-right-ul">
+			<div>
+                <div class="header-name can-not-select"             
+                data-placement="bottom"
+                data-animation="am-flip-x" bs-dropdown aria-haspopup="true" aria-expanded="false">
+                    <!-- 用户的其他部分 -->
+                    <label>欢迎，</label>
+                    <span ng-bind="header.user.name"></span>
+                    <svg width="8" height="6" viewBox="0 0 8 6" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M1 1.5L4 4.5L7 1.5" stroke="white" stroke-width="1.5"/>
+                    </svg>
+                </div>
+                <!-- 下拉菜单 -->
+                <div class="header-my-main header-popups dropdown-menu">
+                    <div class="wrap-content">
+                        <div class="my-item header-item" ng-click="header.showAnalysis()">
+                            <i class="analysis-icon"></i>
+                            <span>图析历史</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- 用户中心 -->
+            <div class="user-center-link" ng-if="header.userCenterInfo.data.length > 0" >
+                <div data-placement="bottom" data-animation="am-flip-x" bs-dropdown aria-haspopup="true" aria-expanded="false" >
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" style="vertical-align:middle">
+                            <g fill="none" fill-rule="evenodd" opacity=".5" transform="translate(1 3)">
+                                <path stroke="#FFF" stroke-width="1.273" d="M12.353425,3.01372877 C12.3375159,4.73899589 10.9216068,6.04242055 9.17160682,6.0274274 C7.41357273,6.01981781 5.98978864,4.67879726 5.98978864,3.01372877 C5.98978864,1.34858493 7.41357273,3.01369863e-05 9.17160682,3.01369863e-05 C10.9295614,3.01369863e-05 12.3693341,1.34858493 12.353425,3.01372877 Z"/>
+                                <path fill="#FFF" d="M13.7295455,7.51919315 C13.7295455,7.90343973 13.4113636,8.19727534 13.0136364,8.19727534 C12.6159091,8.19727534 12.2977273,7.89590548 12.2977273,7.51919315 C12.2977273,7.14248082 12.6159091,6.84111096 13.0136364,6.84111096 C13.4113636,6.84111096 13.7375,7.14248082 13.7295455,7.51919315"/>
+                                <path stroke="#FFF" stroke-linecap="round" stroke-width="1.273" d="M4.41480455 10.9849466C4.40677045 10.8870014 4.39889545 10.7815219 4.39889545 10.6759671 4.327225 8.18220685 6.44321364 6.08007671 9.06821364 6.03494658M13.7374682 9.2369863C13.8726955 9.65136986 13.9443659 10.0958904 13.9443659 10.5479452 13.9443659 10.6835616 13.9363318 10.8191781 13.9283773 10.9547945M4.47042273 6.01234384C2.85565 5.8616589 1.59095682 4.58083699 1.59095682 3.0137137 1.59095682 1.61987808 2.585275.452069863 3.94542273.105494521M.0158772727 10.9623589C.0000477272731 10.8266671.0000477272731 10.6910507.0000477272731 10.5555096.0000477272731 8.14455068 1.99655909 6.17050274 4.51019545 6.04242055"/>
+                            </g>
+                        </svg>    
+                        用户中心              
+                        <svg width="8" height="6" viewBox="0 0 8 6" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M1 1.5L4 4.5L7 1.5" stroke="white" stroke-width="1.5"/>
+                        </svg>
+                </div>
+                <!-- ng-show="header.showCenterList" -->
+                <div class="header-user-center-menu  header-popups  header-my-main dropdown-menu" >
+                        <div class="wrap-content">
+                            <!--  -->
+                            <div class="my-item header-item u-center-item" ng-repeat="item in header.userCenterInfo.data" ng-click="header.jumpToProduct($event,item)" >
+                                {{item.name}}
+                            </div>
+                        </div>
+                </div>
+            </div>
+
+            
+			<div>
+				<i class="header-line"></i>
+			</div>
+      <div  ng-show="header.headerAuth.nav.application && header.headerData.myAppList.length > 0" >
+        <i class="header-application"
+            data-placement="bottom-right"
+            data-trigger="click"
+            data-animation="am-flip-x" bs-dropdown aria-haspopup="true" aria-expanded="false"
+            ng-class="{'header-application-disable': header.headerData.myAppList.length === 0}">
+        </i>
+        <!-- 下拉菜单 -->
+        <div class="header-application-main header-popups dropdown-menu">
+            <div class="wrap-content">
+                <div class="app-item header-item" ng-repeat="app in header.headerData.myAppList" ng-click="header.toApp(app)">
+                    <img ng-src="{{app.icon}}" alt="">
+                    <div class="app-name" ng-bind="app.name"></div>
+                </div>
+            </div>
+        </div>
+      </div>
+			<div class="jq_setting">
+				<i class="header-setting"
+                   data-title="设置"
+                   data-placement="bottom-right"
+                   data-animation="am-flip-x" bs-dropdown aria-haspopup="true" aria-expanded="false"
+                   data-bs-on-before-show="header.settingBeforeShow"
+                   ></i>
+                   <!-- 下拉菜单 -->
+                   <div class="header-setting-main header-popups dropdown-menu">
+                        <!-- <pui-layout align="middle" class="header-setting-zt">
+                            <i class="icon-zt"></i>主题
+                       </pui-layout>
+                       <div class="header-setting-zt-box">
+                           <div class="header-setting-zt-img-box" ng-show="false">
+                               <div ng-class="{'header-setting-active': header.theme === 'elegance_white'}" ng-click="header.chooseSkin('elegance_white')" class="header-setting-zt-img-white">
+                                   <div ng-if="header.theme === 'elegance_white'" class="header-setting-zt-img-active"></div>
+                               </div>
+                               <div class="header-setting-zt-text">典雅白</div>
+                           </div>
+                           <div class="header-setting-zt-img-box">
+                               <div ng-class="{'header-setting-active': header.theme === 'star_blue'}" ng-click="header.chooseSkin('star_blue')" class="header-setting-zt-img-blue">
+                                   <div ng-if="header.theme === 'star_blue'" class="header-setting-zt-img-active"></div>
+                               </div>
+                               <div class="header-setting-zt-text">星空蓝</div>
+                           </div>
+                       </div> -->
+                       <div class="header-setting-other-box">
+                           <ul class="header-setting-other-ul">
+                               <div align="center" class="header-item" ng-if="false">
+                                   <pui-layout align="center" class="setting-item-content">
+                                       <i class="icon-yy"></i>语言
+                                   </pui-layout>
+                               </div>
+                               <div class="header-item" ng-if="header.headerAuth.nav.application" ng-click="header.mainPageSetting($event)">
+                                   <pui-layout align="center" class="setting-item-content">
+                                       <i class="icon-app"></i>应用列表
+                                   </pui-layout>
+                               </div>
+                               
+                               <div ng-if="header.adminAuth.menu.temporary" class="header-item" ng-click="header.fileTemporarySetting($event)">
+                                   <pui-layout align="center" class="setting-item-content">
+                                       <i class="file-temporary-set"></i>临时文件保存设置
+                                   </pui-layout>
+                               </div>
+                               <div class="header-item">
+                                    <pui-layout align="center" class="setting-item-content">
+                                        <i class="user-image-set"></i>图析界面显示头像
+                                        <i class="user-image-set-switch"
+                                            ng-click="header.imageSwitch($event)"
+                                            ng-class="header.userImageSetSwitch ? 'user-image-set-switch-on' : 'user-image-set-switch-off'">
+                                        </i>
+                                    </pui-layout>
+                                </div>
+                               <div class="header-item" ng-click="header.passwordDialog($event)">
+                                   <pui-layout align="center" class="setting-item-content">
+                                       <i class="icon-password"></i>密码修改
+                                   </pui-layout>
+                               </div>
+                               <div class="header-item" ng-if="false">
+                                   <pui-layout align="center" class="setting-item-content">
+                                       <i class="icon-other"></i>其他
+                                   </pui-layout>
+                               </div>
+                           </ul>
+                       </div>
+                   </div>
+			</div>
+			<div ng-show="false">
+				<i class="header-help"
+                   data-placement="bottom-left"
+                   data-title="帮助"
+                   bs-tooltip ></i>
+			</div>
+			<div>
+				<i class="header-logout"
+                   data-placement="bottom-right"
+                   data-title="登出"
+                   bs-tooltip
+                   ng-click="header.logout($event)"></i>
+			</div>
+		</pui-layout>
+    </div>
+    <div class="header-relation header-popups" ng-class="{'active': header.showRelation}"
+        ng-show="header.showRelation"
+        ng-mouseenter="header.showRelation = true" ng-mouseleave="header.showRelation = false"
+    >
+        <span ng-click="header.stateChoose($event, 'relation')">新建图析</span>
+    </div>
+</pui-layout>

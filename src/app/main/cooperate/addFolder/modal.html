@@ -1,0 +1,19 @@
+<div class="pui-modal add-folder-modal modal" >
+    <div class="modal-dialog">
+        <div class="modal-header">
+            <div class="modal-title">新建文件夹</div>
+            <div class="modal-close-icon" ng-click="fn.dismiss()"></div>
+        </div>
+        <div class="modal-body">
+            <pui-layout class="amm-item" align="center">
+                <span class="amm-item-title">文件夹名称</span>
+                <pui-input class="amm-item-input" ng-model="data.name"></pui-input>
+            </pui-layout>
+        </div>
+        <div class="modal-footer">
+            <pui-button class="cancel-btn" on-click="fn.dismiss()">取消</pui-button>
+            <pui-button class="confirm-btn" type="primary" on-click="fn.sure()">确定</pui-button>
+
+        </div>
+    </div>
+</div>

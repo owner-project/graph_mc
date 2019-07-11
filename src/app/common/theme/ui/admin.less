@@ -1,0 +1,236 @@
+.tree-menu-view {
+    .menu-shadow {
+        box-shadow: inset -1px 0 0 0 fade(@text-color-highlight, 3), 1px 0 0 0 rgba(0,0,0,0.15), 2px 0 0 0 rgba(0,0,0,0.06);
+    }
+    &:before {
+        background: linear-gradient(0deg, rgba(25,26,44,0) 0%, @bg-color 50%);
+    }
+}
+
+.tree-menu-container {
+    color: @text-color-title;
+    .menu-item {
+        .icon-tree-menu-arrow {
+            .icon-img(@base-url, @icon-admin-menu-arrow);
+            transform: rotate(90deg);
+        }
+        .icon-tree-menu-arrow-ry {
+            .icon-img(@base-url, @icon-rygl);
+        }
+        .icon-tree-menu-arrow-js {
+            .icon-img(@base-url, @icon-jsgl);
+        }
+        .icon-tree-menu-arrow-gn {
+            .icon-img(@base-url, @icon-gngl);
+        }
+        .icon-tree-menu-arrow-zygl {
+            .icon-img(@base-url, @icon-zygl);
+        }
+        .icon-tree-menu-arrow-rzgl {
+            .icon-img(@base-url, @icon-rzgl);
+        }
+        .icon-tree-menu-arrow-hmdgl{
+            .icon-img(@base-url,@icon-hmdgl);
+        }
+        .icon-tree-menu-arrow-other{
+            .icon-img(@base-url, @icon-other);
+        }
+        .icon-tree-menu-arrow-extend{
+            .icon-img(@base-url, @icon-extend);
+        }
+        .icon-tree-menu-arrow-focus{
+            .icon-img(@base-url, @icon-star);
+        }
+        .icon-tree-menu-arrow-zsgl {
+            .icon-img(@base-url, @icon-zsgl);
+        }
+        .back-shadow-group {
+            .icon-img(@base-url, @manager-menu-active-bg);
+            background-size: cover;
+        }
+    }
+}
+
+.m-m-container {
+    color: @text-color-title;
+    .m-m-body-title {
+        .extend-operate-wrap{
+            color: fade(@info-text-color, 70%);
+            .extend-operate{
+                margin-left: 8px;
+                color: @text-color-highlight;
+                opacity: .7;
+                &:hover{
+                    opacity: 1;
+                }
+            }
+            .icon-extend-setting{
+                .icon-img(@base-url, @icon-extend-setting);
+            }
+            .icon-unextend-setting{
+                .icon-img(@base-url, @icon-unextend-setting);
+            }
+        }
+        .m-m-body-ul {
+            .hover-shine {
+                .icon-img(@base-url, @icon-result-menu-active);
+            }
+            .m-m-body-ul-import {
+                .icon-img(@base-url, @icon-drop-btn-import);
+            }
+            .m-m-body-ul-new {
+                .icon-img(@base-url, @icon-components-add-icon);
+            }
+            .m-m-body-ul-up {
+                .icon-img(@base-url, @icon-voice-model-up-icon);
+            }
+            .m-m-body-ul-down {
+                .icon-img(@base-url, @icon-voice-model-down-icon);
+            }
+            .m-m-body-ul-xz {
+                .icon-img(@base-url, @icon-voice-model-xz-icon);
+            }
+            .m-m-body-ul-zd {
+                .icon-img(@base-url, @icon-voice-model-zd-icon);
+            }
+            .m-m-body-ul-sc {
+                .icon-img(@base-url, @icon-voice-model-sc-icon);
+            }
+            .m-m-body-ul-delete {
+                .icon-img(@base-url, @folder-option-delete);
+            }
+            .m-m-body-ul-line {
+                .icon-img(@base-url, @icon-voice-model-line-icon);
+            }
+        }
+    }
+    .m-m-table-container {
+        th.cb-length-option{
+            color: fade(@info-text-color,70);
+        }
+        .cb-length-option {
+            color : @text-color-primary;
+            .isExtend{
+                color:@info-block-color
+            }
+            .noExtend{
+                color: @info-text-color;
+            }
+            a{
+                color:@info-block-color
+            }
+        }
+    }
+}
+
+.admin-table {
+    .icon-arrow-down{
+        .icon-img(@base-url,@icon-admin-menu-arrow);
+        transform: rotate(90deg);
+    }
+    .icon-arrow-up{
+        .icon-img(@base-url,@icon-admin-menu-arrow);
+        transform: rotate(-90deg);
+    }
+    td {
+        .icon-update {
+            i {
+                .icon-img(@base-url, @icon-update);
+            }
+        }
+        .icon-delete {
+            i {
+                .icon-img(@base-url, @icon-delete-bin);
+            }
+        }
+        .icon-reset {
+            i {
+                .icon-img(@base-url, @icon-reset);
+            }
+        }
+
+    }
+}
+
+// 订阅管理的样式
+.focus-manager-wrapper{
+    color: fade(@info-text-color,70);
+    .tag{
+        background-color:fade(@info-block-color,20);
+        border-color: @info-block-color;
+        &:hover{
+            background-color:fade(@info-block-color,50);
+        }
+        &.active{
+            color: @info-text-color;
+            background: @info-block-color;
+            &:hover{
+                background: @info-block-color;
+            }
+        }
+    }
+
+
+    // 关注项样式
+    .focus-item{
+        background: fade(#153268,70);
+        border-color: fade(@info-block-color,40);
+        .focus-item-top{
+            border-bottom-color: fade(@info-block-color,40);
+            .focus-reason{
+                line-height: 2em;
+                height: 4em;
+                .ellipsis_num(2)
+            }
+        }
+    }
+    // icon部分样式
+    .setting-icon{
+        .icon-img(@base-url, @icon-other);
+    }
+    .focus-remove-icon{
+        .icon-img(@base-url, @icon-blue-star);
+    }
+    .focus-move-to-icon{
+        .icon-img(@base-url, @icon-focus-move-to);
+    }
+    .edit-icon {
+        .icon-img(@base-url, @icon-focus-edit);
+    }
+    .more-edit-icon{
+        .icon-img(@base-url, @icon-focus-edit-more);
+    }
+    .icon-arrow-down{
+        .icon-img(@base-url,@icon-admin-menu-arrow);
+        transform: rotate(90deg);
+    }
+    .icon-arrow-up{
+        .icon-img(@base-url,@icon-admin-menu-arrow);
+        transform: rotate(-90deg);
+    }
+    // 下拉菜单 dropdown-menu
+    .dropdown-menu{
+        background-color: @popups-bg-color;
+        .dropdown-menu-item{
+            padding: 0 16px;
+            cursor: pointer;
+            &:hover{
+                color: @info-text-color;
+                background-color: fade(@info-block-color,10);
+            }
+        }
+    }
+}
+// 订阅管理通用的icon
+.focus-manager-wrapper,.focus-manager-modal{
+    .tag{
+        background-color:fade(@info-block-color,20);
+        border-color: @info-block-color;
+        &:hover{
+            background-color:fade(@info-block-color,50);
+        }
+    }
+    .add-icon{
+        .icon-img(@base-url, @icon-add);
+    }
+}

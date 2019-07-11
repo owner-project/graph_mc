@@ -1,0 +1,55 @@
+.pui-textarea-wrap {
+
+    &.textarea-error {
+        box-shadow: inset 0 0 0 1px fade(@pui-main-error-color, 50%);
+        .pui-textarea {
+            box-shadow: inset 0 0 0 1px fade(@pui-main-error-color, 50%);
+            &:hover {
+                box-shadow: inset 0 0 0 1px fade(@pui-main-error-color, 100%);
+            }
+
+            &:focus {
+                background-color: fade(@pui-main-error-color, 0%);
+                box-shadow: inset 0 0 0 2px fade(@pui-main-error-color, 100%);
+            }
+        }
+    }
+
+    .pui-textarea {
+        display: block;
+        width: 100%;
+        box-sizing: border-box !important;
+        padding: 8px;
+        min-height: 76px;
+        resize: none;
+        border: none;
+        outline: none;
+        color: @pui-main-text-color;
+        background-color: fade(@pui-main-color, 6%);
+        box-shadow: inset 0 0 0 1px fade(@pui-main-color, 50%);
+
+
+        &:hover {
+            box-shadow: inset 0 0 0 1px fade(@pui-main-color, 100%);
+        }
+
+        &:focus {
+            background-color: fade(@pui-main-color, 0%);
+            box-shadow: inset 0 0 0 2px fade(@pui-main-color, 100%);
+        }
+
+        &.disabled {
+            cursor: not-allowed;
+            opacity: 0.4;
+
+            &:hover {
+                box-shadow: inset 0 0 0 1px fade(@pui-main-color, 50%);
+            }
+
+            &:focus {
+                background-color: fade(@pui-main-color, 6%);
+                box-shadow: inset 0 0 0 1px fade(@pui-main-color, 50%);
+            }
+        }
+    }
+}

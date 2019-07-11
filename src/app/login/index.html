@@ -1,0 +1,41 @@
+<div class="login-main">
+    <div class="login-body">
+        <div class="login-con-left">
+            <div class="login-boll"></div>
+            <div class="login-atlas">
+                <div class="login-bling1"></div>
+                <div class="login-bling2"></div>
+                <div class="login-bling3"></div>
+            </div>
+        </div>
+        <div class="login-con-right">
+            <div class="login-logo"></div>
+            <form autocomplete="off" disableautocomplete class="login-form">
+                <div class="username-box">
+                    <i class="user-icon"></i>
+                    <input class="user-input" ng-focus="login.focus()" ng-model="login.username" maxlength="16" placeholder="请输入用户名" disableautocomplete autocomplete="off" name="username" type="text">
+                    <i class="user-check" ng-show="login.error.username"></i>
+                    <span ng-show="login.error.username" class="user-check-log" ng-bind="login.errorTip.username"></span>
+                </div>
+                <input ng-show="" type="text" name="username" />
+				<input ng-show="" type="password" name="password" />
+                <div class="password-box">
+                    <i class="pwd-icon"></i>
+                    <input class="pwd-input" ng-focus="login.focus()" ng-model="login.password" placeholder="请输入密码" type="password" onfocus="this.setAttribute('type','password');">
+                    <i class="pwd-check" ng-show="login.error.password"></i>
+                    <span class="pwd-check-log" ng-show="login.error.password" ng-bind="login.errorTip.password"></span>
+                </div>
+                <div class="remeber-pwd-box">
+                    <pui-layout align="center" class="re-pwd">
+                        <pui-checkbox ng-model="login.rememberPassword"></pui-checkbox>
+                        <span class="re-pwd-span">记住密码</span>
+                    </pui-layout>
+                </div>
+                <div class="submit-box">
+                    <button class="submit-btn" ng-disabled="login.isLogin" ng-click="login.login($event)" type="submit">登录</button>
+                    <div class="submit-active"></div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

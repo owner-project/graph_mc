@@ -1,0 +1,94 @@
+<div class="pui-components-wrap">
+    <div class="mgb20">
+        <div class="ft20 mgb20">Input</div>
+        <pui-layout align="end">
+            <pui-input style="width: 100px;" class="mgr15" ng-model="pui.data.input.value" size="large" ng-change="pui.data.input.change()"></pui-input>
+            <pui-input style="width: 100px;" class="mgr15" ng-model="pui.data.input.value" placeholder="请填写内容" ng-focus="pui.data.input.onFocus($event)" ng-blur="pui.data.input.onBlur($event)" ng-change="pui.data.input.change()"></pui-input>
+            <pui-input style="width: 100px;" class="mgr15" ng-model="pui.data.input.value" size="small" ng-change="pui.data.input.change()"></pui-input>
+            <pui-input style="width: 100px;" class="mgr15" ng-model="pui.data.input.disabledValue" ng-disabled="true" ng-change="pui.data.input.change()"></pui-input>
+        </pui-layout>
+    </div>
+    <div class="mgb20">
+        <div class="ft20 mgb20">Textarea</div>
+        <pui-layout align="start">
+            <pui-textarea style="width: 200px;" class="mgr15" ng-model="pui.data.textarea.value" ng-change="pui.data.textarea.change()"></pui-textarea>
+            <pui-textarea style="width: 200px;" class="mgr15" ng-model="pui.data.textarea.autoHeightValue" auto-height ng-change="pui.data.textarea.change()"></pui-textarea>
+            <pui-textarea style="width: 200px;" class="mgr15" ng-model="pui.data.textarea.disabledValue" ng-disabled="true" ng-change="pui.data.textarea.change()"></pui-textarea>
+        </pui-layout>
+    </div>
+    <div class="mgb20">
+        <div class="ft20 mgb20">Select</div>
+        <pui-layout align="end">
+            <pui-select style="width: 100px;" class="mgr15" placeholder="请选择" options="pui.data.select.single.options" ng-model="pui.data.select.single.value" ng-change="pui.data.select.single.change()"></pui-select>
+            <pui-select style="width: 100px;" class="mgr15" placeholder="请选择" options="pui.data.select.single.options" placement="right" ng-model="pui.data.select.single.value" ng-change="pui.data.select.single.change()"></pui-select>
+            <pui-select style="width: 200px;" class="mgr15" placeholder="多选" options="pui.data.select.multiple.options" multiple ng-model="pui.data.select.multiple.value" ng-change="pui.data.select.multiple.change()"></pui-select>
+            <pui-select style="width: 100px;" class="mgr15" placeholder="请选择" options="pui.data.select.single.options" ng-disabled="true" ng-model="pui.data.select.single.value" ng-change="pui.data.select.single.change()"></pui-select>
+            <pui-select style="width: 150px;" class="mgr15" placeholder="请选择" options="pui.data.select.single.options" type="border" ng-model="pui.data.select.single.value" ng-change="pui.data.select.single.change()"></pui-select>
+            <pui-select style="width: 220px;" class="mgr15" placeholder="多选" options="pui.data.select.multiple.options" type="border" multiple ng-model="pui.data.select.multiple.value" ng-change="pui.data.select.multiple.change()"></pui-select>
+        </pui-layout>
+    </div>
+    <div class="mgb20">
+        <div class="ft20 mgb20">Datepicker</div>
+        <pui-layout align="end">
+            <pui-datepicker style="width: 100px;" class="mgr15" placeholder="请选择"  ng-model="pui.data.datepicker.value1" ng-change="pui.data.datepicker.change()" ng-focus="pui.data.datepicker.focus()" ng-blur="pui.data.datepicker.blur()"></pui-datepicker>
+            <pui-datepicker style="width: 100px;" class="mgr15" ng-disabled="true" placeholder="请选择" ng-model="pui.data.datepicker.value1" ng-change="pui.data.datepicker.change()" ng-focus="pui.data.datepicker.focus()" ng-blur="pui.data.datepicker.blur()"></pui-datepicker>
+            <pui-datepicker style="width: 120px;" type="border" class="mgr15" placeholder="请选择" ng-model="pui.data.datepicker.value1" ng-change="pui.data.datepicker.change()"></pui-datepicker>
+            <pui-datepicker style="width: 120px;" ng-disabled="true" type="border" class="mgr15" placeholder="请选择" ng-model="pui.data.datepicker.value1" ng-change="pui.data.datepicker.change()"></pui-datepicker>
+            <pui-datepicker style="width: 100px;" class="mgr15" placeholder="开始时间" data-max-date="{{pui.data.datepicker.end}}" ng-model="pui.data.datepicker.start" ng-change="pui.data.datepicker.change()"></pui-datepicker>
+            <pui-datepicker style="width: 100px;" class="mgr15" placeholder="结束时间" data-trigger="click" data-min-date="{{pui.data.datepicker.start}}" ng-model="pui.data.datepicker.end" ng-change="pui.data.datepicker.change()"></pui-datepicker>
+            <pui-datepicker style="width: 150px;" class="mgr15" placeholder="选择日期和时间" date-mode="datetime" data-has-clear="true" data-max-date="1511832498663" ng-model="pui.data.datepicker.value1" ng-blur="pui.data.datepicker.blur()" ng-change="pui.data.datepicker.change()"></pui-datepicker>
+        </pui-layout>
+    </div>
+    <div class="mgb20">
+        <div class="ft20 mgb20">Radio</div>
+        <pui-layout align="start">
+            <pui-layout align="center" class="mgr15">
+                <pui-radio class="mgr15" ng-model="pui.data.radio.value1" ng-change="pui.data.radio.change()"></pui-radio>
+                <span>男</span>
+            </pui-layout>
+            <pui-layout align="center">
+                <pui-radio class="mgr15" ng-model="pui.data.radio.value2" ng-disabled="true" ng-change="pui.data.radio.change()"></pui-radio>
+                <span>女</span>
+            </pui-layout>
+        </pui-layout>
+    </div>
+    <div class="mgb20">
+        <div class="ft20 mgb20">Checkbox</div>
+        <pui-layout align="start">
+            <pui-checkbox class="mgr15" ng-model="pui.data.checkbox.allChecked" ng-change="pui.data.checkbox.checkAll()" indeterminate="pui.data.checkbox.indeterminate"></pui-checkbox>
+            <pui-checkbox class="mgr15" ng-model="pui.data.checkbox.value1" ng-change="pui.data.checkbox.change()"></pui-checkbox>
+            <pui-checkbox class="mgr15" ng-model="pui.data.checkbox.value2" ng-disabled="true" ng-change="pui.data.checkbox.change()"></pui-checkbox>
+        </pui-layout>
+    </div>
+    <div class="mgb20">
+        <div class="ft20 mgb20">Button</div>
+        <pui-layout align="center">
+            <pui-button class="mgr15">确定</pui-button>
+            <pui-button class="mgr15" size="large">确定</pui-button>
+            <pui-button class="mgr15" no-shadow="true" on-click="pui.data.button.onClick($event)">确定</pui-button>
+            <pui-button class="mgr15" no-shadow="true" ng-disabled="true" on-click="pui.data.button.onClick($event)">确定</pui-button>
+            <pui-button class="mgr15" type="primary">确定</pui-button>
+            <pui-button class="mgr15" type="primary" size="large">确定</pui-button>
+            <pui-button class="mgr15" ng-disabled="true" on-click="pui.data.button.onClick($event)">禁用</pui-button>
+            <pui-button ng-disabled="true" type="primary" on-click="pui.data.button.onClick($event)">禁用</pui-button>
+        </pui-layout>
+    </div>
+    <div class="mgb20">
+        <div class="ft20 mgb20">Searchbar</div>
+        <pui-layout align="center">
+            <pui-searchbar ng-model="pui.data.searchbar.value" placeholder="请输入名称" ng-change="pui.data.searchbar.onChange()" on-search="pui.data.searchbar.onSearch($event)"></pui-searchbar>
+        </pui-layout>
+    </div>
+    <div class="mgb20">
+        <div class="ft20 mgb20">Modal</div>
+        <pui-layout align="center">
+            <pui-button class="mgr15" on-click="pui.data.modal.confirm()">确认提示</pui-button>
+        </pui-layout>
+    </div>
+    <div class="mgb20">
+        <div class="ft20 mgb20">Progress</div>
+        <pui-layout align="center">
+            <pui-progress style="width: 150px;" percent="50"></pui-progress>
+        </pui-layout>
+    </div>
+</div>

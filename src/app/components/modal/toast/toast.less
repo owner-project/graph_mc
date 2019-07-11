@@ -1,0 +1,32 @@
+.toast-main {
+    position: absolute;
+    z-index: 9999;
+    width: calc(~'100% - 40px');
+    height: 30px;
+    padding: 5px 10px;
+    border-radius: 3px;
+    text-align: center;
+    transition: 500ms;
+    right: 0;
+    left: 0;
+    top: 0;
+    margin: auto;
+    transform: translateY(-40px);
+    opacity: 0;
+
+    span {
+        line-height: 30px;
+        display: inline-block;
+        white-space: nowrap;
+    }
+
+    &.show-toast {
+        transform: translateY(60px);
+        opacity: .7;
+    }
+
+    &.close-toast {
+        transform: translateY(120px);
+        opacity: 0;
+    }
+}

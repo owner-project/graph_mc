@@ -1,0 +1,45 @@
+<div class="pui-modal modal confirm">
+    <div class="modal-dialog circle-search-modal">
+        <div class="modal-header">
+            <div class="modal-title">请选择实体</div>
+            <div class="modal-close-icon" ng-click="fn.dismiss()"></div>
+        </div>
+        <div class="modal-body">
+            <div class="left-menu">
+                <ul class="list-left">
+                    <li class="list-item" ng-class='{"active":root.chooseType == i}' ng-click='root.selectLeftMenu(i)'
+                        ng-repeat="i in data.tempTreesKeysList track by $index">
+                        {{data.currentTree[i].label}}
+                    </li>
+                </ul>
+            </div>
+            <div class="right-content">
+                <div class="person-tree-container" ng-show= "root.chooseType == i" ng-repeat="i in data.tempTreesKeysList track by $index">
+                    <div>
+                        <pui-checkbox ng-model="data.currentTree[i].allSelected" ng-change="fn.selectAll()" data-indeterminate="data.currentTree[i].showIndeterminate">
+                        </pui-checkbox>
+                        <label>{{data.currentTree[i].label}}</label>
+                    </div>
+                    <div class="pdl10 mgt10">
+                        <div ng-repeat="item in data.currentTree[i].child">
+                                <pui-checkbox ng-model="item.isChecked" ng-change="fn.toggleNode(item)" data-indeterminate="item.showIndeterminate">
+                                </pui-checkbox>
+                                <label ng-bind="item.label"></label>
+                                <div class="pdl10 clearfix ">
+                                    <div class="pull-left mgl10" ng-repeat="v in item.child">
+                                        <pui-checkbox ng-model="v.isChecked" ng-change="fn.toggleNode(v)">
+                                        </pui-checkbox>
+                                        <label ng-bind="v.name"></label>
+                                    </div>
+                                </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <pui-button class="cancel-btn" on-click="fn.dismiss()">取消</pui-button>
+            <pui-button class="confirm-btn" type="primary" on-click="fn.sure()">下一步</pui-button>
+        </div>
+    </div>
+</div>

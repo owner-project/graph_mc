@@ -1,0 +1,85 @@
+<div class="corporate-portrait-main corporate-main jq_cor_main">
+	<div class="corporate-title">
+		<span ng-bind="cp.jsonData.enterpriseInfo.name"></span>
+		<div class="corporate-title-img"></div>
+	</div>
+
+	<div class="corporate-body">
+		<div class="corporate-box">
+			<div class="corporate-box-box md-bg">
+				<div class="corporate-box-title">
+					<div class="corporate-box-title-left-text">企业积分</div>
+					<!-- <div class="corporate-box-title-right">更多<i></i></div> -->
+				</div>
+				<div class="box-body-bg corporate-box-body jq_corporate_radar">
+				</div>
+				<div class="box-corporate-score" ng-bind="cp.jsonData.enterpriseInfo.score"></div>
+			</div>
+		</div>
+		<div class="corporate-box">
+			<div class="corporate-box-box map-md-bg">
+				<div class="corporate-box-title">
+					<div class="corporate-box-title-left-text">网络舆情</div>
+					<!-- <div class="corporate-box-title-right">更多<i></i></div> -->
+				</div>
+				<div id="corporate_wordCloud" class="box-body-no-bg-color corporate-box-body jq_corporate_wordCloud">
+				</div>
+				<div class="box-no-content" ng-if="!cp.jsonData.echartData.wordData.length">暂无数据</div>
+			</div>
+		</div>
+		<div class="corporate-box">
+			<div class="corporate-box-box">
+				<div class="corporate-box-title">
+					<div class="corporate-box-title-left-text">风险信息</div>
+					<!--<div class="corporate-box-title-right">更多<i></i></div>-->
+				</div>
+				<div class="box-no-content" ng-if="!cp.jsonData.risk.length">暂无数据</div>
+				<div class="corporate-box-body" ng-if="cp.jsonData.risk.length">
+					<div pui-table>
+                        <table>
+                            <tbody>
+                            <tr>
+                                <td>类型</td>
+                                <td>案由</td>
+                                <td>风险来源</td>
+                            </tr>
+                            <tr ng-repeat="item in cp.jsonData.risk">
+                                <td ng-bind="item.type"></td>
+                                <td ng-bind="item.desc"></td>
+                                <td>
+                                    <a ng-href="{{item.src}}">原站点</a>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+				</div>
+			</div>
+		</div>
+		<div class="corporate-box">
+			<div class="corporate-box-box">
+				<div class="corporate-box-title">
+					<div class="corporate-box-title-left-text">企业信息变更</div>
+					<!--<div class="corporate-box-title-right">更多<i></i></div>-->
+				</div>
+				<div class="box-no-content" ng-if="!cp.jsonData.change.length">暂无数据</div>
+				<div class="corporate-box-body" ng-if="cp.jsonData.change.length">
+					<div pui-table>
+                        <table>
+                            <tbody>
+                            <tr>
+                                <td>时间</td>
+                                <td>变更信息</td>
+                            </tr>
+                            <tr ng-repeat="item in cp.jsonData.change">
+                                <td ng-bind="item.octAt"></td>
+                                <td class="text-ellipsis" ng-bind="item.desc"></td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

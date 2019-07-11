@@ -1,0 +1,551 @@
+<!-- 人员 -->
+<div ng-show="item.tag == '0101'">
+    <div class="result-list-body-li-img">
+        <img ng-src="{{(item.image && item.image!='')? 'data:image/jpg;base64,'+item.image:'assets/images/theme_star_blue/people/people_info_img.svg'}}">
+        <p class="focus-status">{{item.isFocused?'已关注':'未关注'}}</p>
+    </div>
+    <div class="result-list-body-li-title" ng-bind-html="item.xm+'   ('+item.keys+')'"></div>
+
+    <ul class="result-list-body-li-ul">
+        <li>
+            <span class="title">性别：</span>
+            <span ng-bind-html="(item.xbmc==null?'':item.xbmc)"></span>
+        </li>
+        <li>
+            <span class="title">电话：</span>
+            <span ng-bind-html="(item.lxdh==null?'':item.lxdh)"></span>
+        </li>
+    </ul>
+    <ul class="result-list-body-li-ul">
+        <li>
+            <span class="title">婚否：</span>
+            <span ng-bind-html="(item.hyzk==null?'':item.hyzk)"></span>
+        </li>
+        <li>
+            <span class="title">民族：</span>
+            <span ng-bind-html="(item.mzmc==null?'':item.mzmc)"></span>
+        </li>
+    </ul>
+    <ul class="result-list-body-li-ul last">
+        <li>
+            <span class="title">籍贯：</span>
+            <span ng-bind-html="(item.jgdq==null?'':item.jgdq)"></span>
+        </li>
+        <li title="{{item.hjxz}}">
+            <span class="title">户籍地址：</span>
+            <span ng-bind-html="(item.hjxz==null?'':item.hjxz)"></span>
+        </li>
+    </ul>
+    <ul class="result-list-body-li-menu-ul">
+
+        <li class="result-list-body-li-menu-ul-tuxi" ng-click="home.into_porpoise(item.id)">
+            <i></i>
+            <div>图析</div>
+        </li>
+        <li class="result-list-body-li-menu-ul-dangan" ng-click="home.into_archives(item.id)">
+            <i></i>
+            <div>档案</div>
+        </li>
+        <!-- <li class="result-list-body-li-menu-ul-gis" ng-click="home.into_porpoise(item.id,true)">
+            <i></i>
+            <div>gis</div>
+        </li> -->
+        <li class="result-list-body-li-menu-ul-focus"
+            ng-click="home.focus($event, item)">
+            <i></i>
+            <div ng-bind="'关注'"></div>
+        </li>
+    </ul>
+</div>
+<!-- 手机 -->
+<div ng-show="item.tag == '0301'">
+    <div class="result-list-body-li-img">
+        <img ng-src="assets/images/theme_star_blue/home/tag0301.svg">
+        <p class="focus-status">{{item.isFocused?'已关注':'未关注'}}</p>
+    </div>
+    <div class="result-list-body-li-title" ng-bind-html="item.sjhm+'('+item.jzxm+')'"></div>
+
+    <ul class="result-list-body-li-ul">
+        <li>
+            <span class="title">手机号码：</span>
+            <span ng-bind-html="(item.sjhm || '-')"></span>
+        </li>
+        <li>
+            <span class="title">机主姓名：</span>
+            <span ng-bind-html="(item.jzxm || '-')"></span>
+        </li>
+    </ul>
+    <ul class="result-list-body-li-ul">
+        <li>
+            <span class="title">登记时间：</span>
+            <span ng-bind-html="(item.djsj || '-')"></span>
+        </li>
+        <li>
+            <span class="title">登记单位：</span>
+            <span ng-bind-html="(item.sjkdjdwmc || '-')"></span>
+        </li>
+    </ul>
+    <ul class="result-list-body-li-ul last">
+        <li>
+            <span class="title">手机卡归属地：</span>
+            <span ng-bind-html="(item.sjkgsd || '-')"></span>
+        </li>
+        <li>
+            <span class="title">机主身份证：</span>
+            <span ng-bind-html="(item.jzsfhm || '-')"></span>
+        </li>
+    </ul>
+    <ul class="result-list-body-li-menu-ul">
+        <li class="result-list-body-li-menu-ul-tuxi" ng-click="home.into_porpoise(item.id)">
+            <i></i>
+            <div>图析</div>
+        </li>
+        <li class="result-list-body-li-menu-ul-dangan" ng-click="home.into_archives(item.id)">
+            <i></i>
+            <div>档案</div>
+        </li>
+        <!-- <li class="result-list-body-li-menu-ul-gis" ng-click="home.into_porpoise(item.id,true)">
+                <i></i>
+                <div>gis</div>
+        </li> -->
+        <li class="result-list-body-li-menu-ul-focus"
+            ng-click="home.focus($event, item)">
+            <i></i>
+            <div ng-bind="'关注'"></div>
+        </li>
+    </ul>
+</div>
+<!-- 网吧 -->
+<div ng-show="item.tag == '0404'"> 
+    <div class="result-list-body-li-img">
+        <img ng-src="assets/images/theme_star_blue/home/tag0404.svg">
+        <p class="focus-status">{{item.isFocused?'已关注':'未关注'}}</p>
+    </div>
+    <div class="result-list-body-li-title" ng-bind-html="item.wbmc"></div>
+
+    <ul class="result-list-body-li-ul">
+        <li>
+            <span class="title">网吧编号：</span>
+            <span ng-bind-html="(item.wbbh || '-')"></span>
+        </li>
+        <li>
+            <span class="title">网吧负责人：</span>
+            <span ng-bind-html="(item.wbfzr || '-')"></span>
+        </li>
+    </ul>
+    <ul class="result-list-body-li-ul">
+        <li>
+            <span class="title">经营许可证编号：</span>
+            <span ng-bind-html="(item.jyxkzbh || '-')"></span>
+        </li>
+        <li>
+            <span class="title">管辖单位名称：</span>
+            <span ng-bind-html="(item.gxdwmc || '-')"></span>
+        </li>
+    </ul>
+    <ul class="result-list-body-li-ul last">
+        <li title="{{item.jyfw}}">
+            <span class="title">网吧地址：</span>
+            <span ng-bind-html="(item.wbdz || '-')"></span>
+        </li>
+    </ul>
+    <ul class="result-list-body-li-menu-ul">
+        <li class="result-list-body-li-menu-ul-tuxi" ng-click="home.into_porpoise(item.id)">
+            <i></i>
+            <div>图析</div>
+        </li>
+        <li class="result-list-body-li-menu-ul-dangan" ng-click="home.into_archives(item.id)">
+            <i></i>
+            <div>档案</div>
+        </li>
+        <li class="result-list-body-li-menu-ul-focus"
+            ng-click="home.focus($event, item)">
+            <i></i>
+            <div ng-bind="'关注'"></div>
+        </li>
+    </ul>
+</div>
+<!-- 企业 -->
+<div ng-show="item.tag == '0601'">
+    <div class="result-list-body-li-img">
+        <img ng-src="assets/images/theme_star_blue/home/tag0601.svg">
+        <p class="focus-status">{{item.isFocused?'已关注':'未关注'}}</p>
+    </div>
+    <div class="result-list-body-li-title" ng-bind-html="item.qymc+'('+item.ztsfdm+')'"></div>
+
+    <ul class="result-list-body-li-ul">
+        <li>
+            <span class="title">联系电话：</span>
+            <span ng-bind-html="(item.lxdh || '-')"></span>
+        </li>
+        <li>
+            <span class="title">市场主体类型：</span>
+            <span ng-bind-html="(item.scztlx || '-')"></span>
+        </li>
+    </ul>
+    <ul class="result-list-body-li-ul">
+        <li>
+            <span class="title">核准日期：</span>
+            <span ng-bind-html="(item.hzrq || '-')"></span>
+        </li>
+        <li>
+            <span class="title">登记状态：</span>
+            <span ng-bind-html="(item.djzt || '-')"></span>
+        </li>
+    </ul>
+    <ul class="result-list-body-li-ul last">
+        <li title="{{item.jyfw}}">
+            <span class="title">经营范围：</span>
+            <span ng-bind-html="(item.jyfw || '-')"></span>
+        </li>
+        <li title="{{item.zs}}">
+            <span class="title">住所：</span>
+            <span ng-bind-html="(item.zs || '-')"></span>
+        </li>
+    </ul>
+    <ul class="result-list-body-li-menu-ul">
+        <li class="result-list-body-li-menu-ul-tuxi" ng-click="home.into_porpoise(item.id)">
+            <i></i>
+            <div>图析</div>
+        </li>
+        <li class="result-list-body-li-menu-ul-dangan" ng-click="home.into_archives(item.id)">
+            <i></i>
+            <div>档案</div>
+        </li>
+        <li class="result-list-body-li-menu-ul-focus"
+            ng-click="home.focus($event, item)">
+            <i></i>
+            <div ng-bind="'关注'"></div>
+        </li>
+    </ul>
+</div>
+<!-- 车辆 -->
+<div ng-show="item.tag == '0201'">
+    <div class="result-list-body-li-img">
+        <img ng-src="assets/images/theme_star_blue/home/tag0201.svg">
+        <p class="focus-status">{{item.isFocused?'已关注':'未关注'}}</p>
+    </div>
+    <div class="result-list-body-li-title" ng-bind-html="item.clbh"></div>
+
+    <ul class="result-list-body-li-ul">
+        <li>
+            <span class="title">车辆品牌：</span>
+            <span ng-bind-html="(item.clpp || '')"></span>
+        </li>
+        <li>
+            <span class="title">车辆所有人：</span>
+            <span ng-bind-html="(item.syr || '-')"></span>
+        </li>
+    </ul>
+    <ul class="result-list-body-li-ul">
+        <li>
+            <span class="title">发动机型号：</span>
+            <span ng-bind-html="(item.fdjxh || '')"></span>
+        </li>
+        <li>
+            <span class="title">发动机号：</span>
+            <span ng-bind-html="(item.fdjh || '-')"></span>
+        </li>
+    </ul>
+    <ul class="result-list-body-li-ul last">
+        <li>
+            <span class="title">所有人证件号码：</span>
+            <span ng-bind-html="(item.zjhm || '-')"></span>
+        </li>
+        <li>
+            <span class="title">车辆识别编号：</span>
+            <span ng-bind-html="(item.clsbdh || '-')"></span>
+        </li>
+    </ul>
+    <ul class="result-list-body-li-menu-ul">
+        <li class="result-list-body-li-menu-ul-tuxi" ng-click="home.into_porpoise(item.id)">
+            <i></i>
+            <div>图析</div>
+        </li>
+        <li class="result-list-body-li-menu-ul-dangan" ng-click="home.into_archives(item.id)">
+            <i></i>
+            <div>档案</div>
+        </li>
+        <li class="result-list-body-li-menu-ul-focus"
+            ng-click="home.focus($event, item)">
+            <i></i>
+            <div ng-bind="'关注'"></div>
+        </li>
+    </ul>
+</div>
+<!-- 案件 -->
+<div ng-show="item.tag == '1601'">
+    <div class="result-list-body-li-img">
+        <img ng-src="assets/images/theme_star_blue/home/tag6.svg">
+        <p class="focus-status">{{item.isFocused?'已关注':'未关注'}}</p>
+    </div>
+    <div class="result-list-body-li-title" ng-bind-html="item.ajmc"></div>
+
+    <ul class="result-list-body-li-ul">
+        <li>
+            <span class="title">案件报案人姓名:</span>
+            <span ng-bind-html="(item.ajbarxm || '-')"></span>
+        </li>
+        <li>
+            <span class="title">报案时间:</span>
+            <span ng-bind-html="(item.ajbarq || '-')"></span>
+        </li>
+    </ul>
+    <ul class="result-list-body-li-ul">
+        <li>
+            <span class="title">案件日期:</span>
+            <span ng-bind-html="(item.ajrq || '-')"></span>
+        </li>
+        <li>
+            <span class="title">报案人身份证:</span>
+            <span ng-bind-html="(item.ajbarzjhm || '-')"></span>
+        </li>
+    </ul>
+    <ul class="result-list-body-li-ul last">
+        <li>
+            <span class="title">案件详情:</span>
+            <span ng-bind-html="(item.ajjyaq || '-')"></span>
+        </li>
+        <li>
+            <span class="title">案件描述:</span>
+            <span ng-bind-html="(item.ajjyaq || '-')"></span>
+        </li>
+    </ul>
+    <ul class="result-list-body-li-menu-ul">
+        <li class="result-list-body-li-menu-ul-tuxi" ng-click="home.into_porpoise(item.id)">
+            <i></i>
+            <div>图析</div>
+        </li>
+        <li class="result-list-body-li-menu-ul-dangan" ng-click="home.into_archives(item.id)">
+            <i></i>
+            <div>档案</div>
+        </li>
+        <li class="result-list-body-li-menu-ul-focus"
+            ng-click="home.focus($event, item)">
+            <i></i>
+            <div ng-bind="'关注'"></div>
+        </li>
+    </ul>
+</div>
+<!-- 火车出行 -->
+<div ng-show="item.tag == '0403'">
+    <div class="result-list-body-li-img">
+        <img ng-src="assets/images/theme_star_blue/home/tag3.svg">
+    </div>
+    <div class="result-list-body-li-title" ng-bind-html="item.zwm+'('+item.key+')'"></div>
+
+    <ul class="result-list-body-li-ul">
+        <li>
+            <span class="title">出发地：</span>
+            <span ng-bind-html="(item.cfcz || '')"></span>
+        </li>
+        <li>
+            <span class="title">目的地：</span>
+            <span ng-bind-html="(item.ddcz || '')"></span>
+        </li>
+    </ul>
+    <ul class="result-list-body-li-ul">
+        <li>
+            <span class="title">车次：</span>
+            <span ng-bind-html="(item.hbh || '')"></span>
+        </li>
+        <li>
+            <span class="title">车厢号：</span>
+            <span ng-bind-html="(item.cxh || '')"></span>
+        </li>
+    </ul>
+    <ul class="result-list-body-li-ul last">
+        <li>
+            <span class="title">座位号：</span>
+            <span ng-bind-html="(item.zwh || '')"></span>
+        </li>
+        <li>
+            <span class="title">乘车日期：</span>
+            <span ng-bind-html="(!item.ccrq ? '' : (item.ccrq) | date:'yyyy-MM-dd')"></span>
+        </li>
+    </ul>
+    <ul class="result-list-body-li-menu-ul">
+        <li class="result-list-body-li-menu-ul-dangan" ng-click="home.into_archives(item.id)">
+            <i></i>
+            <div>档案</div>
+        </li>
+        <li class="result-list-body-li-menu-ul-tuxi" ng-click="home.into_porpoise(item.id)">
+            <i></i>
+            <div>图析</div>
+        </li>
+    </ul>
+</div>
+<!-- 网络购票 -->
+<div ng-show="item.tag == '1501'">
+    <div class="result-list-body-li-img">
+        <img ng-src="assets/images/theme_star_blue/home/buy tickets.svg">
+    </div>
+    <div class="result-list-body-li-title" ng-bind-html="item.xm+'('+item.zjhm+')'"></div>
+
+    <ul class="result-list-body-li-ul">
+        <li>
+            <span class="title">购票类型:</span>
+            <span ng-bind-html="(item.type || '')"></span>
+        </li>
+        <li>
+            <span class="title">购票数量:</span>
+            <span ng-bind-html="(item.gpsl || '')"></span>
+        </li>
+    </ul>
+    <ul class="result-list-body-li-ul last">
+        <li>
+            <span class="title">购票日期:</span>
+            <span ng-bind-html="(item.dt || '')"></span>
+        </li>
+        <li>
+            <span class="title">场地位置:</span>
+            <span ng-bind-html="(item.zwh || '')"></span>
+        </li>
+    </ul>
+    <ul class="result-list-body-li-menu-ul">
+        <li class="result-list-body-li-menu-ul-dangan" ng-click="home.into_archives(item.id)">
+            <i></i>
+            <div>档案</div>
+        </li>
+        <li class="result-list-body-li-menu-ul-tuxi" ng-click="home.into_porpoise(item.id)">
+            <i></i>
+            <div>图析</div>
+        </li>
+    </ul>
+</div>
+<!-- 违法车辆 -->
+<div ng-show="item.tag == '0902'">
+    <div class="result-list-body-li-img">
+        <img ng-src="assets/images/theme_star_blue/home/tag0201.svg">
+    </div>
+    <div class="result-list-body-li-title" ng-bind-html="item.clbh"></div>
+
+    <ul class="result-list-body-li-ul">
+        <li>
+            <span class="title">车辆单位名称：</span>
+            <span  ng-bind-html="(item.cldwmc || '')"></span>
+        </li>
+        <li>
+            <span class="title">车辆类型：</span>
+            <span ng-bind-html="(item.cllxdm || '')"></span>
+        </li>
+    </ul>
+    <ul class="result-list-body-li-ul">
+        <li>
+            <span class="title">车牌号种类：</span>
+            <span ng-bind-html="(item.clcpzldm || '')"></span>
+        </li>
+        <li>
+            <span class="title">车牌编号：</span>
+            <span ng-bind-html="(item.clbh || '')"></span>
+        </li>
+    </ul>
+    <ul class="result-list-body-li-ul last">
+        <li>
+            <span class="title">驾驶证编号：</span>
+            <span ng-bind-html="(item.jszbh || '')"></span>
+        </li>
+        <li>
+            <span class="title">违法日期：</span>
+            <span ng-bind-html="(item.wfrq || '')"></span>
+        </li>
+    </ul>
+    <ul class="result-list-body-li-menu-ul">
+        <li class="result-list-body-li-menu-ul-dangan" ng-click="home.into_archives(item.id)">
+            <i></i>
+            <div>档案</div>
+        </li>
+        <li class="result-list-body-li-menu-ul-tuxi" ng-click="home.into_porpoise(item.id)">
+            <i></i>
+            <div>图析</div>
+        </li>
+    </ul>
+</div>
+<!-- 航班离岗 -->
+<div ng-show="item.tag == '0402'">
+    <div class="result-list-body-li-img">
+        <img ng-src="assets/images/theme_star_blue/home/tag2.svg">
+    </div>
+    <div class="result-list-body-li-title" ng-bind-html="item.zwm+'('+item.key+')'"></div>
+
+    <ul class="result-list-body-li-ul">
+        <li>
+            <span class="title">出发地编码：</span>
+            <span ng-bind-html="(item.djjc || '')"></span>
+        </li>
+        <li>
+            <span class="title">目的地编码：</span>
+            <span ng-bind-html="(item.ddjc || '')"></span>
+        </li>
+    </ul>
+    <ul class="result-list-body-li-ul">
+        <li>
+            <span class="title">航班号：</span>
+            <span ng-bind-html="(item.hbh || '')"></span>
+        </li>
+        <li>
+            <span class="title">航空公司：</span>
+            <span ng-bind-html="(item.cyhkgs || '')"></span>
+        </li>
+    </ul>
+    <ul class="result-list-body-li-ul last">
+        <li>
+            <span class="title">航班日期：</span>
+            <span ng-bind-html="(!item.hbrq ? '' : (item.hbrq ) | date:'yyyy-MM-dd')"></span>
+        </li>
+    </ul>
+    <ul class="result-list-body-li-menu-ul">
+        <li class="result-list-body-li-menu-ul-dangan" ng-click="home.into_archives(item.id)">
+            <i></i>
+            <div>档案</div>
+        </li>
+        <li class="result-list-body-li-menu-ul-tuxi" ng-click="home.into_porpoise(item.id)">
+            <i></i>
+            <div>图析</div>
+        </li>
+    </ul>
+</div>
+<!-- 住宿 -->
+<div ng-show="item.tag == '0401'">
+    <div class="result-list-body-li-img">
+        <img ng-src="assets/images/theme_star_blue/home/tag5.svg">
+    </div>
+    <div class="result-list-body-li-title" ng-bind-html="item.rzxm+'('+item.key+')'"></div>
+
+    <ul class="result-list-body-li-ul">
+        <li>
+            <span class="title">房间号：</span>
+            <span ng-bind-html="(item.fjh || '')"></span>
+        </li>
+        <li>
+            <span class="title">旅店编码：</span>
+            <span ng-bind-html="(item.ldbm || '')"></span>
+        </li>
+    </ul>
+    <ul class="result-list-body-li-ul">
+        <li>
+            <span class="title">入住时间：</span>
+            <span ng-bind-html="(!item.rzsj ? '' : (item.rzsj ) | date:'yyyy-MM-dd HH:mm:ss')"></span>
+        </li>
+        <li>
+            <span class="title">离开时间：</span>
+            <span ng-bind-html="(!item.lksj ? '' : (item.lksj ) | date:'yyyy-MM-dd HH:mm:ss')"></span>
+        </li>
+    </ul>
+    <ul class="result-list-body-li-ul last">
+        <li>
+            <span class="title">旅店名称：</span>
+            <span ng-bind-html="item.ldmc"></span>
+        </li>
+    </ul>
+    <ul class="result-list-body-li-menu-ul">
+        <li class="result-list-body-li-menu-ul-dangan" ng-click="home.into_archives(item.id)">
+            <i></i>
+            <div>档案</div>
+        </li>
+        <li class="result-list-body-li-menu-ul-tuxi" ng-click="home.into_porpoise(item.id)">
+            <i></i>
+            <div>图析</div>
+        </li>
+    </ul>
+</div>

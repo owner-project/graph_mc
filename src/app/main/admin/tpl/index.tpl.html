@@ -1,0 +1,178 @@
+<div class="m-m-container">
+    <div class="m-m-body-title clearfix">
+        <div class="m-m-title-left">
+
+            <pui-layout class="m-left-box" align="center">
+                <span class="mgr30" ng-if="vm.data.showTotalCount">共{{vm.pageParam.total}}条数据</span>
+                <pui-datepicker
+                    style="width: 100px;"
+                    ng-if="vm.data.hasDateSearch"
+                    class="mgr15"
+                    placeholder="开始时间"
+                    ng-model="vm.data.startTime">
+                </pui-datepicker>
+                <span ng-if="vm.data.hasDateSearch">至</span>
+                <pui-datepicker
+                    style="width: 100px;"
+                    ng-if="vm.data.hasDateSearch"
+                    class="mgl15 mgr15" placeholder="结束时间"
+                    data-max-date="{{vm.data.currentDate}}" 
+                    data-min-date="{{vm.data.startTime}}"
+                    ng-model="vm.data.endTime">
+                </pui-datepicker>
+                <pui-select class="extend-select mgr10" ng-if="vm.data.hasExtend"  data-options="vm.data.extendOption" ng-change="vm.extendSelectChange($event)" ng-model="vm.data.extendSelected"></pui-select>
+
+                <pui-searchbar
+                    ng-if="vm.data.hasSearch"
+                    class="fl"
+                    data-empty-search="{{vm.data.emptySearch}}"
+                    data-placeholder="{{vm.data.searchBarPlaceholder}}"
+                    on-search="vm.myKeyup($event)"
+                    data-width="180"
+                    on-close = "vm.myClose($event)"
+                    ng-model="vm.data.searchContent"
+                    >
+                </pui-searchbar>
+                <div ng-if="vm.data.isRedManager" style="display:flex">
+                        <!-- <pui-input class="mgl10" data-placeholder="请输入实体名称或标识" data-on-enter="vm.myKeyup($event)" ng-model="vm.data.searchContent"></pui-input>
+                        <pui-searchbar data-placeholder="请输入实体名称或标识"></pui-searchbar> -->
+                        <div style="margin-left:8px;width: 100px">
+                            <pui-select  data-placeholder="请选择实体类型" data-options="vm.userTypeList" ng-change="vm.myKeyup($event)" ng-model="vm.data.entityType"></pui-select>
+                        </div>
+                        <div style="margin-left:8px;width: 100px">
+                            <pui-select  data-placeholder="请选择保密级别" data-options="vm.rankList" ng-change="vm.myKeyup($event)" ng-model="vm.data.secrecyLevel"></pui-select>
+                        </div>
+
+                </div>
+            </pui-layout>
+        </div>
+        <div class="m-m-body-ul operate-wrapper" ng-if="vm.data.hasEditTop">
+            <li class="operate" ng-click="vm.importData()" ng-if="vm.data.hasImport">
+                <i class="odipus-icon m-m-body-ul-import"></i>
+                <span>导入</span>
+            </li>
+            <li  class="operate" ng-click="vm.addMember()" ng-if="vm.data.hasAdd">
+                <i class="odipus-icon  m-m-body-ul-new"></i>
+                <span>新增</span>
+             </li>
+            <li class="operate" ng-click="vm.deleteClick()" ng-if="vm.data.hasDelete">
+                <i class="odipus-icon  m-m-body-ul-delete"></i>
+                <span>删除</span>
+            </li>
+        </div>
+        <div class="m-m-body-ul extend-operate-wrap" ng-if="vm.data.hasExtend">
+            <span class="extend-operate" ng-click="vm.updateExtend('1')"><i class="icon-extend-setting"></i>配置</span>
+            <span class="extend-operate" ng-click="vm.updateExtend('0')"><i class="icon-unextend-setting"></i>取消配置</span>
+        </div>
+    </div>
+    <div class="m-m-table-container">
+        <div pui-table type="header">
+            <table cellpadding="0" class="admin-table" cellspacing="0" border="0" ng-style="{'table-layout':vm.data.tableLayout || 'auto'}">
+                <colgroup>
+                    <col width="50px">
+                </colgroup>
+                <thead>
+                <tr>
+                    <th class="cb-length" ng-if="vm.data.hasDelete">
+                        <pui-layout justify="center">
+                            <pui-checkbox
+                                ng-model="vm.data.allSelected"
+                                ng-change="vm.selectAll()"
+                                >
+                            </pui-checkbox>
+                        </pui-layout>
+                    </th>
+                    <th ng-repeat="item in vm.data.theadList track by $index"
+                        ng-class="{'cb-length-option': item.size === 'op', 'cb-length': item.size === 'small','hasSort':item.hasSort}"
+                        ng-style="item.style"
+                        ng-click="item.hasSort && vm.tableSortClick(item)"
+                        >
+                        <i ng-if="item.hasSort" ng-class="{'icon-arrow-up':item.sort =='asc','icon-arrow-down':item.sort == 'desc'}"  class="odipus-icon "></i>
+                        {{item.name}}
+                    </th>
+                </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="item in vm.data.dataList">
+                        <td class="cb-length" ng-if="vm.data.hasDelete">
+                            <pui-layout justify="center">
+                                <pui-checkbox class="pui-layout justify-center" ng-model="item.selected" ng-if="vm.data.hasDelete">
+                                </pui-checkbox>
+                            </pui-layout>
+                        </td>
+                        <td class="cb-length" ng-bind="$index + 1" ng-if="!vm.data.hideIndex"></td>
+                        <td ng-repeat="map in vm.data.tbodyList" class='{{map.className}}' ng-style="map.style" ng-class="{'cb-length': map.size === 'small'}" bs-tooltip  data-bs-enabled="{{(map.showTooltip && item[map.key].length && item[map.key].length > 10) || false }}" data-delay="50"  data-container="body"  data-title="{{item[map.key]| managerDisplay: map}}"  data-placement="top" ng-bind="item[map.key] | managerDisplay: map"></td>
+                        <td ng-if="vm.data.hasImg" class="cb-length-option" style="padding-top:15px;padding-bottom: 15px">
+                                <pui-layout align="center">
+                                        <pui-layout align="center" class="icon-update mgr10">
+                                           <img ng-src={{item.image}} ng-class="{'login-logo-size':vm.data.loginLogo,'logo-size':!vm.data.loginLogo}"  alt="">
+                                        </pui-layout>
+                                    </pui-layout>
+                                </td>
+                        <td ng-if="vm.data.hasOp" ng-style="vm.data.opStyle" class="cb-length-option">
+                            <pui-layout align="center">
+                                <pui-layout align="center" ng-click="vm.updateClick(item)" class="icon-update mgr10">
+                                    <i></i>
+                                    <span class="mgl5">编辑</span>
+                                </pui-layout>
+                                <pui-layout align="center" ng-click="vm.deleteClick(item)" class="icon-delete">
+                                    <i class="mgl10"></i>
+                                    <span class="mgl5">删除</span>
+                                </pui-layout>
+                            </pui-layout>
+                        </td>
+                        <td ng-if="vm.data.hasImg" class="cb-length-option">
+                            <pui-layout align="center">
+                                <pui-layout align="center" class="icon-update mgr10">
+                                    <i ng-if="item.status == 0"></i>
+                                    <span class="mgl5" ng-if="item.status == 0" type="button" ng-click="vm.updateClick(item)">设为logo</span>
+                                    <span class="mgl5" ng-if="item.status == 1">当前logo</span>
+                                </pui-layout>
+                                <pui-layout align="center" ng-click="vm.deleteClick(item)" class="icon-delete">
+                                    <i class="mgl10" ng-if="item.status == 0"></i>
+                                    <span class="mgl5" ng-if="item.status == 0">删除</span>
+                                </pui-layout>
+                            </pui-layout>
+                        </td>
+                        <td ng-if="vm.data.hasMemberOp" class="cb-length-option">
+                            <pui-layout align="center">
+                                <pui-layout align="center" ng-click="vm.updateClick(item.userId)" class="icon-update">
+                                    <i></i>
+                                    <span class="mgl5">编辑</span>
+                                </pui-layout>
+                                <pui-layout align="center" ng-click="vm.resetPassword(item.userId)" class="icon-reset">
+                                    <i class="mgl15"></i>
+                                    <span class="mgl5">重置密码</span>
+                                </pui-layout>
+                            </pui-layout>
+                        </td>
+                        <td ng-if="vm.data.hasExtend" class="cb-length-option">
+                                <pui-layout align="center">
+                                    <pui-layout align="center" >
+                                        <span ng-class="{'isExtend':item.isSelect == 1,'noExtend':item.isSelect != 1}">{{item.isSelect == 1?'已配置':'未配置'}}</s>
+                                    </pui-layout>
+                                </pui-layout>
+                            </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="footer">
+        <div class="clearfix">
+            <uib-pagination
+                class="pagination-sm pull-right"
+                total-items="vm.pageParam.total"
+                ng-show="vm.pageParam.total && vm.pageParam.total > vm.pageParam.pageSize"
+                ng-change="vm.changePage()"
+                ng-model="vm.pageParam.pageNo"
+                previous-text="上一页"
+                next-text="下一页"
+                force-ellipses="true"
+                max-size="3"
+                items-per-page="vm.pageParam.pageSize"
+                boundary-link-numbers="true">
+            </uib-pagination>
+        </div>
+    </div>
+</div>

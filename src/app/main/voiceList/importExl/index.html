@@ -1,0 +1,280 @@
+<div class="modal pui-modal import-voice-modal">
+    <div class="modal-dialog porpoise-import-graph-modal">
+        <div class="modal-header">
+            <div class="modal-title">文件导入</div>
+            <div class="modal-close-icon" ng-click="fn.dismiss()"></div>
+        </div>
+        <div class="modal-body">
+            <div class="import-step">
+                <pui-steps>
+                    <pui-step current-step="data.currentStep" step-number="1" step-title="上传文件"></pui-step>
+                    <pui-step current-step="data.currentStep" step-number="2" step-title="预览数据"></pui-step>
+                    <pui-step current-step="data.currentStep" step-number="3" step-title="保存设置"></pui-step>
+                </pui-steps>
+            </div>
+            <div ng-show="data.currentStep === 1">
+                <pui-layout align="center" class="import-model">
+                    <div class="title">导入模式</div>
+                    <pui-layout align="center" class="address-book">
+                        <pui-radio class="radio" value="2" ng-model="data.type"></pui-radio>
+                        <div ng-click="fn.changeImportType(2)">嫌犯通讯录导入</div>
+                    </pui-layout>
+                    <pui-layout align="center">
+                        <pui-radio class="radio" value="1" ng-model="data.type"></pui-radio>
+                        <div ng-click="fn.changeImportType(1)">话单导入</div>
+                    </pui-layout>
+                </pui-layout>
+                <div class="edge-box">
+                    <div ng-if="data.type == 2">
+                        <div class="upload-phone-number upload-phone">
+                            <input class="ng-hide" type="file" ng-model="data.phoneNumberFile" ng-if="!data.phoneNumberFile" file-upload >
+                            <div class="item-con upload-file-wrap" ng-if="!data.phoneNumberFile" ng-click="fn.chooseFile($event)">
+                                <span>上传嫌犯手机号</span>
+                            </div>
+                            <div class="item-con has-file pointer" ng-if="data.phoneNumberFile">
+                                <span ng-bind="data.phoneNumberFile.name"></span>
+                                <div class="delete-file-icon icon-circle-close" ng-click="fn.deleteFile($event, 'phoneNumberFile')"></div>
+                            </div>
+                        </div>
+                        <div class="upload-phone-book upload-phone">
+                            <input class="ng-hide" type="file" ng-model="data.phoneBookFile" ng-if="!data.phoneBookFile" file-upload >
+                            <div class="item-con upload-file-wrap" ng-if="!data.phoneBookFile" ng-click="fn.chooseFile($event)">
+                                <span>上传嫌犯通讯录</span>
+                            </div>
+                            <div class="item-con has-file pointer" ng-if="data.phoneBookFile">
+                                <span ng-bind="data.phoneBookFile.name"></span>
+                                <div class="delete-file-icon icon-circle-close" ng-click="fn.deleteFile($event, 'phoneBookFile')"></div>
+                            </div>
+                        </div>
+                        <div class="file-upload-tip">
+                            <p>支持Excel（单个Excel最大100M）</p>
+                        </div>
+                        <!-- <div ng-if="data.phoneNumberFile.percent" class="progress-wrap">
+                            <pui-progress style="width: 306px" percent="data.phoneNumberFile.percent"></pui-progress>
+                        </div> -->
+                        <div ng-if="data.phoneBookFile.percent" class="progress-wrap">
+                            <pui-progress style="width: 306px" percent="data.phoneBookFile.percent"></pui-progress>
+                        </div>
+                    </div>
+                    <div ng-if="data.type == 1">
+                        <div class="upload-phone-number upload-phone">
+                            <input class="ng-hide" type="file" ng-model="data.voiceFile" ng-if="!data.voiceFile" file-upload >
+                            <div class="item-con upload-file-wrap" ng-if="!data.voiceFile" ng-click="fn.chooseFile($event)">
+                                <span>上传话单</span>
+                            </div>
+                            <div class="item-con has-file pointer" ng-if="data.voiceFile">
+                                <span ng-bind="data.voiceFile.name"></span>
+                                <div class="delete-file-icon icon-circle-close" ng-click="fn.deleteFile($event, 'voiceFile')"></div>
+                            </div>
+                        </div>
+                        <div class="file-upload-tip">
+                            <p>支持Excel（单个Excel最大100M）</p>
+                            <span class="download-link" ng-click="fn.downloadFile($event)">下载模板</span>
+                        </div>
+                        <div ng-if="data.voiceFile.percent" class="progress-wrap">
+                            <pui-progress style="width: 306px" percent="data.voiceFile.percent"></pui-progress>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div ng-show="data.currentStep === 2">
+                <div ng-if="data.type === 2">
+                    <div class="vt-lits-box vt-list-phonenum">
+                        <div class="vt-list-header">
+                            <div class="vt-list-header-title">嫌疑犯手机号码</div>
+                            <div class="vt-list-header-item">
+                                <div class="vt-list-item">
+                                    <span>嫌疑犯号码</span>
+                                    <pui-select class="df-select-width fl" value-field="key" config='$root.selectConfig.vtSelect' options='data.voiceData.jsonData.option1' ng-model="data.voiceData.option.value1"></pui-select>
+                                </div>
+                                <div class="vt-list-item">
+                                    <span>嫌疑犯姓名</span>
+                                    <pui-select class="df-select-width fl" value-field="key" config='$root.selectConfig.vtSelect' options='data.voiceData.jsonData.option2' ng-model="data.voiceData.option.value2"></pui-select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="vt-list">
+                            <div class="voice-table-con">
+                                <div class="pui-table">
+                                    <table>
+                                        <thead>
+                                        <tr>
+                                            <th style="width: 50px">序号</th>
+                                            <th style="width: 130px" title="{{item.name}}" ng-repeat="item in data.voiceData.jsonData.option1 track by item.key">
+                                                {{item.name}}
+                                            </th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <tr ng-repeat="item in data.voiceData.jsonData.resultData1 track by $index">
+                                            <td>{{$index+1}}</td>
+                                            <td ng-repeat="child in data.voiceData.jsonData.option1 track by child.key">
+                                                {{item[child.key]}}
+                                            </td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                
+                    <div class="vt-lits-box vt-list-phonebook">
+                        <div class="vt-list-header">
+                            <div class="vt-list-header-title">嫌疑犯通讯录</div>
+                            <div class="vt-list-header-item">
+                                <div class="vt-list-item">
+                                    <span>对方号码</span>
+                                    <pui-select class="df-select-width fl" value-field="key" config='$root.selectConfig.vtSelect' options='data.voiceData.jsonData.option3' ng-model="data.voiceData.option.value3"></pui-select>
+                                </div>
+                                <div class="vt-list-item">
+                                    <span>对方姓名</span>
+                                    <pui-select class="df-select-width fl" value-field="key" config='$root.selectConfig.vtSelect' options='data.voiceData.jsonData.option4' ng-model="data.voiceData.option.value4"></pui-select>
+                                </div>
+                                <div class="vt-list-item">
+                                    <span>嫌疑犯号码</span>
+                                    <pui-select class="df-select-width fl" value-field="key" config='$root.selectConfig.vtSelect' options='data.voiceData.jsonData.option5' ng-model="data.voiceData.option.value5"></pui-select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="vt-list">
+                            <div class="voice-table-con">
+                                <div class="pui-table">
+                                    <table>
+                                        <thead>
+                                        <tr>
+                                            <th style="width: 50px;">序号</th>
+                                            <th style="width: 130px;" title="{{item.name}}" ng-repeat="item in data.voiceData.jsonData.option3 track by item.key">
+                                                {{item.name}}
+                                            </th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <tr ng-repeat="item in data.voiceData.jsonData.resultData2 track by $index">
+                                            <td>{{$index+1}}</td>
+                                            <td ng-repeat="child in data.voiceData.jsonData.option3 track by child.key">
+                                                {{item[child.key]}}
+                                            </td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div ng-if="data.type === 1">
+                    <div class="vt-lits-box">
+                        <div class="vt-list-header">
+                            <div class="vt-list-header-title">话单列表</div>
+                            <div class="vt-list-header-item">
+                                <div class="vt-list-item">
+                                    <span>计费号码</span>
+                                    <pui-select class="df-select-width fl" value-field="key" options='data.ticketData.jsonData.option1'
+                                                ng-model="data.ticketData.option.value1"></pui-select>
+                                </div>
+                                <div class="vt-list-item">
+                                    <span>通话类型</span>
+                                    <pui-select class="df-select-width fl" value-field="key" options='data.ticketData.jsonData.option1'
+                                                ng-model="data.ticketData.option.value2"></pui-select>
+                                </div>
+                                <div class="vt-list-item">
+                                    <span>对方号码</span>
+                                    <pui-select class="df-select-width fl" value-field="key" options='data.ticketData.jsonData.option1'
+                                                ng-model="data.ticketData.option.value3"></pui-select>
+                                </div>
+                                <div class="vt-list-item">
+                                    <span>开始时间</span>
+                                    <pui-select class="df-select-width fl" value-field="key" options='data.ticketData.jsonData.option1'
+                                                ng-model="data.ticketData.option.value4"></pui-select>
+                                </div>
+                                <div class="vt-list-item">
+                                    <span>通话时长</span>
+                                    <pui-select class="df-select-width fl" value-field="key" options='data.ticketData.jsonData.option1'
+                                                ng-model="data.ticketData.option.value5"></pui-select>
+                                </div>
+                                <div class="vt-list-item">
+                                    <span>小区代码</span>
+                                    <pui-select class="df-select-width fl" value-field="key" options='data.ticketData.jsonData.option1'
+                                                ng-model="data.ticketData.option.value6"></pui-select>
+                                </div>
+                                <div class="vt-list-item">
+                                    <span>基站代码</span>
+                                    <pui-select class="df-select-width fl" value-field="key" options='data.ticketData.jsonData.option1'
+                                                ng-model="data.ticketData.option.value7"></pui-select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="vt-list">
+                            <div class="voice-table-con">
+                                <div class="pui-table content-table">
+                                    <table>
+                                        <thead>
+                                        <tr>
+                                            <th style="width: 50px;">序号</th>
+                                            <th style="width: 120px;" ng-repeat="item in data.ticketData.jsonData.option1 track by item.key">
+                                                {{item.name}}
+                                            </th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <tr ng-repeat="item in data.ticketData.jsonData.resultData track by $index">
+                                            <td>{{$index+1}}</td>
+                                            <td ng-repeat="child in data.ticketData.jsonData.option1 track by child.key">
+                                                {{item[child.key]}}
+                                            </td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div ng-show="data.currentStep === 3">
+                <div ng-if="data.type === 2" class="import-des">
+                    <div class="input-name-wrap">
+                        <span class="name">名称</span>
+                        <pui-input class="input-name" placeholder="请输入名称" type="text" ng-model="data.voiceData.importDes.recordName"></pui-input>
+                    </div>
+                    <div class="textarea-des">
+                        <pui-textarea placeholder="请输入描述" ng-model="data.voiceData.importDes.description"></pui-textarea>
+                    </div>
+                </div>
+                <div ng-if="data.type === 1" class="import-des">
+                    <div class="input-name-wrap">
+                        <span class="name">名称</span>
+                        <pui-input class="input-name" placeholder="请输入名称" type="text" ng-model="data.ticketData.importDes.recordName"></pui-input>
+                    </div>
+                    <div class="textarea-des">
+                        <pui-textarea placeholder="请输入描述" ng-model="data.ticketData.importDes.description"></pui-textarea>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <div ng-show="data.currentStep === 1">
+                <pui-button ng-show="(data.type == 2 && data.phoneNumberFile && data.phoneBookFile) || (data.type == 1 && data.voiceFile)" class="cancel-btn" on-click="fn.dismiss()">取消</pui-button>
+                <pui-button ng-show="data.type == 1 && data.voiceFile" class="confirm-btn" type="primary" ng-disabled="data.ticketData.uploading" on-click="fn.import()">
+                    <span ng-if="data.ticketData.uploading">上传中</span>
+                    <span ng-if="!data.ticketData.uploading" ng-bind="data.ticketData.status ? '下一步' : '上传文件'"></span>
+                </pui-button>
+                <pui-button ng-show="data.type == 2 && data.phoneNumberFile && data.phoneBookFile" class="confirm-btn" type="primary" ng-disabled="data.voiceData.uploading" on-click="fn.import()">
+                    <span ng-if="data.voiceData.uploading">上传中</span>
+                    <span ng-if="!data.voiceData.uploading" ng-bind="data.voiceData.status ? '下一步' : '上传文件'"></span>
+                </pui-button>
+            </div>
+            <div ng-show="data.currentStep === 2">
+                <pui-button class="cancel-btn" on-click="fn.dismiss()">取消</pui-button>
+                <pui-button class="confirm-btn" on-click="fn.gotoSaveSetting()">下一步</pui-button>
+                <pui-button class="confirm-btn" on-click="fn.gotoUpload()">上一步</pui-button>
+            </div>
+            <div ng-show="data.currentStep === 3">
+                <pui-button class="cancel-btn" on-click="fn.dismiss()">取消</pui-button>
+                <pui-button class="confirm-btn" on-click="fn.sure()">确定</pui-button>
+                <pui-button class="confirm-btn" on-click="fn.gotoDataPreview()">上一步</pui-button>
+            </div>
+        </div>
+    </div>
+</div>

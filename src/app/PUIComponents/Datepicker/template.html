@@ -1,0 +1,10 @@
+<div class="pui-datepicker-wrap pui-input-wrap">
+    <input class="pui-input"
+           ng-class="{'disabled': !!ngDisabled, 'border': type === 'border'}"
+           ng-focus="$onFocus($event)"
+           ng-blur="$onBlur($event)"
+           ng-disabled="!!ngDisabled"
+           ng-readonly="$readonly"
+           placeholder="{{placeholder}}" />
+    <div class="arrow-down" ng-class="{'disabled': !!ngDisabled, 'border': type === 'border'}">&gt;</div>
+</div>

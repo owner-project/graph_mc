@@ -1,0 +1,249 @@
+/**
+
+	v-center  垂直居中, 需要设定容器的position
+	h-center  水平居中, 需要设定容器的position
+	c-center  全部居中, 需要设定容器的position
+	w5~w100   百分比样式
+	can-not-select 文本不能选中样式
+	mg  外边框单样式
+	pd  内边框单样式
+	bd  边框样式
+	ft  字体大小单样式
+	ta  文本对齐单样式
+	fr/fl 浮动样式
+	pa  layout样式
+	dl  行内元素基样式
+	clearfix 清除浮动样式
+	text-ellipsis 文本省略号
+	box-shadow-none 去除阴影样式
+*/
+
+html,
+body {
+	width: 100%;
+	height: 100%;
+    -webkit-font-smoothing: antialiased;
+}
+
+//去除登录页面在chrome下的用户名密码自动填充样式
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+    -webkit-transition-delay: 9999999999999s;
+    -webkit-transition: color 9999999999999s ease-out, background-color 9999999999999s ease-out;
+}
+
+.v-center {
+	display: block;
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	margin: auto;
+}
+
+.h-center {
+	display: block;
+	position: absolute;
+	left: 0;
+	right: 0;
+	margin: auto;
+}
+
+.c-center {
+	display: block;
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	margin: auto;
+}
+
+.generate-width-height-percent(100);
+
+.generate-width-height-percent(@n, @i: 5) when (@i =< @n) {
+	.w@{i} {
+		width: (@i * 1%);
+	}
+	.h@{i} {
+		height: (@i * 1%)
+	}
+	.generate-width-height-percent(@n, (@i + 5));
+}
+
+.generate-margin-padding(50);
+
+.generate-margin-padding(@n, @i: 0) when (@i =< @n) {
+  .mg@{i} {margin: (@i * 1px);}
+  .mgt@{i} {margin-top: (@i * 1px);}
+  .mgb@{i} {margin-bottom: (@i * 1px);}
+  .mgl@{i} {margin-left: (@i * 1px);}
+  .mgr@{i} {margin-right: (@i * 1px);}
+  .pd@{i} {padding: (@i * 1px);}
+  .pdt@{i} {padding-top: (@i * 1px);}
+  .pdr@{i} {padding-right: (@i * 1px);}
+  .pdb@{i} {padding-bottom: (@i * 1px);}
+  .pdl@{i} {padding-left: (@i * 1px);}
+
+  .generate-margin-padding(@n, (@i + 5));
+}
+
+.generate-font-size(30);
+
+.generate-font-size(@n, @i: 2) when (@i =< @n) {
+	.ft@{i} {
+		font-size: (@i * 1px);
+	}
+    .ft@{i}-imp {
+        font-size: (@i * 1px) !important;
+    }
+	.generate-font-size(@n, (@i + 2));
+}
+
+.can-not-select {
+	-webkit-touch-callout: none;
+	-webkit-user-select: none;
+	-khtml-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+}
+
+/*边框样式*/
+.no-bdr{border: 0 !important;}
+.bdr{border: 1px solid;}
+.bdrt{border-top: 1px solid;}
+.bdrr{border-right: 1px solid;}
+.bdrb{border-bottom: 1px solid;}
+.bdrl{border-left: 1px solid;}
+.bdr-r3{-webkit-border-radius:3px;-moz-border-radius:3px;border-radius:3px;}
+.bdr-r5{-webkit-border-radius:5px;-moz-border-radius:5px;border-radius:5px;}
+.bdr-r10{-webkit-border-radius:10px;-moz-border-radius:10px;border-radius:10px;}
+.bdr-ra{-webkit-border-radius:100%;-moz-border-radius:100%;border-radius:100%;}
+/*字体样式*/
+.fb{font-weight: bold;}
+.fn{font-weight: normal;}
+/*文本对齐*/
+.ta-c{text-align: center !important;}
+.ta-l{text-align: left;}
+.ta-r{text-align: right;}
+/*浮动*/
+.fl{float:left;}
+.fr{float:right;}
+/*位置*/
+.pr{position: relative;}
+.pa{position: absolute;}
+.ps{position: static;}
+.pf{position: fixed;}
+/*行内元素*/
+.d-inline-block {display: inline-block;}
+.v-m {vertical-align: middle;}
+.v-t {vertical-align: top;}
+/*鼠标手势*/
+.cursor-pointer {cursor: pointer;}
+.cursor-move {cursor: move;}
+/*去除阴影*/
+.box-shadow-none {box-shadow: none;-webkit-box-shadow: none;}
+/*初始化overflow*/
+.overflow-normal {overflow: visible;}
+.resize-none{resize: none;}
+.hide{display: none;}
+.show{display: block;}
+/* canvas需要的 隐藏 */
+.visibility-hidden{visibility: hidden;}
+/** 经典清除浮动**/
+.clearfix() {
+	&:before,
+	&:after {
+		content: " ";
+		display: table;
+	}
+	&:after {
+		clear: both;
+	}
+}
+.clearfix {
+	.clearfix();
+}
+
+
+/** 文本省略号 **/
+.text-ellipsis{
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+}
+
+.text-break {
+    word-wrap: break-word;
+    word-break: break-all;
+}
+
+input:-webkit-autofill {
+    -webkit-box-shadow: 0 0 0px 1000px white inset;
+}
+
+/*滚动条*/
+::-webkit-scrollbar-button {
+    display: none;
+    width: 0;
+    height: 0;
+}
+
+::-webkit-scrollbar-corner {
+    background-color: transparent;
+}
+
+::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+::-webkit-scrollbar-track {
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb {
+    border-radius: 4px;
+    background: rgba(150, 150, 150, .3);
+}
+
+//li 显示*行 其他省略号
+.ellipsis_num(@line){
+	display: -webkit-box;
+	-webkit-line-clamp: @line;
+	-webkit-box-orient: vertical;
+	overflow: hidden;
+}
+.odipus-icon(@size){
+	display: inline-block;
+	width: @size;
+	height: @size;
+	vertical-align: sub;
+	margin-right: 4px;
+}
+input::-webkit-input-placeholder {
+	color: rgba(255, 255, 255, .3);
+}
+input::-moz-placeholder {
+	color: rgba(255, 255, 255, .3);
+}
+input:-moz-placeholder {
+	color: rgba(255, 255, 255, .3);
+}
+input:-ms-input-placeholder {
+	color: rgba(255, 255, 255, .3);
+}
+textarea::-webkit-input-placeholder {
+	color: rgba(255, 255, 255, .3);
+}
+textarea::-moz-placeholder {
+	color: rgba(255, 255, 255, .3);
+}
+textarea:-moz-placeholder {
+	color: rgba(255, 255, 255, .3);
+}
+textarea:-ms-input-placeholder {
+	color: rgba(255, 255, 255, .3);
+}

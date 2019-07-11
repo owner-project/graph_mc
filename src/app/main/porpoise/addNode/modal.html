@@ -1,0 +1,45 @@
+<div class="pui-modal modal confirm" >
+    <div class="modal-dialog add-node-modal">
+        <div class="modal-header">
+            <div class="modal-title">添加实体</div>
+            <div class="modal-close-icon" ng-click="fn.dismiss()"></div>
+        </div>
+        <div class="modal-body">
+            <div class="edge-box">
+                <div class="mgb20 font-color-info">填写证件号码可搜索已存在的实体名称</div>
+                <pui-layout align="center" class="form-item-wrap">
+                    <label class="item-title">实体标识</label>
+                    <pui-input class="item-con" placeholder="请输入实体标识" ng-change="fn.searchNode()" on-enter="fn.searchNode()" ng-blur="fn.searchNode()" ng-model="data.putData.key"></pui-input>
+                </pui-layout>
+                <pui-layout align="center" class="form-item-wrap">
+                    <label class="item-title">实体名称</label>
+                    <pui-input class="item-con" ng-disabled="true" ng-model="data.putData.name"></pui-input>
+                </pui-layout>
+                <!-- <pui-layout align="center" class="form-item-wrap" ng-show="!data.hasSearchNode">
+                    <label class="item-title">实体大类</label>
+                    <pui-select class="item-con" placeholder="请选择" ng-change="fn.getDataTypeList()" value-field="id" options="data.options.typeList" placement="left" ng-model="data.putData.type"></pui-select>
+                </pui-layout>
+                <pui-layout align="center" class="form-item-wrap" ng-show="!data.hasSearchNode">
+                    <label class="item-title">实体类型</label>
+                    <pui-select class="item-con" placeholder="请选择" value-field="id" options="data.options.dataTypeList" placement="left" ng-model="data.putData.dataType"></pui-select>
+                </pui-layout> -->
+
+                <pui-layout align="center" class="form-item-wrap">
+                        <label class="item-title">实体大类</label>
+                        <label class="item-title" title="{{data.searchNodeType}}">{{data.searchNodeType}}</label>
+                </pui-layout>
+                <pui-layout align="center" class="form-item-wrap">
+                        <label class="item-title">实体类型</label>
+                        <label class="item-title" title="{{data.searchNodeDataType}}">{{data.searchNodeDataType}}</label>
+                </pui-layout>
+
+
+
+            </div>
+        </div>
+        <div class="modal-footer">
+            <pui-button class="cancel-btn" on-click="fn.dismiss()">取消</pui-button>
+            <pui-button class="confirm-btn" type="primary" on-click="fn.sure()">确定</pui-button>
+        </div>
+    </div>
+</div>

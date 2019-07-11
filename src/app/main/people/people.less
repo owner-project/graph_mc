@@ -1,0 +1,324 @@
+.people-info-main {
+    margin: 0 auto;
+    overflow-y: auto;
+    display: flex;
+    min-height: 100%;
+    height: 100%;
+    .tooltip-inner{
+        max-width: 600px;
+    }
+    .people-info-left {
+        min-width: 239px;
+        width: 239px;
+    }
+    .people-info-right {
+        width: calc(~'100% - 239px');
+        position: relative;
+        padding: 8px 24px 16px;
+        float: right;
+        box-sizing: border-box !important;
+        .info-title {
+            width: 100%;
+            height: 32px;
+            position: relative;
+            font-size: 12px;
+            > span {
+                font-size: 20px;
+            }
+            span {
+                line-height: 32px;
+            }
+            .info-right-common {
+                position: absolute;
+                top: 0;
+                display: flex;
+            }
+            .people-info-operate{
+                position: absolute;
+                right: 13px;
+                top: 0;
+                .operate-item{
+                    display: inline-block;
+                    margin:0 8px;
+                    &:last-child{
+                        margin-right: 0;
+                    }
+                }
+                .to-porpoise {
+                    right: 132px;
+                    img {
+                        margin-right: 5px;
+                    }
+                }
+                .export-file {
+                    line-height: 32px;
+                    position: relative;
+                    .export-file-icon {
+                        margin-right: 5px;
+                    }
+                    .export-file-btn{
+                        display: inline-block;
+                    }
+                }
+            }
+
+        }
+        .info-content {
+            width: 100%;
+            .focus-people{
+                cursor: pointer;
+                text-align: center;
+                margin: 8px 0 16px 0;
+                padding: 4px 0;
+                border-radius: 4px;
+                font-size: 12px;
+                font-weight: bolder;
+                i{
+                    width: 16px;
+                    height: 16px;
+                    vertical-align: middle;
+                    margin-right: 4px;
+                    display: inline-block;
+                }
+            }
+            // 用户主/副信息
+            .info-top {
+                .info-base {
+                    padding: 0 24px;
+                    position: relative;
+                    padding-right:140px;
+                    .person-info-operate-box{
+                        position: absolute;
+                        top: 16px;
+                        right: 4px;
+                        .operate-item{
+                            display: inline-block;
+                            margin-right: 8px;
+                        }
+                    }
+                    .export-file-type {
+                        position: absolute;
+                        width: 100px;
+                        top: 32px;
+                        left: 0;
+                        z-index: 10;
+                        .item {
+                            padding-left: 16px;
+                            line-height: 2em;
+
+                        }
+                    }
+                    .show-assistant {
+                        width: 32px;
+                        height: 32px;
+                        border-radius: 50%;
+                        text-align: center;
+                        line-height: 32px;
+                        img {
+                            transform: rotate(180deg);
+                        }
+                        &.active img {
+                            transform: rotate(0);
+                        }
+                    }
+                    .clearfix;
+                    .info-b-img-box {
+                        width: 80px;
+                        margin: 24px 24px 0 0;
+                        float: left;
+                        img {
+                            width:80px;
+                            height:80px;
+                            border-radius: 50%;
+                        }
+                        .title-code {
+                            font-size: 14px;
+                            line-height: 32px;
+                        }
+                    }
+                    .info-b-con {
+                        width: calc(~'100% - 104px');
+                        float: left;
+                        .con-title {
+                            margin: 8px auto 16px;
+                            display: flex;
+                            align-items: center;
+                            .title-tags {
+                                height: 20px;
+                                line-height: 20px;
+                                margin-bottom: 0;
+                                li {
+                                    float: left;
+                                    padding: 0 8px;
+                                    margin-left: 8px;
+                                    border-radius: 10px;
+                                }
+                            }
+                        }
+                        .con-con {
+                            width: 100%;
+                            margin-top: 22px;
+                            &.info-assistant {
+                                margin: 0 auto 14px;
+                                .con-con-items {
+                                    margin-top: 14.5px;
+                                    .con-con-item {
+                                        div {
+                                            width: 328px;
+                                            &.item-all {
+                                                width: auto;
+                                            }
+                                            &.item-all-all {
+                                                width: calc(~'100% - 328px');
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                            .con-con-items {
+                                width: 100%;
+                                margin-bottom: 0;
+                                .con-con-item {
+                                    width: 100%;
+                                    margin-top: 12px;
+                                    height: 20px;
+                                    line-height: 20px;
+                                    &:first-child {
+                                        margin-top: 0;
+                                    }
+                                    .clearfix;
+                                    div {
+                                        float: left;
+                                        margin-bottom: 10px;
+                                        width: 240px;
+                                        overflow: hidden;
+                                        white-space: nowrap;
+                                        text-overflow: ellipsis;
+                                        &.item-right {
+                                            width: calc(~'100% - 660px');
+                                        }
+                                        &.item-all {
+                                            // width: calc(~'100% - 140px');
+                                            display: -webkit-box;
+                                            -webkit-line-clamp: 2;
+                                            white-space: normal;
+                                            -webkit-box-orient: vertical;
+                                            max-height: 37px;
+                                            width: auto
+                                        }
+                                        .item-title {
+                                            margin-right: 8px;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            //相关关系块
+            .info-relation-wrap {
+                margin-top: 8px;
+            }
+            //轨迹信息/图析历史/同关注列表
+            .info-bottom {
+                width: 100%;
+                box-sizing: border-box !important;
+                .info-assistant-tab {
+                    height: 50px;
+                    line-height: 50px;
+                    margin: 0 24px;
+                    ul {
+                        li {
+                            float: left;
+                            padding: 0 10px;
+                            text-align: center;
+                            position: relative;
+                            &.active {
+                                &:after {
+                                    content: '';
+                                    width: 20px;
+                                    height: 3px;
+                                    display: block;
+                                    position: absolute;
+                                    bottom: 0;
+                                    left: 50%;
+                                    transform: translateX(-50%);
+                                }
+                            }
+                        }
+                    }
+                }
+                .info-assistant {
+                    padding: 8px 0;
+                    .assistant-body {
+                        .assistant-body-echart {
+                            height: calc(~'100% - 10px');
+                            width: 100%;
+                        }
+                    }
+
+                }
+                .info-judg-graph {
+                    .assistant-body {
+                        .assistant-box {
+                            border-radius: 8px;
+                            display: inline-block;
+                            margin-left: 8px;
+                            width: calc(~'(100% - 48px)/5');
+                            padding: 0 16px 16px;
+                            box-sizing: border-box !important;
+                            .assistant-image-box {
+                                width: 100%;
+                                height: 187px;
+                                overflow: hidden;
+                                img {
+                                    width: 100%;
+                                }
+                            }
+                            .assistant-title {
+                                .text-ellipsis;
+                            }
+                            .assistant-time {
+                                display: flex;
+                                align-items: center;
+                                line-height: 20px;
+                                float: left;
+                                &.assistant-author {
+                                    margin-right: 18px;
+                                }
+                                &:before {
+                                    content: '';
+                                    width: 16px;
+                                    height: 16px;
+                                    display: inline-block;
+                                    margin-right: 6.5px;
+                                }
+                                .text-ellipsis;
+                            }
+                        }
+                    }
+                }
+                .info-wrap {
+                    padding-bottom: 25px;
+                    .pagination {
+                        justify-content: flex-end;
+                    }
+                    .wrap-body {
+                        padding: 0 24px;
+                    }
+                }
+            }
+        }
+        // 动态列表组件 样式需要进行重置
+        .focus-people-dynamic{
+            position: static;
+            transform: none;
+            overflow-y: scroll;
+            max-height: 240px;
+            width: 100%;
+            margin: 0;
+            padding: 16px 24px;
+        }
+    }
+}

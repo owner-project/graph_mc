@@ -1,0 +1,58 @@
+<div class="gcc-main">
+    <div class="gcc-title">
+        <div class="gcc-title-con">
+            <pui-searchbar class="gcc-title-con-bar" ng-model="vm.searchData.text" data-placeholder="请输入姓名和身份证号" data-max-width="200" data-on-search="vm.searchList()"></pui-searchbar>
+        </div>
+    </div>
+    <div class="gcc-body">
+        <div pui-table type="header">
+            <table>
+                <thead>
+                    <tr>
+                        <th class="table-first">序号</th>
+                        <th class="table-name">姓名</th>
+                        <th class="table-ids">证件号</th>
+                        <th class="table-last">操作</th>
+                    </tr>
+                </thead>
+            </table>
+        </div>
+        <div pui-table type="body">
+            <table>
+                <tbody>
+                    <tr ng-repeat="member in vm.jsonData track by $index">
+                        <td class="table-first">{{$index + 1}}</td>
+                        <td class="table-name" ng-bind="member.zdry_xm"></td>
+                        <td class="table-ids">
+                            <span ng-repeat="child in member.zdry_sfhm track by $index">
+                                <span ng-bind="child"></span>
+                                <span ng-if="!$last">,</span>
+                            </span>
+                        </td>
+                        <td class="table-last">
+                            <pui-layout class="table-last-layout" align="center" ng-click="vm.toPorpoise(member)">
+                                <i class="go-graph"></i>
+                                <span class="go-graph-title">到图析</span>
+                            </pui-layout>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="search-result-footer">
+        <div class="clearfix">
+            <uib-pagination ng-show="vm.total > 10"
+                total-items="vm.total"
+                ng-change="vm.seearchSubmit()"
+                ng-model="vm.searchData.pageNo"
+                previous-text="上一页"
+                next-text="下一页"
+                force-ellipses="true"
+                max-size="3"
+                items-per-page="vm.searchData.pageSize"
+                boundary-link-numbers="true">
+            </uib-pagination>
+        </div>
+    </div>
+</div>

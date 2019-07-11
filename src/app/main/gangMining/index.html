@@ -1,0 +1,140 @@
+<div class="gang-mining-main">
+	<div class="gang-mining-left jq_gang-mining_left">
+		<!--<div class="gang-mining-app-box">
+			<div ng-repeat="item in gm.jsonData.counts" class="gang-mining-app-box-item" ng-init="item.fzlx = (item.thlx | fzlxFilter)" ng-click="gm.searchData.type = item.thlx;gm.getPageData()">
+				<img ng-src={{item.fzlx.image}} />
+				<div ng-bind="item.fzlx.name" class="gang-mining-app-text"></div>
+				<div ng-bind="item.count" class="gang-mining-app-count"></div>
+				<div class="gang-mining-app-unit">个</div>
+			</div>
+		</div>-->
+		<div class="gang-mining-app-table-box">
+			<div class="gang-mining-app-list-title">
+				<pui-layout align="center" class="gang-mining-app-list-text">
+                    <div class="mgr10">团伙类型</div>
+                    <pui-select style="width: 100px;" options='gm.jsonData.option' ng-model="gm.searchData.type" ng-change="gm.getPageData()"></pui-select>
+                </pui-layout>
+				<div class="gang-mining-app-list-title-icon">
+					<pui-searchbar ng-model="gm.searchData.name" data-placeholder="请输入团伙成员名称" data-mode="elastic" data-max-width="200" data-on-search="gm.getPageData()"></pui-searchbar>
+				</div>
+			</div>
+			<div pui-table class="gang-mining-table-con">
+				<table>
+                    <colgroup>
+                        <col width="50px">
+                        <col width="80px">
+                        <col width="80px">
+                        <col width="200px">
+                    </colgroup>
+					<thead>
+					<tr>
+						<th>编号</th>
+						<th>团伙类型</th>
+						<th>团伙人数</th>
+						<th class="gang-mining-table-th-date">时间</th>
+						<th class="gang-mining-table-th-date">危险度</th>
+						<th class="gang-mining-table-th-date">聚集度</th>
+						<th class="gang-mining-table-th-date">活跃度</th>
+						<th>图析</th>
+					</tr>
+					</thead>
+					<tbody>
+						<tr ng-repeat="item in gm.jsonData.resultData" ng-click="gm.getGangDetailInfo(item.id)">
+							<td ng-bind="$index + 1"></td>
+							<td ng-bind="(item.thlx | fzlxFilter).name"></td>
+							<td ng-bind="item.thrs"></td>
+							<td ng-bind="item.sj" class="gang-mining-table-td-date"></td>
+							<td class="gang-mining-table-td-date">
+								<pui-layout align="center">
+                                    <div ng-bind="item.wxd" class="gang-mining-table-date-text"></div>
+                                    <div class="bfb {{item.lColor}}" ng-style="{'width': item.wxd * 1.2}"></div>
+                                </pui-layout>
+							</td>
+							<td class="gang-mining-table-td-date">
+								<pui-layout align="center">
+                                    <div ng-bind="item.jjd" class="gang-mining-table-date-text"></div>
+                                    <div class="bfb {{item.aColor}}" ng-style="{'width': item.jjd * 1.2}"></div>
+                                </pui-layout>
+							</td>
+							<td class="gang-mining-table-td-date">
+								<pui-layout align="center">
+                                    <div ng-bind="item.hyd" class="gang-mining-table-date-text"></div>
+                                    <div class="bfb {{item.dColor}}" ng-style="{'width': item.hyd * 1.2}"></div>
+                                </pui-layout>
+							</td>
+							<td ng-click="gm.toPorpoise(item)">
+								<i class="gang-mining-table-td-yp"></i>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+            <div class="clearfix">
+                <uib-pagination
+                    ng-show="gm.pager.total > gm.pager.pageSize"
+                    class="pagination-sm pull-right"
+                    total-items="gm.pager.total"
+                    ng-change="gm.changePage()"
+                    ng-model="gm.pager.pageNo"
+                    previous-text="上一页"
+                    next-text="下一页"
+                    force-ellipses="true"
+                    max-size="3"
+                    items-per-page="gm.pager.pageSize"
+                    boundary-link-numbers="true">
+                </uib-pagination>
+            </div>
+		</div>
+	</div>
+	<div class="gang-mining-right jq_gang-mining_left">
+		<div class="gang-mining-right-thlx">
+            <pui-layout class="mgb5">
+                <div class="mgr10 item-label">团伙类型</div>
+                <div class="item-content" ng-bind="(gm.jsonData.gangDetailInfo.thlx | fzlxFilter).name"></div>
+            </pui-layout>
+            <pui-layout>
+                <div class="mgr10 item-label">团伙成员</div>
+                <div class="item-content">
+                    <span ng-repeat="member in gm.jsonData.gangDetailInfo.thcy">
+                        <span ng-bind="member.xm"></span>
+                        <span ng-if="!$last">、</span>
+                    </span>
+                </div>
+            </pui-layout>
+		</div>
+		<!--<div class="gang-mining-right-thlx">
+
+		</div>-->
+		<div class="gang-mining-right-pie">
+            <ul class="gang-mining-right-pie-ul">
+                <li>危险度</li>
+                <li>
+                    <div class="gang-mining-right-pie-li-box">
+                        <div class="gang-mining-right-pie-li-box-bfb {{gm.jsonData.gangDetailInfo.wxdColor}}" ng-style="{'width': gm.jsonData.gangDetailInfo.wxd * 1.2}"></div>
+                    </div>
+                </li>
+                <li ng-bind="gm.jsonData.gangDetailInfo.wxd + '%'"></li>
+            </ul>
+            <ul class="gang-mining-right-pie-ul">
+                <li>聚集度</li>
+                <li>
+                    <div class="gang-mining-right-pie-li-box">
+                        <div class="gang-mining-right-pie-li-box-bfb {{gm.jsonData.gangDetailInfo.jjdColor}}" ng-style="{'width': gm.jsonData.gangDetailInfo.jjd * 1.2}"></div>
+                    </div>
+                </li>
+                <li ng-bind="gm.jsonData.gangDetailInfo.jjd + '%'"></li>
+            </ul>
+            <ul class="gang-mining-right-pie-ul">
+                <li>活跃度</li>
+                <li>
+                    <div class="gang-mining-right-pie-li-box">
+                        <div class="gang-mining-right-pie-li-box-bfb {{gm.jsonData.gangDetailInfo.hydColor}}" ng-style="{'width': gm.jsonData.gangDetailInfo.hyd * 1.2}"></div>
+                    </div>
+                </li>
+                <li ng-bind="gm.jsonData.gangDetailInfo.hyd + '%'"></li>
+            </ul>
+            <div class="gang-mining-right-pie-box" id="gang-mining-circle">
+            </div>
+		</div>
+	</div>
+</div>

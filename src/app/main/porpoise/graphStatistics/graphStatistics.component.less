@@ -1,0 +1,35 @@
+#graph-statistics-component.graph-statistics-component{
+    padding: 8px 24px 0 24px;
+    position: relative;
+    .tags{
+        font-size: 12px;
+        color: rgba(255,255,255,.7);
+        line-height: 24px;
+        margin-bottom: 0;
+        .tag{
+            padding:0 8px;
+            cursor: pointer;   
+            float:left;
+            border-radius: 12px; 
+            margin-right:8px; 
+            &.active{
+                color: #fff;
+                background-color: rgba(41,121,255,30%);
+            }
+        }
+    }
+    .charts-wrapper{
+        margin: 0 auto;
+        width: 1000px;
+        max-width: 90%;
+        min-width: 80%;
+        height: 220px;
+    }
+    .no-data{
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%,-50%);
+        color: #fff;
+    }
+}

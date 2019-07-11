@@ -1,0 +1,106 @@
+<div class="pui-modal modal confirm" >
+    <div class="modal-dialog push-judge-modal">
+        <div class="modal-header">
+            <div class="modal-title">推送</div>
+            <div class="modal-close-icon" ng-click="fn.dismiss()"></div>
+        </div>
+        <div class="modal-body">
+            <div class="judge-box">
+                <pui-layout align="center" ng-init="data.putData.type = 2" class="item-pr-pr-pr">
+                    <div class="item-title">推送给</div>
+                    <pui-layout class="item-radio" align="center">
+                        <pui-radio class="" name="push-type" ng-model="data.putData.type" value="2"></pui-radio>
+                        <span>部门</span>
+                    </pui-layout>
+                    <pui-layout class="item-radio" align="center">
+                        <pui-radio class="" name="push-type" ng-model="data.putData.type" value="1"></pui-radio>
+                        <span>民警</span>
+                    </pui-layout>
+                </pui-layout>
+                <pui-layout class="item-con-pr-pr-pr" ng-if="data.putData.type === 2">
+                    <div class="item-title">
+                        部门
+                    </div>
+                    <div class="con-box jq_con_box">
+                        <div class="con-left">
+                            <div class="left-title">请选择</div>
+                            <ul class="ul-p1">
+                                <li class="li-p1" ng-repeat="item in data.options.departmentList track by $index">
+                                    <pui-layout align="center" class="list-con list-con-p1">
+                                        <pui-checkbox class="list-checkedbox" ng-change="fn.changeDepartment(item)" ng-model="item.choosed"></pui-checkbox>
+                                        <div class="arrow-down-icon" ng-class="{'to-right': !item.isOpen}" ng-click="fn.clickDepartment($event, item)"></div>
+                                        <label class="list-title" ng-click="fn.clickDepartment($event, item)" ng-bind="item.departmentName" title="{{item.departmentName}}"></label>
+                                    </pui-layout>
+                                    <ul class="ul-p2" ng-show="item.isOpen && item.child.length > 0">
+                                        <li class="li-p2" ng-repeat="child in item.child track by $index">
+                                            <pui-layout align="center" class="list-con list-con-p2">
+                                                <pui-checkbox class="list-checkedbox" ng-change="fn.changeDepartment(child)" ng-model="child.choosed"></pui-checkbox>
+                                                <div class="arrow-down-icon"ng-class="{'to-right': !child.isOpen}" ng-click="fn.clickDepartment($event, child)"></div>
+                                                <label class="list-title" ng-click="fn.clickDepartment($event, child)" ng-bind="child.departmentName" title="{{child.departmentName}}"></label>
+                                            </pui-layout>
+                                            <ul class="ul-p3" ng-show="child.isOpen && child.child.length > 0">
+                                                <li class="li-p3" ng-repeat="child1 in child.child track by $index">
+                                                    <pui-layout align="center" class="list-con list-con-p3">
+                                                        <pui-checkbox class="list-checkedbox" ng-change="fn.changeDepartment(child1)" ng-model="child1.choosed"></pui-checkbox>
+                                                        <label class="list-title" ng-click="fn.clickDepartment($event, child1)" ng-bind="child1.departmentName" title="{{child1.departmentName}}"></label>
+                                                    </pui-layout>
+                                                </li>
+                                            </ul>
+                                        </li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="con-right">
+                            <div class="right-title">已选择</div>
+                            <ul >
+                                <li  ng-repeat="item in data.chooseDepartmentList track by $index">
+                                    <pui-layout align="center" class="list-con">
+                                        <label class="choosed-title" title="{{item.departmentName}}" ng-bind="item.departmentName"></label>
+                                        <i ng-click="fn.deleteChooseDepartment($event,item)"></i>
+                                    </pui-layout>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </pui-layout>
+                <pui-layout class="item-con-pr-pr-pr" ng-if="data.putData.type === 1">
+                    <div class="item-title">
+                        个人
+                    </div>
+                    <div class="con-box jq_con_box">
+                        <div class="con-left">
+                            <div class="left-title users-title">
+                                <input class="users-input" ng-keydown="fn.searchUsers($event)" placeholder="请选择或者输入警员编号，逗号隔开" type="text" ng-model="data.policeIdStr">
+                            </div>
+                            <ul class="ul-p1">
+                                <li class="li-p1" ng-repeat="item in data.options.usersList track by $index">
+                                    <pui-layout align="center" class="list-con-p1">
+                                        <pui-checkbox class="list-checkedbox" ng-change="fn.changeUsers(item)" ng-model="item.choosed"></pui-checkbox>
+                                        <label class="list-title" ng-bind="item.name" title="{{item.name}}" ng-click="fn.clickUsers($event, item)"></label>
+                                    </pui-layout>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="con-right">
+                            <div class="right-title">已选择</div>
+                            <ul>
+                                <li ng-repeat="item in data.chooseUsersList track by $index">
+                                    <pui-layout align="center" class="list-con">
+                                        <label class="choosed-title" title="{{item.name}}" ng-bind="item.name"></label>
+                                        <i ng-click="fn.deleteChooseUsers($event,item)"></i>
+                                    </pui-layout>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </pui-layout>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <pui-button class="cancel-btn" on-click="fn.dismiss()">取消</pui-button>
+            <pui-button class="confirm-btn" type="primary" on-click="fn.sure()">确定</pui-button>
+
+        </div>
+    </div>
+</div>

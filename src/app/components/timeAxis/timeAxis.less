@@ -1,0 +1,126 @@
+.time-axis-wrap {
+    height: 500px;
+    position: relative;
+
+    .event-boxes-wrap {
+        height: 100%;
+        margin: 0px 30px;
+        overflow: hidden;
+    }
+    .event-boxes {
+        white-space: nowrap;
+        height: 100%;
+
+        &.animate {
+            transition: transform 300ms ease-in-out;
+        }
+    }
+
+    .event-box-wrap {
+        display: inline-block;
+        vertical-align: top;
+        position: relative;
+
+        .event-box {
+            position: relative;
+            font-size: 12px;
+            width: 160px;
+            border: 1px solid;
+
+            .event-title {
+                height: 26px;
+                line-height: 26px;
+                padding: 0px 10px;
+            }
+
+            .event-content-wrap {
+                max-height: 160px;
+                padding: 0px 10px;
+                overflow-x: hidden;
+                overflow-y: auto;
+
+                .event-content {
+                    white-space: nowrap;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                }
+            }
+
+            &:after {
+                content: '';
+                display: block;
+                position: absolute;
+                border-width: 1px 0 0 1px;
+                border-style: solid;  
+                width: 10px;
+                height: 10px;
+            }
+        }
+
+        .event-dot {
+            position: absolute;
+            left: 74px;
+            top: 244px;
+            width: 12px;
+            height: 12px;
+            border-radius: 12px;
+            
+        }
+
+        &.top {
+            .event-title {
+                border-bottom: 1px solid;
+            }
+            .event-box {
+                top: 225px;
+                transform: translate(0, -100%);
+                &:after {
+                    bottom: -5px;
+                    left: 75px;
+                    transform: rotate(-135deg);
+                }
+            }
+        }
+
+        &.bottom {
+            .event-title {
+                border-top: 1px solid;
+            }
+            .event-box {
+                top: 275px;
+                &:after {
+                    top: -5px;
+                    left: 75px;
+                    transform: rotate(45deg);
+                }
+            }
+        }
+    }
+    .control-btn {
+        position: absolute;
+        top: 231px;
+        width: 22px;
+        height: 38px;
+        background-position: center center;
+        cursor: pointer;
+
+        &:hover {
+            opacity: 0.8;
+        }
+
+        &.prev {
+            left: 0px;
+        }
+        &.next {
+            right: 0px;
+        }
+    }
+
+    .line-bar {
+        position: absolute;
+        left: 30px;
+        top: 248px;
+        width: calc(~'100% - 60px');
+        height: 5px;
+    }
+}

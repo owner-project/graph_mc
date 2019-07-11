@@ -1,0 +1,156 @@
+.tm-main {
+    .tm-con {
+        .tm-header {
+            background-color: @bg-color-lighter;
+            background: linear-gradient(180deg, fade(@text-color-title, 0) 0%, rgba(81,130,228,0.1) 100%);
+            box-shadow: inset 0 -1px 0 0 rgba(0,0,0,0.03), 0 1px 0 0 @bg-color-primary;
+            .header-ul {
+                .header-li {
+                    color: @text-color-info;
+                    background-color: @bg-color-light;
+                    &.active {
+                        border-color: @border-color-primary;
+                        background-color: @bg-color;
+                        color: @text-color-primary;
+                    }
+                }
+            }
+        }
+        .tm-body {
+            .tm-base {
+                .left-slider {
+                    border-color: @border-color;
+
+                    .slider-top {
+                        .slider-top-title {
+                            color: @text-color-title;
+                            border-color: @border-color;
+                        }
+                        .slider-top-area {
+                            textarea, div[contenteditable] {
+                                color: @text-color-title;
+                                &.placeholder {
+                                    color: @text-color-content;
+                                }
+                                .key-word {
+                                    background-color: #FF5E5E;
+                                }
+                            }
+                        }
+                    }
+                    .slider-bottom {
+                        background-color: @bg-color-opacity;
+                        .slider-bottom-title {
+                            color: @text-color-title;
+                            background-color: @bg-color-opacity;
+                            box-shadow: 0 0 1px 0 @shadow-color-primary;
+                        }
+                        .slider-bottom-con {
+                            .key-ul {
+                                .key-li {
+                                    background-color: @bg-color-primary;
+                                    color: @text-color-title;
+                                }
+                            }
+                            &.cb-key-word-wrap {
+                                .key-ul {
+                                    .key-li {
+                                        box-shadow: inset 0 0 0 1px #FF8660;
+                                        .close-btn {
+                                            background-color: fade(@text-color-title, 80%);
+                                            &:before {
+                                                background-color: @text-color-content;
+                                            }
+                                            &:after {
+                                                background-color: @text-color-content;
+                                            }
+                                        }
+                                        &:after {
+                                            background: linear-gradient(-45deg, @bg-color-light 40%, #FF8660 40%, #FF8660 50%, @bg-color-light 50%);
+                                            box-shadow: inset 1px 1px 0 0 #FF8660;
+                                        }
+                                    }
+                                    .add-key-word-input {
+                                        input {
+                                            color: @text-color-content;
+                                        }
+                                    }
+                                    .add-key-word-btn {
+                                        color: #FF8660;
+                                        box-shadow: inset 0 0 0 1px #FF8660;
+                                    }
+                                }
+                            }
+                        }
+                        .series-key-word-search-bar {
+                            box-shadow: inset 0 1px 0 0 @shadow-color;
+                            .search-label {
+                                color: fade(@text-color-title, 50%);
+                            }
+                        }
+                    }
+                }
+                .slider-right {
+                    background-color: @bg-color-opacity;
+                    .right-con-title {
+                        color: @text-color-title;
+                        background-color: @bg-color-shadow;
+                        box-shadow: 0 -1px 1px -1px @shadow-color inset;
+                    }
+                    .right-tip {
+                        color: fade(@text-color-title, 50);
+                    }
+                    .right-con {
+                        .item-word-class {
+                            box-shadow: 0 1px 0 0 @shadow-color;
+                        }
+                        .item-word-class-title {
+                            color: @text-color-title;
+                            i {
+                                .icon-img(@base-url, @icon-admin-menu-arrow);
+                            }
+                        }
+                        .item-con {
+                            box-shadow: 0 1px 0 0 @shadow-color;
+                            .con-con-item {
+                                .con-con-title {
+                                    color: fade(@text-color-title, 60);
+                                }
+                            }
+                            .con-title {
+                                color: @text-color-primary;
+                            }
+                            .con-con {
+                                .con-span {
+                                    color: @text-color-title;
+                                }
+                            }
+                            ul {
+                                color: @text-color-title;
+                                li {
+                                    background-color: @bg-color-primary;
+                                    color: #ffffff;
+                                }
+                            }
+                        }
+                    }
+                }
+                .tool-block {
+                    background-color: @bg-color-lighter;
+                    border: 1px solid @border-color;
+                    .block-title {
+                        border-bottom: 1px solid @border-color;
+                        color: @text-color-title;
+                        background-color: @bg-color-light;
+                    }
+                    .item-label {
+                        color: @text-color-content;
+                    }
+                    .block-body {
+                        color: @text-color-content;
+                    }
+                }
+            }
+        }
+    }
+}

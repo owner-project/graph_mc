@@ -1,0 +1,252 @@
+//协作首页
+.cooperate-main {
+    .left-content {
+        border-color: fade(@info-block-color, 20%);
+        .search-wrap {
+            .search-btn {
+                i {
+                    .icon-img(@base-url, @icon-menu-serch-ico);
+                }
+            }
+            .search-icon {
+                .icon-img(@base-url, @icon-search-input-del);
+            }
+            .search-input-box {
+                background-color: fade(@info-block-color, 6%);
+                border: 1px solid fade(@info-block-color, 70%);
+                color: @text-color-title;
+            }
+        }
+        .open-icon {
+            .icon-img(@base-url, @icon-components-open-file-icon);
+        }
+        .close-icon {
+            .icon-img(@base-url, @icon-components-close-icon);
+        }
+        .item-icon {
+            .icon-img(@base-url, @icon-components-item-icon);
+        }
+        .list-left {
+            border-color: fade(@info-block-color, 20%);
+            .list-item {
+                color: fade(@info-text-color, 50%);
+                &:hover {
+                    color: @info-text-color;
+                }
+                &.active {
+                    color: @info-text-color;
+                    &:before {
+                        background-color: @info-block-color;
+                    }
+                }
+            }
+        }
+        .list-right {
+            .no-result {
+                color: fade(@info-text-color, 70%)
+            }
+            .tree-body {
+                &:hover {
+                    &:after {
+                        background-color: fade(@info-block-color, 6%);
+                    }
+                }
+                .tree-title {
+                    .tree-text {
+                        color: @info-text-color;
+                    }
+                }
+                &.active {
+                    &:after {
+                        .icon-img(@base-url, @folder-list-item-bg);
+                    }
+                }
+                .operation-icon {
+                    .icon-img(@base-url, @icon-components-operation-icon);
+                }
+                .operation-list {
+                    background-color: @popups-bg-color;
+                    box-shadow: 0 0 4px 0 @shadow-color;
+                    color: fade(@info-text-color, 70%);
+                    > div {
+                        &:hover {
+                            background-color: fade(@info-block-color, 10%);
+                            color: @info-text-color;
+                        }
+                        .open {
+                            .icon-img(@base-url, @folder-option-move);
+                        }
+                        .push {
+                            .icon-img(@base-url, @folder-option-push);
+                        }
+                        .share {
+                            .icon-img(@base-url, @folder-option-share);
+                        }
+                        .cancel-share {
+                            .icon-img(@base-url, @cancel-share);
+                        }
+                        .delete {
+                            .icon-img(@base-url, @folder-option-delete);
+                        }
+                        .edit {
+                            .icon-img(@base-url, @folder-option-edit);
+                        }
+                    }
+                }
+            }
+            .load-more {
+                color: @info-text-color;
+            }
+        }
+    }
+    .search-relation-header {
+        .relation-title {
+            color: @text-color-title;
+        }
+    }
+    .search-relation-body {
+        .relation-list-body {
+            .crumb-list {
+                color: fade(@info-text-color, 30%);
+                .title {
+                    color: fade(@info-text-color, 50%)
+                }
+                .arrow-right {
+                    color: fade(@info-text-color, 32%)
+                }
+                .crumb-name {
+                    color: fade(@info-text-color, 70%)
+                }
+                .crumb-name {
+                    &.last-nav {
+                        color: fade(@info-text-color, 32%)
+                    }
+                }
+            }
+            .folder-option {
+                .option-list {
+                    span {
+                        color: fade(@info-text-color, 70%);
+                        &.add-folder {
+                            &:before {
+                                .icon-img(@base-url, @icon-components-add-icon);
+                            }
+                        }
+                        &.move-to {
+                            &:before {
+                                .icon-img(@base-url, @folder-option-move);
+                            }
+                        }
+                        &.share {
+                            &:before {
+                                .icon-img(@base-url, @folder-option-share);
+                            }
+                        }
+                        &.cancel-share {
+                            &:before {
+                                .icon-img(@base-url, @cancel-share);
+                            }
+                        }
+                        &.push {
+                            &:before {
+                                .icon-img(@base-url, @folder-option-push);
+                            }
+                        }
+                        &.delete {
+                            &:before {
+                                .icon-img(@base-url, @folder-option-delete);
+                            }
+                        }
+                    }
+                }
+            }
+            .statistics {
+                .title {
+                    color: fade(@info-text-color, 60%)
+                }
+                .number {
+                    color: @info-text-color;
+                    background: fade(@info-block-color, 20%)
+                }
+                .select-all {
+                    color: @info-text-color;
+                }
+            }
+            .relation-list-body-ul {
+                .close-icon {
+                    .icon-img(@base-url, @icon-components-close-icon);
+                }
+                .delete-folder {
+                    .icon-img(@base-url, @folder-hover-delete-icon);
+                }
+                .relation-list-body-li {
+                    background: fade(@info-block-color, 15%);
+                    .relation-list-body-right {
+                        .relation-list-body-li-title {
+                            color: @info-text-color;
+                        }
+                    }
+                    .relation-list-body-img {
+                        .folder-icon {
+                            .icon-img(@base-url, @icon-result-folder-icon);
+                        }
+                    }
+                }
+            }
+            .relation-list-body-ul-item {
+                .close-icon {
+                    .icon-img(@base-url, @icon-components-close-icon);
+                }
+                .relation-list-body-li {
+                    border: 1px solid @info-block-color;
+                    background: fade(@info-block-color, 15%);
+                    .relation-list-body-img {
+                        .folder-icon {
+                            .icon-img(@base-url, @icon-result-folder-icon);
+                        }
+                    }
+                    .relation-list-body-right {
+                        .share-tag {
+                            background: fade(@info-block-color, 30%);
+                            color: fade(@info-text-color, 70%);
+                        }
+                        .r-l-li-item {
+                            .time-icon {
+                                .icon-img(@base-url, @icon-components-time-icon);
+                            }
+                            .user-icon {
+                                .icon-img(@base-url, @icon-components-user-icon);
+                            }
+                        }
+                    }
+                }
+            }
+            .relation-list-body-menu-ul {
+                background-color: #193769;
+                li {
+                    .relation-list-body-menu-ul-open {
+                        .icon-img(@base-url, @icon-components-open-icon);
+                    }
+                    .relation-list-body-menu-ul-move {
+                        .icon-img(@base-url, @file-option-move);
+                    }
+                    .relation-list-body-menu-ul-delete {
+                        .icon-img(@base-url, @file-option-delete);
+                    }
+                    .relation-list-body-menu-ul-share {
+                        .icon-img(@base-url, @file-option-share);
+                    }
+                    .relation-list-body-menu-ul-cancel-share {
+                        .icon-img(@base-url, @file-option-cancel-share);
+                    }
+                    .relation-list-body-menu-ul-push {
+                        .icon-img(@base-url, @file-option-push);
+                    }
+                    span {
+                        color: fade(@info-text-color, 70%)
+                    }
+                }
+            }
+        }
+    }
+}

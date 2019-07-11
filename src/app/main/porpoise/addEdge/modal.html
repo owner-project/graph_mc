@@ -1,0 +1,44 @@
+<div class="pui-modal modal confirm" >
+    <div class="modal-dialog add-edge-modal">
+        <div class="modal-header">
+            <div class="modal-title">添加关系</div>
+            <div class="modal-close-icon" ng-click="fn.dismiss()"></div>
+        </div>
+        <div class="modal-body">
+            <div class="edge-box">
+                <pui-layout align="center" class="item-pr-pr-pr">
+                    <label class="item-title">关系大类</label>
+                    <pui-select class="item-con" placeholder="请选择" ng-change="fn.getDataTypeList()" value-field="id" options="data.options.typeList" placement="left" ng-model="data.putData.type"></pui-select>
+                </pui-layout>
+                <pui-layout align="center" class="item-pr-pr-pr" ng-if="data.putData.type === '00'">
+                    <label class="item-title">自定义关系类型</label>
+                    <pui-input class="item-con" placeholder="请填写" ng-model="data.putData.customDataType"></pui-input>
+                </pui-layout>
+                <pui-layout align="center" class="item-pr-pr-pr" ng-if="data.putData.type !== '00'">
+                    <label class="item-title">关系小类</label>
+                    <pui-select class="item-con" placeholder="请选择" value-field="id" options="data.options.dataTypeList" placement="left" ng-model="data.putData.dataType"></pui-select>
+                </pui-layout>
+                <pui-layout align="center" class="item-pr-pr-pr" ng-if="data.putData.type !== '00'">
+                    <label class="item-title">手写关系内容</label>
+                    <pui-checkbox ng-model="data.putData.isCustomDataLabel"></pui-checkbox>
+                </pui-layout>
+                <pui-layout align="center" class="item-pr-pr-pr" ng-if="data.putData.type !== '00' && data.putData.isCustomDataLabel">
+                    <label class="item-title">关系内容</label>
+                    <pui-input class="item-con" placeholder="请填写（用于关系线上内容展示）" ng-model="data.putData.customDataLabel"></pui-input>
+                </pui-layout>
+                <pui-layout align="center" class="item-pr-pr-pr">
+                    <label class="item-title">实体对象A</label>
+                    <pui-select class="item-con" data-search placeholder="请选择" value-field="id" options="data.options.nodeList" placement="left" ng-model="data.putData.firstNode"></pui-select>
+                </pui-layout>
+                <pui-layout align="center" class="item-pr-pr-pr">
+                    <label class="item-title">实体对象B</label>
+                    <pui-select class="item-con" data-search placeholder="请选择" value-field="id" options="data.options.nodeList" placement="left" ng-model="data.putData.secondNode"></pui-select>
+                </pui-layout>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <pui-button class="cancel-btn" on-click="fn.dismiss()">取消</pui-button>
+            <pui-button class="confirm-btn" type="primary" on-click="fn.sure()">确定</pui-button>
+        </div>
+    </div>
+</div>

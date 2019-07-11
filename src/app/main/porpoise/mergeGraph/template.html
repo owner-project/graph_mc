@@ -1,0 +1,113 @@
+<div class="pui-modal modal" >
+    <div class="modal-dialog merge-graph-modal">
+        <div class="modal-header">
+            <div class="modal-title">选择要合并的快照</div>
+            <div class="modal-close-icon" ng-click="fn.dismiss()"></div>
+        </div>
+        <div class="modal-body">
+            <pui-layout class="tab-bar">
+                <div class="tab-item" ng-class="{'current': data.type === 1}" ng-click="fn.changeType(1)">分析</div>
+                <div class="tab-item" ng-class="{'current': data.type === 2}" ng-click="fn.changeType(2)">推送</div>
+                <div class="tab-item" ng-class="{'current': data.type === 3}" ng-click="fn.changeType(3)">分享</div>
+                <div class="tab-item" ng-class="{'current': data.type === 4}" ng-click="fn.changeType(4)">临时</div>
+            </pui-layout>
+            <div class="crumb-search">
+                <pui-layout align="center" class="crumb-list" ng-if="data.type === 1">
+                    <span class="title">当前位置：</span>
+                    <div ng-repeat="crumb in data.crumbList">
+                        <span class="crumb-name"
+                            ng-class="{'last-nav': $last}"
+                            ng-bind="crumb.name"
+                            ng-click="fn.crumbJump(crumb, $index)">
+                        </span>
+                        <span class="mgl5 mgr5 arrow-right" ng-if="!$last">&gt;</span>
+                    </div>
+                </pui-layout>
+                <pui-layout class="search-content" align="center" justify="space-between">
+                    <pui-searchbar data-empty-search="true" ng-model="data.search.content" data-max-width="150" data-placeholder="请输入名称" data-on-search="fn.changeContent()">
+                    </pui-searchbar>
+                </pui-layout>
+            </div>
+            <div class="content">
+                <pui-layout align="center" class="mgb10 folder-statistics statistics" ng-show="data.type === 1">
+                    <span class="title">文件夹</span>
+                    <span class="mgl5 mgr5 number" ng-bind="data.list.folder.length"></span>
+                </pui-layout>
+                <ul class="relation-list-body-ul" ng-if="data.type === 1">
+                    <li ng-repeat="item in data.list.folder"
+                        data-title="{{item.name}}"
+                        bs-tooltip
+                        data-bs-enabled = "{{item.name.length > 5}}"
+                        data-container="body"
+                        data-placement="bottom"
+                        class="relation-list-body-li"
+                        ng-click="fn.openFolder(item)">
+                        <pui-layout align="center">
+                            <div class="close-icon"></div>
+                            <div class="relation-list-body-right">
+                                <div ng-bind="item.name" class="relation-list-body-li-title"></div>
+                            </div>
+                        </pui-layout>
+                    </li>
+                </ul>
+                <div class="cooperate-header-info">
+                    <pui-layout align="center" class="mgb10 cooperate-statistics statistics">
+                        <span class="title">图析</span>
+                        <span class="mgl5 mgr5 number" ng-bind="data.pager.total"></span>
+                    </pui-layout>
+                </div>
+                <ul class="relation-list-body-ul-item">
+                    <li class="relation-list-body-li"
+                        ng-repeat="item in data.list.file"
+                        ng-click="fn.chooseSnapshot(item)"
+                        ng-class="{'active': item.selected}">
+                        <div class="relation-list-body-img">
+                            <img ng-src={{item.screenshot}}>
+                        </div>
+                        <div class="relation-list-body-right">
+                            <div ng-bind="item.themeName"
+                                bs-tooltip
+                                data-title="{{item.themeName}}"
+                                data-bs-enabled = "{{item.themeName.length > 14}}"
+                                class="relation-list-body-li-title">
+                            </div>
+                            <pui-layout align="center">
+                                <pui-layout align="center" class="r-l-li-item">
+                                    <div class="user-icon"></div>
+                                    <span class="r-l-li-item-text" style="max-width: 50px;"
+                                        ng-bind="item.author"
+                                        bs-tooltip
+                                        data-bs-enabled = "{{item.themeName.length > 3}}"
+                                        data-title="{{item.author}}">
+                                    </span>
+                                </pui-layout>
+                                <pui-layout align="center" class="r-l-li-item r-l-li-item-time">
+                                    <div class="time-icon"></div>
+                                    <span class="r-l-li-item-text"
+                                        ng-bind="item.createTime | date: 'yyyy-MM-dd'"
+                                        data-title="{{item.createTime | date: 'yyyy-MM-dd'}}"
+                                        bs-tooltip>
+                                    </span>
+                                </pui-layout>
+                            </pui-layout>
+                        </div>
+                    </li>
+                </ul>
+                <div class="no-result" ng-include="'app/main/home/searchNodata/template.html'" ng-if="!data.loading && data.pager.total === 0"></div>
+            </div>
+            <uib-pagination
+                class="pagination-sm"
+                ng-if="data.pager.total > data.pager.pageSize"
+                total-items="data.pager.total"
+                ng-change="fn.changePage()"
+                ng-model="data.pager.pageNo"
+                previous-text="上一页"
+                next-text="下一页"
+                force-ellipses="true"
+                max-size="3"
+                items-per-page="data.pager.pageSize"
+                boundary-link-numbers="true">
+            </uib-pagination>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,27 @@
+//应用界面
+.video-bg-img {
+    .bg-img(@base-url, @video-bg-img);
+}
+.video-bg-block {
+    background-color: @video-bg-color;
+}
+.application-main {
+    color: @text-color-title;
+    //.bg-img(@base-url, @bg-home);
+    .app-type {
+        .app-type-title {
+            border-bottom: 1px solid @border-color;
+        }
+        .app-type-ul {
+            .app-type-li {
+                &:hover {
+                    background-color: fade(@bg-color-primary, 10%);
+                    box-shadow: inset 0px 0px 0px 1px @shadow-color-primary;
+                    .app-type-text {
+                        color: @text-color-primary;
+                    }
+                }
+            }
+        }
+    }
+}

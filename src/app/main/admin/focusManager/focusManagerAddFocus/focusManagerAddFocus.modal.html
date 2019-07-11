@@ -1,0 +1,38 @@
+<div class="pui-modal modal focus-manager-modal focus-move-to-modal">
+        <div class="modal-dialog">
+            <!-- modal弹窗头部 -->
+            <div class="modal-header">
+                <div class="modal-title">关注</div>
+                <div class="modal-close-icon" ng-click="fn.dismiss()"></div>
+            </div>
+            <!-- modal弹窗body -->
+            <div class="modal-body">
+                <ul class="modal-focus-group-list">
+                    <li class="group-item" ng-repeat="group in data.focusGroup">
+                        <label>
+                            <pui-checkbox ng-model="group.isSelect" label-text="group.name"></pui-checkbox>
+                        </label>
+                    </li>
+                </ul>
+                <div>
+                    <div ng-if="data.isShowAddGroup">
+                        <pui-input ng-model="data.addGroupName" data-placeholder="请输入汉子或英文(必填)"></pui-input>
+                        <span class="tag" ng-click="fn.createGroup()">创建</span>
+                        <span class="tag" ng-click="data.isShowAddGroup = false;data.addGroupName=''">取消</span>
+                    </div>
+                    <span class="tag" ng-if="!data.isShowAddGroup" ng-click="data.isShowAddGroup = true"><i class="odipus-icon add-icon"></i>创建新分组</span>
+                </div>
+                <div>
+                    <pui-textarea ng-model="data.focusReason" ng-class="{'textarea-error':data.focusReason.length > data.maxReasonLength }" data-placeholder="请输入关注理由,不超过100字"></pui-textarea>
+                    <span style="display: block; text-align: right">最多{{data.maxReasonLength - data.focusReason.length}}个字</span>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <pui-button class="cancel-btn" on-click="fn.dismiss()">取消</pui-button>
+                <pui-button class="confirm-btn" type="primary" on-click="fn.sure()">确定</pui-button>
+    
+            </div>
+        </div>
+    
+    </div>
+    

@@ -1,0 +1,73 @@
+<div class="pui-modal modal confirm" >
+    <div class="modal-dialog attention-list-modal">
+        <div class="modal-header">
+            <div class="modal-title">我的关注</div>
+            <div class="modal-close-icon" ng-click="fn.dismiss()"></div>
+        </div>
+        <div class="modal-body">
+            <div class="edge-box">
+                <div class="wrap-content" ng-if="data.attentionList.length != 0">
+                    <div pui-table type="header">
+                        <table cellpadding="0" cellspacing="0" border="0">
+                            <colgroup>
+                                <col width="15%">
+                                <col width="15%">
+                                <col width="35%">
+                                <col width="35%">
+                            </colgroup>
+                            <thead>
+                                <tr>
+                                    <th>姓名/名称</th>
+                                    <th>类型</th>
+                                    <th>关注理由</th>
+                                    <th>操作</th>
+                                </tr>
+                            </thead>
+                        </table>
+                    </div>
+                    <div pui-table type="body" class="my-attention-body">
+                        <table cellpadding="0" cellspacing="0" border="0">
+                            <colgroup>
+                                <col width="15%">
+                                <col width="15%">
+                                <col width="35%">
+                                <col width="35%">
+                            </colgroup>
+                            <tbody>
+                                <tr ng-repeat="item in data.attentionList">
+                                    <td class="des"
+                                        ng-bind="item.title"
+                                        data-title="{{item.title}}"
+                                        bs-tooltip
+                                        data-placement="top"
+                                        data-container=".attention-list-modal"
+                                        data-bs-enabled = "{{item.title.length > 5}}"></td>
+                                    <td ng-bind="item.label"></td>
+                                    <td class="des"
+                                        ng-bind="item.desc"
+                                        data-title="{{item.desc}}"
+                                        bs-tooltip
+                                        data-placement="top"
+                                        data-container=".attention-list-modal"
+                                        data-bs-enabled = "{{item.desc.length > 16}}">
+                                    </td>
+                                    <td>
+                                        <span ng-click="fn.into_porpoise(item.focusid)" class="view-file option">查看图析</span>
+                                        <span class="line"></span>
+                                        <span ng-click="fn.viewFocusItem(item)" class="view-file option">查看档案</span>
+                                        <span class="line"></span>
+                                        <span ng-click="fn.focus($event, item)" class="cancel-focus option">取消关注</span>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div ng-include="'app/components/header/aboutMySearch/template.html'" ng-if="data.attentionList.length == 0"></div>
+            </div>
+        </div>
+        <div class="modal-footer">
+
+        </div>
+    </div>
+</div>

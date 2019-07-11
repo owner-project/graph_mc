@@ -1,0 +1,20 @@
+<div class="pui-modal modal focus-manager-modal focus-move-to-modal">
+        <div class="modal-dialog">
+            <!-- modal弹窗头部 -->
+            <div class="modal-header">
+                <div class="modal-title">{{data.title}}</div>
+                <div class="modal-close-icon" ng-click="fn.dismiss()"></div>
+            </div>
+            <!-- modal弹窗body -->
+            <div class="modal-body">
+                <p>{{data.text}}</p>
+            </div>
+            <div class="modal-footer">
+                <pui-button class="cancel-btn" on-click="fn.dismiss()">取消</pui-button>
+                <pui-button class="confirm-btn" type="primary" on-click="fn.sure()">确定</pui-button>
+    
+            </div>
+        </div>
+    
+    </div>
+    

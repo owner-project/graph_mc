@@ -1,0 +1,13 @@
+<div class="pui-modal modal confirm">
+    <div class="modal-dialog">
+        <div class="modal-header">
+            <div class="modal-title" ng-bind="title"></div>
+            <div class="modal-close-icon" ng-if="hasCancel" ng-click="dismiss()"></div>
+        </div>
+        <div class="modal-body" ng-bind="content"></div>
+        <div class="modal-footer">
+            <pui-button class="cancel-btn" ng-if="hasCancel" on-click="dismiss()">取消</pui-button>
+            <pui-button class="confirm-btn" type="primary" on-click="ok()">确定</pui-button>
+        </div>
+    </div>
+</div>

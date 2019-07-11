@@ -1,0 +1,25 @@
+<div class="relation-map-directive-wrap">
+    <div class="map-content" ng-click="$clickMap($event)">
+    </div>
+   
+    <div class="filter-controller" ng-if="$feature.tagSelect">
+        <div class="mgb10">选择标签</div>
+        <div class="tag-item" ng-repeat="tag in $tags" ng-class="{'selected': tag.selected}" ng-click="$selectTag(tag)">
+            <span ng-bind="tag.label"></span>
+        </div>
+    </div>
+        <pui-layout class="expend-controller" ng-if="$feature.tagSelect">
+        <!--<div class="expend-btn" ng-class="{'actived': $depth === 1}" ng-click="$expendMap(1)">
+            <span>一级扩展</span>
+            <div class="check-icon"></div>
+        </div>-->
+        <div class="expend-btn" ng-class="{'actived': $depth === 2}" ng-click="$expendMap(2)">
+            <span>二级扩展</span>
+            <div class="check-icon"></div>
+        </div>
+        <div class="expend-btn" ng-class="{'actived': $depth === 3}" ng-click="$expendMap(3)">
+            <span>三级扩展</span>
+            <div class="check-icon"></div>
+        </div>
+    </pui-layout>
+</div>

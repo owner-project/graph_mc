@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="33px" height="33px" viewBox="0 0 33 33" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 52.3 (67297) - http://www.bohemiancoding.com/sketch -->
+    <title>实体-bed</title>
+    <desc>Created with Sketch.</desc>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="components" transform="translate(-259.000000, -1448.000000)">
+            <g id="实体-bed" transform="translate(259.000000, 1448.000000)">
+                <rect id="Rectangle" fill="#0D254E" fill-rule="evenodd" x="0" y="0" width="32" height="32" rx="16"></rect>
+                <circle id="Oval" stroke="#2979FF" stroke-width="1" cx="16.5" cy="16.5" r="15.5"></circle>
+                <g id="Group-2" stroke-width="1" fill-rule="evenodd" transform="translate(7.000000, 10.000000)">
+                    <polygon id="Path" fill="#2979FF" points="19 8.5 2 8.5 2 0 0 0 0 13 2 13 2 11 16 11 16 13 18 13 18 11 19 11"></polygon>
+                    <path d="M18.371,7.93 C18.946,7.53 18.812,5.97 18.3,5.72 L2.358,5.72 L2.358,7.93 L18.371,7.93 Z" id="Path" fill="#A5C6FF"></path>
+                    <path d="M3.155,4.35 C2.959,4.16 2.959,3.84 3.155,3.65 L5.276,1.53 C5.471,1.33 5.788,1.33 5.983,1.53 L8.104,3.65 C8.3,3.84 8.3,4.16 8.104,4.35 L5.983,6.47 C5.788,6.67 5.471,6.67 5.276,6.47 L3.155,4.35 Z" id="Path" fill="#A5C6FF"></path>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

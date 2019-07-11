@@ -1,0 +1,52 @@
+<div class="assistant-body2 person-graph-main" id="person-graph-main">
+    <pui-layout justify="space-between" align="center" class="assistant-body2-title">
+        <pui-layout align="center">
+
+            </pui-datepicker>
+            <span>时间：</span>
+            <!-- <pui-select class="df-select-width"  options='person.optionType' ng-model="person.timeType"></pui-select> -->
+            <pui-datepicker id="start_at_graph"
+            class="mgl3 width80"
+            date-mode="date"
+            ng-model="person.searchStartTime"
+            data-placement="top"
+            placeholder="开始日期"
+            data-max-date="{{person.searchEndTime}}"
+            ></pui-datepicker>
+            <pui-datepicker id="end_at_graph"
+            class="mgl3 width80"
+            date-mode="date"
+            ng-model="person.searchEndTime"
+            data-placement="top"
+            placeholder="结束日期"
+            data-min-date="{{person.searchStartTime}}"
+            data-max-date="{{person.nowTime}}"
+            ></pui-datepicker>
+
+            <pui-button  no-shadow="true" class="person-search-btn" data-on-click="person.searchInfo()"></pui-button>
+            <span class="search-tip" style="color:#ccc">(默认显示一年内轨迹）</span>
+            <div class="tag-list">
+            <span class="tag" ng-repeat="tag in person.tagList" ng-class="{'selected':tag.selected}" ng-click="person.switchSelectTag(tag)">
+                {{tag.name}}
+            </span>
+            </div>
+        </pui-layout>
+        <span class="person-back-btn"></span>
+            <pui-button no-shadow="true" ng-if="person.isDay" class="mgr20 person-back-btn" data-on-click="person.onDrilldown()">返回</pui-button>
+    </pui-layout>
+    <div class="assistant-body-echart person-graph-dom" ng-class="{'visibility-hidden':person.hideGraph}"  id="people-scatter"></div>
+        <div ng-if="person.hideGraph" class="no-data absolute-center" ng-include="'app/components/header/aboutMySearch/template.html'">
+        </div>
+        <div ng-show="person.graphTipInfo.show" ng-mouseleave='person.graphTipInfo.show = false' class="graphTooltip" ng-style='{left:person.graphTipInfo.left,bottom:person.graphTipInfo.bottom}'>
+            <div class="event-list" ng-repeat="item in person.graphTipInfo.detailList track by $index">
+                <div ng-repeat="subitem in item">
+                        <div class="colorWhite50">{{subitem.typeName}}</div>
+                        <div class="colorWhite" ng-if="subitem.entityName">{{subitem.entityName}}</div>
+                        <ul class="event-detail">
+                            <li ng-repeat="eventItem in subitem.detail"><span class="colorWhite50">{{eventItem.key}}：</span><span class="colorWhite">{{eventItem.value}}</span></li>
+                        </ul>
+                </div>
+
+            </div>
+        </div>
+</div>

@@ -1,0 +1,27 @@
+<div class="pui-modal add-red-list-modal modal" >
+    <div class="modal-dialog">
+        <div class="modal-header">
+            <div class="modal-title">新增红名单实体</div>
+            <div class="modal-close-icon" ng-click="fn.dismiss()"></div>
+        </div>
+        <div class="modal-body" style="overflow:inherit">
+            <pui-layout class="amm-item" align="center">
+                <span class="amm-item-title">实体名称</span>
+                <pui-input class="amm-item-input mgl10" ng-model="data.name"></pui-input>
+                <span class="amm-item-title mgl30">实体标识</span>
+                <pui-input class="amm-item-input mgl10" ng-model="data.sfzh"></pui-input>
+            </pui-layout>
+            <pui-layout class="amm-item" align="center">
+                <span class="amm-item-title more-font">级别</span>
+                <pui-select class="amm-item-input mgl10" data-options="data.rankOptions" ng-model="data.rank"></pui-select>
+                <span class="amm-item-title more-font mgl30 ">类型</span>
+                <pui-select class="amm-item-input mgl10" data-options="data.userTypeList" ng-model="data.entityType"></pui-select>
+            </pui-layout>
+        </div>
+        <div class="modal-footer">
+            <pui-button class="cancel-btn" on-click="fn.dismiss()">取消</pui-button>
+            <pui-button class="confirm-btn" type="primary" on-click="fn.sure()">确定</pui-button>
+
+        </div>
+    </div>
+</div>

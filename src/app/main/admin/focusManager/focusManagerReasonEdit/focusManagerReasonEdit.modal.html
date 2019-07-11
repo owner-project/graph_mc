@@ -1,0 +1,18 @@
+<div class="pui-modal modal focus-manager-modal focus-move-to-modal">
+        <div class="modal-dialog">
+            <!-- modal弹窗头部 -->
+            <div class="modal-header">
+                <div class="modal-title">编辑</div>
+                <div class="modal-close-icon" ng-click="fn.dismiss()"></div>
+            </div>
+            <!-- modal弹窗body -->
+            <div class="modal-body">
+                <pui-textarea ng-model="data.editReason" ng-class="{'textarea-error':data.editReason.length>100}" data-placeholder="请输入关注理由,最多不超过100字"></pui-textarea>
+                <span class="fr">最多输入{{100 - data.editReason.length}}个字</span>
+            </div>
+            <div class="modal-footer">
+                <pui-button class="cancel-btn" on-click="fn.dismiss()">取消</pui-button>
+                <pui-button class="confirm-btn" type="primary" on-click="fn.sure()">确定</pui-button>
+            </div>
+    </div>
+</div>

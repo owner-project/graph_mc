@@ -1,0 +1,48 @@
+<div id="record-left-menu-component" class="record-left-menu-component">
+    <div class="record-menu-search-wrapper" ng-if ='recordMenu.showSearch'>
+            <pui-searchbar data-max-width='238px' 
+            data-empty-search='true'
+            data-enter-blur="true"
+            ng-model="recordMenu.searchWord" 
+            on-search="recordMenu.onSearch($event)" 
+            on-close ="recordMenu.searchOnClose(event)"
+            on-change="recordMenu.searchOnChange($event)"
+            placeholder="请输入实体名称或标识"
+            on-focus="recordMenu.searchOnFocus($event)"
+            >
+        </pui-searchbar>
+    </div>
+    <div class="search-from-server-wrapper" ng-if="recordMenu.ISSHOWSEARCHFROMSERVER && recordMenu.searchWord !== ''">
+        <div class="search-from-server-box" ng-click="recordMenu.searchFromServer()">
+                全局搜索:
+                <span class="search-key">{{recordMenu.searchWord}}</span>
+        </div>
+
+    </div>
+    <div class="generalize" ng-class='{"active":recordMenu.selectGeneralize}' ng-if ='recordMenu.showGeneralize' ng-click='recordMenu.handleSelectGeneralize()''>
+        <img class="generalize-img" src="../../../../assets/theme-sb/people/generalize.png">
+        概览
+    </div>
+    <div class="menu-main">
+        <ul class="list-left">
+            <li class="list-item" ng-class='{"active":recordMenu.selectedLeftItem == item && !recordMenu.selectGeneralize}' 
+                                  ng-click='recordMenu.selectLeftMenu(item)' 
+                                  ng-repeat="(key,item) in recordMenu.leftMenuDataList track by $index">
+                                  {{item.name}}
+                                </li>
+        </ul>
+        <ul class="list-right">
+            <!--                                   ng-click="recordMenu.selectRecord(item)" -->
+            <li class="list-item" ng-repeat="(key,item) in recordMenu.rightMenuData track by $index"
+                                  ng-click="recordMenu.selectRecord(item)"
+                                  title="{{item.name}}"
+                                  ng-class="{'active':recordMenu.selectedRecord == item}">
+                                  <span class="person-info-word">{{item.name || item.key}}</span>
+                                  <span class="person-info-icon" data-title="{{recordMenu.selectedLeftItem.type =='vehicle'?item.name:item.key}}" data-container="body" bs-tooltip data-placement="top"></span>
+                                </li>
+            <li class="text-center pd10" ng-if="!recordMenu.rightMenuData || recordMenu.rightMenuData.length==0">暂无数据</li>
+         <li class="more load-more" ng-if="recordMenu.selectedLeftItem.isEnd == false" ng-click='recordMenu.loadMore()'>加载更多</li>
+        </ul>
+    </div>
+
+</div>

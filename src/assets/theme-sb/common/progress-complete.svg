@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="12px" height="12px" viewBox="0 0 12 12" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 53.2 (72643) - https://sketchapp.com -->
+    <title>Group 3</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <polygon id="path-1" points="0 0 16 0 16 16 0 16"></polygon>
+    </defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="08-自定义模板导入4" transform="translate(-871.000000, -310.000000)">
+            <g id="Group-4" transform="translate(559.000000, 306.000000)">
+                <g id="Group-3" transform="translate(310.000000, 2.000000)">
+                    <mask id="mask-2" fill="white">
+                        <use xlink:href="#path-1"></use>
+                    </mask>
+                    <g id="Clip-2"></g>
+                    <path d="M10.376,5.576 L7.2,8.752 L5.6248,7.176 L4.776,8.0248 L6.776,10.0248 L7.2,10.4488 L7.6248,10.0248 L11.2248,6.4248 L10.376,5.576 Z M14,8 C14,11.3144 11.3136,14 8,14 C4.6864,14 2,11.3144 2,8 C2,4.6864 4.6864,2 8,2 C11.3136,2 14,4.6864 14,8 L14,8 Z" id="Fill-1" fill="#2979FF" mask="url(#mask-2)"></path>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

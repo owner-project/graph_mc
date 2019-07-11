@@ -1,0 +1,151 @@
+.gang-mining-main {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    .gang-mining-left {
+        height: calc(~'100% - 40px');
+        width: calc(~'80% - 40px');
+        padding: 20px;
+        float: left;
+        &.gang-animate {
+            .gang-mining-app-box {
+                transform: translate(0, 0);
+            }
+            .gang-mining-app-table-box {
+                transform: translate(0, 0);
+            }
+        }
+        .gang-mining-app-box {
+            width: 100%;
+            height: 150px;
+            overflow: auto;
+            transform: translateY(-2000px);
+            transition: 1000ms;
+            .gang-mining-app-box-item {
+                height: 134px;
+                width: calc(~'(100% / 3) - 14px');
+                float: left;
+                margin: 6px;
+                .gang-mining-app-text {
+                    margin-top: 40px;
+                    font-size: 14px;
+                }
+                .gang-mining-app-count {
+                    font-size: 32px;
+                    float: left;
+                    margin-right: 5px;
+                }
+                .gang-mining-app-unit {
+                    font-size: 14px;
+                    margin-top: 17px;
+                }
+
+                img {
+                    height: 100px;
+                    width: 100px;
+                    float: left;
+                    margin: 17px;
+                }
+            }
+        }
+        .gang-mining-app-table-box {
+            height: 100%;
+            transform: translateY(2000px);
+            transition: 1000ms;
+            .gang-mining-app-list-title {
+                width: calc(~'100% - 32px');
+                height: 32px;
+                // line-height: 32px;
+                float: left;
+                margin: 16px;
+                .gang-mining-app-list-text {
+                    float: left;
+                    margin: 0px 10px 0px 0px;
+                }
+                .gang-mining-app-list-title-icon {
+                    float: right;
+                    height: 32px;
+                    min-width: 64px;
+                }
+            }
+            .gang-mining-table-con {
+                margin-top: 14px;
+                width: 100%;
+                height: calc(~'100% - 136px');
+                overflow: auto;
+
+                td {
+                    .bfb {
+                        height: 10px;
+                    }
+                    .gang-mining-table-date-text {
+                        flex: 0 0 auto;
+                        width: 40px;
+                    }
+
+                    .gang-mining-table-td-yp {
+                        float: left;
+                        width: 16px;
+                        height: 16px;
+                    }
+                }
+            }
+        }
+    }
+    .gang-mining-right {
+        height: calc(~'100% - 2px');
+        width: calc(~'20% - 4px');
+        float: left;
+        position: relative;
+        transform: translateX(2000px);
+        transition: 1000ms;
+
+        &.gang-animate {
+            transform: translate(0, 0);
+        }
+        .gang-mining-right-thlx {
+            width: calc(~'100% - 40px');
+            padding: 20px;
+            .item-content {
+                flex: 0 0 auto;
+            }
+        }
+        .gang-mining-right-ycsj {
+            width: calc(~'100% - 40px');
+            height: 60px;
+            padding: 20px;
+            .gang-mining-right-ycsj-table {
+                width: 90%;
+                height: 100%;
+                font-size: 12px;
+                td {
+                    min-width: 60px;
+                }
+            }
+        }
+        .gang-mining-right-pie {
+            .gang-mining-right-pie-ul {
+                padding: 20px;
+                padding-right: 0px;
+                li {
+                    float: left;
+                    .gang-mining-right-pie-li-box {
+                        width: 120px;
+                        height: 10px;
+                        margin: 6px 10px 0px 10px;
+                        .gang-mining-right-pie-li-box-bfb {
+                            .bfb-animate;
+                            height: 100%;
+                        }
+                    }
+                }
+            }
+            .gang-mining-right-pie-box {
+                margin-top: 20px;
+                width: 100%;
+                height: 280px;
+                padding: 10px 0px;
+            }
+        }
+    }
+}
